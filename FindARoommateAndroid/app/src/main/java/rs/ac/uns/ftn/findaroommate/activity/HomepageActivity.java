@@ -2,11 +2,16 @@ package rs.ac.uns.ftn.findaroommate.activity;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,8 +46,26 @@ public class HomepageActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 menuItem.setChecked(true);
-                mDrawerLayout.closeDrawers();
                 Toast.makeText(HomepageActivity.this, menuItem.getTitle(), Toast.LENGTH_LONG).show();
+
+                int id = menuItem.getItemId();
+
+                switch (id) {
+                    case android.R.id.home:
+
+                        return true;
+                    case R.id.search_item:
+                        return true;
+                    case R.id.profile_item:
+                        return true;
+                    case R.id.settings_item:
+                        Intent settingsIntent = new Intent(HomepageActivity.this, SettingsActivity.class);
+                        startActivity(settingsIntent);
+                        return true;
+                    case R.id.sign_out_item:
+                        return true;
+                }
+
                 return true;
             }
         });
@@ -62,6 +85,12 @@ public class HomepageActivity extends AppCompatActivity {
                 Toast.makeText(HomepageActivity.this, "New ad action", Toast.LENGTH_LONG).show();
             }
         });
+
+        CardView mCardViewTop = (CardView) findViewById(R.id.ca);
+        CardView mCardViewBottom = (CardView) findViewById(R.id.cb);
+
+        mCardViewTop.setRadius(50);
+        mCardViewBottom.setRadius(50);
     }
 
     @Override
@@ -69,5 +98,29 @@ public class HomepageActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_toolbar, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        switch (id) {
+            case android.R.id.home:
+
+                return true;
+            case R.id.search_item:
+                return true;
+            case R.id.profile_item:
+                return true;
+            case R.id.settings_item:
+                return true;
+            case R.id.sign_out_item:
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

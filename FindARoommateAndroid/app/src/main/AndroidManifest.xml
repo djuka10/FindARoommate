@@ -8,10 +8,24 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_logo_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar"
-        >
-        <activity android:name=".activity.HomepageActivity"
-                   android:label="HomepageActivity" >
+        android:theme="@style/AppTheme.NoActionBar">
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:label="@string/title_activity_settings">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="rs.ac.uns.ftn.findaroommate.activity.HomepageActivity" />
+            </activity>
+        <activity android:name=".activity.SignUpHomeActivity" android:screenOrientation="portrait" />
+        <activity android:name=".activity.SignUpActivity" android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:label="@string/title_activity_login" android:screenOrientation="portrait" >
+
+        </activity>
+        <activity
+            android:name=".activity.HomepageActivity"
+            android:label="HomepageActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -23,7 +37,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

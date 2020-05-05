@@ -1,0 +1,22 @@
+<resources>
+
+    <string-array name="lang_entries">
+        <item>Serbian</item>
+        <item>English</item>
+    </string-array>
+
+    <string-array name="lang_values">
+        <item>serbian</item>
+        <item>english</item>
+    </string-array>
+
+    <string-array name="unit_entries">
+        <item>kilometers</item>
+        <item>miles</item>
+    </string-array>
+
+    <string-array name="unit_values">
+        <item>km</item>
+        <item>miles</item>
+    </string-array>
+</resources>
