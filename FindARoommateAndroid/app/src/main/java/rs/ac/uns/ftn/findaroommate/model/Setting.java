@@ -1,8 +1,15 @@
 package rs.ac.uns.ftn.findaroommate.model;
 
-public class Setting {
+import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
 
+@Table(name = "settings")
+public class Setting extends Model {
+
+    @Column
     private String name;
+    @Column
     private String value;
 
 

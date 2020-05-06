@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.activeandroid.ActiveAndroid;
+
+
 import rs.ac.uns.ftn.findaroommate.activity.HomepageActivity;
 import rs.ac.uns.ftn.findaroommate.activity.LoginActivity;
 import rs.ac.uns.ftn.findaroommate.activity.SignUpActivity;
@@ -20,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ActiveAndroid.initialize(this);
 
         Message m = Message.builder().title("title").message("message").build();
 //        Message m = new Message(1, 1, "My title", "My message");

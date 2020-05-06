@@ -2,12 +2,27 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="rs.ac.uns.ftn.findaroommate">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_logo_round"
         android:supportsRtl="true"
+        android:theme="@style/AppTheme.NoActionBar"
+        android:name="com.activeandroid.app.Application"
+        >
+        <meta-data android:name="AA_DB_NAME" android:value="FindARoommateDatabase" />
+        <meta-data android:name="AA_DB_VERSION" android:value="21" />
+        <meta-data
+            android:name="AA_MODELS"
+            android:value="rs.ac.uns.ftn.findaroommate.model.Ad,
+                           rs.ac.uns.ftn.findaroommate.model.AdItem,
+                           rs.ac.uns.ftn.findaroommate.model.Message, rs.ac.uns.ftn.findaroommate.model.Language, rs.ac.uns.ftn.findaroommate.model.ResourceRegistry, rs.ac.uns.ftn.findaroommate.model.Setting, rs.ac.uns.ftn.findaroommate.model.User, rs.ac.uns.ftn.findaroommate.model.UserCharacteristic, rs.ac.uns.ftn.findaroommate.model.Review, rs.ac.uns.ftn.findaroommate.model.Stay" />
+
+        <activity android:name=".activity.HomepageActivity"
+                   android:label="HomepageActivity" >
         android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:name=".activity.SettingsActivity"
