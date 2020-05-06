@@ -12,6 +12,9 @@ import com.activeandroid.ActiveAndroid;
 
 
 import rs.ac.uns.ftn.findaroommate.activity.HomepageActivity;
+import rs.ac.uns.ftn.findaroommate.activity.LoginActivity;
+import rs.ac.uns.ftn.findaroommate.activity.SignUpActivity;
+import rs.ac.uns.ftn.findaroommate.activity.SignUpHomeActivity;
 import rs.ac.uns.ftn.findaroommate.model.Message;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,9 +40,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        boolean logged = true;
+        boolean logged = false;
         if(logged){
             Intent intent = new Intent(MainActivity.this, HomepageActivity.class);
+            startActivity(intent);
+        } else {
+            Intent intent = new Intent(MainActivity.this, SignUpHomeActivity.class);
             startActivity(intent);
         }
 
