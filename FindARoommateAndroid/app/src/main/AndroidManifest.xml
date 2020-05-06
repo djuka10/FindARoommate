@@ -21,21 +21,18 @@
                            rs.ac.uns.ftn.findaroommate.model.AdItem,
                            rs.ac.uns.ftn.findaroommate.model.Message, rs.ac.uns.ftn.findaroommate.model.Language, rs.ac.uns.ftn.findaroommate.model.ResourceRegistry, rs.ac.uns.ftn.findaroommate.model.Setting, rs.ac.uns.ftn.findaroommate.model.User, rs.ac.uns.ftn.findaroommate.model.UserCharacteristic, rs.ac.uns.ftn.findaroommate.model.Review, rs.ac.uns.ftn.findaroommate.model.Stay" />
 
-        <activity android:name=".activity.HomepageActivity"
-                   android:label="HomepageActivity" >
-        android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:name=".activity.SettingsActivity"
             android:label="@string/title_activity_settings">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="rs.ac.uns.ftn.findaroommate.activity.HomepageActivity" />
-            </activity>
-        <activity android:name=".activity.SignUpHomeActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activity.SignUpActivity" android:screenOrientation="portrait" />
+        </activity>
+        <activity android:name=".activity.SignUpHomeActivity" android:screenOrientation="fullSensor" />
+        <activity android:name=".activity.SignUpActivity" android:screenOrientation="fullSensor" />
         <activity
             android:name=".activity.LoginActivity"
-            android:label="@string/title_activity_login" android:screenOrientation="portrait" >
+            android:label="@string/title_activity_login" android:screenOrientation="fullSensor" >
 
         </activity>
         <activity
