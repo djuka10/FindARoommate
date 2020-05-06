@@ -1,8 +1,15 @@
 package rs.ac.uns.ftn.findaroommate.model;
 
-public class Language {
+import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
 
+@Table(name="languages")
+public class Language extends Model {
+
+    @Column
     private int isoCode;
+    @Column
     private String name;
 
     public Language(int isoCode, String name) {
