@@ -67,6 +67,8 @@
     <string name="prefs_new_review_notif">new_review_notif</string>
     <string name="prefs_should_confirm_mail">should_confirm</string>
     <string name="prefs_should_request_mail">should_request</string>
+    <string name="title_room_list">Rooms</string>
+    <string name="title_room_detail">Room Detail</string>
 
 
 </resources>

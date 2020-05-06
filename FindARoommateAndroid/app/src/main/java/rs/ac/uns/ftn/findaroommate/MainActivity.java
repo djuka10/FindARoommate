@@ -11,10 +11,14 @@ import android.widget.TextView;
 import com.activeandroid.ActiveAndroid;
 
 
+import java.util.Date;
+import java.util.List;
+
 import rs.ac.uns.ftn.findaroommate.activity.HomepageActivity;
 import rs.ac.uns.ftn.findaroommate.activity.LoginActivity;
 import rs.ac.uns.ftn.findaroommate.activity.SignUpActivity;
 import rs.ac.uns.ftn.findaroommate.activity.SignUpHomeActivity;
+import rs.ac.uns.ftn.findaroommate.model.Ad;
 import rs.ac.uns.ftn.findaroommate.model.Message;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,6 +29,27 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ActiveAndroid.initialize(this);
+
+/*        Ad ad = new Ad().builder().build();
+        ad.setFlatM2(25);
+        ad.setAdType("type");
+        ad.setAvailableFrom(new Date());
+        ad.setAvailableUntil(new Date());
+        ad.setBoysNum(3);
+        ad.setCostsIncluded(true);
+        ad.setDeposit(300);
+        ad.setDescription("Brutalna stancuga u centru grada");
+        ad.setLadiesNum(2);
+        ad.setLatitude(25);
+        ad.setLongitude(25);
+        ad.setMaxPerson(5);
+        ad.setMinDays(34);
+        ad.setPrice(322);
+        ad.setRoomM2(20);
+        ad.setTitle("Rajski pogled!");
+        ad.save();*/
+
+        List<Ad> storedItems = Ad.getAllAds();
 
         Message m = Message.builder().title("title").message("message").build();
 //        Message m = new Message(1, 1, "My title", "My message");

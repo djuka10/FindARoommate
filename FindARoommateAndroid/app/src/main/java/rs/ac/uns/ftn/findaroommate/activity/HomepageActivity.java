@@ -23,6 +23,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import rs.ac.uns.ftn.findaroommate.MainActivity;
 import rs.ac.uns.ftn.findaroommate.R;
+import rs.ac.uns.ftn.findaroommate.model.Ad;
 
 public class HomepageActivity extends AppCompatActivity {
 
@@ -75,6 +76,14 @@ public class HomepageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(HomepageActivity.this, "Search action", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(HomepageActivity.this, RoomListActivity.class);
+
+                RoomListActivity.adsList = Ad.getAllAds();
+                for (Ad ad: RoomListActivity.adsList) {
+                    RoomListActivity.adsMap.put(ad.getId().toString(), ad);
+                }
+
+                startActivity(intent);
             }
         });
 
