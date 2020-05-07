@@ -3,6 +3,7 @@ package rs.ac.uns.ftn.findaroommate.activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -14,8 +15,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.ActionBar;
 
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import rs.ac.uns.ftn.findaroommate.R;
+import rs.ac.uns.ftn.findaroommate.model.Ad;
 
 /**
  * An activity representing a single Room detail screen. This
@@ -64,10 +67,20 @@ public class RoomDetailActivity extends AppCompatActivity {
                     getIntent().getStringExtra(RoomDetailFragment.ARG_ITEM_ID));
             RoomDetailFragment fragment = new RoomDetailFragment();
             fragment.setArguments(arguments);
+
+            CollapsingToolbarLayout layout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
+            Ad ad = RoomListActivity.adsMap.get(getIntent().getStringExtra(RoomDetailFragment.ARG_ITEM_ID));
+
+/*
+            TextView textView = layout.findViewById(R.id.room_title);
+            textView.setText(ad.getTitle());
+*/
+
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.room_detail_container, fragment)
                     .commit();
         }
+
     }
 
     @Override

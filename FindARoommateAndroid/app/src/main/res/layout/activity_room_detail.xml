@@ -18,18 +18,55 @@
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="200dp"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:toolbarId="@+id/toolbar">
+            app:expandedTitleMarginStart="@dimen/activity_vertical_margin"
+            app:toolbarId="@+id/toolbar"
+            >
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/detail_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/detail_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="15dp"
+                            android:src="@mipmap/ic_logo" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:gravity="center_horizontal|bottom"
+                            android:text="@string/app_title"
+                            android:textColor="@color/colorPureWhite"
+                            android:textSize="20sp"></TextView>
+
+                    </LinearLayout>
+
+                </androidx.appcompat.widget.Toolbar>
+
+<!--                    <TextView
+                        android:id="@+id/room_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_vertical|start"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorPureWhite"
+                        android:textSize="30sp"
+                        tools:ignore="RtlCompat">
+                    </TextView>-->
+
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -39,7 +76,8 @@
         android:id="@+id/room_detail_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:background="@color/colorPrimaryMonoComp"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -48,7 +86,7 @@
         android:layout_gravity="center_vertical|start"
         android:layout_margin="@dimen/fab_margin"
         app:layout_anchor="@+id/room_detail_container"
-        app:layout_anchorGravity="top|end"
+        app:layout_anchorGravity="bottom|right|end"
         app:srcCompat="@android:drawable/stat_notify_chat" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
