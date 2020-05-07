@@ -67,6 +67,25 @@
     <string name="prefs_new_review_notif">new_review_notif</string>
     <string name="prefs_should_confirm_mail">should_confirm</string>
     <string name="prefs_should_request_mail">should_request</string>
+    <string name="find_a_roommate">Find a Roommate</string>
+    <string name="enter_location">Enter location</string>
+    <string name="where_do_you_want_to_live">Where do you want to live</string>
+    <string name="filters">Filters</string>
+    <string name="monthly_budget">Monthly budget</string>
+    <string name="minimum">Minimum</string>
+    <string name="maximum">Maximum</string>
+    <string name="from">From</string>
+    <string name="available_from">Available from</string>
+    <string name="now">Now</string>
+    <string name="choose_date">Choose date</string>
+    <string name="duration_of_stay">Duration of stay</string>
+    <string name="short_1_5_months">Short(1-5 months)</string>
+    <string name="medium_6_11_months">Medium (6-11 months)</string>
+    <string name="long_12_months">Long (12+ months)</string>
+    <string name="flat_amenities">Flat amenities</string>
+    <string name="tv">TV</string>
+    <string name="wifi">WiFi</string>
+    <string name="apply">Apply</string>
 
 
 </resources>
