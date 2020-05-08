@@ -77,7 +77,9 @@ public class HomepageActivity extends AppCompatActivity {
         btnSearchAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(HomepageActivity.this, "Search action", Toast.LENGTH_LONG).show();
+                //Toast.makeText(HomepageActivity.this, "Search action", Toast.LENGTH_LONG).show();
+                Intent settingsIntent = new Intent(HomepageActivity.this, SearchActivity.class);
+                startActivity(settingsIntent);
             }
         });
 
