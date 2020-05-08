@@ -1,5 +1,4 @@
 <resources>
-
     <string-array name="lang_entries">
         <item>Serbian</item>
         <item>English</item>
@@ -18,5 +17,23 @@
     <string-array name="unit_values">
         <item>km</item>
         <item>miles</item>
+    </string-array>
+
+    <string-array name="gender_values">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string-array name="occupation_values">
+        <item>Work</item>
+        <item>Study</item>
+        <item>Both</item>
+    </string-array>
+
+    <string-array name="study_level_values">
+        <item>High school</item>
+        <item>Bachelor\'s degree</item>
+        <item>Master\'s degree</item>
+        <item>PhD</item>
     </string-array>
 </resources>

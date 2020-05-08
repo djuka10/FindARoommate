@@ -6,6 +6,6 @@
             android:id="@+id/search_item_toolbar"
             android:icon="@drawable/ic_location"
             android:title="@string/app_title"
-            app:showAsAction="never" />
+            app:showAsAction="ifRoom" />
 
 </menu>
