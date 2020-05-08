@@ -18,6 +18,8 @@ import java.util.List;
 
 import rs.ac.uns.ftn.findaroommate.activity.HomepageActivity;
 import rs.ac.uns.ftn.findaroommate.activity.LoginActivity;
+import rs.ac.uns.ftn.findaroommate.activity.ProfileActivity;
+import rs.ac.uns.ftn.findaroommate.activity.ProfileFormActivity;
 import rs.ac.uns.ftn.findaroommate.activity.SignUpActivity;
 import rs.ac.uns.ftn.findaroommate.activity.SignUpHomeActivity;
 import rs.ac.uns.ftn.findaroommate.model.Ad;
@@ -87,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
         boolean logged = false;
         if(logged){
-            Intent intent = new Intent(MainActivity.this, HomepageActivity.class);
+            Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
             startActivity(intent);
         } else {
             Intent intent = new Intent(MainActivity.this, SignUpHomeActivity.class);

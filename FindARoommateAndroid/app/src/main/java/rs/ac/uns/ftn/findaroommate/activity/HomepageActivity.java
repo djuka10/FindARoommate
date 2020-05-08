@@ -10,6 +10,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Gravity;
@@ -58,6 +59,8 @@ public class HomepageActivity extends AppCompatActivity {
                     case R.id.search_item:
                         return true;
                     case R.id.profile_item:
+                        Intent intent = new Intent(HomepageActivity.this, ProfileActivity.class);
+                        startActivity(intent);
                         return true;
                     case R.id.settings_item:
                         Intent settingsIntent = new Intent(HomepageActivity.this, SettingsActivity.class);
@@ -75,15 +78,9 @@ public class HomepageActivity extends AppCompatActivity {
         btnSearchAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(HomepageActivity.this, "Search action", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(HomepageActivity.this, RoomListActivity.class);
-
-                RoomListActivity.adsList = Ad.getAllAds();
-                for (Ad ad: RoomListActivity.adsList) {
-                    RoomListActivity.adsMap.put(ad.getId().toString(), ad);
-                }
-
-                startActivity(intent);
+                //Toast.makeText(HomepageActivity.this, "Search action", Toast.LENGTH_LONG).show();
+                Intent settingsIntent = new Intent(HomepageActivity.this, SearchActivity.class);
+                startActivity(settingsIntent);
             }
         });
 
