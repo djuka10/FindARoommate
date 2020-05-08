@@ -13,12 +13,17 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.ActionBar;
+import androidx.viewpager.widget.ViewPager;
 
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import java.util.List;
+
 import rs.ac.uns.ftn.findaroommate.R;
+import rs.ac.uns.ftn.findaroommate.adapters.ImageAdapter;
 import rs.ac.uns.ftn.findaroommate.model.Ad;
+import rs.ac.uns.ftn.findaroommate.model.ResourceRegistry;
 
 /**
  * An activity representing a single Room detail screen. This
@@ -27,6 +32,10 @@ import rs.ac.uns.ftn.findaroommate.model.Ad;
  * in a {@link RoomListActivity}.
  */
 public class RoomDetailActivity extends AppCompatActivity {
+
+    ViewPager viewPager;
+    int images[] = {R.drawable.apartment1, R.drawable.ic_facebook, R.drawable.ic_google, R.drawable.apartment1};
+    ImageAdapter imageAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +59,7 @@ public class RoomDetailActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
+
         // savedInstanceState is non-null when there is fragment state
         // saved from previous configurations of this activity
         // (e.g. when rotating the screen from portrait to landscape).
@@ -70,6 +80,12 @@ public class RoomDetailActivity extends AppCompatActivity {
 
             CollapsingToolbarLayout layout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
             Ad ad = RoomListActivity.adsMap.get(getIntent().getStringExtra(RoomDetailFragment.ARG_ITEM_ID));
+
+
+            viewPager = (ViewPager) findViewById(R.id.ViewPage);
+
+            imageAdapter = new ImageAdapter(RoomDetailActivity.this, images);
+            viewPager.setAdapter(imageAdapter);
 
 /*
             TextView textView = layout.findViewById(R.id.room_title);

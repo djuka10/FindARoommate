@@ -13,6 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 import rs.ac.uns.ftn.findaroommate.R;
 import rs.ac.uns.ftn.findaroommate.model.Ad;
 
@@ -65,6 +68,11 @@ public class RoomDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.room_detail, container, false);
 
+        CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) getActivity().findViewById(R.id.toolbar_layout);
+        if (appBarLayout != null) {
+            appBarLayout.setTitle(mItem.getTitle());
+        }
+
         // Show the dummy content as text in a TextView.
         if (mItem != null) {
             ((TextView) rootView.findViewById(R.id.room_title_frag)).setText(mItem.getTitle());
@@ -82,8 +90,13 @@ public class RoomDetailFragment extends Fragment {
             }
             ((TextView) rootView.findViewById(R.id.room_deposit)).setText(String.valueOf(mItem.getDeposit()));
 
-            ((TextView) rootView.findViewById(R.id.room_available_from)).setText(mItem.getAvailableFrom().toString());
-            ((TextView) rootView.findViewById(R.id.room_available_until)).setText(mItem.getAvailableUntil().toString());
+
+            String pattern = "MM/dd/yyyy";
+            DateFormat df = new SimpleDateFormat(pattern);
+            String dateFromStr = df.format(mItem.getAvailableFrom());
+            String dateUntilStr = df.format(mItem.getAvailableFrom());
+            ((TextView) rootView.findViewById(R.id.room_available_from)).setText(dateFromStr);
+            ((TextView) rootView.findViewById(R.id.room_available_until)).setText(dateUntilStr);
 
             ((TextView) rootView.findViewById(R.id.room_min_days)).setText(String.valueOf(mItem.getMinDays()));
             ((TextView) rootView.findViewById(R.id.room_max_person)).setText(String.valueOf(mItem.getMaxPerson()));
@@ -93,4 +106,5 @@ public class RoomDetailFragment extends Fragment {
 
         return rootView;
     }
+
 }

@@ -13,7 +13,7 @@
 
     <TextView
         android:id="@+id/room_title_frag"
-        android:layout_width="200dp"
+        android:layout_width="346dp"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
         android:gravity="center_vertical|center_horizontal"
@@ -36,7 +36,7 @@
     <TextView
         android:id="@+id/room_detail_text"
         android:layout_width="346dp"
-        android:layout_height="120dp"
+        android:layout_height="180dp"
         android:gravity="left"
         android:layout_below="@+id/room_title_frag"
         android:textSize="20dp"
