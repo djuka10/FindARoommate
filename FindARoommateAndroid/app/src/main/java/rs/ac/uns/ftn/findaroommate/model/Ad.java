@@ -57,7 +57,7 @@ public class Ad  extends Model{
     @Column(name = "boys_num")
     private int boysNum;
 
-    public static List<Ad> getAllItems() {
+    public static List<Ad> getAllAds() {
         return new Select().from(Ad.class).execute();
     }
 

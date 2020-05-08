@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="rs.ac.uns.ftn.findaroommate">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -29,10 +30,14 @@
             android:value="FindARoommateDatabase" />
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="22" />
+            android:value="23" />
         <meta-data
             android:name="AA_MODELS"
             android:value="rs.ac.uns.ftn.findaroommate.model.Ad,                            rs.ac.uns.ftn.findaroommate.model.AdItem,                            rs.ac.uns.ftn.findaroommate.model.Message, rs.ac.uns.ftn.findaroommate.model.Language, rs.ac.uns.ftn.findaroommate.model.ResourceRegistry, rs.ac.uns.ftn.findaroommate.model.Setting, rs.ac.uns.ftn.findaroommate.model.User, rs.ac.uns.ftn.findaroommate.model.UserCharacteristic, rs.ac.uns.ftn.findaroommate.model.Review, rs.ac.uns.ftn.findaroommate.model.Stay" />
+
+        <provider
+            android:name="com.activeandroid.content.ContentProvider"
+            android:authorities="rs.ac.uns.ftn.findaroommate" />
 
         <activity
             android:name=".activity.SettingsActivity"
@@ -43,14 +48,17 @@
         </activity>
         <activity
             android:name=".activity.SignUpHomeActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.SignUpActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.LoginActivity"
             android:label="@string/title_activity_login"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"></activity>
         <activity
             android:name=".activity.HomepageActivity"
             android:label="HomepageActivity">
@@ -58,6 +66,22 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+
+        <activity
+            android:name=".activity.RoomListActivity"
+            android:label="@string/title_room_list"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
+        <activity
+            android:name=".activity.RoomDetailActivity"
+            android:label="@string/title_room_detail"
+            android:parentActivityName=".activity.RoomListActivity"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="rs.ac.uns.ftn.findaroommate.activity.RoomListActivity" />
+        </activity>
+
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

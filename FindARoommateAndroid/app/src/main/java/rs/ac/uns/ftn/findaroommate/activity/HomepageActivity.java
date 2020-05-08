@@ -24,6 +24,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import rs.ac.uns.ftn.findaroommate.MainActivity;
 import rs.ac.uns.ftn.findaroommate.R;
+import rs.ac.uns.ftn.findaroommate.model.Ad;
 
 public class HomepageActivity extends AppCompatActivity {
 

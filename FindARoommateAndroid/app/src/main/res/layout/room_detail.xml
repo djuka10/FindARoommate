@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/room_detail"
+    style="?android:attr/textAppearanceLarge"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="16dp"
+    android:textIsSelectable="true"
+    tools:context=".activity.RoomDetailFragment"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/room_title_frag"
+        android:layout_width="346dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_vertical|center_horizontal"
+        android:textAlignment="center"
+        android:textSize="25dp"
+        android:background="@drawable/layout_round_edg"
+        android:textColor="@android:color/black"
+        >
+    </TextView>
+
+<!--    <TextView
+        android:id="@+id/description"
+        android:layout_width="120dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/room_title_frag"
+        android:text="Description:"
+        android:textSize="20dp">
+    </TextView>-->
+
+    <TextView
+        android:id="@+id/room_detail_text"
+        android:layout_width="346dp"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/activity_vertical_margin"
+        android:gravity="left"
+        android:layout_below="@+id/room_title_frag"
+        android:textSize="20dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/layout_round_edg"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="20dp">
+
+    </TextView>
+
+    <RelativeLayout
+        android:id="@+id/relative_position_long_lat"
+        android:layout_marginTop="20dp"
+        android:layout_width="346dp"
+        android:layout_height="60dp"
+        android:gravity="center_horizontal|center_vertical"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/room_detail_text"
+        android:background="@drawable/layout_round_edg">
+
+        <ImageView
+            android:id="@+id/postition_img"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/layout_round_edg"
+            android:src="@drawable/ic_location">
+        </ImageView>
+
+        <TextView
+            android:id="@+id/longitude"
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@id/postition_img"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"
+            android:text="Longitude: ">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/room_longitude"
+            android:layout_width="380dp"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@id/longitude"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"></TextView>
+
+        <TextView
+            android:id="@+id/latitude"
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:layout_below="@id/longitude"
+            android:layout_toRightOf="@+id/postition_img"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"
+            android:text="Latitude: ">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/room_latitude"
+            android:layout_width="380dp"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@id/latitude"
+            android:layout_below="@id/room_longitude"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"></TextView>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_flat_room"
+        android:layout_marginTop="20dp"
+        android:layout_width="346dp"
+        android:layout_height="60dp"
+        android:gravity="left|center_vertical"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/relative_position_long_lat"
+        android:background="@drawable/layout_round_edg">
+
+        <ImageView
+            android:id="@+id/flat_img"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/layout_round_edg"
+            android:src="@mipmap/ic_apartment_foreground">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/flat_m2"
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@+id/flat_img"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
+            android:text="Flat in m2: ">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/room_flat_m2"
+            android:layout_width="380dp"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@id/flat_m2"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"></TextView>
+
+        <TextView
+            android:id="@+id/room_m2"
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:layout_below="@id/flat_m2"
+            android:layout_toRightOf="@+id/flat_img"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
+            android:text="Room in m2: ">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/room_room_m2"
+            android:layout_width="380dp"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@id/room_m2"
+            android:layout_below="@id/room_flat_m2"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"></TextView>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_available"
+        android:layout_marginTop="20dp"
+        android:layout_width="346dp"
+        android:layout_height="60dp"
+        android:gravity="left|center_vertical"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/relative_flat_room"
+        android:background="@drawable/layout_round_edg">
+
+        <ImageView
+            android:id="@+id/calendar_img"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/layout_round_edg"
+            android:src="@mipmap/ic_calendar_foreground">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/available_from"
+            android:layout_width="170dp"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@id/calendar_img"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
+            android:text="Available from: ">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/room_available_from"
+            android:layout_width="380dp"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@id/available_from"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"></TextView>
+
+        <TextView
+            android:id="@+id/available_until"
+            android:layout_width="170dp"
+            android:layout_height="30dp"
+            android:layout_below="@id/available_from"
+            android:layout_toRightOf="@+id/calendar_img"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
+            android:text="Available until: ">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/room_available_until"
+            android:layout_width="380dp"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@id/available_until"
+            android:layout_below="@id/room_available_from"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"></TextView>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_min_days"
+        android:layout_marginTop="20dp"
+        android:layout_width="346dp"
+        android:layout_height="60dp"
+        android:gravity="left|center_vertical"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/relative_available"
+        android:background="@drawable/layout_round_edg">
+
+        <ImageView
+            android:id="@+id/min_days_img"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/layout_round_edg"
+            android:src="@mipmap/ic_min_days_foreground">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/min_days"
+            android:layout_width="170dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@+id/min_days_img"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
+            android:text="Minimum days: ">
+        </TextView>
+
+        <TextView
+            android:id="@+id/room_min_days"
+            android:layout_width="380dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@id/min_days"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_vertical|center_horizontal"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"></TextView>
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/relative_persons"
+        android:layout_marginTop="20dp"
+        android:layout_width="346dp"
+        android:layout_height="150dp"
+        android:gravity="left|top"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/relative_min_days"
+        android:background="@drawable/layout_round_edg">
+
+        <ImageView
+            android:id="@+id/persons_img"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/layout_round_edg"
+            android:src="@drawable/ic_persons_foreground">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/max_person"
+            android:layout_width="170dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@+id/persons_img"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
+            android:text="Maximum person: ">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/room_max_person"
+            android:layout_width="380dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@id/max_person"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"></TextView>
+
+        <ImageView
+            android:id="@+id/male_img"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/layout_round_edg"
+            android:src="@mipmap/ic_male_foreground">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/boys_num"
+            android:layout_width="170dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@+id/male_img"
+            android:layout_below="@+id/max_person"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
+            android:text="Male number: ">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/room_boys_num"
+            android:layout_width="380dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@id/boys_num"
+            android:layout_below="@id/room_max_person"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"></TextView>
+
+        <ImageView
+            android:id="@+id/female_img"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="90dp"
+            android:background="@drawable/layout_round_edg"
+            android:src="@mipmap/ic_female_foreground">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/ladies_num"
+            android:layout_width="170dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@+id/female_img"
+            android:layout_below="@+id/boys_num"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
+            android:text="Female number: ">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/room_ladies_num"
+            android:layout_width="380dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@id/ladies_num"
+            android:layout_below="@id/room_boys_num"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"></TextView>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_price"
+        android:layout_marginTop="20dp"
+        android:layout_width="346dp"
+        android:layout_height="150dp"
+        android:gravity="left|top"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/relative_persons"
+        android:background="@drawable/layout_round_edg">
+
+        <ImageView
+            android:id="@+id/price_img"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/layout_round_edg"
+            android:src="@drawable/ic_price_foreground">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@+id/price_img"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
+            android:text="Price: ">
+        </TextView>
+
+        <TextView
+            android:id="@+id/room_price"
+            android:layout_width="380dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@id/price"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"></TextView>
+
+        <TextView
+            android:id="@+id/deposit"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@+id/price_img"
+            android:layout_below="@+id/price"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
+            android:text="Deposit: ">
+        </TextView>
+
+        <TextView
+            android:id="@+id/room_deposit"
+            android:layout_width="380dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@id/deposit"
+            android:layout_below="@+id/room_price"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"></TextView>
+
+        <TextView
+            android:id="@+id/costs_included"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@+id/price_img"
+            android:layout_below="@+id/deposit"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
+            android:text="Costs included: ">
+        </TextView>
+
+        <TextView
+            android:id="@+id/room_costs_included"
+            android:layout_width="380dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@id/costs_included"
+            android:layout_below="@+id/room_deposit"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"></TextView>
+
+
+    </RelativeLayout>
+
+
+
+
+</RelativeLayout>

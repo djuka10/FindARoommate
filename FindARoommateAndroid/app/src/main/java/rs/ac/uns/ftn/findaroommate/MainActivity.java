@@ -11,13 +11,20 @@ import android.widget.TextView;
 import com.activeandroid.ActiveAndroid;
 
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 import rs.ac.uns.ftn.findaroommate.activity.HomepageActivity;
 import rs.ac.uns.ftn.findaroommate.activity.LoginActivity;
 import rs.ac.uns.ftn.findaroommate.activity.ProfileActivity;
 import rs.ac.uns.ftn.findaroommate.activity.ProfileFormActivity;
 import rs.ac.uns.ftn.findaroommate.activity.SignUpActivity;
 import rs.ac.uns.ftn.findaroommate.activity.SignUpHomeActivity;
+import rs.ac.uns.ftn.findaroommate.model.Ad;
 import rs.ac.uns.ftn.findaroommate.model.Message;
+import rs.ac.uns.ftn.findaroommate.model.ResourceRegistry;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +34,44 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ActiveAndroid.initialize(this);
+
+       /* Ad ad = new Ad().builder().build();
+        ad.setFlatM2(25);
+        ad.setAdType("type");
+        ad.setAvailableFrom(new Date());
+        ad.setAvailableUntil(new Date());
+        ad.setBoysNum(3);
+        ad.setCostsIncluded(true);
+        ad.setDeposit(300);
+        ad.setDescription("Brutalna stancuga u centru grada");
+        ad.setLadiesNum(2);
+        ad.setLatitude(25);
+        ad.setLongitude(25);
+        ad.setMaxPerson(5);
+        ad.setMinDays(34);
+        ad.setPrice(322);
+        ad.setRoomM2(20);
+        ad.setTitle("Rajski pogled!");
+        ad.save();
+
+        Ad ad2 = Ad.getRandom();
+        ad2.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.");
+        ad2.setTitle("Apartment with positive view");
+        String pattern = "MM/dd/yyyy";
+        DateFormat df = new SimpleDateFormat(pattern);
+        Date dateFrom = new Date();
+
+        ad2.setAvailableFrom(new Date());
+        ad2.setAvailableUntil(new Date());
+        ad2.save();*/
+
+/*        ResourceRegistry rr = new ResourceRegistry().builder().build();
+        rr.setAddId(1);
+        rr.setProfilePicture(false);
+        rr.setUri(R.drawable.apartment1);
+        rr.save();*/
+
+        List<Ad> storedItems = Ad.getAllAds();
 
         Message m = Message.builder().title("title").message("message").build();
 //        Message m = new Message(1, 1, "My title", "My message");
