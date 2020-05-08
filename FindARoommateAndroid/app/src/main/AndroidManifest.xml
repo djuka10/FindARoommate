@@ -2,24 +2,37 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="rs.ac.uns.ftn.findaroommate">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature
+        android:name="android.hardware.camera.front"
+        android:required="false" />
 
     <application
+        android:name="com.activeandroid.app.Application"
         android:allowBackup="true"
         android:icon="@mipmap/ic_logo"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_logo_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar"
-        android:name="com.activeandroid.app.Application"
-        >
-        <meta-data android:name="AA_DB_NAME" android:value="FindARoommateDatabase" />
-        <meta-data android:name="AA_DB_VERSION" android:value="21" />
+        android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".activity.UserReviewDetailActivity"></activity>
+
+        <meta-data
+            android:name="AA_DB_NAME"
+            android:value="FindARoommateDatabase" />
+        <meta-data
+            android:name="AA_DB_VERSION"
+            android:value="22" />
         <meta-data
             android:name="AA_MODELS"
-            android:value="rs.ac.uns.ftn.findaroommate.model.Ad,
-                           rs.ac.uns.ftn.findaroommate.model.AdItem,
-                           rs.ac.uns.ftn.findaroommate.model.Message, rs.ac.uns.ftn.findaroommate.model.Language, rs.ac.uns.ftn.findaroommate.model.ResourceRegistry, rs.ac.uns.ftn.findaroommate.model.Setting, rs.ac.uns.ftn.findaroommate.model.User, rs.ac.uns.ftn.findaroommate.model.UserCharacteristic, rs.ac.uns.ftn.findaroommate.model.Review, rs.ac.uns.ftn.findaroommate.model.Stay" />
+            android:value="rs.ac.uns.ftn.findaroommate.model.Ad,                            rs.ac.uns.ftn.findaroommate.model.AdItem,                            rs.ac.uns.ftn.findaroommate.model.Message, rs.ac.uns.ftn.findaroommate.model.Language, rs.ac.uns.ftn.findaroommate.model.ResourceRegistry, rs.ac.uns.ftn.findaroommate.model.Setting, rs.ac.uns.ftn.findaroommate.model.User, rs.ac.uns.ftn.findaroommate.model.UserCharacteristic, rs.ac.uns.ftn.findaroommate.model.Review, rs.ac.uns.ftn.findaroommate.model.Stay" />
 
         <activity
             android:name=".activity.SettingsActivity"
@@ -28,13 +41,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="rs.ac.uns.ftn.findaroommate.activity.HomepageActivity" />
         </activity>
-        <activity android:name=".activity.SignUpHomeActivity" android:screenOrientation="fullSensor" />
-        <activity android:name=".activity.SignUpActivity" android:screenOrientation="fullSensor" />
+        <activity
+            android:name=".activity.SignUpHomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SignUpActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.LoginActivity"
-            android:label="@string/title_activity_login" android:screenOrientation="fullSensor" >
-
-        </activity>
+            android:label="@string/title_activity_login"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.HomepageActivity"
             android:label="HomepageActivity">
@@ -51,6 +67,47 @@
         </activity>
         <activity android:name=".activity.SearchActivity">
         </activity>
+        <activity android:name=".activity.ProfileActivity" />
+        <activity
+            android:name=".activity.LanguageChooserActivity"
+            android:parentActivityName=".activity.ProfileFormActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.ProfileFormActivity" />
+        </activity>
+        <activity
+            android:name=".activity.UserAttributesActivity"
+            android:parentActivityName=".activity.ProfileFormActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.ProfileFormActivity" />
+        </activity>
+        <activity android:name=".activity.ProfileFormActivity" />
+        <activity
+            android:name=".activity.UserStayActivity"
+            android:parentActivityName=".activity.ProfileActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.ProfileActivity" />
+        </activity>
+        <activity
+            android:name=".activity.UserReviewActivity"
+            android:parentActivityName=".activity.ProfileActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.ProfileActivity" />
+        </activity>
+        <activity android:name=".activity.UserStayDetailActivity" />
+
+        <provider
+            android:name=".provider.GenericFileProvider"
+            android:authorities="rs.ac.uns.ftn.findaroommate.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
     </application>
 
 </manifest>

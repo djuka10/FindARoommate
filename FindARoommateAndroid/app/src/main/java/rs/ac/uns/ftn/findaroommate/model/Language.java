@@ -8,20 +8,20 @@ import com.activeandroid.annotation.Table;
 public class Language extends Model {
 
     @Column
-    private int isoCode;
+    private String isoCode;
     @Column
     private String name;
 
-    public Language(int isoCode, String name) {
+    public Language(String isoCode, String name) {
         this.isoCode = isoCode;
         this.name = name;
     }
 
-    public int getIsoCode() {
+    public String getIsoCode() {
         return isoCode;
     }
 
-    public void setIsoCode(int isoCode) {
+    public void setIsoCode(String isoCode) {
         this.isoCode = isoCode;
     }
 

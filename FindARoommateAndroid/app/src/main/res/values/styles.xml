@@ -18,6 +18,7 @@
         <item name="colorButtonNormal">@color/colorPureWhite</item>
         <item name="colorControlHighlight">@color/colorGray</item>
         <item name="android:background">@drawable/button_effect</item>
+
     </style>
 
     <style name="AppTheme.NoActionBar.NoActionBar">
