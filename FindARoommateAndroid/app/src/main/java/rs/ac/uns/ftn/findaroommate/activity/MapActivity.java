@@ -35,7 +35,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     GoogleMap map;
     Button btnGetDirection;
 
-    MarkerOptions place1, place2;
+    MarkerOptions adPlace, myPlace;
 
     /*private static final String TAG = "MainActivity";
 
@@ -47,14 +47,18 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-        btnGetDirection = findViewById(R.id.btnGetDirection);
+      //  btnGetDirection = findViewById(R.id.btnGetDirection);
 
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.mapFrag);
 
         mapFragment.getMapAsync(this);
 
-        place1 = new MarkerOptions().position(new LatLng(45.209217, 19.722242)).title("Location 1");
-        place2 = new MarkerOptions().position(new LatLng(45.245720, 19.851118)).title("Location 2");
+        Bundle extras = getIntent().getExtras();
+        Float longitude = extras.getFloat("longitude");
+        Float latitude = extras.getFloat("latitude");
+
+        adPlace = new MarkerOptions().position(new LatLng(longitude, latitude)).title("Ad location");
+        //place2 = new MarkerOptions().position(new LatLng(45.245720, 19.851118)).title("Location 2");
 
        /* btnGetDirection.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +73,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
-        map.addMarker(place1);
+        map.addMarker(adPlace);
 /*        map.addMarker(place2);*/
     }
 

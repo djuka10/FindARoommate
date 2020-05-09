@@ -66,10 +66,10 @@ public class MainActivity extends AppCompatActivity {
         ad2.save();*/
        //45.209217
 
-        Ad ad2 = Ad.getRandom();
-        ad2.setLongitude((float) 45.209217);
-        ad2.setLatitude((float) 19.722242);
-        ad2.save();
+/*        Ad ad2 = Ad.getRandom();
+        ad2.setLongitude((float) 48.209217);
+        ad2.setLatitude((float) 29.722242);
+        ad2.save();*/
 
 /*        ResourceRegistry rr = new ResourceRegistry().builder().build();
         rr.setAddId(1);

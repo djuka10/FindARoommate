@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -112,6 +113,11 @@ public class RoomDetailFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(), MapActivity.class);
+
+                    intent.putExtra("longitude", mItem.getLongitude());
+                    intent.putExtra("latitude", mItem.getLatitude());
+
+
                     startActivity(intent);
                 }
             });

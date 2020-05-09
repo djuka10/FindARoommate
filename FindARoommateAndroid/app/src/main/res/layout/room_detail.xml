@@ -53,7 +53,7 @@
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:gravity="center_horizontal|center_vertical"
+        android:gravity="left|center_vertical"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/room_detail_text"
         android:background="@drawable/layout_round_edg">
@@ -62,7 +62,7 @@
             android:id="@+id/postition_img"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="1dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/layout_round_edg"
             android:src="@drawable/ic_location">
@@ -112,8 +112,12 @@
             android:id="@+id/btnMapView"
             android:layout_width="65dp"
             android:layout_height="65dp"
-            android:layout_toRightOf="@id/room_latitude"
-            android:text="Map">
+            android:layout_below="@id/room_detail_text"
+            android:layout_toRightOf="@+id/room_longitude"
+            android:text="Map"
+            tools:ignore="NotSibling">
+
+
         </Button>
 
 
@@ -285,7 +289,7 @@
             android:layout_marginTop="15dp"
             android:layout_toRightOf="@id/min_days"
             android:layout_centerHorizontal="true"
-            android:gravity="center_vertical|center_horizontal"
+            android:gravity="left|center_horizontal"
             android:textAlignment="center"
             android:textSize="20dp"
             android:textColor="@android:color/black"></TextView>
@@ -491,6 +495,29 @@
             android:layout_below="@+id/room_deposit"
             android:textSize="20dp"
             android:textColor="@android:color/black"></TextView>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_book"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="left|center_vertical"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/relative_price"
+        android:background="@drawable/layout_round_edg">
+
+
+        <Button
+            android:id="@+id/btn_new_ad_action"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Request to book"
+            android:background="@drawable/button_effect"
+            >
+        </Button>
 
 
     </RelativeLayout>
