@@ -2,6 +2,7 @@ package rs.ac.uns.ftn.findaroommate.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -11,10 +12,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Map;
 
 import rs.ac.uns.ftn.findaroommate.R;
 import rs.ac.uns.ftn.findaroommate.model.Ad;
@@ -102,6 +105,16 @@ public class RoomDetailFragment extends Fragment {
             ((TextView) rootView.findViewById(R.id.room_max_person)).setText(String.valueOf(mItem.getMaxPerson()));
             ((TextView) rootView.findViewById(R.id.room_ladies_num)).setText(String.valueOf(mItem.getLadiesNum()));
             ((TextView) rootView.findViewById(R.id.room_boys_num)).setText(String.valueOf(mItem.getBoysNum()));
+
+            Button btnMapView = (Button) rootView.findViewById(R.id.btnMapView);
+
+            btnMapView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), MapActivity.class);
+                    startActivity(intent);
+                }
+            });
         }
 
         return rootView;

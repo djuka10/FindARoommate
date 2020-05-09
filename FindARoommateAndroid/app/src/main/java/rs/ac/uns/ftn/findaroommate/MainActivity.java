@@ -64,6 +64,12 @@ public class MainActivity extends AppCompatActivity {
         ad2.setAvailableFrom(new Date());
         ad2.setAvailableUntil(new Date());
         ad2.save();*/
+       //45.209217
+
+        Ad ad2 = Ad.getRandom();
+        ad2.setLongitude((float) 45.209217);
+        ad2.setLatitude((float) 19.722242);
+        ad2.save();
 
 /*        ResourceRegistry rr = new ResourceRegistry().builder().build();
         rr.setAddId(1);

@@ -13,7 +13,7 @@
 
     <TextView
         android:id="@+id/room_title_frag"
-        android:layout_width="346dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
         android:gravity="center_vertical|center_horizontal"
@@ -35,7 +35,7 @@
 
     <TextView
         android:id="@+id/room_detail_text"
-        android:layout_width="346dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/activity_vertical_margin"
         android:gravity="left"
@@ -51,7 +51,7 @@
     <RelativeLayout
         android:id="@+id/relative_position_long_lat"
         android:layout_marginTop="20dp"
-        android:layout_width="346dp"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
         android:gravity="center_horizontal|center_vertical"
         android:layout_centerHorizontal="true"
@@ -62,8 +62,8 @@
             android:id="@+id/postition_img"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_marginLeft="1dp"
             android:layout_marginTop="5dp"
-            android:layout_marginLeft="10dp"
             android:background="@drawable/layout_round_edg"
             android:src="@drawable/ic_location">
         </ImageView>
@@ -81,7 +81,7 @@
 
         <TextView
             android:id="@+id/room_longitude"
-            android:layout_width="380dp"
+            android:layout_width="100dp"
             android:layout_height="30dp"
             android:layout_toRightOf="@id/longitude"
             android:textColor="@android:color/black"
@@ -101,12 +101,20 @@
 
         <TextView
             android:id="@+id/room_latitude"
-            android:layout_width="380dp"
+            android:layout_width="100dp"
             android:layout_height="30dp"
             android:layout_toRightOf="@id/latitude"
             android:layout_below="@id/room_longitude"
             android:textColor="@android:color/black"
             android:textSize="20dp"></TextView>
+
+        <Button
+            android:id="@+id/btnMapView"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_toRightOf="@id/room_latitude"
+            android:text="Map">
+        </Button>
 
 
     </RelativeLayout>
@@ -114,7 +122,7 @@
     <RelativeLayout
         android:id="@+id/relative_flat_room"
         android:layout_marginTop="20dp"
-        android:layout_width="346dp"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
         android:gravity="left|center_vertical"
         android:layout_centerHorizontal="true"
@@ -178,7 +186,7 @@
     <RelativeLayout
         android:id="@+id/relative_available"
         android:layout_marginTop="20dp"
-        android:layout_width="346dp"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
         android:gravity="left|center_vertical"
         android:layout_centerHorizontal="true"
@@ -209,7 +217,7 @@
 
         <TextView
             android:id="@+id/room_available_from"
-            android:layout_width="380dp"
+            android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_toRightOf="@id/available_from"
             android:textSize="20dp"
@@ -229,7 +237,7 @@
 
         <TextView
             android:id="@+id/room_available_until"
-            android:layout_width="380dp"
+            android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_toRightOf="@id/available_until"
             android:layout_below="@id/room_available_from"
@@ -241,7 +249,7 @@
     <RelativeLayout
         android:id="@+id/relative_min_days"
         android:layout_marginTop="20dp"
-        android:layout_width="346dp"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
         android:gravity="left|center_vertical"
         android:layout_centerHorizontal="true"
@@ -289,7 +297,7 @@
     <RelativeLayout
         android:id="@+id/relative_persons"
         android:layout_marginTop="20dp"
-        android:layout_width="346dp"
+        android:layout_width="match_parent"
         android:layout_height="150dp"
         android:gravity="left|top"
         android:layout_centerHorizontal="true"
@@ -402,7 +410,7 @@
     <RelativeLayout
         android:id="@+id/relative_price"
         android:layout_marginTop="20dp"
-        android:layout_width="346dp"
+        android:layout_width="match_parent"
         android:layout_height="150dp"
         android:gravity="left|top"
         android:layout_centerHorizontal="true"
