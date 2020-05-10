@@ -93,7 +93,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
-                        android:src="@drawable/ic_add"
+                        android:src="@drawable/ic_upload"
                         android:layout_weight="1"
                         >
                     </ImageButton>
@@ -219,7 +219,8 @@
                     android:text="@string/profile_form_gender"
                     android:textColor="@color/colorAccent"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:paddingStart="@dimen/form_margin_up">
+                    android:paddingStart="@dimen/form_margin_up"
+                    >
                 </TextView>
                 <Spinner
                     android:layout_width="fill_parent"

@@ -49,7 +49,9 @@ public class Ad  extends Model{
     @Column(name = "available_until")
     private Date availableUntil;
     @Column(name = "min_days")
-    private int minDays;
+    private String minDays;
+    @Column(name = "max_days")
+    private String maxDays;
     @Column(name = "max_person")
     private int maxPerson;
     @Column(name = "ladies_num")

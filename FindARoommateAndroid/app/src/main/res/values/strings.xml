@@ -118,6 +118,44 @@
     <string name="profile_form_desc">Optional description</string>
     <string name="profile_form_update">Update</string>
     <string name="profile_form_save">Save profile</string>
+    <string name="profile_form_success">Profile successfully updated</string>
+
+    <!-- Ad -->
+    <string name="ad_form_success">Ad successfully created</string>
+    <string name="ad_form_save">Save ad</string>
+    <string name="ad_form_title">New ad</string>
+    <string name="ad_form_location">Location</string>
+    <string name="ad_form_street">Street</string>
+    <string name="ad_form_property_size_hint">Flat size (in m2)</string>
+    <string name="ad_form_mmates_info">Who currently lives</string>
+    <string name="ad_form_women">Female</string>
+    <string name="ad_form_men">Male</string>
+    <string name="ad_form_property_type">Type of property</string>
+    <string name="ad_form_max_person">Num of maximum person</string>
+    <string name="ad_form_ad_title">Title of add</string>
+    <string name="ad_form_house_rules">House rules</string>
+    <string name="ad_form_pets">Pets</string>
+    <string name="ad_form_couple">Couples</string>
+    <string name="ad_form_smoking">Smoking</string>
+    <string name="ad_form_flat">Flat</string>
+    <string name="ad_form_private_room">Private room</string>
+    <string name="ad_form_shared_room">Shared room</string>
+    <string name="ad_form_desc">Description</string>
+    <string name="ad_form_bed_type">Choose a bed type</string>
+    <string name="ad_form_single_bed">Single bed</string>
+    <string name="ad_form_double_bed">Double bed</string>
+    <string name="ad_form_sofa_bec">Sofa bed</string>
+    <string name="ad_form_room_size_hint">Room size (in m2)</string>
+    <string name="ad_form_available_info">Room is available:</string>
+    <string name="ad_form_available_from">From</string>
+    <string name="ad_form_available_to">To</string>
+    <string name="ad_form_stay_cond_info">Person can stay min/max:</string>
+    <string name="ad_form_costs">Costs (in €)</string>
+    <string name="ad_form_bills_included">Bills\'s included</string>
+    <string name="ad_form_deposit">Deposit (in €)</string>
+    <string name="ad_form_deposit_required">No deposit required</string>
+
+
 
 
 </resources>

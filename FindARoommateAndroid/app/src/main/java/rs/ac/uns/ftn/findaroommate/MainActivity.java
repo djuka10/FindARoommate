@@ -18,6 +18,7 @@ import java.util.List;
 
 import rs.ac.uns.ftn.findaroommate.activity.HomepageActivity;
 import rs.ac.uns.ftn.findaroommate.activity.LoginActivity;
+import rs.ac.uns.ftn.findaroommate.activity.NewAdActivity;
 import rs.ac.uns.ftn.findaroommate.activity.ProfileActivity;
 import rs.ac.uns.ftn.findaroommate.activity.ProfileFormActivity;
 import rs.ac.uns.ftn.findaroommate.activity.SignUpActivity;
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         ActiveAndroid.initialize(this);
 
-       /* Ad ad = new Ad().builder().build();
+        /*Ad ad = new Ad().builder().build();
         ad.setFlatM2(25);
         ad.setAdType("type");
         ad.setAvailableFrom(new Date());
@@ -87,9 +88,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        boolean logged = false;
+        boolean logged = true;
         if(logged){
-            Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+            Intent intent = new Intent(MainActivity.this, HomepageActivity.class);
             startActivity(intent);
         } else {
             Intent intent = new Intent(MainActivity.this, SignUpHomeActivity.class);

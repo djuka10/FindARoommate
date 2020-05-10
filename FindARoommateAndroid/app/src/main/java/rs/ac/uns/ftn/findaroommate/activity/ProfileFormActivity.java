@@ -153,20 +153,7 @@ public class ProfileFormActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-       /* TextInputLayout ta = (TextInputLayout) findViewById(R.id.textField);
-        EditText xx = ta.getEditText();
-        TextInputEditText t = (TextInputEditText) findViewById(R.id.proba);
-        t.setText("jfdlkfjd");
-
-       *//* AutoCompleteTextView combo = (AutoCompleteTextView) findViewById(R.id.multi);
-        List<String> items = Arrays.asList(new String[]{"jedan", "dva", "tri"});
-       /* ArrayAdapter adapter = new ArrayAdapter(this, R.layout.text_item, items);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        combo.setAdapter(adapter);*/
-
         Spinner genderSpinner = (Spinner) findViewById(R.id.profile_form_gender_spinner);
-        /*List<String> items = Arrays.asList(new String[]{"Select", "male", "female"});
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, items);*/
         ArrayAdapter<CharSequence> genderAdapter = ArrayAdapter.createFromResource(this,
                 R.array.gender_values, android.R.layout.simple_spinner_item);
         genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -223,10 +210,6 @@ public class ProfileFormActivity extends AppCompatActivity {
         filmChipGroup = (ChipGroup) findViewById(R.id.film_chips);
         sportChipGroup = (ChipGroup) findViewById(R.id.sport_chips);
 
-        //     public static final String CAMERA = "android.permission.CAMERA";  u manifestu trazi...
-        int i = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
-        int permGranted = PackageManager.PERMISSION_GRANTED;
-
         // ako nema u manifestu ovo zabrani na dugmetu da se slika...
         // nekad se otvori dijalog pa na osnovu odgovora se poziva listener ispod i interpretira
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -275,24 +258,11 @@ public class ProfileFormActivity extends AppCompatActivity {
                 });
                 picker.show();
             } else if(v == saveButton){
-
+                Toast.makeText(ProfileFormActivity.this, getString(R.string.profile_form_success), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(ProfileFormActivity.this, ProfileActivity.class);
+                startActivity(intent);
+                finish();
             } else if(v == uploadPhotoButton) {
-                // from gallery
-                /*Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(galleryIntent, UPLOAD_PHOTO_ACTIVITY);*/
-
-                // take photo
-                /*Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-
-                File outputMediaFile = getOutputMediaFile();
-                if(outputMediaFile != null){
-                    file = FileProvider.getUriForFile(ProfileFormActivity.this, GenericFileProvider.MY_PROVIDER, outputMediaFile);
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, file); //za skladistenje andoidovog serializable, tj parceable
-
-                    startActivityForResult(intent, TAKE_PHOTO_ACTIVITY);
-                }*/
-
                 // dialog
                 AlertDialog.Builder builder = new AlertDialog.Builder(ProfileFormActivity.this);
                 ViewGroup viewGroup = findViewById(android.R.id.content);
@@ -388,6 +358,5 @@ public class ProfileFormActivity extends AppCompatActivity {
         return new File(mediaStorageDir.getPath() + File.separator +
                 "IMG_"+ timeStamp + ".jpg");
     }
-
 
 }
