@@ -21,6 +21,8 @@ import lombok.Setter;
 public class User extends Model {
 
     @Column
+    private int userId;
+    @Column
     private String email;
     @Column
     private String password;

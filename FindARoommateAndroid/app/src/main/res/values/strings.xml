@@ -118,6 +118,7 @@
     <string name="profile_form_desc">Optional description</string>
     <string name="profile_form_update">Update</string>
     <string name="profile_form_save">Save profile</string>
+    <string name="messenger">Messenger</string>
 
 
 </resources>

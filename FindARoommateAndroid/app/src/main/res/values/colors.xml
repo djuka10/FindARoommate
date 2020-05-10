@@ -8,5 +8,6 @@
     <color name="colorPrimaryMonoComp">#166c63</color>
     <color name="colorGray">#8f8989</color>
     <color name="colorGreenLight">#ffa6c575</color>
+    <color name="colorBlack">#000000</color>
 
 </resources>
