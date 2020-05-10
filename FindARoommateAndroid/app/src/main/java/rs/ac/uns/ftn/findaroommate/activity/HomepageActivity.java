@@ -30,7 +30,6 @@ public class HomepageActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +47,7 @@ public class HomepageActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 menuItem.setChecked(true);
-                Toast.makeText(HomepageActivity.this, menuItem.getTitle(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(HomepageActivity.this, menuItem.getTitle(), Toast.LENGTH_LONG).show();
 
                 int id = menuItem.getItemId();
 
@@ -88,7 +87,8 @@ public class HomepageActivity extends AppCompatActivity {
         btnNewAddAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(HomepageActivity.this, "New ad action", Toast.LENGTH_LONG).show();
+                Intent newAdIntent = new Intent(HomepageActivity.this, NewAdActivity.class);
+                startActivity(newAdIntent);
             }
         });
 
@@ -115,16 +115,9 @@ public class HomepageActivity extends AppCompatActivity {
 
         switch (id) {
             case android.R.id.home:
+                Toast.makeText(this, "TODO: drawer togler or something else for home button", Toast.LENGTH_SHORT).show();
+                //return true;
 
-                return true;
-            case R.id.search_item:
-                return true;
-            case R.id.profile_item:
-                return true;
-            case R.id.settings_item:
-                return true;
-            case R.id.sign_out_item:
-                return true;
         }
 
         return super.onOptionsItemSelected(item);

@@ -18,6 +18,7 @@ import java.util.List;
 
 import rs.ac.uns.ftn.findaroommate.activity.HomepageActivity;
 import rs.ac.uns.ftn.findaroommate.activity.LoginActivity;
+import rs.ac.uns.ftn.findaroommate.activity.NewAdActivity;
 import rs.ac.uns.ftn.findaroommate.activity.ProfileActivity;
 import rs.ac.uns.ftn.findaroommate.activity.ProfileFormActivity;
 import rs.ac.uns.ftn.findaroommate.activity.SignUpActivity;
@@ -86,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         ad.setLatitude(25);
         ad.setLongitude(25);
         ad.setMaxPerson(5);
-        ad.setMinDays(34);
+        ad.setMinDays("1-5 months");
         ad.setPrice(322);
         ad.setRoomM2(20);
         ad.setTitle("Rajski pogled!");
@@ -185,7 +186,6 @@ public class MainActivity extends AppCompatActivity {
         userDjuka.save();
         userLuka.save();
         userPop.save();
-
 
     }
 

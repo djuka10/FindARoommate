@@ -29,7 +29,6 @@
         android:roundIcon="@mipmap/ic_logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".activity.UserReviewDetailActivity"></activity>
 
         <!--Google Maps-->
 
@@ -50,7 +49,7 @@
             android:value="FindARoommateDatabase" />
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="23" />
+            android:value="24" />
         <meta-data
             android:name="AA_MODELS"
             android:value="rs.ac.uns.ftn.findaroommate.model.Ad,                            rs.ac.uns.ftn.findaroommate.model.AdItem,                            rs.ac.uns.ftn.findaroommate.model.Message, rs.ac.uns.ftn.findaroommate.model.Language, rs.ac.uns.ftn.findaroommate.model.ResourceRegistry, rs.ac.uns.ftn.findaroommate.model.Setting, rs.ac.uns.ftn.findaroommate.model.User, rs.ac.uns.ftn.findaroommate.model.UserCharacteristic, rs.ac.uns.ftn.findaroommate.model.Review, rs.ac.uns.ftn.findaroommate.model.Stay" />
@@ -82,7 +81,7 @@
             android:name=".activity.LoginActivity"
             android:label="@string/title_activity_login"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"></activity>
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.HomepageActivity"
             android:label="HomepageActivity">
@@ -90,11 +89,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-
         <activity
             android:name=".activity.RoomListActivity"
             android:label="@string/title_room_list"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
             android:name=".activity.RoomDetailActivity"
             android:label="@string/title_room_detail"
@@ -106,8 +104,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="rs.ac.uns.ftn.findaroommate.activity.RoomListActivity" />
         </activity>
-
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -115,9 +111,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.SearchActivity">
+        <activity android:name=".activity.SearchActivity"></activity>
+        <activity android:name=".activity.ProfileActivity"
+            android:parentActivityName=".activity.HomepageActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.HomepageActivity" />
         </activity>
-        <activity android:name=".activity.ProfileActivity" />
         <activity
             android:name=".activity.LanguageChooserActivity"
             android:parentActivityName=".activity.ProfileFormActivity">
@@ -132,7 +132,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.ProfileFormActivity" />
         </activity>
-        <activity android:name=".activity.ProfileFormActivity" />
+        <activity android:name=".activity.ProfileFormActivity"
+            android:parentActivityName=".activity.ProfileActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.ProfileActivity" />
+        </activity>
         <activity
             android:name=".activity.UserStayActivity"
             android:parentActivityName=".activity.ProfileActivity">
@@ -147,6 +152,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.ProfileActivity" />
         </activity>
+        <activity android:name=".activity.NewAdActivity"
+            android:parentActivityName=".activity.HomepageActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.HomepageActivity" />
+        </activity>
+        <activity android:name=".activity.UserReviewDetailActivity" />
         <activity android:name=".activity.UserStayDetailActivity" />
 
         <activity android:name=".activity.ChatActivity"></activity>
