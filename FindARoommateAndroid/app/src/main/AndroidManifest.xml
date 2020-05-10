@@ -7,6 +7,12 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+
+
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
@@ -24,6 +30,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
 
+        <!--Google Maps-->
+
+
+        <!-- BUG IN GOOGLE PLAY SERVICES!!! -->
+        <uses-library android:name="org.apache.http.legacy" android:required="false" />
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCqysn5uvaOW6OhpBG8UWXViZ6PROqXqXo"/>
+
+<!--        <meta-data android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />-->
+
+        <!-- Database SQLite -->
+
         <meta-data
             android:name="AA_DB_NAME"
             android:value="FindARoommateDatabase" />
@@ -37,6 +57,10 @@
         <provider
             android:name="com.activeandroid.content.ContentProvider"
             android:authorities="rs.ac.uns.ftn.findaroommate" />
+
+        <activity android:name=".activity.MapActivity"
+            android:label="Map">
+        </activity>
 
         <activity
             android:name=".activity.SettingsActivity"
@@ -73,7 +97,9 @@
             android:name=".activity.RoomDetailActivity"
             android:label="@string/title_room_detail"
             android:parentActivityName=".activity.RoomListActivity"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="rs.ac.uns.ftn.findaroommate.activity.RoomListActivity" />
@@ -136,6 +162,8 @@
         </activity>
         <activity android:name=".activity.UserReviewDetailActivity" />
         <activity android:name=".activity.UserStayDetailActivity" />
+
+        <activity android:name=".activity.ChatActivity"></activity>
 
         <provider
             android:name=".provider.GenericFileProvider"
