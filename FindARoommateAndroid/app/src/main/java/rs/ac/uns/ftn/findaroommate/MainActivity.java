@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         ad.setLatitude(25);
         ad.setLongitude(25);
         ad.setMaxPerson(5);
-        ad.setMinDays(34);
+        ad.setMinDays("1-5 months");
         ad.setPrice(322);
         ad.setRoomM2(20);
         ad.setTitle("Rajski pogled!");
