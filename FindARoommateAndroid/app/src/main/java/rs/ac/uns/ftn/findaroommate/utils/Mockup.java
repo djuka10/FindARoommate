@@ -1,11 +1,14 @@
 package rs.ac.uns.ftn.findaroommate.utils;
 
+import android.app.AlertDialog;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import rs.ac.uns.ftn.findaroommate.dto.ReviewDto;
 import rs.ac.uns.ftn.findaroommate.dto.StayDto;
+import rs.ac.uns.ftn.findaroommate.model.AdItem;
 import rs.ac.uns.ftn.findaroommate.model.CharacteristicType;
 import rs.ac.uns.ftn.findaroommate.model.Language;
 import rs.ac.uns.ftn.findaroommate.model.Review;
@@ -26,6 +29,7 @@ public class Mockup {
     private static ArrayList<StayDto> staysHistory;
     private static ArrayList<ReviewDto> reviews;
 
+    private static ArrayList<AdItem> adItems;
 
     private Mockup(){
         availableLanguages = initLanguages();
@@ -40,6 +44,8 @@ public class Mockup {
 
         staysHistory = initStaysHistory();
         reviews = initReviews();
+
+        adItems = initAdItems();
 
     }
 
@@ -61,6 +67,11 @@ public class Mockup {
     public ArrayList<UserCharacteristic> getAvailablePersonalities() {
         return availablePersonalities;
     }
+
+    public ArrayList<AdItem> getAdItems() {
+        return adItems;
+    }
+
 
     public  ArrayList<UserCharacteristic> getAvailableLifestyles() {
         return availableLifestyles;
@@ -129,9 +140,9 @@ public class Mockup {
         UserCharacteristic c2 = new UserCharacteristic(type, "Active");
         UserCharacteristic c3 = new UserCharacteristic(type, "Cheerful");
         UserCharacteristic c4 = new UserCharacteristic(type, "Friendly");
-        UserCharacteristic c5 = new UserCharacteristic(type, "Calm");
+        UserCharacteristic c5 = new UserCharacteristic(type, "Energetic");
         UserCharacteristic c6 = new UserCharacteristic(type, "Organised");
-        UserCharacteristic c7 = new UserCharacteristic(type, "Fun");
+        UserCharacteristic c7 = new UserCharacteristic(type, "Funny");
         UserCharacteristic c8 = new UserCharacteristic(type, "Tolerant");
         UserCharacteristic c9 = new UserCharacteristic(type, "Easygoing");
         UserCharacteristic c10 = new UserCharacteristic(type, "Sociable");
@@ -301,5 +312,53 @@ public class Mockup {
 
 
         return reviewDtos;
+    }
+
+    private static ArrayList<AdItem> initAdItems(){
+        ArrayList<AdItem> adItems = new ArrayList<>();
+
+        AdItem a1 = AdItem.builder().name("Wifi").build();
+        AdItem a2 = AdItem.builder().name("Lift").build();
+        AdItem a3 = AdItem.builder().name("Washing mashine").build();
+        AdItem a4 = AdItem.builder().name("Dishing").build();
+        AdItem a5 = AdItem.builder().name("Room service").build();
+        AdItem a6 = AdItem.builder().name("Doorman").build();
+        AdItem a7 = AdItem.builder().name("Tv").build();
+        AdItem a8 = AdItem.builder().name("Heating").build();
+        AdItem a9 = AdItem.builder().name("Air cond").build();
+        AdItem a10 = AdItem.builder().name("Furnished").build();
+        AdItem a11 = AdItem.builder().name("Parking").build();
+        AdItem a12 = AdItem.builder().name("Garage").build();
+        AdItem a13 = AdItem.builder().name("Pool").build();
+        AdItem a14 = AdItem.builder().name("Terrace").build();
+        AdItem a15 = AdItem.builder().name("Pet friendly").build();
+        AdItem a16 = AdItem.builder().name("Garden").build();
+        AdItem a17 = AdItem.builder().name("Balcony").build();
+        AdItem a18 = AdItem.builder().name("Dryer").build();
+        AdItem a19 = AdItem.builder().name("Private lift").build();
+        AdItem a20 = AdItem.builder().name("Natural ligth").build();
+
+        adItems.add(a1);
+        adItems.add(a2);
+        adItems.add(a3);
+        adItems.add(a4);
+        adItems.add(a5);
+        adItems.add(a6);
+        adItems.add(a7);
+        adItems.add(a8);
+        adItems.add(a9);
+        adItems.add(a10);
+        adItems.add(a11);
+        adItems.add(a12);
+        adItems.add(a13);
+        adItems.add(a14);
+        adItems.add(a15);
+        adItems.add(a16);
+        adItems.add(a17);
+        adItems.add(a18);
+        adItems.add(a19);
+        adItems.add(a20);
+
+        return adItems;
     }
 }
