@@ -290,7 +290,6 @@
             android:layout_toRightOf="@id/min_days"
             android:layout_centerHorizontal="true"
             android:gravity="left|center_horizontal"
-            android:textAlignment="center"
             android:textSize="20dp"
             android:textColor="@android:color/black"></TextView>
 
