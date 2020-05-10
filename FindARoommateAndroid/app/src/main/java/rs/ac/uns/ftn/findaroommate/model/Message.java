@@ -26,9 +26,9 @@ import lombok.Setter;
 public class Message extends Model {
 
     @Column(name = "sender")
-    private int sender;
+    private User sender;
     @Column(name = "receiver")
-    private int receiver;
+    private User receiver;
     @Column(name = "title")
     private String title;
     @Column(name = "message")

@@ -122,6 +122,7 @@
     <!-- Google Maps API-->
     
     <string name="google_maps_API_key">AIzaSyCqysn5uvaOW6OhpBG8UWXViZ6PROqXqXo</string>
+    <string name="messenger">Messenger</string>
 
 
 </resources>

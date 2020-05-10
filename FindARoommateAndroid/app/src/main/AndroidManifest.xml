@@ -149,6 +149,8 @@
         </activity>
         <activity android:name=".activity.UserStayDetailActivity" />
 
+        <activity android:name=".activity.ChatActivity"></activity>
+
         <provider
             android:name=".provider.GenericFileProvider"
             android:authorities="rs.ac.uns.ftn.findaroommate.provider"
