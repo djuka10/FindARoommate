@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
         ad2.setAvailableFrom(new Date());
         ad2.setAvailableUntil(new Date());
-        ad2.save();*/
+        ad2.save();
 
 /*        ResourceRegistry rr = new ResourceRegistry().builder().build();
         rr.setAddId(1);
