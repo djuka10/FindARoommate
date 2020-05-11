@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -107,7 +108,7 @@ public class RoomDetailFragment extends Fragment {
             ((TextView) rootView.findViewById(R.id.room_ladies_num)).setText(String.valueOf(mItem.getLadiesNum()));
             ((TextView) rootView.findViewById(R.id.room_boys_num)).setText(String.valueOf(mItem.getBoysNum()));
 
-            Button btnMapView = (Button) rootView.findViewById(R.id.btnMapView);
+            ImageView btnMapView = (ImageView) rootView.findViewById(R.id.btnMapView);
 
             btnMapView.setOnClickListener(new View.OnClickListener() {
                 @Override

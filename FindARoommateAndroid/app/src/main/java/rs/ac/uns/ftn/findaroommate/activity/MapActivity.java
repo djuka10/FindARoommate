@@ -1,11 +1,13 @@
 package rs.ac.uns.ftn.findaroommate.activity;
 
 import android.app.Dialog;
+import android.graphics.Camera;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +18,8 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -36,6 +40,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     Button btnGetDirection;
 
     MarkerOptions adPlace, myPlace;
+    LatLng adLocation;
 
     /*private static final String TAG = "MainActivity";
 
@@ -59,6 +64,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         adPlace = new MarkerOptions().position(new LatLng(longitude, latitude)).title("Ad location");
         //place2 = new MarkerOptions().position(new LatLng(45.245720, 19.851118)).title("Location 2");
+        adLocation = new LatLng(longitude, latitude);
 
        /* btnGetDirection.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +80,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
         map.addMarker(adPlace);
+        CameraUpdate location = CameraUpdateFactory.newLatLngZoom(adLocation, 10.0f);
+        map.animateCamera(location);
+
 /*        map.addMarker(place2);*/
     }
 
