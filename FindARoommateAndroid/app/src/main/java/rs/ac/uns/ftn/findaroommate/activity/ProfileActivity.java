@@ -15,6 +15,8 @@ import android.widget.Toast;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -29,10 +31,21 @@ import rs.ac.uns.ftn.findaroommate.utils.Mockup;
 
 public class ProfileActivity extends AppCompatActivity {
 
+    private FirebaseUser loggedUser;
+    private FirebaseAuth mAuth;
+    private User loggedUserModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        mAuth = FirebaseAuth.getInstance();
+        loggedUser = mAuth.getCurrentUser();
+
+        List<User> list = User.getOneByEmail(loggedUser.getEmail());
+        if(!list.isEmpty())
+            loggedUserModel = list.get(0);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.profile_toolbar);
         setSupportActionBar(toolbar);
@@ -81,7 +94,8 @@ public class ProfileActivity extends AppCompatActivity {
         int now = Calendar.getInstance().get(Calendar.YEAR);
         String age = Integer.toString(now - user.getBirthDay().getYear() - 1900);
 
-        tUserInfo.setText(String.format("%s %s, %s", user.getFirstName(), user.getLastName(), age));
+        tUserInfo.setText(String.format("%s %s", loggedUserModel.getFirstName(), loggedUserModel.getLastName()));
+        //tUserInfo.setText(String.format("%s %s, %s", user.getFirstName(), user.getLastName(), age));
         tUserActive.setText("Active since " + formattedActive);
         tOccupation.setText(user.getOccupation());
         tEducation.setText(user.getStudyLevel());

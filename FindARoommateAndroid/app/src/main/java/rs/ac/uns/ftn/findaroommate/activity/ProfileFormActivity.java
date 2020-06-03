@@ -40,6 +40,8 @@ import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.chip.ChipGroup.OnCheckedChangeListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -57,10 +59,15 @@ import rs.ac.uns.ftn.findaroommate.provider.GenericFileProvider;
 import rs.ac.uns.ftn.findaroommate.utils.Mockup;
 
 public class ProfileFormActivity extends AppCompatActivity {
+
+    FirebaseAuth mAuth;
+    FirebaseUser loggedUser;
+
     DatePickerDialog picker;
     TextInputEditText dateEditText;
-
     TextInputEditText languageEditText;
+
+    TextInputEditText firstNameEdit;
 
     ChipGroup personalityChipGroup;
     ChipGroup lifestyleChipGroup;
@@ -149,6 +156,10 @@ public class ProfileFormActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_form);
 
+        mAuth = FirebaseAuth.getInstance();
+        loggedUser = mAuth.getCurrentUser();
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.profile_form_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -174,6 +185,8 @@ public class ProfileFormActivity extends AppCompatActivity {
         studyLevelAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         studyLevelSpinner.setAdapter(studyLevelAdapter);
 
+        //Viktor added
+        firstNameEdit = (TextInputEditText) findViewById(R.id.edit_first_name);
 
         dateEditText= (TextInputEditText) findViewById(R.id.input_date_picker);
         dateEditText.setInputType(InputType.TYPE_NULL);

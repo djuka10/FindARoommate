@@ -86,6 +86,14 @@
             android:padding="@dimen/activity_vertical_margin"
             />
 
+        <!--<com.facebook.login.widget.LoginButton
+            android:id="@+id/fb_login_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp" />-->
+
         <Button
             android:id="@+id/btn_email_signup"
             android:layout_width="match_parent"

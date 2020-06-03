@@ -3,8 +3,10 @@ package rs.ac.uns.ftn.findaroommate.model;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Select;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -46,4 +48,8 @@ public class User extends Model {
     private String urlProfile;
     @Column
     private Date activeSince;
+
+    public static List<User> getOneByEmail(String email) {
+        return new Select().from(User.class).where("email=?",email).execute();
+    }
 }
