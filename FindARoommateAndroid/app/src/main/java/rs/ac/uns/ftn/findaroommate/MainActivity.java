@@ -9,6 +9,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.activeandroid.ActiveAndroid;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 import java.text.DateFormat;
@@ -32,15 +36,26 @@ import rs.ac.uns.ftn.findaroommate.model.User;
 public class MainActivity extends AppCompatActivity {
 
     private Boolean initDataFlag;
+    private FirebaseUser currentUser;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        //AppEventsLogger.activateApp(this);
+
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
 
         ActiveAndroid.initialize(this);
 
         initDataFlag = false;
+        Boolean initPeraFlag = false;
+
+        if(initPeraFlag)
+            initUser();
 
         if(initDataFlag)
             initData();
@@ -61,7 +76,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         boolean logged = false;
+
+        if(currentUser == null) {
+            logged = false;
+        } else {
+            logged = true;
+        }
+
         if(logged){
             Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
             startActivity(intent);
@@ -71,6 +94,29 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+/*    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if(currentUser == null) {
+            SendUserLoginActivity();
+        } else {
+            SendUserHomeActivity();
+        }
+
+    }
+
+    private void SendUserHomeActivity() {
+        Intent intent = new Intent(MainActivity.this, HomepageActivity.class);
+        startActivity(intent);
+    }
+
+    private void SendUserLoginActivity() {
+
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(intent);
+    }*/
 
     private void initData() {
 
@@ -189,4 +235,23 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void initUser() {
+        User userPera = new User().builder()
+                .firstName("Petar")
+                .lastName("Petrovic")
+                .email("pera123@gmail.com")
+                .birthDay(new Date(1996,2,9))
+                .gender("male")
+                .about("Lorem ipsum")
+                .password("pera123")
+                .occupation("student")
+                .studyLevel("master")
+                .workingStatus("unemployed")
+                .urlProfile("url")
+                .activeSince(new Date())
+                .build();
+
+        userPera.save();
+
+    }
 }

@@ -156,11 +156,22 @@
     <string name="ad_form_deposit_required">No deposit required</string>
 
 
-    
     <!-- Google Maps API-->
-    
+
     <string name="google_maps_API_key">AIzaSyCqysn5uvaOW6OhpBG8UWXViZ6PROqXqXo</string>
     <string name="messenger">Messenger</string>
+    <string name="title_activity_sign_up_google">SignUpGoogleActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
 
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <!-- FACEBOOK -->
+    <string name="facebook_app_id">1501643706681249</string>
+    <string name="fb_login_protocol_scheme">fb1501643706681249</string>
 
 </resources>

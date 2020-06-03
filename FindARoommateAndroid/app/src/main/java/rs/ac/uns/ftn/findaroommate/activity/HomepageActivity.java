@@ -21,6 +21,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import rs.ac.uns.ftn.findaroommate.MainActivity;
 import rs.ac.uns.ftn.findaroommate.R;
@@ -29,11 +31,16 @@ import rs.ac.uns.ftn.findaroommate.model.Ad;
 public class HomepageActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
+    private FirebaseAuth mAuth;
+    private FirebaseUser currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
+
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -66,6 +73,9 @@ public class HomepageActivity extends AppCompatActivity {
                         startActivity(settingsIntent);
                         return true;
                     case R.id.sign_out_item:
+                        mAuth.signOut();
+                        Intent signUpIntent = new Intent(HomepageActivity.this, SignUpHomeActivity.class);
+                        startActivity(signUpIntent);
                         return true;
                 }
 
