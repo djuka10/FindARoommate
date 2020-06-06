@@ -53,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
 
         ActiveAndroid.initialize(this);
 
-        initDataFlag = false;
-        Boolean initPeraFlag = false;
+        initDataFlag = true;
+        Boolean initPeraFlag = true;
 
         if(initPeraFlag)
             initUser();
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(logged){
-            Intent intent = new Intent(MainActivity.this, ProfileActivity .class);
+            Intent intent = new Intent(MainActivity.this, HomepageActivity .class);
             startActivity(intent);
         } else {
             Intent intent = new Intent(MainActivity.this, SignUpHomeActivity.class);

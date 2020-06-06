@@ -26,7 +26,7 @@ public interface UserServiceApi {
             "Content-Type:application/json"
     })
     @POST(ServiceUtils.USER_API)
-    Call<ResponseBody> add(@Body UserDto user);
+    Call<UserDto> add(@Body UserDto user);
 
     @GET(ServiceUtils.USER_API)
     Call<List<User>> getAll();

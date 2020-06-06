@@ -30,10 +30,8 @@ public class UserController {
 	}
 	
 	@PostMapping
-    public String createOrUpdateCity(@RequestBody User user) {
-		int i = user.getActiveSince().getDay();
-        userService.save(user);
-        return "redirect:/city";
+    public User createOrUpdateCity(@RequestBody User user) {
+        return userService.save(user);
     }
 	
 	

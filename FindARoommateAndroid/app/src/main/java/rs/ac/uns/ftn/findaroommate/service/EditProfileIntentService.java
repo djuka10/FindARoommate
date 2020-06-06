@@ -53,13 +53,18 @@ public class EditProfileIntentService extends IntentService {
 
                 UserDto userDto = new UserDto();
                 userDto.convert(user);
-                Call<ResponseBody> call = ServiceUtils.userServiceApi.add(userDto);
-                call.enqueue(new Callback<ResponseBody>() {
+                Call<UserDto> call = ServiceUtils.userServiceApi.add(userDto);
+                call.enqueue(new Callback<UserDto>() {
                     @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    public void onResponse(Call<UserDto> call, Response<UserDto> response) {
                         if (response.isSuccessful()) {
                             System.out.println("Meesage recieved");
                             Log.i("fd", "Message received");
+
+                            UserDto body = response.body();
+                            User user = User.getOne(body.getEntityId());
+                            user.setEntityId(body.getEntityId());
+                            user.save();
 
                             Intent intent = new Intent(ProfileFormActivity.EDIT_USER_PROFILE);
                             sendBroadcast(intent);
@@ -71,7 +76,7 @@ public class EditProfileIntentService extends IntentService {
                     }
 
                     @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    public void onFailure(Call<UserDto> call, Throwable t) {
                         System.out.println("Error!");
                         Log.e("error", t.getMessage());
                     }
