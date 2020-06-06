@@ -17,8 +17,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Date;
+
 import rs.ac.uns.ftn.findaroommate.R;
 import rs.ac.uns.ftn.findaroommate.model.User;
+import rs.ac.uns.ftn.findaroommate.service.EditProfileService;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -80,9 +83,11 @@ public class SignUpActivity extends AppCompatActivity {
                                 .firstName(firstName)
                                 .lastName(lastName)
                                 .email(email)
+                                .activeSince(new Date())
                                 .password(password).build();
                         user.save();
-                        Intent intent = new Intent(SignUpActivity.this, HomepageActivity.class);
+                        sendToServer(user);
+                        Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                         startActivity(intent);
                         Toast.makeText(SignUpActivity.this, "Account create successfully...", Toast.LENGTH_SHORT);
                         loadingBar.dismiss();
@@ -97,5 +102,12 @@ public class SignUpActivity extends AppCompatActivity {
             });
         }
 
+    }
+
+    private void sendToServer(User user){
+        // send to the server
+        Intent editProfileIntent = new Intent(this, EditProfileService.class);
+        editProfileIntent.putExtra("userId", user.getId());
+        startService(editProfileIntent);
     }
 }

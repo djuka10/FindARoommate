@@ -1,6 +1,7 @@
 package rs.ac.uns.ftn.findaroommate.activity;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
@@ -10,6 +11,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -27,12 +29,15 @@ import com.google.firebase.auth.FirebaseUser;
 import rs.ac.uns.ftn.findaroommate.MainActivity;
 import rs.ac.uns.ftn.findaroommate.R;
 import rs.ac.uns.ftn.findaroommate.model.Ad;
+import rs.ac.uns.ftn.findaroommate.utils.AppTools;
 
 public class HomepageActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
+
+    private ActionBarDrawerToggle mDrawerToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +46,8 @@ public class HomepageActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -74,6 +81,8 @@ public class HomepageActivity extends AppCompatActivity {
                         return true;
                     case R.id.sign_out_item:
                         mAuth.signOut();
+                        AppTools.setLoggedUser(null);
+                        AppTools.setFirebaseUser(null);
                         Intent signUpIntent = new Intent(HomepageActivity.this, SignUpHomeActivity.class);
                         startActivity(signUpIntent);
                         return true;
@@ -102,6 +111,24 @@ public class HomepageActivity extends AppCompatActivity {
             }
         });
 
+        mDrawerToggle = new ActionBarDrawerToggle(
+                this,                  /* host Activity */
+                mDrawerLayout,         /* DrawerLayout object */
+                toolbar,  /* nav drawer image to replace 'Up' caret */
+                R.string.drawer_open,  /* "open drawer" description for accessibility */
+                R.string.drawer_close  /* "close drawer" description for accessibility */
+        ) {
+            public void onDrawerClosed(View view) {
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+
+            public void onDrawerOpened(View drawerView) {
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+        };
+        // OVOM LINIJOM SE AKTIVIRA LISTENER IZNAD
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+
         CardView mCardViewTop = (CardView) findViewById(R.id.ca);
         CardView mCardViewBottom = (CardView) findViewById(R.id.cb);
 
@@ -116,6 +143,21 @@ public class HomepageActivity extends AppCompatActivity {
         return true;
     }
 
+    // after onStart() and onRestoreInstanceState(). nema bas toliku primenu ima smisla za NavigationDrawer
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        // Pass any configuration change to the drawer toggls
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -127,7 +169,6 @@ public class HomepageActivity extends AppCompatActivity {
             case android.R.id.home:
                 Toast.makeText(this, "TODO: drawer togler or something else for home button", Toast.LENGTH_SHORT).show();
                 //return true;
-
         }
 
         return super.onOptionsItemSelected(item);

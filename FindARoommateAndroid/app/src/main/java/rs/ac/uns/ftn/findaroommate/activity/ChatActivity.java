@@ -29,13 +29,13 @@ public class ChatActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         User user1 = new User();
-        user1.setUserId(1);
+        user1.setEntityId(1);
         user1.setFirstName("Djuro");
         user1.setLastName(" Stevic");
         user1.setUrlProfile("https://upload.wikimedia.org/wikipedia/en/thumb/8/8f/Boston_Celtics.svg/300px-Boston_Celtics.svg.png");
 
         User user2 = new User();
-        user2.setUserId(2);
+        user2.setEntityId(2);
         user2.setFirstName("Pera");
         user2.setLastName(" Peric");
         user2.setUrlProfile("https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Jayson_Tatum_%282018%29.jpg/330px-Jayson_Tatum_%282018%29.jpg");

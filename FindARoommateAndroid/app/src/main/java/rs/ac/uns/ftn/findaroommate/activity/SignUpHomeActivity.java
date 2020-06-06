@@ -53,6 +53,7 @@ import java.util.List;
 
 import rs.ac.uns.ftn.findaroommate.R;
 import rs.ac.uns.ftn.findaroommate.model.User;
+import rs.ac.uns.ftn.findaroommate.service.EditProfileService;
 
 public class SignUpHomeActivity extends AppCompatActivity {
 
@@ -252,8 +253,17 @@ public class SignUpHomeActivity extends AppCompatActivity {
                 .email(email)
                 .firstName("DUMMY")
                 .lastName("DUMMIC")
+                .activeSince(new Date())
                 .build();
 //TODO Pokupiti nekako first i last name sa google account-a
         user.save();
+        sendToServer(user);
+    }
+
+    private void sendToServer(User user){
+        // send to the server
+        Intent editProfileIntent = new Intent(this, EditProfileService.class);
+        editProfileIntent.putExtra("userId", user.getId());
+        startService(editProfileIntent);
     }
 }

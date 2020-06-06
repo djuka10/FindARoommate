@@ -199,7 +199,7 @@ public class Mockup {
         UserCharacteristic c3 = new UserCharacteristic(type, "Alternative");
         UserCharacteristic c4 = new UserCharacteristic(type, "Dance");
         UserCharacteristic c5 = new UserCharacteristic(type, "Hip-hop");
-        UserCharacteristic c6 = new UserCharacteristic(type, "Jaez");
+        UserCharacteristic c6 = new UserCharacteristic(type, "Jaaz");
         UserCharacteristic c7 = new UserCharacteristic(type, "Blues");
         UserCharacteristic c8 = new UserCharacteristic(type, "Tolerant");
         UserCharacteristic c9 = new UserCharacteristic(type, "Punk");
@@ -319,7 +319,7 @@ public class Mockup {
 
         AdItem a1 = AdItem.builder().name("Wifi").build();
         AdItem a2 = AdItem.builder().name("Lift").build();
-        AdItem a3 = AdItem.builder().name("Washing mashine").build();
+        AdItem a3 = AdItem.builder().name("Washing machine").build();
         AdItem a4 = AdItem.builder().name("Dishing").build();
         AdItem a5 = AdItem.builder().name("Room service").build();
         AdItem a6 = AdItem.builder().name("Doorman").build();

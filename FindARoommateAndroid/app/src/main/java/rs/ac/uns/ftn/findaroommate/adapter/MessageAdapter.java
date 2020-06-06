@@ -58,11 +58,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         Message item = messages.get(i);
         LinearLayout viewMessage = viewHolder.ll_1;
-        if(item.getSender().getUserId() == 1) {
+        if(item.getSender().getEntityId() == 1) {
             //ako smo mi ulogovani i mi smo sender, poruka treba da se prikaze na desnoj strani ekrana
 //            viewMessage.setGravity(END);
             viewMessage.setHorizontalGravity(RIGHT);
-        } else if(item.getSender().getUserId() == 2) {
+        } else if(item.getSender().getEntityId() == 2) {
             //ako smo receiver, poruka treba da se prikaze na levoj strani ekrana
 //            viewMessage.setGravity(START);
             viewMessage.setHorizontalGravity(LEFT);
