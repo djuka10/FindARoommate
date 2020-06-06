@@ -4,13 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.activeandroid.ActiveAndroid;
 import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -21,17 +21,14 @@ import java.util.Date;
 import java.util.List;
 
 import rs.ac.uns.ftn.findaroommate.activity.HomepageActivity;
-import rs.ac.uns.ftn.findaroommate.activity.LoginActivity;
-import rs.ac.uns.ftn.findaroommate.activity.NewAdActivity;
 import rs.ac.uns.ftn.findaroommate.activity.ProfileActivity;
-import rs.ac.uns.ftn.findaroommate.activity.ProfileFormActivity;
-import rs.ac.uns.ftn.findaroommate.activity.SignUpActivity;
 import rs.ac.uns.ftn.findaroommate.activity.SignUpHomeActivity;
 import rs.ac.uns.ftn.findaroommate.model.Ad;
 import rs.ac.uns.ftn.findaroommate.model.Language;
 import rs.ac.uns.ftn.findaroommate.model.Message;
-import rs.ac.uns.ftn.findaroommate.model.ResourceRegistry;
 import rs.ac.uns.ftn.findaroommate.model.User;
+import rs.ac.uns.ftn.findaroommate.service.DemoService;
+import rs.ac.uns.ftn.findaroommate.utils.AppTools;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,6 +42,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         FacebookSdk.sdkInitialize(getApplicationContext());
         //AppEventsLogger.activateApp(this);
+
+        User loggedUserModel = AppTools.getLoggedUser();
+        if(loggedUserModel == null){
+            Log.e("login error", "No one is logged");
+        }
 
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
@@ -86,13 +88,26 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(logged){
-            Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+            Intent intent = new Intent(MainActivity.this, ProfileActivity .class);
             startActivity(intent);
         } else {
             Intent intent = new Intent(MainActivity.this, SignUpHomeActivity.class);
             startActivity(intent);
         }
 
+        setUpReceiver();
+
+    }
+
+
+
+    private void setUpReceiver(){
+
+        // Retrieve a PendingIntent that will perform a broadcast
+        Intent alarmIntent = new Intent(this, DemoService.class);
+        startService(alarmIntent);
+        //PendingIntent pendingIntent = PendingIntent.getService(this, 0, alarmIntent, 0);
+        // manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
     }
 
 /*    @Override
@@ -188,13 +203,13 @@ public class MainActivity extends AppCompatActivity {
                 .firstName("Luka")
                 .lastName("Jovanovic")
                 .email("lukajvnv@gmail.com")
-                .birthDay(new Date(1996,3,29))
-                .gender("male")
+                .birthDay(new Date(828054000000l))  //29.3.1996.
+                .gender("Male")
                 .about("Lorem ipsum")
                 .password("password")
-                .occupation("student")
-                .studyLevel("master")
-                .workingStatus("unemployed")
+                .occupation("SW architect")
+                .studyLevel("Bachelor's degree")
+                .workingStatus("Study")
                 .urlProfile("url")
                 .activeSince(new Date())
                 .build();
@@ -203,13 +218,13 @@ public class MainActivity extends AppCompatActivity {
                 .firstName("Srdjan")
                 .lastName("Popovic")
                 .email("srdjanpopovic14@gmail.com")
-                .birthDay(new Date(1996,3,1))
-                .gender("male")
+                .birthDay(new Date(825634800000l))  //1.3.1996
+                .gender("Male")
                 .about("Lorem ipsum")
                 .password("password")
-                .occupation("student")
-                .studyLevel("4 year")
-                .workingStatus("unemployed")
+                .occupation("SW architect")
+                .studyLevel("Bachelor's degree")
+                .workingStatus("Study")
                 .urlProfile("url")
                 .activeSince(new Date())
                 .build();
@@ -218,13 +233,13 @@ public class MainActivity extends AppCompatActivity {
                 .firstName("Viktor")
                 .lastName("Djuka")
                 .email("viktordjuka10@gmail.com")
-                .birthDay(new Date(1996,2,9))
-                .gender("male")
+                .birthDay(new Date(823820400000l))  // 9.2.1996
+                .gender("Male")
                 .about("Lorem ipsum")
-                .password("password")
-                .occupation("student")
-                .studyLevel("master")
-                .workingStatus("unemployed")
+                .password("SW architect")
+                .occupation("Study")
+                .studyLevel("Bachelor's degree")
+                .workingStatus("Study")
                 .urlProfile("url")
                 .activeSince(new Date())
                 .build();
@@ -240,15 +255,16 @@ public class MainActivity extends AppCompatActivity {
                 .firstName("Petar")
                 .lastName("Petrovic")
                 .email("pera123@gmail.com")
-                .birthDay(new Date(1996,2,9))
-                .gender("male")
+                .birthDay(new Date(823820400000l))  // 9.2.1996
+                .gender("Male")
                 .about("Lorem ipsum")
                 .password("pera123")
-                .occupation("student")
-                .studyLevel("master")
-                .workingStatus("unemployed")
+                .occupation("SW architect")
+                .studyLevel("Bachelor's degree")
+                .workingStatus("Study")
                 .urlProfile("url")
                 .activeSince(new Date())
+                .entityId(1)
                 .build();
 
         userPera.save();

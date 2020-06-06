@@ -7,6 +7,7 @@ import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -27,12 +28,11 @@ import java.util.List;
 import rs.ac.uns.ftn.findaroommate.R;
 import rs.ac.uns.ftn.findaroommate.model.Language;
 import rs.ac.uns.ftn.findaroommate.model.User;
+import rs.ac.uns.ftn.findaroommate.utils.AppTools;
 import rs.ac.uns.ftn.findaroommate.utils.Mockup;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private FirebaseUser loggedUser;
-    private FirebaseAuth mAuth;
     private User loggedUserModel;
 
     @Override
@@ -40,12 +40,10 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        mAuth = FirebaseAuth.getInstance();
-        loggedUser = mAuth.getCurrentUser();
-
-        List<User> list = User.getOneByEmail(loggedUser.getEmail());
-        if(!list.isEmpty())
-            loggedUserModel = list.get(0);
+        loggedUserModel = AppTools.getLoggedUser();
+        if(loggedUserModel == null){
+            Log.e("login error", "No one is logged");
+        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.profile_toolbar);
         setSupportActionBar(toolbar);
@@ -73,6 +71,7 @@ public class ProfileActivity extends AppCompatActivity {
                 .workingStatus("Unemployed")
                 .build();
 
+        // TODO: get user languages
         List<Language> userLanguages = Mockup.getInstance().getUserLanguages();
         StringBuilder builder = new StringBuilder();
         for(int i = 0; i < userLanguages.size(); i++){
@@ -89,16 +88,19 @@ public class ProfileActivity extends AppCompatActivity {
 
 
         SimpleDateFormat format = new SimpleDateFormat(getString(R.string.date_format));
-        String formattedActive = format.format(user.getActiveSince());
+        String formattedActive = format.format(loggedUserModel.getActiveSince());
 
         int now = Calendar.getInstance().get(Calendar.YEAR);
-        String age = Integer.toString(now - user.getBirthDay().getYear() - 1900);
+        String age = "";
+        if(loggedUserModel.getBirthDay() != null){
+             age = ", " + Integer.toString(now - loggedUserModel.getBirthDay().getYear() - 1900);
+        }
 
-        tUserInfo.setText(String.format("%s %s", loggedUserModel.getFirstName(), loggedUserModel.getLastName()));
+        tUserInfo.setText(String.format("%s %s%s", loggedUserModel.getFirstName(), loggedUserModel.getLastName(), age));
         //tUserInfo.setText(String.format("%s %s, %s", user.getFirstName(), user.getLastName(), age));
         tUserActive.setText("Active since " + formattedActive);
-        tOccupation.setText(user.getOccupation());
-        tEducation.setText(user.getStudyLevel());
+        tOccupation.setText(loggedUserModel.getOccupation());
+        tEducation.setText(loggedUserModel.getStudyLevel());
         tLanguages.setText(builder.toString());
 
         BottomAppBar bottomAppBar = (BottomAppBar) findViewById(R.id.bottom_app_bar);

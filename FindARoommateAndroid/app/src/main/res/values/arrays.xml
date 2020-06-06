@@ -24,10 +24,11 @@
         <item>Female</item>
     </string-array>
 
-    <string-array name="occupation_values">
+    <string-array name="working_status_values">
         <item>Work</item>
         <item>Study</item>
         <item>Both</item>
+        <item>Unemployed</item>
     </string-array>
 
     <string-array name="study_level_values">

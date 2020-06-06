@@ -11,6 +11,8 @@
     <string name="drawer_header_text">Drawer Header</string>
     <string name="homepage_button_1">I am looking for a room to live in.</string>
     <string name="homepage_button_2">I have a room to rent.</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
 
     <!-- Sign in -->
     <string name="title_activity_login">Sign in</string>
@@ -113,6 +115,7 @@
     <string name="profile_form_film">Film</string>
     <string name="profile_form_music">Music</string>
     <string name="profile_form_occupation">Occupation</string>
+    <string name="profile_form_working_status">Working status</string>
     <string name="profile_form_study_level">Study level</string>
     <string name="profile_form_education">Education</string>
     <string name="profile_form_desc">Optional description</string>
