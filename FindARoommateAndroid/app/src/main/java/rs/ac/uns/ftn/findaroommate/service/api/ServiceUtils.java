@@ -8,17 +8,19 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import rs.ac.uns.ftn.findaroommate.model.UserCharacteristic;
 
 public class ServiceUtils {
 
-    /*public static final String SERVER_API_PATH = "http://192.168.1.2:8089/server/";*/
-    public static final String SERVER_API_PATH = "http://192.168.1.4:8089/server/";
+    public static final String SERVER_API_PATH = "http://192.168.1.2:8089/server/";
+    /*public static final String SERVER_API_PATH = "http://192.168.1.4:8089/server/"; */
 
     public static final String ADD = "add";
     public static final String TEST = "test";
 
     public static final String USER_CHARACTERISTIC_API = "userCharacteristic";
     public static final String USER_API = "user";
+    public static final String LANGUAGE_API = "language";
 
     public static final String AD_API = "ad";
 
@@ -46,5 +48,8 @@ public class ServiceUtils {
     public static ReviewerServiceApi reviewerServiceApi = retrofit.create(ReviewerServiceApi.class);
     public static UserServiceApi userServiceApi = retrofit.create(UserServiceApi.class);
     public static AdServiceApi adServiceApi = retrofit.create(AdServiceApi.class);
+    public static LanguageServiceApi languageServiceApi = retrofit.create(LanguageServiceApi.class);
+    public static UserCharacteristicServiceApi userCharacteristicServiceApi = retrofit.create(UserCharacteristicServiceApi.class);
+
 
 }

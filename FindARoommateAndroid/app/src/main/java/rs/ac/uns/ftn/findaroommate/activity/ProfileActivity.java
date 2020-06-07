@@ -10,9 +10,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -34,6 +37,12 @@ import rs.ac.uns.ftn.findaroommate.utils.Mockup;
 public class ProfileActivity extends AppCompatActivity {
 
     private User loggedUserModel;
+
+    private ImageView profileImage;
+
+    private ImageButton imageGenderButton;
+
+    public static String PROFILE_URL = "http://HOST/server/user/profile/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,9 +91,23 @@ public class ProfileActivity extends AppCompatActivity {
 
         TextView tUserInfo = (TextView) findViewById(R.id.user_name_info);
         TextView tUserActive = (TextView) findViewById(R.id.user_active);
-        TextView tLanguages = (TextView) findViewById(R.id.user_languages);
+        //TextView tLanguages = (TextView) findViewById(R.id.user_languages);
+        TextView tStudyLevel= (TextView) findViewById(R.id.study_level);
         TextView tOccupation = (TextView) findViewById(R.id.user_occupation);
         TextView tEducation = (TextView) findViewById(R.id.user_education);
+
+        profileImage = (ImageView) findViewById(R.id.profileImage);
+
+        imageGenderButton = (ImageButton) findViewById(R.id.gender_image);
+        if(loggedUserModel.getGender() != null){
+            if(loggedUserModel.getGender().equals("Female")){
+                imageGenderButton.setImageResource(R.drawable.ic_girl);
+
+            } else {
+                imageGenderButton.setImageResource(R.drawable.ic_boy);
+            }
+        }
+
 
 
         SimpleDateFormat format = new SimpleDateFormat(getString(R.string.date_format));
@@ -101,7 +124,8 @@ public class ProfileActivity extends AppCompatActivity {
         tUserActive.setText("Active since " + formattedActive);
         tOccupation.setText(loggedUserModel.getOccupation());
         tEducation.setText(loggedUserModel.getStudyLevel());
-        tLanguages.setText(builder.toString());
+        //tLanguages.setText(builder.toString());
+        tStudyLevel.setText(loggedUserModel.getStudyLevel());
 
         BottomAppBar bottomAppBar = (BottomAppBar) findViewById(R.id.bottom_app_bar);
         bottomAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -128,6 +152,12 @@ public class ProfileActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+
+        if(loggedUserModel.getUrlProfile() != null){
+            Glide.with(getApplicationContext())
+                    .load(PROFILE_URL.replace("HOST", getString(R.string.host)) + loggedUserModel.getUrlProfile()).into(profileImage);
+        }
     }
 
     @Override

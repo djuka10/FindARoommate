@@ -4,6 +4,7 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
+import com.google.gson.annotations.Expose;
 
 import java.util.List;
 
@@ -21,12 +22,16 @@ import lombok.Setter;
 @Table(name = "resource_registry")
 public class ResourceRegistry extends Model {
 
+    @Expose
     @Column
     private int user;
+    @Expose
     @Column
     private String uri;
+    @Expose
     @Column
     private boolean profilePicture;
+    @Expose
     @Column
     private int addId;
 

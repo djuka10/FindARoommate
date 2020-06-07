@@ -8,8 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.ManyToAny;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -55,10 +58,16 @@ public class User {
     @Column
     private Date activeSince;
     
-  /*  @OneToMany(mappedBy = "userId")
-    private List<Ad> ads;
+    @Transient
+    private List<Integer> languageIds;
     
-    @OneToMany(mappedBy = "ownerId")
-    private List<Ad> ownerAds;*/
+    @ManyToMany
+    private List<Language> languages;
+    
+    @Transient
+    private List<Integer> userCharacteristicIds;
+    
+    @ManyToMany
+    private List<UserCharacteristic> characteristics;
 
 }

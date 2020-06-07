@@ -1,3 +1,4 @@
+insert into languages (iso_code, name) values ('ell', 'Greek');
 insert into languages (iso_code, name) values ('srp', 'Serbian');
 insert into languages (iso_code, name) values ('eng', 'English');
 insert into languages (iso_code, name) values ('spa', 'Spanish');
@@ -7,7 +8,6 @@ insert into languages (iso_code, name) values ('por', 'Portuguese');
 insert into languages (iso_code, name) values ('rus', 'Russian');
 insert into languages (iso_code, name) values ('zho', 'Chinise');
 insert into languages (iso_code, name) values ('hun', 'Hungarian');
-insert into languages (iso_code, name) values ('ell', 'Greek');
 
 -- PERSONALITY
 insert into user_characteristics (type, value) values (0, 'Calm');
@@ -116,3 +116,10 @@ insert into ads (ad_type, available_from, available_until, boys_num, const_inclu
 insert into ads (ad_type, available_from, available_until, boys_num, const_included, deposit, desc, flat_m2, ladies_num, latitude, longitude, max_days, max_person, min_days, price, room_m2, title, ad_status, owner_id, user_id) values
 ('type1', '2019-01-01', '2019-12-12', 3, 1, 300, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
  25, 2, 29.72224235534668, 48.2092170715332, '60', 5, '1-5 months', 322, 20, 'Apartment with positive view',2,4,1);
+
+insert into users_languages (user_entity_id, languages_entity_id) values (1, 2);
+insert into users_languages (user_entity_id, languages_entity_id) values (1, 3);
+
+insert into users_characteristics (user_entity_id, characteristics_entity_id) values (1, 2);
+insert into users_characteristics (user_entity_id, characteristics_entity_id) values (1, 3);
+

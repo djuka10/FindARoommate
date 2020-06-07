@@ -2,6 +2,8 @@ package rs.ac.uns.ftn.findaroommate.FindARoommateServer.model;
 
 
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,12 +31,15 @@ public class ResourceRegistry {
     private Integer entityId;
 
     @Column
-    private int user;
+    private Integer user;
     @Column
     private String uri;
     @Column
-    private boolean profilePicture;
+    private Boolean profilePicture;
     @Column
-    private int addId;
+    private Integer addId;
+    
+    @Column
+    private Date created;
 
 }

@@ -12,11 +12,14 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.OpenableColumns;
 import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,23 +31,47 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.common.util.IOUtils;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import android.app.AlertDialog;
 
+import lombok.val;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.http.Multipart;
 import rs.ac.uns.ftn.findaroommate.R;
+import rs.ac.uns.ftn.findaroommate.model.CharacteristicType;
+import rs.ac.uns.ftn.findaroommate.model.Language;
+import rs.ac.uns.ftn.findaroommate.model.ResourceRegistry;
 import rs.ac.uns.ftn.findaroommate.model.User;
+import rs.ac.uns.ftn.findaroommate.model.UserCharacteristic;
 import rs.ac.uns.ftn.findaroommate.provider.GenericFileProvider;
 import rs.ac.uns.ftn.findaroommate.receiver.EditProfileReceiver;
 import rs.ac.uns.ftn.findaroommate.service.EditProfileIntentService;
 import rs.ac.uns.ftn.findaroommate.service.EditProfileService;
+import rs.ac.uns.ftn.findaroommate.service.api.ServiceUtils;
+import rs.ac.uns.ftn.findaroommate.task.UploadProfileTask;
 import rs.ac.uns.ftn.findaroommate.utils.AppTools;
 
 public class ProfileFormActivity extends AppCompatActivity {
@@ -96,11 +123,15 @@ public class ProfileFormActivity extends AppCompatActivity {
     private static final int TAKE_PHOTO_ACTIVITY = 101;
     private static final int UPLOAD_PHOTO_ACTIVITY = 102;
 
+    private static final int ENTITY_ID = 110;
+
 
     private ClickListener clickListener = new ClickListener();
 
     EditProfileReceiver editProfileReceiver;
     public static String EDIT_USER_PROFILE = "EDIT_USER_PROFILE";
+
+    public static String PROFILE_URL = "http://HOST/server/user/profile/";
 
 
     @Override
@@ -108,13 +139,19 @@ public class ProfileFormActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == LANGUAGE_CHOSER_ACTIVITY) {
             if (data.hasExtra("selectedLanguages")) {
-                CharSequence[] a = data.getExtras().getCharSequenceArray("selectedLanguages");
+                int[] langIds = data.getExtras().getIntArray("selectedLanguagesId");
+                List<Integer> languageIds = new ArrayList<Integer>();
+
+                CharSequence[] langs = data.getExtras().getCharSequenceArray("selectedLanguages");
                 StringBuilder builder = new StringBuilder();
-                for(int i = 0; i < a.length; i++){
-                    builder.append(a[i]);
-                    if( i < a.length - 1)
+                for(int i = 0; i < langs.length; i++){
+                    languageIds.add(langIds[i]);
+
+                    builder.append(langs[i]);
+                    if( i < langs.length - 1)
                         builder.append(", ");
                 }
+                user.setLanguageIds(languageIds);
                 languageEditText.setText(builder.toString());
             }
         }
@@ -122,23 +159,26 @@ public class ProfileFormActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK && requestCode == USER_ATTRIBUTES_ACTIVITY) {
             CharSequence[] characteritics = data.getExtras().getCharSequenceArray("selectedPersonalities");
             personalityChipGroup.removeAllViews();
-            createLanguageChips(characteritics, personalityChipGroup);
+            createUserCharacteristicChips(characteritics, personalityChipGroup);
 
             characteritics = data.getExtras().getCharSequenceArray("selectedLifestyles");
             lifestyleChipGroup.removeAllViews();
-            createLanguageChips(characteritics, lifestyleChipGroup);
+            createUserCharacteristicChips(characteritics, lifestyleChipGroup);
 
             characteritics = data.getExtras().getCharSequenceArray("selectedMusics");
             musicChipGroup.removeAllViews();
-            createLanguageChips(characteritics, musicChipGroup);
+            createUserCharacteristicChips(characteritics, musicChipGroup);
 
             characteritics = data.getExtras().getCharSequenceArray("selectedFilms");
             filmChipGroup.removeAllViews();
-            createLanguageChips(characteritics, filmChipGroup);
+            createUserCharacteristicChips(characteritics, filmChipGroup);
 
             characteritics = data.getExtras().getCharSequenceArray("selectedSport");
             sportChipGroup.removeAllViews();
-            createLanguageChips(characteritics, sportChipGroup);
+            createUserCharacteristicChips(characteritics, sportChipGroup);
+
+            ArrayList<Integer> userChar = data.getExtras().getIntegerArrayList("selectedUserCharacteristicId");
+            user.setUserCharacteristicIds(userChar);
         }
 
         if(resultCode == RESULT_OK && requestCode == TAKE_PHOTO_ACTIVITY){
@@ -149,6 +189,48 @@ public class ProfileFormActivity extends AppCompatActivity {
             if(data!= null){
                 Uri selectedImage = data.getData();
                 photoView.setImageURI(selectedImage);
+                InputStream inputStream = null;
+                byte[] image = null;
+                String fileName = "";
+
+                try {
+                    inputStream = getContentResolver().openInputStream(selectedImage);
+                    fileName = getFileName(selectedImage);
+                    try {
+                        image = IOUtils.toByteArray(inputStream);
+                        System.out.println("jkfd");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                } catch (FileNotFoundException e){
+
+                }
+
+                //new UploadProfileTask(getApplicationContext()).execute(image, fileName, user.getEntityId(), true);
+                RequestBody body = MultipartBody.create(MediaType.parse("image/jpeg"), image);
+
+                Call<ResourceRegistry> c = ServiceUtils.userServiceApi.uploadPhoto(
+                        MultipartBody.Part.createFormData("image", fileName, body),
+                        MultipartBody.Part.createFormData("user", Integer.toString(user.getEntityId())),
+                        MultipartBody.Part.createFormData("profilePicture", Boolean.toString(true)));
+                c.enqueue(new Callback<ResourceRegistry>() {
+                    @Override
+                    public void onResponse(Call<ResourceRegistry> call, Response<ResourceRegistry> response) {
+                        if(response.isSuccessful()){
+                            ResourceRegistry body = response.body();
+                            user.setUrlProfile(body.getUri());
+                            System.out.println("super");
+
+                        }
+                    }
+
+
+                    @Override
+                    public void onFailure(Call<ResourceRegistry> call, Throwable t) {
+                        System.out.println("Error");
+                    }
+                });
             }
         }
     }
@@ -278,6 +360,78 @@ public class ProfileFormActivity extends AppCompatActivity {
             cldr.setTime(user.getBirthDay());
             dateOfBirthEditText.setText(cldr.get(Calendar.DAY_OF_MONTH) + "/" + (cldr.get(Calendar.MONTH) + 1) + "/" + cldr.get(Calendar.YEAR));
         }
+
+        Call<List<Language>> c = ServiceUtils.userServiceApi.getUserLanguages(1);
+        c.enqueue(new Callback<List<Language>>() {
+            @Override
+            public void onResponse(Call<List<Language>> call, Response<List<Language>> response) {
+                if (response.isSuccessful()) {
+                    System.out.println("Meesage recieved");
+                    Log.i("fd", "Message received");
+
+                    List<Language> userLanguages = response.body();
+
+                    List<Integer> languageIds = new ArrayList<Integer>();
+
+                    StringBuilder builder = new StringBuilder();
+                    for(int i = 0; i < userLanguages.size(); i++){
+                        languageIds.add(userLanguages.get(i).getEntityId());
+                        builder.append(userLanguages.get(i).getName());
+
+                        if( i < userLanguages.size() - 1)
+                            builder.append(", ");
+                    }
+                    user.setLanguageIds(languageIds);
+                    languageEditText.setText(builder.toString());
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Language>> call, Throwable t) {
+                System.out.println("Error!");
+                Log.e("error", t.getMessage());
+            }
+        });
+
+        Call<List<UserCharacteristic>> cs = ServiceUtils.userServiceApi.getUserUserCharacteristic(1);
+        cs.enqueue(new Callback<List<UserCharacteristic>>() {
+            @Override
+            public void onResponse(Call<List<UserCharacteristic>> call, Response<List<UserCharacteristic>> response) {
+                if (response.isSuccessful()) {
+                    System.out.println("Meesage recieved");
+                    Log.i("fd", "Message received");
+
+                    List<UserCharacteristic> userCharacteristics = response.body();
+
+                    createUserCharacteristicChips(userCharacteristics.stream().filter(c -> c.getType().equals(CharacteristicType.PERSONALITY)).collect(Collectors.toList()),
+                            personalityChipGroup);
+                    createUserCharacteristicChips(userCharacteristics.stream().filter(c -> c.getType().equals(CharacteristicType.LIFESTYLE)).collect(Collectors.toList()),
+                            lifestyleChipGroup);
+                    createUserCharacteristicChips(userCharacteristics.stream().filter(c -> c.getType().equals(CharacteristicType.SPORT)).collect(Collectors.toList()),
+                            sportChipGroup);
+                    createUserCharacteristicChips(userCharacteristics.stream().filter(c -> c.getType().equals(CharacteristicType.FILM)).collect(Collectors.toList()),
+                            filmChipGroup);
+                    createUserCharacteristicChips(userCharacteristics.stream().filter(c -> c.getType().equals(CharacteristicType.MUSIC)).collect(Collectors.toList()),
+                            musicChipGroup);
+
+                    user.setUserCharacteristicIds(userCharacteristics.stream().map(UserCharacteristic::getEntityId).collect(Collectors.toList()));
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<UserCharacteristic>> call, Throwable t) {
+                System.out.println("Error!");
+                Log.e("error", t.getMessage());
+            }
+        });
+
+        if(user.getUrlProfile() != null){
+            Glide.with(getApplicationContext())
+                    .load(PROFILE_URL.replace("HOST", getString(R.string.host)) + user.getUrlProfile()).into(photoView);
+        }
+
     }
 
     private void proccessProfileEdit(){
@@ -308,10 +462,20 @@ public class ProfileFormActivity extends AppCompatActivity {
         }
     }
 
-    private void createLanguageChips(CharSequence[] characteristics, ChipGroup chips){
+    private void createUserCharacteristicChips(CharSequence[] characteristics, ChipGroup chips){
         for(int i = 0; i < characteristics.length; i++){
             Chip c = (Chip) this.getLayoutInflater().inflate(R.layout.chip_tag, null, false);
             c.setText(characteristics[i]);
+            chips.addView(c);
+        }
+    }
+
+    private void createUserCharacteristicChips(List<UserCharacteristic> userCharacteristics, ChipGroup chips){
+        for(int i = 0; i < userCharacteristics.size(); i++){
+            Chip c = (Chip) this.getLayoutInflater().inflate(R.layout.chip_tag, null, false);
+            c.setText(userCharacteristics.get(i).getValue());
+            //c.setTag(ENTITY_ID, userCharacteristics.get(i).getEntityId());
+            c.setTag(userCharacteristics.get(i).getEntityId());
             chips.addView(c);
         }
     }
@@ -360,7 +524,7 @@ public class ProfileFormActivity extends AppCompatActivity {
                 alertDialog.show();
             } else {
                 Intent intent = new Intent(getApplicationContext(), UserAttributesActivity.class);
-                intent.putExtra("key", "value");
+                intent.putIntegerArrayListExtra("userCharacteristics", (ArrayList<Integer>)user.getUserCharacteristicIds());
                 startActivityForResult(intent, USER_ATTRIBUTES_ACTIVITY);
             }
         }
@@ -429,7 +593,7 @@ public class ProfileFormActivity extends AppCompatActivity {
             } else if (v == languageEditText){
                 if(hasFocus){
                     Intent intent = new Intent(getApplicationContext(), LanguageChooserActivity.class);
-                    intent.putExtra("key", "value");
+                    intent.putIntegerArrayListExtra("userLanguages", (ArrayList<Integer>)user.getLanguageIds());
                     startActivityForResult(intent, LANGUAGE_CHOSER_ACTIVITY);
                 }
             }
@@ -452,6 +616,19 @@ public class ProfileFormActivity extends AppCompatActivity {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         return new File(mediaStorageDir.getPath() + File.separator +
                 "IMG_"+ timeStamp + ".jpg");
+    }
+
+    public String getFileName(Uri selectedImage){
+        Cursor cursor = null;
+        String fileName = "";
+        cursor = getContentResolver().query(selectedImage, null, null, null, null);
+        if (cursor != null) {
+            int nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+            cursor.moveToFirst();
+            fileName = cursor.getString(nameIndex);
+            cursor.close();
+        }
+        return fileName;
     }
 
 }

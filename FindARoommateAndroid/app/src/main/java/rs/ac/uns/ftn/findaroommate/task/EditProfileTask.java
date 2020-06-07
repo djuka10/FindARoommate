@@ -1,5 +1,6 @@
 package rs.ac.uns.ftn.findaroommate.task;
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -40,13 +41,13 @@ public class EditProfileTask extends AsyncTask<Long, Void, Void> {
         try {
             // User user = AppTools.getLoggedUser();
             User user = null;
-            long id = -1;
+            long userId = -1;
             if(voids.length > 0){
-                 id = voids[0];
+                userId = voids[0];
 
             }
-            if(id != -1){
-                user = User.getOne(id);
+            if(userId != -1){
+                user = User.getOne(userId);
             }
 
             UserDto userDto = new UserDto();
@@ -60,12 +61,15 @@ public class EditProfileTask extends AsyncTask<Long, Void, Void> {
                         Log.i("fd", "Message received");
 
                         UserDto body = response.body();
-                        User user = User.getOne(body.getEntityId());
-                        user.setEntityId(body.getEntityId());
-                        user.save();
 
-                        Intent intent = new Intent(ProfileFormActivity.EDIT_USER_PROFILE);
-                        context.sendBroadcast(intent);
+                        List<User> users = User.getOneByEmail(body.getEmail());
+                        if(!users.isEmpty()){
+                            User user = users.get(0);
+                            user.setEntityId(body.getEntityId());
+                            user.save();
+                        }
+//                        Intent intent = new Intent(ProfileFormActivity.EDIT_USER_PROFILE);
+//                        context.sendBroadcast(intent);
                     } else {
                         Log.e("editProfileTask", "Error");
 

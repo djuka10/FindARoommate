@@ -21,19 +21,28 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import rs.ac.uns.ftn.findaroommate.R;
+import rs.ac.uns.ftn.findaroommate.model.CharacteristicType;
 import rs.ac.uns.ftn.findaroommate.model.Language;
+import rs.ac.uns.ftn.findaroommate.model.UserCharacteristic;
+import rs.ac.uns.ftn.findaroommate.service.api.ServiceUtils;
 import rs.ac.uns.ftn.findaroommate.utils.Mockup;
 
 public class LanguageChooserActivity extends AppCompatActivity {
 
     ChipGroup chipGroup;
     List<Language> selectedLanguages;
+    List<Integer> selectedLanguagesId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_language_chooser);
+
+        selectedLanguagesId = getIntent().getIntegerArrayListExtra("userLanguages");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.lang_choser_toolbar);
         setSupportActionBar(toolbar);
@@ -50,25 +59,49 @@ public class LanguageChooserActivity extends AppCompatActivity {
 
 
                 CharSequence[] langArray = new CharSequence[selectedLanguages.size()];
+                int[] langIdArray = new int[selectedLanguages.size()];
+
 
                 for(int i = 0; i < selectedLanguages.size(); i++){
                     langArray[i] = selectedLanguages.get(i).getName();
+                    langIdArray[i] = selectedLanguages.get(i).getEntityId();
                 }
 
                 data.putExtra("selectedLanguages", langArray);
+                data.putExtra("selectedLanguagesId", langIdArray);
                 setResult(RESULT_OK, data);
                 finish();
             }
         });
 
         chipGroup = (ChipGroup) findViewById(R.id.chips);
-        createLanguageChips();
+        setupLanguageChips();
 
         selectedLanguages = new ArrayList<Language>();
     }
 
-    private void createLanguageChips(){
-        for (Language lang : Mockup.getInstance().getLanguagesDataSource()){
+    private void setupLanguageChips(){
+        Call<List<Language>> languages = ServiceUtils.languageServiceApi.getAll();
+        languages.enqueue(new Callback<List<Language>>() {
+            @Override
+            public void onResponse(Call<List<Language>> call, Response<List<Language>> response) {
+                if(response.isSuccessful()){
+                    List<Language> languages= response.body();
+                    createLanguageChips(languages);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Language>> call, Throwable t) {
+
+            }
+        });
+
+
+    }
+
+    private void createLanguageChips(List<Language> languages){
+        for (Language lang : languages){
             Chip c1 = (Chip) this.getLayoutInflater().inflate(R.layout.chip_item, null, false);
             Display display = getWindowManager().getDefaultDisplay();
             int width = display.getWidth();
@@ -82,9 +115,14 @@ public class LanguageChooserActivity extends AppCompatActivity {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     Chip c = (Chip) buttonView;
                     if(isChecked){
-                        selectedLanguages.add((Language)c.getTag());
+                        if(!alreadyAddedSelected(c, lang)){
+                            selectedLanguagesId.add(((Language)c.getTag()).getEntityId());
+                            selectedLanguages.add((Language)c.getTag());
+                        }
                     } else {
-                        selectedLanguages.remove((Language)c.getTag());
+                        Language l = (Language)c.getTag();
+                        selectedLanguages.remove(l);
+                        selectedLanguagesId.remove(Integer.valueOf(l.getEntityId()));
                     }
                 }
             });
@@ -95,17 +133,41 @@ public class LanguageChooserActivity extends AppCompatActivity {
             c1.setPadding(paddingDp, 0, paddingDp, 0);
             c1.setTag(lang);
 
+            if(alreadyAddedSelected(c1, lang)){
+                selectedLanguages.add(lang);
+                c1.setChecked(true);
+            }
+
             c1.setOnCloseIconClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     boolean t = true;
                     Chip c = (Chip)v;
                     c.setChecked(false);
-                    selectedLanguages.remove((Language)c.getTag());
+                    Language l = (Language)c.getTag();
+                    selectedLanguages.remove(l);
+                    selectedLanguagesId.remove(Integer.valueOf(l.getEntityId()));
                 }
             });
 
             chipGroup.addView(c1);
         }
     }
+
+    private boolean alreadyAddedSelected(Chip chip, Language characteristicType){
+        Language item = (Language)chip.getTag();
+
+        if(selectedLanguagesId.contains(characteristicType.getEntityId())){
+            return true;
+        }
+
+//        for(Language language : selectedAttrs){
+//            if(u == item){
+//                return true;
+//            }
+//        }
+
+        return false;
+    }
+
 }

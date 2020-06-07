@@ -2,8 +2,10 @@ package rs.ac.uns.ftn.findaroommate.utils;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.provider.OpenableColumns;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,7 +29,6 @@ public class AppTools {
     }
 
     public static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
 
     public static int getConnectivityStatus(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context
@@ -97,6 +98,5 @@ public class AppTools {
         }
         return loggedUser;
     }
-
 
 }
