@@ -28,8 +28,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <service
+            android:name=".service.BookService"
+            android:enabled="true"
+            android:exported="true"></service>
+        <service
+            android:name=".service.BookIntentService"
+            android:exported="false" />
+        <service
             android:name=".service.EditProfileIntentService"
-            android:exported="false"></service>
+            android:exported="false" />
+
         <!-- Google Maps -->
         <!-- BUG IN GOOGLE PLAY SERVICES!!! -->
         <uses-library
@@ -49,7 +57,7 @@
             android:value="FindARoommateDatabase" />
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="28" />
+            android:value="36" />
         <meta-data
             android:name="AA_MODELS"
             android:value="rs.ac.uns.ftn.findaroommate.model.Ad,                            rs.ac.uns.ftn.findaroommate.model.AdItem,                            rs.ac.uns.ftn.findaroommate.model.Message, rs.ac.uns.ftn.findaroommate.model.Language, rs.ac.uns.ftn.findaroommate.model.ResourceRegistry, rs.ac.uns.ftn.findaroommate.model.Setting, rs.ac.uns.ftn.findaroommate.model.User, rs.ac.uns.ftn.findaroommate.model.UserCharacteristic, rs.ac.uns.ftn.findaroommate.model.Review, rs.ac.uns.ftn.findaroommate.model.Stay" />
@@ -196,6 +204,7 @@
         </provider>
 
         <service android:name=".service.DemoService" />
+
         <receiver android:name=".receiver.EditProfileReceiver" />
 
         <service

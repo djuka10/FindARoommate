@@ -1,12 +1,14 @@
 package rs.ac.uns.ftn.findaroommate.FindARoommateServer.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -52,5 +54,11 @@ public class User {
     private String urlProfile;
     @Column
     private Date activeSince;
+    
+  /*  @OneToMany(mappedBy = "userId")
+    private List<Ad> ads;
+    
+    @OneToMany(mappedBy = "ownerId")
+    private List<Ad> ownerAds;*/
 
 }

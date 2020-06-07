@@ -512,7 +512,7 @@
 
 
         <Button
-            android:id="@+id/btn_new_ad_action"
+            android:id="@+id/btn_request_to_book"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Request to book"

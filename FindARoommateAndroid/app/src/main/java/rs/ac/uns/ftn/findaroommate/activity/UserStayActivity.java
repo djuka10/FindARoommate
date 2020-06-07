@@ -18,18 +18,31 @@ import android.view.ViewGroup;
 
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import rs.ac.uns.ftn.findaroommate.R;
 import rs.ac.uns.ftn.findaroommate.adapter.UserStayRecyclerAdapter;
+import rs.ac.uns.ftn.findaroommate.dto.StayDto;
+import rs.ac.uns.ftn.findaroommate.model.Ad;
+import rs.ac.uns.ftn.findaroommate.model.User;
+import rs.ac.uns.ftn.findaroommate.utils.AppTools;
 import rs.ac.uns.ftn.findaroommate.utils.Mockup;
 
 public class UserStayActivity extends AppCompatActivity {
 
     private static String[] tabTitles;
+    private User loggedUserModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_stay);
+
+        loggedUserModel = AppTools.getLoggedUser();
+        if(loggedUserModel == null)
+            return;
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.user_stay_toolbar);
         toolbar.setTitle("My stays");
@@ -47,6 +60,8 @@ public class UserStayActivity extends AppCompatActivity {
 
     public static class TabFragment extends Fragment {
         private static final String TAB_TITLE = "title";
+
+        private User loggedUserModel;
 
         public TabFragment() {
 
@@ -66,12 +81,43 @@ public class UserStayActivity extends AppCompatActivity {
             Bundle args = getArguments();
             String tabPosition = args.getString(TAB_TITLE);
 
+            loggedUserModel = AppTools.getLoggedUser();
+
             View v =  inflater.inflate(R.layout.fragment_list_view, container, false);
             RecyclerView recyclerView = (RecyclerView)v.findViewById(R.id.recyclerview);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-            recyclerView.setAdapter(new UserStayRecyclerAdapter(Mockup.getInstance().getStaysHistory()));
+
+            List<Ad> listAds = Ad.getAllAdsByUserId(loggedUserModel);
+            List<StayDto> stays = createStays(listAds);
+            List<StayDto> pastStays = new ArrayList<>();
+            List<StayDto> upcomingStays = new ArrayList<>();
+            for (StayDto stay: stays) {
+                if(stay.getFrom().before(new Date())) {
+                    //ovde cepamo past
+                    pastStays.add(stay);
+                } else {
+                    upcomingStays.add(stay);
+                }
+            }
+            if(tabPosition.contains("Past")) {
+                recyclerView.setAdapter(new UserStayRecyclerAdapter(pastStays));
+            } else {
+                recyclerView.setAdapter(new UserStayRecyclerAdapter(upcomingStays));
+            }
+
+
+
+            //recyclerView.setAdapter(new UserStayRecyclerAdapter(stays));
 
             return v;
+        }
+
+        private List<StayDto> createStays(List<Ad> listAds) {
+            List<StayDto> stays = new ArrayList<>();
+            for (Ad ad: listAds) {
+                stays.add(new StayDto(ad.getTitle(), "Lokacija neka", ad.getAvailableFrom(), ad.getAvailableUntil()));
+            }
+            return stays;
         }
     }
 

@@ -43,5 +43,6 @@ public class AdService implements ServiceInterface<Ad> {
 		// TODO Auto-generated method stub
 		adRepository.deleteById(id);
 	}
+	
 
 }
