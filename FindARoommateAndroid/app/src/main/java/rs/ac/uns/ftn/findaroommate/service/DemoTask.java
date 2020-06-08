@@ -17,6 +17,7 @@ import rs.ac.uns.ftn.findaroommate.dto.AdDto;
 import rs.ac.uns.ftn.findaroommate.dto.AdDtoDto;
 import rs.ac.uns.ftn.findaroommate.dto.TagToSend;
 import rs.ac.uns.ftn.findaroommate.model.Ad;
+import rs.ac.uns.ftn.findaroommate.model.Language;
 import rs.ac.uns.ftn.findaroommate.model.User;
 import rs.ac.uns.ftn.findaroommate.model.UserCharacteristic;
 import rs.ac.uns.ftn.findaroommate.service.api.ServiceUtils;
@@ -92,6 +93,24 @@ public class DemoTask extends AsyncTask<Void, Void, Void> {
 //                }
 //            });
 
+//            Call<List<User>> c = ServiceUtils.userServiceApi.getAll();
+//            c.enqueue(new Callback<List<User>>() {
+//                @Override
+//                public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+//                    if (response.isSuccessful()) {
+//                        System.out.println("Meesage recieved");
+//                        Log.i("fd", "Message received");
+//                    }
+//
+//                }
+//
+//                @Override
+//                public void onFailure(Call<List<User>> call, Throwable t) {
+//                    System.out.println("Error!");
+//                    Log.e("error", t.getMessage());
+//                }
+//            });
+
             Call<List<User>> c = ServiceUtils.userServiceApi.getAll();
             c.enqueue(new Callback<List<User>>() {
                 @Override
@@ -101,7 +120,9 @@ public class DemoTask extends AsyncTask<Void, Void, Void> {
                         Log.i("fd", "Message received");
                         List<User> users = response.body();
                         for (User user: users) {
-                            user.save();
+                            if(User.getOneGlobal(user.getEntityId()) == null){
+                                user.save();
+                            }
                         }
                     }
 

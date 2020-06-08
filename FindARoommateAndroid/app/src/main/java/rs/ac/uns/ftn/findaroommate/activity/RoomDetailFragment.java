@@ -121,7 +121,7 @@ public class RoomDetailFragment extends Fragment{
             String pattern = "MM/dd/yyyy";
             DateFormat df = new SimpleDateFormat(pattern);
             String dateFromStr = df.format(mItem.getAvailableFrom());
-            String dateUntilStr = df.format(mItem.getAvailableFrom());
+            String dateUntilStr = df.format(mItem.getAvailableUntil());
             ((TextView) rootView.findViewById(R.id.room_available_from)).setText(dateFromStr);
             ((TextView) rootView.findViewById(R.id.room_available_until)).setText(dateUntilStr);
 

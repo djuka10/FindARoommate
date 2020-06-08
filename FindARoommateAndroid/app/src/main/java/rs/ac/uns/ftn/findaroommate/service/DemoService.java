@@ -31,8 +31,7 @@ public class DemoService extends Service {
         //ima konekcije ka netu skini sta je potrebno i sinhronizuj bazu
         if(status == AppTools.TYPE_WIFI){
             new DemoTask(getApplicationContext()).execute();
-
-
+            
         }
 
         //sendBroadcast(ints);

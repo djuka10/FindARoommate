@@ -66,12 +66,22 @@ public class User extends Model {
     @Column
     private Date activeSince;
 
+    @Expose
+    private List<Integer> languageIds;
+
+    @Expose
+    private List<Integer> userCharacteristicIds;
+
     public static List<User> getOneByEmail(String email) {
         return new Select().from(User.class).where("email=?",email).execute();
     }
 
     public static User getOne(long id) {
         return new Select().from(User.class).where("id=?",id).executeSingle();
+    }
+
+    public static User getOneGlobal(int id) {
+        return new Select().from(User.class).where("entity_id=?",id).executeSingle();
     }
 
 }

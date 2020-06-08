@@ -17,6 +17,7 @@ import rs.ac.uns.ftn.findaroommate.dto.AdDtoDto;
 import rs.ac.uns.ftn.findaroommate.model.Ad;
 import rs.ac.uns.ftn.findaroommate.model.User;
 import rs.ac.uns.ftn.findaroommate.service.api.ServiceUtils;
+import rs.ac.uns.ftn.findaroommate.utils.AppTools;
 
 public class BookTask extends AsyncTask<Long,Void,Void> {
 
@@ -55,7 +56,8 @@ public class BookTask extends AsyncTask<Long,Void,Void> {
 
                         AdDtoDto body = response.body();
                         Ad ad = Ad.getOne(body.getEntityId());
-                        User user = User.getOne(body.getUserId().getEntityId());
+                        User user = AppTools.getLoggedUser();
+                        //User user = User.getOne(body.getUserId().getEntityId());
                         ad.setUserId(user);
                         ad.setAdStatus(ad.getAdStatus());
                         ad.save();

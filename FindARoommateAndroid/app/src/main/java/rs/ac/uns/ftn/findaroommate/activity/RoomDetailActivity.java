@@ -13,6 +13,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.ActionBar;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.MenuItem;
@@ -20,10 +21,15 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import rs.ac.uns.ftn.findaroommate.R;
 import rs.ac.uns.ftn.findaroommate.adapters.ImageAdapter;
+import rs.ac.uns.ftn.findaroommate.adapters.ImageAdapterOnline;
 import rs.ac.uns.ftn.findaroommate.model.Ad;
 import rs.ac.uns.ftn.findaroommate.model.ResourceRegistry;
+import rs.ac.uns.ftn.findaroommate.service.api.ServiceUtils;
 
 /**
  * An activity representing a single Room detail screen. This
@@ -36,6 +42,7 @@ public class RoomDetailActivity extends AppCompatActivity {
     ViewPager viewPager;
     int images[] = {R.drawable.apartment1, R.drawable.ic_facebook, R.drawable.ic_google, R.drawable.apartment1};
     ImageAdapter imageAdapter;
+    ImageAdapterOnline imageAdapterOnline;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,17 +91,12 @@ public class RoomDetailActivity extends AppCompatActivity {
 
             viewPager = (ViewPager) findViewById(R.id.ViewPage);
 
-            imageAdapter = new ImageAdapter(RoomDetailActivity.this, images);
-            viewPager.setAdapter(imageAdapter);
-
-/*
-            TextView textView = layout.findViewById(R.id.room_title);
-            textView.setText(ad.getTitle());
-*/
-
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.room_detail_container, fragment)
-                    .commit();
+            setUpAdapter(ad.getEntityId(), fragment);
+//            imageAdapter = new ImageAdapter(RoomDetailActivity.this, images);
+//            viewPager.setAdapter(imageAdapter);
+//            getSupportFragmentManager().beginTransaction()
+//                    .add(R.id.room_detail_container, fragment)
+//                    .commit();
         }
 
     }
@@ -113,5 +115,28 @@ public class RoomDetailActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setUpAdapter(int entityId, Fragment fragment){
+        Call<List<ResourceRegistry>> r = ServiceUtils.reviewerServiceApi.getAdImages(Integer.toString(entityId));
+
+        r.enqueue(new Callback<List<ResourceRegistry>>() {
+            @Override
+            public void onResponse(Call<List<ResourceRegistry>> call, Response<List<ResourceRegistry>> response) {
+                List<ResourceRegistry> body = response.body();
+                System.out.println("super");
+                imageAdapterOnline = new ImageAdapterOnline(RoomDetailActivity.this, body);
+                viewPager.setAdapter(imageAdapterOnline);
+
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.room_detail_container, fragment)
+                        .commit();
+            }
+
+            @Override
+            public void onFailure(Call<List<ResourceRegistry>> call, Throwable t) {
+                System.out.println("Error");
+            }
+        });
     }
 }

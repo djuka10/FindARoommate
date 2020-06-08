@@ -1,15 +1,22 @@
 package rs.ac.uns.ftn.findaroommate.FindARoommateServer.model;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -55,10 +62,16 @@ public class User {
     @Column
     private Date activeSince;
     
-  /*  @OneToMany(mappedBy = "userId")
-    private List<Ad> ads;
+    @Transient
+    private List<Integer> languageIds;
     
-    @OneToMany(mappedBy = "ownerId")
-    private List<Ad> ownerAds;*/
-
+    @ManyToMany
+    private List<Language> languages;
+    
+    @Transient
+    private List<Integer> userCharacteristicIds;
+    
+    @ManyToMany
+    private List<UserCharacteristic> characteristics;
+        
 }

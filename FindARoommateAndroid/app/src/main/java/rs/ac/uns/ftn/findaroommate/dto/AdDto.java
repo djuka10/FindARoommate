@@ -29,5 +29,7 @@ public class AdDto {
     private List<UserCharacteristic> prefsMusic;
     private List<UserCharacteristic> prefsSport;
 
+    private List<Integer> prefsId;
+    private List<Integer> adItemsIds;
 
 }

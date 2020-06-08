@@ -2,6 +2,9 @@
     <string name="app_name">FindARoommate-Android</string>
     <string name="app_title">Find a roommate</string>
 
+    <string name="host">192.168.1.2:8089</string>
+
+
     <!-- Homepage -->
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -129,6 +132,8 @@
     <string name="ad_form_title">New ad</string>
     <string name="ad_form_location">Location</string>
     <string name="ad_form_street">Street</string>
+    <string name="ad_form_longitude">Longitude</string>
+    <string name="ad_form_latitude">Latitude</string>
     <string name="ad_form_property_size_hint">Flat size (in m2)</string>
     <string name="ad_form_mmates_info">Who currently lives</string>
     <string name="ad_form_women">Female</string>

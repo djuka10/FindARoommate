@@ -1,6 +1,7 @@
 package rs.ac.uns.ftn.findaroommate.FindARoommateServer.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.ManyToAny;
 
@@ -70,12 +73,26 @@ public class Ad {
     @Column(name = "ad_status")
     private AdStatus adStatus;
     
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User userId;
     
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "owner_id")
     private User ownerId;
 
+    
+    @ManyToMany
+    private List<UserCharacteristic> characteristics;
+    
+    @ManyToMany
+    private List<AdItem> items;
+    
+    @Transient
+    private List<Integer> adItemsId;
+    @Transient
+    private List<Integer> roommatePrefsId;
+    @Transient
+    private Integer adOwnerId;
+    
 }

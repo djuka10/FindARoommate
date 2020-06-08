@@ -15,6 +15,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import rs.ac.uns.ftn.findaroommate.model.User;
+import rs.ac.uns.ftn.findaroommate.model.UserCharacteristic;
 import rs.ac.uns.ftn.findaroommate.utils.AppTools;
 
 @Getter
@@ -51,6 +52,12 @@ public class UserDto{
     @Expose
     private String activeSince;
 
+    @Expose
+    private List<Integer> languageIds;
+
+    @Expose
+    private List<Integer> userCharacteristicIds;
+
     public void convert(User user){
         this.entityId = user.getEntityId();
         if(user.getBirthDay() != null){
@@ -67,6 +74,9 @@ public class UserDto{
         this.password = user.getPassword();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
+
+        this.languageIds = user.getLanguageIds();
+        this.userCharacteristicIds = user.getUserCharacteristicIds();
     }
 
 }
