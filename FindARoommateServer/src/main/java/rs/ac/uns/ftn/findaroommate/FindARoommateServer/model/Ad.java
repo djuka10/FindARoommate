@@ -67,6 +67,8 @@ public class Ad {
     private int ladiesNum;
     @Column(name = "boys_num")
     private int boysNum;
+    @Column(name = "ad_status")
+    private AdStatus adStatus;
     
     @ManyToOne()
     @JoinColumn(name = "user_id")

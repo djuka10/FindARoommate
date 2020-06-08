@@ -27,18 +27,21 @@
         android:roundIcon="@mipmap/ic_logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+        <activity
+            android:name=".activity.MyAdsActivity"
+            android:label="@string/title_activity_my_ads"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
+
         <service
             android:name=".service.BookService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
         <service
             android:name=".service.BookIntentService"
             android:exported="false" />
         <service
             android:name=".service.EditProfileIntentService"
-            android:exported="false" />
-
-        <!-- Google Maps -->
+            android:exported="false" /> <!-- Google Maps -->
         <!-- BUG IN GOOGLE PLAY SERVICES!!! -->
         <uses-library
             android:name="org.apache.http.legacy"
@@ -57,7 +60,7 @@
             android:value="FindARoommateDatabase" />
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="36" />
+            android:value="38" />
         <meta-data
             android:name="AA_MODELS"
             android:value="rs.ac.uns.ftn.findaroommate.model.Ad,                            rs.ac.uns.ftn.findaroommate.model.AdItem,                            rs.ac.uns.ftn.findaroommate.model.Message, rs.ac.uns.ftn.findaroommate.model.Language, rs.ac.uns.ftn.findaroommate.model.ResourceRegistry, rs.ac.uns.ftn.findaroommate.model.Setting, rs.ac.uns.ftn.findaroommate.model.User, rs.ac.uns.ftn.findaroommate.model.UserCharacteristic, rs.ac.uns.ftn.findaroommate.model.Review, rs.ac.uns.ftn.findaroommate.model.Stay" />

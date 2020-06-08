@@ -176,5 +176,6 @@
     <!-- FACEBOOK -->
     <string name="facebook_app_id">1501643706681249</string>
     <string name="fb_login_protocol_scheme">fb1501643706681249</string>
+    <string name="title_activity_my_ads">MyAdsActivity</string>
 
 </resources>

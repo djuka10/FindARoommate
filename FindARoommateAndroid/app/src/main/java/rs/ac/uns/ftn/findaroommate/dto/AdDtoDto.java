@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import rs.ac.uns.ftn.findaroommate.model.Ad;
 import rs.ac.uns.ftn.findaroommate.model.User;
+import rs.ac.uns.ftn.findaroommate.utils.AdStatus;
 import rs.ac.uns.ftn.findaroommate.utils.AppTools;
 
 @Getter
@@ -60,6 +61,8 @@ public class AdDtoDto {
     private int ladiesNum;
     @Expose
     private int boysNum;
+    @Expose
+    private AdStatus adStatus;
 
     public void convert(Ad ad){
         this.entityId = ad.getEntityId();
@@ -90,5 +93,6 @@ public class AdDtoDto {
         UserDto ownerDto = new UserDto();
         ownerDto.convert(ad.getOwnerId());
         this.ownerId = ownerDto;
+        this.adStatus = ad.getAdStatus();
     }
 }

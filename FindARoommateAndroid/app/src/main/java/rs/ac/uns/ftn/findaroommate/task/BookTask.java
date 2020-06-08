@@ -57,10 +57,11 @@ public class BookTask extends AsyncTask<Long,Void,Void> {
                         Ad ad = Ad.getOne(body.getEntityId());
                         User user = User.getOne(body.getUserId().getEntityId());
                         ad.setUserId(user);
+                        ad.setAdStatus(ad.getAdStatus());
                         ad.save();
 
                         Intent intent = new Intent(HomepageActivity.HOME_PAGE);
-                        
+                        context.startActivity(intent);
 
                         /*Intent intent = new Intent(HomepageActivity.HOME_PAGE);
                         context.sendBroadcast(intent);*/
@@ -95,7 +96,7 @@ public class BookTask extends AsyncTask<Long,Void,Void> {
     @Override
     protected void onPostExecute(Void aVoid) {
         //super.onPostExecute(aVoid);
-        Toast.makeText(context, "Succesfully book", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "Succesfully!!", Toast.LENGTH_SHORT).show();
 
     }
 }

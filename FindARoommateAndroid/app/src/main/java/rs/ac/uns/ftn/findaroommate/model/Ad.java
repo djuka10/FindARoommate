@@ -17,6 +17,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import rs.ac.uns.ftn.findaroommate.utils.AdStatus;
 
 @Getter
 @Setter
@@ -87,6 +88,9 @@ public class Ad  extends Model{
     @Expose
     @Column(name = "boys_num")
     private int boysNum;
+    @Expose
+    @Column(name = "ad_status")
+    private AdStatus adStatus;
 
     public static List<Ad> getAllAds() {
         return new Select().from(Ad.class).execute();
@@ -102,6 +106,10 @@ public class Ad  extends Model{
 
     public static List<Ad> getAllAdsByUserId(User user) {
         return new Select().from(Ad.class).where("user_id=?", user.getId()).execute();
+    }
+
+    public static List<Ad> getAllAdsByOwnerId(User user) {
+        return new Select().from(Ad.class).where("owner_id=?", user.getId()).execute();
     }
 
 }

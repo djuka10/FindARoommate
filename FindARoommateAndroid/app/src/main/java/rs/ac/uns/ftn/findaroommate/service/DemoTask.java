@@ -20,6 +20,7 @@ import rs.ac.uns.ftn.findaroommate.model.Ad;
 import rs.ac.uns.ftn.findaroommate.model.User;
 import rs.ac.uns.ftn.findaroommate.model.UserCharacteristic;
 import rs.ac.uns.ftn.findaroommate.service.api.ServiceUtils;
+import rs.ac.uns.ftn.findaroommate.utils.AdStatus;
 import rs.ac.uns.ftn.findaroommate.utils.AppTools;
 
 
@@ -125,12 +126,27 @@ public class DemoTask extends AsyncTask<Void, Void, Void> {
                         User user = null;
                         User owner = null;
                         for (Ad ad: RoomListActivity.adsList) {
+                            if(Ad.getOne(ad.getEntityId()) == ad) {
+                                //proveram kako poredi
+                            }
                             if(Ad.getOne(ad.getEntityId()) == null) {
                                 if(ad.getUserId() != null) {
                                     user = User.getOne(ad.getUserId().getEntityId());
                                 }
                                 if(ad.getOwnerId() != null) {
                                     owner = User.getOne(ad.getOwnerId().getEntityId());
+                                }
+
+                                if(ad.getAdStatus() != null) {
+                                    if(ad.getAdStatus().equals(AdStatus.IDLE)) {
+
+                                    } else if(ad.getAdStatus().equals(AdStatus.PENDING)) {
+
+                                    } else if(ad.getAdStatus().equals(AdStatus.APPROVE)) {
+
+                                    } else {
+                                        //denied
+                                    }
                                 }
 
                                 ad.setUserId(user);

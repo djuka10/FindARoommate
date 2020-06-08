@@ -102,17 +102,17 @@ insert into users (about, active_since, birth_day, email, first_name, gender, la
 ('Lorem ipsum', '2020-05-05', '1996-03-01', 'srdjanpopovic14@gmail.com', 'Srdjan', 'Male', 'Popovic', 'SW architect', 'password', 'Bachelor''s degree', '', 'Study');
 
 insert into users (about, active_since, birth_day, email, first_name, gender, last_name, occupation, password, study_level, url_profile, working_status) values 
-('Lorem ipsum', '2020-05-05', '1996-02-09', 'viktordjuka10@gmail.com', 'Viktor', 'Male', 'Djuka', 'SW architect', 'password', 'Bachelor''s degree', '', 'Study');
+('Lorem ipsum', '2020-05-05', '1996-02-09', 'vikac.parkic@gmail.com', 'Viktor', 'Male', 'Djuka', 'SW architect', 'password', 'Bachelor''s degree', '', 'Study');
 
 -- Ads
-insert into ads (ad_type, available_from, available_until, boys_num, const_included, deposit, desc, flat_m2, ladies_num, latitude, longitude, max_days, max_person, min_days, price, room_m2, title, owner_id) values
+insert into ads (ad_type, available_from, available_until, boys_num, const_included, deposit, desc, flat_m2, ladies_num, latitude, longitude, max_days, max_person, min_days, price, room_m2, title, ad_status, owner_id) values
 ('type1', '2020-07-09', '2021-07-09', 3, 1, 300, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
- 25, 2, 29.72224235534668, 48.2092170715332, '60', 5, '1-5 months', 322, 20, 'Apartment with positive view',2);
+ 25, 2, 29.72224235534668, 48.2092170715332, '60', 5, '1-5 months', 322, 20, 'Apartment with positive view',0,4);
  
-insert into ads (ad_type, available_from, available_until, boys_num, const_included, deposit, desc, flat_m2, ladies_num, latitude, longitude, max_days, max_person, min_days, price, room_m2, title, owner_id, user_id) values
+insert into ads (ad_type, available_from, available_until, boys_num, const_included, deposit, desc, flat_m2, ladies_num, latitude, longitude, max_days, max_person, min_days, price, room_m2, title, ad_status, owner_id, user_id) values
 ('type1', '2020-01-09', '2020-05-05', 3, 1, 300, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
- 25, 2, 29.72224235534668, 48.2092170715332, '60', 5, '1-5 months', 322, 20, 'Apartment with positive view',2,1);
+ 25, 2, 29.72224235534668, 48.2092170715332, '60', 5, '1-5 months', 322, 20, 'Apartment with positive view',2,4,1);
  
-insert into ads (ad_type, available_from, available_until, boys_num, const_included, deposit, desc, flat_m2, ladies_num, latitude, longitude, max_days, max_person, min_days, price, room_m2, title, owner_id, user_id) values
+insert into ads (ad_type, available_from, available_until, boys_num, const_included, deposit, desc, flat_m2, ladies_num, latitude, longitude, max_days, max_person, min_days, price, room_m2, title, ad_status, owner_id, user_id) values
 ('type1', '2019-01-01', '2019-12-12', 3, 1, 300, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
- 25, 2, 29.72224235534668, 48.2092170715332, '60', 5, '1-5 months', 322, 20, 'Apartment with positive view',2,1);
+ 25, 2, 29.72224235534668, 48.2092170715332, '60', 5, '1-5 months', 322, 20, 'Apartment with positive view',2,4,1);

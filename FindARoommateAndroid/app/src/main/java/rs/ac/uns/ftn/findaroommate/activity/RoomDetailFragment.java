@@ -29,6 +29,7 @@ import rs.ac.uns.ftn.findaroommate.model.User;
 import rs.ac.uns.ftn.findaroommate.receiver.BookReceiver;
 import rs.ac.uns.ftn.findaroommate.service.BookService;
 import rs.ac.uns.ftn.findaroommate.service.EditProfileService;
+import rs.ac.uns.ftn.findaroommate.utils.AdStatus;
 import rs.ac.uns.ftn.findaroommate.utils.AppTools;
 
 /**
@@ -152,6 +153,7 @@ public class RoomDetailFragment extends Fragment{
                     Ad ad = Ad.load(Ad.class,adId);
                     User user = AppTools.getLoggedUser();
                     ad.setUserId(user);
+                    ad.setAdStatus(AdStatus.PENDING);
                     ad.save();
                     Intent bookIntent = new Intent(getActivity(), BookService.class);
                     bookIntent.putExtra("adId", mItem.getId());
