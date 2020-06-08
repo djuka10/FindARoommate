@@ -2,6 +2,7 @@ package rs.ac.uns.ftn.findaroommate.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -52,7 +53,15 @@ public class MyActiveAdsRecyclerAdapter extends RecyclerView.Adapter<MyActiveAds
         if(item.getUser() != null)
             viewHolder.mUser.setText(item.getUser().getFirstName() + " " + item.getUser().getLastName());
 
+
         viewHolder.mAnimator.setText(item.getAdStatus().name());
+        if(item.getAdStatus().equals(AdStatus.PENDING)) {
+            viewHolder.mAnimator.setBackgroundColor(Color.YELLOW);
+        } else if(item.getAdStatus().equals(AdStatus.APPROVE)) {
+            viewHolder.mAnimator.setBackgroundColor(Color.GREEN);
+        } else if(item.getAdStatus().equals(AdStatus.DENIED)) {
+            viewHolder.mAnimator.setBackgroundColor(Color.RED);
+        }
         viewHolder.mAnimator.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -61,7 +61,7 @@ public class BookTask extends AsyncTask<Long,Void,Void> {
                         ad.save();
 
                         Intent intent = new Intent(HomepageActivity.HOME_PAGE);
-                        context.startActivity(intent);
+
 
                         /*Intent intent = new Intent(HomepageActivity.HOME_PAGE);
                         context.sendBroadcast(intent);*/
