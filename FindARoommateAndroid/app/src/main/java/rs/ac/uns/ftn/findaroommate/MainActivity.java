@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         ActiveAndroid.initialize(this);
 
         initDataFlag = false;
-        Boolean initPeraFlag = true;
+        Boolean initPeraFlag = false;
 
         if(initPeraFlag)
             initUser();

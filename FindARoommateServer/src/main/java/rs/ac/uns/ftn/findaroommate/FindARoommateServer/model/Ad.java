@@ -73,11 +73,11 @@ public class Ad {
     @Column(name = "ad_status")
     private AdStatus adStatus;
     
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User userId;
     
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "owner_id")
     private User ownerId;
 
@@ -93,6 +93,6 @@ public class Ad {
     @Transient
     private List<Integer> roommatePrefsId;
     @Transient
-    private Integer ownerId;
+    private Integer adOwnerId;
     
 }

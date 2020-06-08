@@ -80,4 +80,8 @@ public class User extends Model {
         return new Select().from(User.class).where("id=?",id).executeSingle();
     }
 
+    public static User getOneGlobal(int id) {
+        return new Select().from(User.class).where("entity_id=?",id).executeSingle();
+    }
+
 }

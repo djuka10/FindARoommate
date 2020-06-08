@@ -31,7 +31,7 @@ public class AdController {
 		return lista;
 	}
 	
-	@PostMapping
+	@PostMapping("/book")
 	public Ad bookAd(@RequestBody Ad ad) {
 		return adService.save(ad);
 	}

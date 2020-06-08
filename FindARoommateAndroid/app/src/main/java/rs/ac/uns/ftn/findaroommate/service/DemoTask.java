@@ -111,23 +111,25 @@ public class DemoTask extends AsyncTask<Void, Void, Void> {
 //                }
 //            });
 
-            Call<List<Language>> c = ServiceUtils.userServiceApi.getUserLanguages(1);
-            c.enqueue(new Callback<List<Language>>() {
+            Call<List<User>> c = ServiceUtils.userServiceApi.getAll();
+            c.enqueue(new Callback<List<User>>() {
                 @Override
-                public void onResponse(Call<List<Language>> call, Response<List<Language>> response) {
+                public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                     if (response.isSuccessful()) {
                         System.out.println("Meesage recieved");
                         Log.i("fd", "Message received");
                         List<User> users = response.body();
                         for (User user: users) {
-                            user.save();
+                            if(User.getOneGlobal(user.getEntityId()) == null){
+                                user.save();
+                            }
                         }
                     }
 
                 }
 
                 @Override
-                public void onFailure(Call<List<Language>> call, Throwable t) {
+                public void onFailure(Call<List<User>> call, Throwable t) {
                     System.out.println("Error!");
                     Log.e("error", t.getMessage());
                 }

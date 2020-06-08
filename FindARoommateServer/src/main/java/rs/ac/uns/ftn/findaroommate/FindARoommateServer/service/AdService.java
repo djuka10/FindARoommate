@@ -63,12 +63,13 @@ public class AdService implements ServiceInterface<Ad> {
 			entity.setCharacteristics(userCharacteristics);
 		}
 		
-		if(entity.getOwnerId() != null) {
-			User user = userRepository.getOne(entity.getOwnerId());
+		if(entity.getAdOwnerId() != null) {
+			User user = userRepository.getOne(entity.getAdOwnerId());
 			//TODO: set owner to ad
+			entity.setOwnerId(user);
 		}
-		
-		return adRepository.save(entity);
+		Ad savedAd = adRepository.save(entity);
+		return Ad.builder().entityId(savedAd.getEntityId()).build();
 	}
 
 	@Override

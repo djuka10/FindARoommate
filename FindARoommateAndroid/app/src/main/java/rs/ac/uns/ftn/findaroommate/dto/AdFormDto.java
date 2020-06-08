@@ -14,6 +14,7 @@ import rs.ac.uns.ftn.findaroommate.model.Ad;
 import rs.ac.uns.ftn.findaroommate.model.AdItem;
 import rs.ac.uns.ftn.findaroommate.model.ResourceRegistry;
 import rs.ac.uns.ftn.findaroommate.model.UserCharacteristic;
+import rs.ac.uns.ftn.findaroommate.utils.AdStatus;
 
 @Getter
 @Setter
@@ -63,7 +64,10 @@ public class AdFormDto {
     List<Integer> roommatePrefsId;
 
     @Expose
-    List<Integer> ownerId;
+    private AdStatus adStatus;
+
+    @Expose
+    Integer adOwnerId;
 
     // private List<ResourceRegistry> images;
 }

@@ -60,6 +60,7 @@ import rs.ac.uns.ftn.findaroommate.service.EditAdService;
 import rs.ac.uns.ftn.findaroommate.service.EditProfileService;
 import rs.ac.uns.ftn.findaroommate.service.UploadImagesService;
 import rs.ac.uns.ftn.findaroommate.service.api.ServiceUtils;
+import rs.ac.uns.ftn.findaroommate.utils.AdStatus;
 import rs.ac.uns.ftn.findaroommate.utils.AppTools;
 
 public class NewAdActivity extends AppCompatActivity {
@@ -213,6 +214,9 @@ public class NewAdActivity extends AppCompatActivity {
     private void proccessAdEdit(){
 
         Ad a = ad.getAd();
+        User user = AppTools.getLoggedUser();
+        a.setOwnerId(user);
+        a.setAdStatus(AdStatus.IDLE);
         a.save();
 
         // send to the server
@@ -239,6 +243,8 @@ public class NewAdActivity extends AppCompatActivity {
                 .title(ad.getAd().getTitle())
                 .adItemsId(ad.getAdItemsIds())
                 .roommatePrefsId(ad.getPrefsId())
+                .adStatus(AdStatus.IDLE)
+                .adOwnerId(user.getEntityId())
                 .build();
 
         if(ad.getAd().getAvailableFrom() != null){

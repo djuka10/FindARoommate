@@ -27,7 +27,7 @@ public interface AdServiceApi {
             "Content-Type:application/json"
     })
 
-    @POST(ServiceUtils.AD_API)
+    @POST(ServiceUtils.AD_API + "/book")
     Call<AdDtoDto> add(@Body AdDtoDto ad);
 
     @GET(ServiceUtils.AD_API)
