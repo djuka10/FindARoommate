@@ -40,6 +40,8 @@ import rs.ac.uns.ftn.findaroommate.adapter.DisplayImageAdapter;
 import rs.ac.uns.ftn.findaroommate.dto.AdDto;
 import rs.ac.uns.ftn.findaroommate.model.ResourceRegistry;
 import rs.ac.uns.ftn.findaroommate.provider.GenericFileProvider;
+import rs.ac.uns.ftn.findaroommate.service.DemoService;
+import rs.ac.uns.ftn.findaroommate.service.UploadImagesService;
 
 public class NewAdFinalFragment extends NewAdFragmentAbstact {
 
@@ -213,6 +215,7 @@ public class NewAdFinalFragment extends NewAdFragmentAbstact {
             if(isExternalStorageWritable()){
                 if (takenPhotoTemp != null){
                     String uriPath = takenPhotoTemp.toString();
+                    takenPhotoTemp.getPath();
 
                     ResourceRegistry newImage  = ResourceRegistry.builder().uri(uriPath).profilePicture(false).build();
                     addAdImage(newImage);
@@ -294,10 +297,15 @@ public class NewAdFinalFragment extends NewAdFragmentAbstact {
 
     @Override
     public void onDestroyView() {
+        //pickData();
+
+        super.onDestroyView();
+    }
+
+    public void pickData(){
         ad.getAd().setTitle(titleEditText.getText().toString());
         ad.getAd().setDescription(descEditText.getText().toString());
 
-        super.onDestroyView();
     }
 
     @Override

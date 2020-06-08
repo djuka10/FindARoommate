@@ -183,56 +183,63 @@ public class ProfileFormActivity extends AppCompatActivity {
 
         if(resultCode == RESULT_OK && requestCode == TAKE_PHOTO_ACTIVITY){
             photoView.setImageURI(file);
+
+            sendImageToServer(file);
         }
 
         if(resultCode == RESULT_OK && requestCode == UPLOAD_PHOTO_ACTIVITY){
             if(data!= null){
                 Uri selectedImage = data.getData();
                 photoView.setImageURI(selectedImage);
-                InputStream inputStream = null;
-                byte[] image = null;
-                String fileName = "";
 
-                try {
-                    inputStream = getContentResolver().openInputStream(selectedImage);
-                    fileName = getFileName(selectedImage);
-                    try {
-                        image = IOUtils.toByteArray(inputStream);
-                        System.out.println("jkfd");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                } catch (FileNotFoundException e){
-
-                }
-
-                //new UploadProfileTask(getApplicationContext()).execute(image, fileName, user.getEntityId(), true);
-                RequestBody body = MultipartBody.create(MediaType.parse("image/jpeg"), image);
-
-                Call<ResourceRegistry> c = ServiceUtils.userServiceApi.uploadPhoto(
-                        MultipartBody.Part.createFormData("image", fileName, body),
-                        MultipartBody.Part.createFormData("user", Integer.toString(user.getEntityId())),
-                        MultipartBody.Part.createFormData("profilePicture", Boolean.toString(true)));
-                c.enqueue(new Callback<ResourceRegistry>() {
-                    @Override
-                    public void onResponse(Call<ResourceRegistry> call, Response<ResourceRegistry> response) {
-                        if(response.isSuccessful()){
-                            ResourceRegistry body = response.body();
-                            user.setUrlProfile(body.getUri());
-                            System.out.println("super");
-
-                        }
-                    }
-
-
-                    @Override
-                    public void onFailure(Call<ResourceRegistry> call, Throwable t) {
-                        System.out.println("Error");
-                    }
-                });
+                sendImageToServer(selectedImage);
             }
         }
+    }
+
+    private void sendImageToServer(Uri selectedImage){
+        InputStream inputStream = null;
+        byte[] image = null;
+        String fileName = "";
+
+        try {
+            inputStream = getContentResolver().openInputStream(selectedImage);
+            fileName = getFileName(selectedImage);
+            try {
+                image = IOUtils.toByteArray(inputStream);
+                System.out.println("jkfd");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } catch (FileNotFoundException e){
+
+        }
+
+        //new UploadProfileTask(getApplicationContext()).execute(image, fileName, user.getEntityId(), true);
+        RequestBody body = MultipartBody.create(MediaType.parse("image/jpeg"), image);
+
+        Call<ResourceRegistry> c = ServiceUtils.userServiceApi.uploadPhoto(
+                MultipartBody.Part.createFormData("image", fileName, body),
+                MultipartBody.Part.createFormData("user", Integer.toString(user.getEntityId())),
+                MultipartBody.Part.createFormData("profilePicture", Boolean.toString(true)));
+        c.enqueue(new Callback<ResourceRegistry>() {
+            @Override
+            public void onResponse(Call<ResourceRegistry> call, Response<ResourceRegistry> response) {
+                if(response.isSuccessful()){
+                    ResourceRegistry body = response.body();
+                    user.setUrlProfile(body.getUri());
+                    System.out.println("super");
+
+                }
+            }
+
+
+            @Override
+            public void onFailure(Call<ResourceRegistry> call, Throwable t) {
+                System.out.println("Error");
+            }
+        });
     }
 
     @Override

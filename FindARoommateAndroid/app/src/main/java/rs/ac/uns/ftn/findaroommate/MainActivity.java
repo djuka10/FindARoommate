@@ -21,6 +21,7 @@ import java.util.Date;
 import java.util.List;
 
 import rs.ac.uns.ftn.findaroommate.activity.HomepageActivity;
+import rs.ac.uns.ftn.findaroommate.activity.NewAdActivity;
 import rs.ac.uns.ftn.findaroommate.activity.ProfileActivity;
 import rs.ac.uns.ftn.findaroommate.activity.ProfileFormActivity;
 import rs.ac.uns.ftn.findaroommate.activity.SignUpHomeActivity;
@@ -55,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         ActiveAndroid.initialize(this);
 
         initDataFlag = false;
-        Boolean initPeraFlag = false;
+        Boolean initPeraFlag = true;
 
         if(initPeraFlag)
             initUser();
@@ -89,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(logged){
-            Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+            Intent intent = new Intent(MainActivity.this, NewAdActivity.class);
             startActivity(intent);
         } else {
             Intent intent = new Intent(MainActivity.this, SignUpHomeActivity.class);
@@ -263,7 +264,6 @@ public class MainActivity extends AppCompatActivity {
                 .occupation("SW architect")
                 .studyLevel("Bachelor's degree")
                 .workingStatus("Study")
-                .urlProfile("vuso.jpg")
                 .activeSince(new Date())
                 .entityId(1)
                 .build();

@@ -91,10 +91,10 @@ public class UserService implements ServiceInterface<User> {
 		    ImageIO.write(bImage, "jpg", outputfile);
 		    
 		    ResourceRegistry newObj = ResourceRegistry.builder()
-		    		.entityId(profileImageDto.getUser())
 		    		.profilePicture(profileImageDto.isProfilePicture())
 		    		.user(profileImageDto.getUser())
 		    		.uri(fileName)
+		    		.addId(-1)
 		    		.created(new Date())
 		    		.build();
 		    return resourceRegistryRepository.save(newObj);

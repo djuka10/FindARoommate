@@ -19,8 +19,8 @@ import rs.ac.uns.ftn.findaroommate.model.Ad;
 
 public class NewAdLocationFragment extends NewAdFragmentAbstact {
 
-    TextInputEditText locationEditText;
-    TextInputEditText streetEditText;
+    TextInputEditText latitudeEditText;
+    TextInputEditText longitudeEditText;
 
 
     public NewAdLocationFragment(AdDto ad) {
@@ -53,19 +53,29 @@ public class NewAdLocationFragment extends NewAdFragmentAbstact {
             r= 5;
         }
 
-        locationEditText = (TextInputEditText) view.findViewById(R.id.ad_form_location);
-        streetEditText = (TextInputEditText) view.findViewById(R.id.ad_form_street);
+        longitudeEditText = (TextInputEditText) view.findViewById(R.id.ad_form_longitude);
+        latitudeEditText = (TextInputEditText) view.findViewById(R.id.ad_form_latitude);
 
         //temp
-        String adType = ad.getAd().getAdType();
-        String adTitle = ad.getAd().getTitle();
+//        String adType = ad.getAd().getAdType();
+//        String adTitle = ad.getAd().getTitle();
+//
+//        if(adType != null){
+//            longitudeEditText.setText(ad.getAd().getAdType());
+//        }
+//
+//        if(adTitle != null){
+//            latitudeEditText.setText(ad.getAd().getTitle());
+//        }
+        float longitude = ad.getAd().getLongitude();
+        float latitude = ad.getAd().getLatitude();
 
-        if(adType != null){
-            locationEditText.setText(ad.getAd().getAdType());
+        if(longitude != 0){
+            longitudeEditText.setText(ad.getAd().getAdType());
         }
 
-        if(adTitle != null){
-            streetEditText.setText(ad.getAd().getTitle());
+        if(latitude != 0){
+            latitudeEditText.setText(ad.getAd().getTitle());
         }
 
         return view;
@@ -98,10 +108,21 @@ public class NewAdLocationFragment extends NewAdFragmentAbstact {
 
     @Override
     public void onDestroyView() {
-        //privremeno mapiranje
 
-        ad.getAd().setAdType(locationEditText.getText().toString());
-        ad.getAd().setTitle(streetEditText.getText().toString());
+        String longitudeText = longitudeEditText.getText().toString();
+        String latitudeText = latitudeEditText.getText().toString();
+
+        if(!longitudeText.isEmpty()){
+            ad.getAd().setLongitude(Float.parseFloat(longitudeText));
+        }
+
+        if(!latitudeText.isEmpty()){
+            ad.getAd().setLatitude(Float.parseFloat(latitudeText));
+        }
+
+        //privremeno mapiranje
+//        ad.getAd().setAdType(locationEditText.getText().toString());
+//        ad.getAd().setTitle(streetEditText.getText().toString());
         super.onDestroyView();
     }
 

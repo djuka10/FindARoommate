@@ -14,7 +14,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import rs.ac.uns.ftn.findaroommate.model.User;
@@ -97,6 +99,11 @@ public class AppTools {
             }
         }
         return loggedUser;
+    }
+
+    public static String createFileName() {
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        return "IMG_"+ timeStamp + ".jpg";
     }
 
 }

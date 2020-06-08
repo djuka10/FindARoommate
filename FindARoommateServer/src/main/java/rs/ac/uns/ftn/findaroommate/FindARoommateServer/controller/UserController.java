@@ -49,12 +49,7 @@ public class UserController {
 		User user = userService.getOne(id);
 		return user.getCharacteristics();
 	}
-	
-//	@PostMapping("/profilePhoto")
-//    public ProfileImageDto uploadProfileImage(@RequestBody ProfileImageDto user ) {
-//        return null;
-//    }
-	
+		
 	@PostMapping("/uploadProfilePhoto")
     public ResourceRegistry uploadProfileImage(@ModelAttribute ProfileImageDto model, BindingResult bindingResult) throws IOException {
 		

@@ -23,4 +23,6 @@ public class ProfileImageDto {
 	    
 	    private boolean profilePicture;
 	    
+	    private Integer addId;
+	    
 }

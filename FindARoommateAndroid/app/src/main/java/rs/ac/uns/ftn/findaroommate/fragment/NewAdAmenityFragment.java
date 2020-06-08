@@ -73,7 +73,7 @@ public class NewAdAmenityFragment extends NewAdFragmentAbstact {
         amenityChipView = (RecyclerView) view.findViewById(R.id.amenity_chip_view);
         LinearLayoutManager recyclerViewLayoutManager = new LinearLayoutManager(getActivity());
         amenityChipView.setLayoutManager(recyclerViewLayoutManager);
-        amenityChipView.setAdapter(new ChipAdapter(Mockup.getInstance().getAdItems(), selectedAdItems));
+        amenityChipView.setAdapter(new ChipAdapter(Mockup.getInstance().getAdItems(), selectedAdItems, ad.getAdItemsIds()));
 
         //chipGroup = (ChipGroup) view.findViewById(R.id.chips);
         //createAdItemChips();
@@ -98,8 +98,10 @@ public class NewAdAmenityFragment extends NewAdFragmentAbstact {
                     Chip c = (Chip) buttonView;
                     if(isChecked){
                         selectedAdItems.add((AdItem) c.getTag());
+                        ad.getAdItemsIds().add(((AdItem) c.getTag()).getEntityId());
                     } else {
                         selectedAdItems.remove((AdItem)c.getTag());
+                        ad.getAdItemsIds().remove(((AdItem) c.getTag()).getEntityId());
                     }
                 }
             });
@@ -117,6 +119,7 @@ public class NewAdAmenityFragment extends NewAdFragmentAbstact {
                     Chip c = (Chip)v;
                     c.setChecked(false);
                     selectedAdItems.remove((AdItem)c.getTag());
+                    ad.getAdItemsIds().remove(((AdItem) c.getTag()).getEntityId());
                 }
             });
 

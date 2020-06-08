@@ -129,9 +129,12 @@ public class NewAdMateAttrFragment extends NewAdFragmentAbstact{
                     if(isChecked){
                         if(!alreadyAddedSelected(c, type)){
                             selectedAttrs.add((UserCharacteristic) c.getTag());
+                            ad.getPrefsId().add(((UserCharacteristic) c.getTag()).getEntityId());
                         }
                     } else {
-                        selectedAttrs.remove((UserCharacteristic)c.getTag());
+                        UserCharacteristic u = (UserCharacteristic)c.getTag();
+                        selectedAttrs.remove(u);
+                        ad.getPrefsId().remove(u.getEntityId());
                     }
                 }
             });
@@ -142,8 +145,9 @@ public class NewAdMateAttrFragment extends NewAdFragmentAbstact{
                     boolean t = true;
                     Chip c = (Chip)v;
                     c.setChecked(false);
-                    selectedAttrs.remove((UserCharacteristic)c.getTag());
-                }
+                    UserCharacteristic u = (UserCharacteristic)c.getTag();
+                    selectedAttrs.remove(u);
+                    ad.getPrefsId().remove(u.getEntityId());                }
             });
 
             chips.addView(chip);

@@ -214,6 +214,21 @@
             android:name=".service.EditProfileService"
             android:enabled="true"
             android:exported="true" />
+
+        <service
+            android:name=".service.EditProfileIntentService"
+            android:exported="false" />
+
+        <service
+            android:name=".service.EditAdService"
+            android:enabled="true"
+            android:exported="true"></service>
+
+        <service
+            android:name=".service.UploadImagesService"
+            android:enabled="true"
+            android:exported="true"></service>
+
     </application>
 
 </manifest>

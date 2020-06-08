@@ -26,11 +26,13 @@ public class ChipAdapter extends RecyclerView.Adapter<ChipAdapter.ViewHolder>{
 
     private List<AdItem> mItems;
     private List<AdItem> selectedIAdtems;
+    private List<Integer> selectedAdItemsId;
 
 
-    public ChipAdapter(List<AdItem> items, List<AdItem> selectedIAdtems) {
+    public ChipAdapter(List<AdItem> items, List<AdItem> selectedIAdtems, List<Integer> selectedAdItemsId) {
         this.mItems = items;
         this.selectedIAdtems = selectedIAdtems;
+        this.selectedAdItemsId = selectedAdItemsId;
     }
 
     @Override
@@ -58,8 +60,11 @@ public class ChipAdapter extends RecyclerView.Adapter<ChipAdapter.ViewHolder>{
                 Chip c = (Chip) buttonView;
                 if(isChecked){
                     selectedIAdtems.add((AdItem) c.getTag());
+                    selectedAdItemsId.add(((AdItem) c.getTag()).getEntityId());
                 } else {
-                    selectedIAdtems.remove((AdItem)c.getTag());
+                    AdItem adItem = (AdItem)c.getTag();
+                    selectedIAdtems.remove(adItem);
+                    selectedAdItemsId.remove(Integer.valueOf(adItem.getEntityId()));
                 }
             }
         });
@@ -71,7 +76,9 @@ public class ChipAdapter extends RecyclerView.Adapter<ChipAdapter.ViewHolder>{
                 boolean t = true;
                 Chip c = (Chip)v;
                 c.setChecked(false);
-                selectedIAdtems.remove((AdItem)c.getTag());
+                AdItem adItem = (AdItem)c.getTag();
+                selectedIAdtems.remove(adItem);
+                selectedAdItemsId.remove(Integer.valueOf(adItem.getEntityId()));
             }
         });
     }
