@@ -19,9 +19,12 @@ import android.widget.TextView;
 
 import rs.ac.uns.ftn.findaroommate.R;
 
+import rs.ac.uns.ftn.findaroommate.dto.AdDto;
+import rs.ac.uns.ftn.findaroommate.dto.AdDtoDto;
 import rs.ac.uns.ftn.findaroommate.model.Ad;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,7 +46,9 @@ public class RoomListActivity extends AppCompatActivity {
     private boolean mTwoPane;
 
     public static List<Ad> adsList = new ArrayList<>();
+    public static List<Ad> listOfAvaiable = new ArrayList<>();
     public static Map<String, Ad> adsMap = new HashMap<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +58,14 @@ public class RoomListActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
+
+        //updateAdsList();
+        listOfAvaiable = new ArrayList<>();
+
+        for (Ad ad:adsList) {
+            if(ad.getAvailableFrom().after(new Date()) && ad.getUserId() == null)
+                listOfAvaiable.add(ad);
+        }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -78,8 +91,13 @@ public class RoomListActivity extends AppCompatActivity {
 
     }
 
+    private void updateAdsList() {
+        List<Ad> updateList = Ad.getAllAds();
+        adsList = updateList;
+    }
+
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, adsList, mTwoPane));
+        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, listOfAvaiable, mTwoPane));
     }
 
     public static class SimpleItemRecyclerViewAdapter

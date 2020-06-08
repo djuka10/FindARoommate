@@ -64,8 +64,8 @@ public class EditProfileTask extends AsyncTask<Long, Void, Void> {
                         user.setEntityId(body.getEntityId());
                         user.save();
 
-//                        Intent intent = new Intent(ProfileFormActivity.EDIT_USER_PROFILE);
-//                        context.sendBroadcast(intent);
+                        Intent intent = new Intent(ProfileFormActivity.EDIT_USER_PROFILE);
+                        context.sendBroadcast(intent);
                     } else {
                         Log.e("editProfileTask", "Error");
 

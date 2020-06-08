@@ -3,9 +3,12 @@ package rs.ac.uns.ftn.findaroommate.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,19 +21,21 @@ import rs.ac.uns.ftn.findaroommate.R;
 import rs.ac.uns.ftn.findaroommate.activity.UserStayDetailActivity;
 import rs.ac.uns.ftn.findaroommate.dto.StayDto;
 
-public class UserStayRecyclerAdapter extends RecyclerView.Adapter<UserStayRecyclerAdapter.ViewHolder> {
+public class MyAdsRecyclerAdapter extends RecyclerView.Adapter<MyAdsRecyclerAdapter.ViewHolder> {
 
     private List<StayDto> mItems;
     SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM dd, yyyy");
+    Context context;
 
 
-    public UserStayRecyclerAdapter(List<StayDto> items) {
+    public MyAdsRecyclerAdapter(List<StayDto> items, Context context) {
         mItems = items;
+        this.context = context;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.stay_row, viewGroup, false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.my_ads_row, viewGroup, false);
 
         return new ViewHolder(v);
     }
@@ -42,19 +47,26 @@ public class UserStayRecyclerAdapter extends RecyclerView.Adapter<UserStayRecycl
         viewHolder.mTextTitle.setText(item.getTitle());
         viewHolder.mTextFrom.setText(dateFormat.format(item.getFrom()));
         viewHolder.mTextTo.setText(dateFormat.format(item.getTo()));
+        viewHolder.detailButton.setText(item.getAdStatus().name());
+        viewHolder.mUser.setText(item.getUser().getFirstName() + " " + item.getUser().getLastName());
 
+    }
 
-        viewHolder.detailButton.setOnClickListener(new View.OnClickListener() {
+    private void showPopup(View view) {
+        PopupMenu popup = new PopupMenu(context,view);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.popup_menu, popup.getMenu());
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
-            public void onClick(View view) {
-                Context context = view.getContext();
-                Toast.makeText(context, "AD STATUS: " + item.getAdStatus().name(), Toast.LENGTH_SHORT).show();
-                /*Intent intent = new Intent(context, UserStayDetailActivity.class);
-                intent.putExtra("stayId", 1l);
-                context.startActivity(intent);*/
+            public boolean onMenuItemClick(MenuItem item) {
+                Toast.makeText(context, "Usao u popup", Toast.LENGTH_SHORT).show();
+                return false;
             }
         });
+        popup.show();
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -67,7 +79,8 @@ public class UserStayRecyclerAdapter extends RecyclerView.Adapter<UserStayRecycl
         private final TextView mTextFrom;
         private final TextView mTextTo;
         private final TextView mTextTitle;
-        private final Button detailButton;
+        private final TextView detailButton;
+        private final TextView mUser;
 
         ViewHolder(View v) {
             super(v);
@@ -75,7 +88,8 @@ public class UserStayRecyclerAdapter extends RecyclerView.Adapter<UserStayRecycl
             mTextFrom = (TextView)v.findViewById(R.id.list_from);
             mTextTo = (TextView)v.findViewById(R.id.list_to);
             mTextTitle = (TextView)v.findViewById(R.id.list_title);
-            detailButton = (Button) v.findViewById(R.id.list_btn);
+            detailButton = (TextView) v.findViewById(R.id.list_btn);
+            mUser = (TextView) v.findViewById(R.id.my_ads_user_id);
         }
     }
 

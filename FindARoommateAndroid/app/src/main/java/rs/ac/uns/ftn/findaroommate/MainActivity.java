@@ -53,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
 
         ActiveAndroid.initialize(this);
 
-        initDataFlag = true;
-        Boolean initPeraFlag = true;
+        initDataFlag = false;
+        Boolean initPeraFlag = false;
 
         if(initPeraFlag)
             initUser();
@@ -268,6 +268,27 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         userPera.save();
+
+        Ad ad = new Ad().builder().build();
+        ad.setFlatM2(25);
+        ad.setAdType("type");
+        ad.setAvailableFrom(new Date());
+        ad.setAvailableUntil(new Date());
+        ad.setBoysNum(3);
+        ad.setCostsIncluded(true);
+        ad.setDeposit(300);
+        ad.setDescription("Brutalna stancuga u centru grada");
+        ad.setLadiesNum(2);
+        ad.setLatitude(25);
+        ad.setLongitude(25);
+        ad.setMaxPerson(5);
+        ad.setMinDays("1-5 months");
+        ad.setPrice(322);
+        ad.setRoomM2(20);
+        ad.setTitle("Rajski pogled!");
+        ad.setUserId(userPera);
+        ad.save();
+
 
     }
 }

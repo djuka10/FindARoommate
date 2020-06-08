@@ -26,6 +26,9 @@ public class User extends Model {
     @Expose
     @Column(name = "entity_id", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
     private int entityId;
+    /*@Expose
+    @Column(name = "ads")
+    private List<Ad> ads;*/
     @Expose
     @Column
     private String email;

@@ -12,6 +12,7 @@ import rs.ac.uns.ftn.findaroommate.model.AdItem;
 import rs.ac.uns.ftn.findaroommate.model.CharacteristicType;
 import rs.ac.uns.ftn.findaroommate.model.Language;
 import rs.ac.uns.ftn.findaroommate.model.Review;
+import rs.ac.uns.ftn.findaroommate.model.User;
 import rs.ac.uns.ftn.findaroommate.model.UserCharacteristic;
 
 public class Mockup {
@@ -280,17 +281,17 @@ public class Mockup {
     private static ArrayList<StayDto> initStaysHistory(){
         ArrayList<StayDto> history = new ArrayList<>();
 
-        StayDto s1 = new StayDto("Title 1", "Barcelona", new Date(), new Date());
-        StayDto s2 = new StayDto("Title 2 ", "Madrid", new Date(), new Date());
-        StayDto s3 = new StayDto("Title 3", "Moscow", new Date(), new Date());
-        StayDto s4 = new StayDto("Title 4", "Vienna", new Date(), new Date());
-        StayDto s5 = new StayDto("Title 5", "Istanbul", new Date(), new Date());
+        /*StayDto s1 = new StayDto("Title 1", "Barcelona", new Date(), new Date(), AdStatus.IDLE, new User());
+        StayDto s2 = new StayDto("Title 2 ", "Madrid", new Date(), new Date(), AdStatus.IDLE, new User());
+        StayDto s3 = new StayDto("Title 3", "Moscow", new Date(), new Date(), AdStatus.IDLE, new User());
+        StayDto s4 = new StayDto("Title 4", "Vienna", new Date(), new Date(), AdStatus.IDLE, new User());
+        StayDto s5 = new StayDto("Title 5", "Istanbul", new Date(), new Date(), AdStatus.IDLE, new User());
 
         history.add(s1);
         history.add(s2);
         history.add(s3);
         history.add(s4);
-        history.add(s5);
+        history.add(s5);*/
 
         return history;
     }

@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -23,6 +25,12 @@ import java.util.Map;
 
 import rs.ac.uns.ftn.findaroommate.R;
 import rs.ac.uns.ftn.findaroommate.model.Ad;
+import rs.ac.uns.ftn.findaroommate.model.User;
+import rs.ac.uns.ftn.findaroommate.receiver.BookReceiver;
+import rs.ac.uns.ftn.findaroommate.service.BookService;
+import rs.ac.uns.ftn.findaroommate.service.EditProfileService;
+import rs.ac.uns.ftn.findaroommate.utils.AdStatus;
+import rs.ac.uns.ftn.findaroommate.utils.AppTools;
 
 /**
  * A fragment representing a single Room detail screen.
@@ -30,7 +38,7 @@ import rs.ac.uns.ftn.findaroommate.model.Ad;
  * in two-pane mode (on tablets) or a {@link RoomDetailActivity}
  * on handsets.
  */
-public class RoomDetailFragment extends Fragment {
+public class RoomDetailFragment extends Fragment{
     /**
      * The fragment argument representing the item ID that this fragment
      * represents.
@@ -42,6 +50,12 @@ public class RoomDetailFragment extends Fragment {
      */
     private Ad mItem;
 
+    //receiver
+    BookReceiver bookReceiver;
+
+    //ad id
+    Long adId;
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -52,6 +66,8 @@ public class RoomDetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        adId = Long.parseLong(getArguments().getString(ARG_ITEM_ID));
 
         if (getArguments().containsKey(ARG_ITEM_ID)) {
             // Load the dummy content specified by the fragment
@@ -65,6 +81,12 @@ public class RoomDetailFragment extends Fragment {
                 appBarLayout.setTitle(mItem.getTitle());
             }
         }
+
+        setUpReceiver();
+    }
+
+    private void setUpReceiver() {
+        bookReceiver = new BookReceiver();
     }
 
 
@@ -78,7 +100,7 @@ public class RoomDetailFragment extends Fragment {
             appBarLayout.setTitle(mItem.getTitle());
         }
 
-        // Show the dummy content as text in a TextView.
+        // Show ad content as text in a TextView.
         if (mItem != null) {
             ((TextView) rootView.findViewById(R.id.room_title_frag)).setText(mItem.getTitle());
             ((TextView) rootView.findViewById(R.id.room_detail_text)).setText(mItem.getDescription());
@@ -118,8 +140,24 @@ public class RoomDetailFragment extends Fragment {
                     intent.putExtra("longitude", mItem.getLongitude());
                     intent.putExtra("latitude", mItem.getLatitude());
 
-
                     startActivity(intent);
+                }
+            });
+
+            Button btnRequest = (Button) rootView.findViewById(R.id.btn_request_to_book);
+
+            btnRequest.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // send to the server
+                    Ad ad = Ad.load(Ad.class,adId);
+                    User user = AppTools.getLoggedUser();
+                    ad.setUserId(user);
+                    ad.setAdStatus(AdStatus.PENDING);
+                    ad.save();
+                    Intent bookIntent = new Intent(getActivity(), BookService.class);
+                    bookIntent.putExtra("adId", mItem.getId());
+                    getActivity().startService(bookIntent);
                 }
             });
         }

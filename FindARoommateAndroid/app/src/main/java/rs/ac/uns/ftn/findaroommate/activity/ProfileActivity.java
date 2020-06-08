@@ -111,7 +111,9 @@ public class ProfileActivity extends AppCompatActivity {
 
                 switch (id){
                     case R.id.menu_profile_ads:
-                        Toast.makeText(ProfileActivity.this, "Ads", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(ProfileActivity.this, "Ads", Toast.LENGTH_LONG).show();
+                        Intent myAdsIntent = new Intent(ProfileActivity.this, MyAdsActivity.class);
+                        startActivity(myAdsIntent);
                         return true;
                     case R.id.menu_profile_history:
                         Intent historyIntent = new Intent(ProfileActivity.this, UserStayActivity.class);

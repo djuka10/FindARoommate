@@ -34,7 +34,7 @@ public class SearchActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(SearchActivity.this, "MasterDetailView action", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(SearchActivity.this, RoomListActivity.class);
-
+                //TODO Ovde treba da se pozove servis i da se sinhronizuju oglasi na osnovu search-a
                 RoomListActivity.adsList = Ad.getAllAds();
                 for (Ad ad: RoomListActivity.adsList) {
                     RoomListActivity.adsMap.put(ad.getId().toString(), ad);
