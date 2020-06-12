@@ -42,7 +42,7 @@ public class AdService implements ServiceInterface<Ad> {
 	@Autowired
 	private ResourceRegistryRepository resourceRegistryRepository;
 	
-	private static final String IMAGE_FOLDER= "src/main/resources/images/";
+	private static final String IMAGE_FOLDER= "images/";
 
 	@Override
 	public List<Ad> getAll() {

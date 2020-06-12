@@ -46,7 +46,7 @@ public class BookTask extends AsyncTask<Long,Void,Void> {
 
             AdDtoDto adDtoDto = new AdDtoDto();
             adDtoDto.convert(ad);
-            Call<AdDtoDto> call = ServiceUtils.adServiceApi.add(adDtoDto);
+            Call<AdDtoDto> call = ServiceUtils.adServiceApi.book(adDtoDto);
             call.enqueue(new Callback<AdDtoDto>() {
                 @Override
                 public void onResponse(Call<AdDtoDto> call, Response<AdDtoDto> response) {

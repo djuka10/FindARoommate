@@ -255,7 +255,7 @@ public class NewAdActivity extends AppCompatActivity {
             adFormDto.setAvailableUntil(AppTools.getSimpleDateFormat().format(ad.getAd().getAvailableUntil()));
         }
 
-        Call<AdFormDto> call = ServiceUtils.reviewerServiceApi.add(adFormDto);
+        Call<AdFormDto> call = ServiceUtils.adServiceApi.add(adFormDto);
         call.enqueue(new Callback<AdFormDto>() {
             @Override
             public void onResponse(Call<AdFormDto> call, Response<AdFormDto> response) {
@@ -333,7 +333,7 @@ public class NewAdActivity extends AppCompatActivity {
         //new UploadProfileTask(getApplicationContext()).execute(image, fileName, user.getEntityId(), true);
         RequestBody body = MultipartBody.create(MediaType.parse("image/jpeg"), image);
 
-        Call<ResourceRegistry> c = ServiceUtils.reviewerServiceApi.uploadPhoto(
+        Call<ResourceRegistry> c = ServiceUtils.adServiceApi.uploadPhoto(
                 MultipartBody.Part.createFormData("image", fileName, body),
                 MultipartBody.Part.createFormData("addId", Integer.toString(addId)),
                 MultipartBody.Part.createFormData("user", Integer.toString(userId)),

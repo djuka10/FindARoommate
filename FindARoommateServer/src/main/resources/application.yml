@@ -5,6 +5,10 @@ server:
 spring:
   application:
     name: Springen application
+  servlet:
+    multipart:
+      max-file-size: 7MB
+      max-request-size: 7MB
   # h2
   datasource:
     driver-class-name: org.h2.Driver

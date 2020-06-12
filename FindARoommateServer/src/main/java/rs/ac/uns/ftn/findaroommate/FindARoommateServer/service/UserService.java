@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +13,8 @@ import javax.imageio.ImageIO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import rs.ac.uns.ftn.findaroommate.FindARoommateServer.dto.ProfileImageDto;
 import rs.ac.uns.ftn.findaroommate.FindARoommateServer.model.Language;
@@ -37,7 +41,7 @@ public class UserService implements ServiceInterface<User> {
 	@Autowired
 	private ResourceRegistryRepository resourceRegistryRepository;
 	
-	private static final String IMAGE_FOLDER= "src/main/resources/images/";
+	private static final String IMAGE_FOLDER= "images/";
 	
 	@Override
 	public List<User> getAll() {
@@ -103,6 +107,20 @@ public class UserService implements ServiceInterface<User> {
               System.out.println("Exception occured :" + e.getMessage());
         }
 		return null;	
+	}
+	
+	public byte[] getImage(@PathVariable String filePath) {
+    	String fileUrl = IMAGE_FOLDER + filePath;
+
+	    File outputfile = new File(fileUrl);
+	    try {
+			byte[] ui = Files.readAllBytes(outputfile.toPath());
+			return ui;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

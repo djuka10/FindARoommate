@@ -58,22 +58,7 @@ public class UserController {
 	
 	@GetMapping("/profile/{filePath}")
 	public byte[] getImage(@PathVariable String filePath) {
-    	String IMAGE_FOLDER= "src/main/resources/images/";
-
-    	String fileUrl = IMAGE_FOLDER + filePath;
-
-	    File outputfile = new File(fileUrl);
-	    Path path = outputfile.toPath();
-	    String f = path.toString();
-	    try {
-			BufferedImage bImage = ImageIO.read(outputfile);
-			byte[] ui = Files.readAllBytes(outputfile.toPath());
-			return ui;
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
+		return userService.getImage(filePath);
 	}
 	
 	@PostMapping

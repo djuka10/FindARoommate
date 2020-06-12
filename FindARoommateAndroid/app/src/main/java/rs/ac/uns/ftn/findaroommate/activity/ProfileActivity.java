@@ -1,11 +1,14 @@
 package rs.ac.uns.ftn.findaroommate.activity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -16,6 +19,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -42,6 +49,8 @@ public class ProfileActivity extends AppCompatActivity {
 
     private ImageButton imageGenderButton;
 
+    ProgressDialog loadingBar;
+
     public static String PROFILE_URL = "http://HOST/server/user/profile/";
 
     @Override
@@ -67,6 +76,7 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ProfileActivity.this, ProfileFormActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -91,7 +101,6 @@ public class ProfileActivity extends AppCompatActivity {
 
         TextView tUserInfo = (TextView) findViewById(R.id.user_name_info);
         TextView tUserActive = (TextView) findViewById(R.id.user_active);
-        //TextView tLanguages = (TextView) findViewById(R.id.user_languages);
         TextView tStudyLevel= (TextView) findViewById(R.id.study_level);
         TextView tOccupation = (TextView) findViewById(R.id.user_occupation);
         TextView tEducation = (TextView) findViewById(R.id.user_education);
@@ -120,11 +129,9 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
         tUserInfo.setText(String.format("%s %s%s", loggedUserModel.getFirstName(), loggedUserModel.getLastName(), age));
-        //tUserInfo.setText(String.format("%s %s, %s", user.getFirstName(), user.getLastName(), age));
         tUserActive.setText("Active since " + formattedActive);
         tOccupation.setText(loggedUserModel.getOccupation());
-        tEducation.setText(loggedUserModel.getStudyLevel());
-        //tLanguages.setText(builder.toString());
+        tEducation.setText(loggedUserModel.getWorkingStatus());
         tStudyLevel.setText(loggedUserModel.getStudyLevel());
 
         BottomAppBar bottomAppBar = (BottomAppBar) findViewById(R.id.bottom_app_bar);
@@ -153,10 +160,50 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        initFields();
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+    }
+
+    private void initFields(){
         if(loggedUserModel.getUrlProfile() != null){
+            loadingBar = new ProgressDialog(ProfileActivity.this);
+
+            loadingBar.setTitle("Loading profile into");
+            loadingBar.setMessage("Please wait");
+            loadingBar.setCanceledOnTouchOutside(true);
+            loadingBar.show();
+
             Glide.with(getApplicationContext())
-                    .load(PROFILE_URL.replace("HOST", getString(R.string.host)) + loggedUserModel.getUrlProfile()).into(profileImage);
+                    .load(PROFILE_URL.replace("HOST", getString(R.string.host)) + loggedUserModel.getUrlProfile())
+                    .listener(new RequestListener<Drawable>() {
+                                  @Override
+                                  public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                      return false;
+                                  }
+
+                                  @Override
+                                  public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                      loadingBar.dismiss();
+                                      return false;
+                                  }
+                              }
+                    )
+                    .into(profileImage);
         }
     }
 

@@ -83,7 +83,7 @@ public class UploadImagesService extends IntentService {
         //new UploadProfileTask(getApplicationContext()).execute(image, fileName, user.getEntityId(), true);
         RequestBody body = MultipartBody.create(MediaType.parse("image/jpeg"), image);
 
-        Call<ResourceRegistry> c = ServiceUtils.reviewerServiceApi.uploadPhoto(
+        Call<ResourceRegistry> c = ServiceUtils.adServiceApi.uploadPhoto(
                 MultipartBody.Part.createFormData("image", fileName, body),
                 MultipartBody.Part.createFormData("addId", Integer.toString(addId)),
                 MultipartBody.Part.createFormData("user", Integer.toString(userId)),

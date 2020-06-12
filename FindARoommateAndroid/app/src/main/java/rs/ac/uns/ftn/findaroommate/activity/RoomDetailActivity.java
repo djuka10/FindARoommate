@@ -118,7 +118,7 @@ public class RoomDetailActivity extends AppCompatActivity {
     }
 
     private void setUpAdapter(int entityId, Fragment fragment){
-        Call<List<ResourceRegistry>> r = ServiceUtils.reviewerServiceApi.getAdImages(Integer.toString(entityId));
+        Call<List<ResourceRegistry>> r = ServiceUtils.adServiceApi.getAdImages(Integer.toString(entityId));
 
         r.enqueue(new Callback<List<ResourceRegistry>>() {
             @Override

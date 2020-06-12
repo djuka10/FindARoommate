@@ -50,67 +50,6 @@ public class DemoTask extends AsyncTask<Void, Void, Void> {
         Log.i("REZ", "doInBackground");
 
         try {
-            //Thread.sleep(1000);
-
-            TagToSend tts = new TagToSend();
-            tts.setName("Test tag");
-            tts.setDateModified("2017-05-09");
-//            Call<ResponseBody> call = ServiceUtils.reviewerServiceApi.add(tts);
-//            Call<ResponseBody> call = ServiceUtils.reviewerServiceApi.test();
-            //Call<ResponseBody> call = ServiceUtils.reviewerServiceApi.testById("6");
-//            Call<ResponseBody> call = ServiceUtils.reviewerServiceApi.userCharacterisic();
-//            call.enqueue(new Callback<ResponseBody>() {
-//                @Override
-//                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//                    List<UserCharacteristic> u = (List<UserCharacteristic>) response.body();
-//                    System.out.println("Meesage recieved");
-//                    Log.i("fd", "Message received");
-//                }
-//
-//                @Override
-//                public void onFailure(Call<ResponseBody> call, Throwable t) {
-//                    System.out.println("Error!");
-//                    Log.e("error", t.getMessage());
-//                }
-//            });
-
-//            Call<List<UserCharacteristic>> call = ServiceUtils.reviewerServiceApi.userCharacterisics();
-//            call.enqueue(new Callback<List<UserCharacteristic>>() {
-//                @Override
-//                public void onResponse(Call<List<UserCharacteristic>> call, Response<List<UserCharacteristic>> response) {
-//                    if (response.isSuccessful()) {
-//                        List<UserCharacteristic> u = (List<UserCharacteristic>) response.body();
-//
-//                        System.out.println("Meesage recieved");
-//                        Log.i("fd", "Message received");
-//                    }
-//                }
-//
-//                @Override
-//                public void onFailure(Call<List<UserCharacteristic>> call, Throwable t) {
-//                    System.out.println("Error!");
-//                    Log.e("error", t.getMessage());
-//                }
-//            });
-
-//            Call<List<User>> c = ServiceUtils.userServiceApi.getAll();
-//            c.enqueue(new Callback<List<User>>() {
-//                @Override
-//                public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-//                    if (response.isSuccessful()) {
-//                        System.out.println("Meesage recieved");
-//                        Log.i("fd", "Message received");
-//                    }
-//
-//                }
-//
-//                @Override
-//                public void onFailure(Call<List<User>> call, Throwable t) {
-//                    System.out.println("Error!");
-//                    Log.e("error", t.getMessage());
-//                }
-//            });
-
             Call<List<User>> c = ServiceUtils.userServiceApi.getAll();
             c.enqueue(new Callback<List<User>>() {
                 @Override
@@ -187,22 +126,6 @@ public class DemoTask extends AsyncTask<Void, Void, Void> {
                 }
             });
 
-//            Call<ResponseBody> c = ServiceUtils.reviewerServiceApi.addUserChar(UserCharacteristic.builder().entityId(3).build());
-//            c.enqueue(new Callback<ResponseBody>() {
-//                @Override
-//                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//                    if (response.isSuccessful()) {
-//                        System.out.println("Meesage recieved");
-//                        Log.i("fd", "Message received");
-//                    }
-//                }
-//
-//                @Override
-//                public void onFailure(Call<ResponseBody> call, Throwable t) {
-//                    System.out.println("Error!");
-//                    Log.e("error", t.getMessage());
-//                }
-//            });
         } catch (Exception e) {
             e.printStackTrace();
         }

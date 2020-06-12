@@ -20,13 +20,6 @@ import rs.ac.uns.ftn.findaroommate.model.UserCharacteristic;
 
 public interface ReviewerServiceApi {
 
-    @Headers({
-            "User-Agent: Mobile-Android",
-            "Content-Type:application/json"
-    })
-    @POST(ServiceUtils.ADD)
-    Call<ResponseBody> add(@Body TagToSend tag);
-
     @GET(ServiceUtils.TEST)
     Call<ResponseBody> test();
 
@@ -36,29 +29,6 @@ public interface ReviewerServiceApi {
     })
     @POST(ServiceUtils.USER_CHARACTERISTIC_API)
     Call<ResponseBody> addUserChar(@Body UserCharacteristic tag);
-
-    @GET(ServiceUtils.USER_CHARACTERISTIC_API)
-    Call<ResponseBody> userCharacterisic();
-
-    @GET(ServiceUtils.USER_CHARACTERISTIC_API)
-    Call<List<UserCharacteristic>> userCharacterisics();
-
-    @POST("ad")
-    Call<AdFormDto> add(@Body AdFormDto ad);
-
-    @Multipart
-    @Headers({
-            "User-Agent: Mobile-Android"
-    })
-    @POST("ad" + "/uploadAdPhoto")
-    Call<ResourceRegistry> uploadPhoto(
-            @Part MultipartBody.Part image,
-            @Part MultipartBody.Part adId,
-            @Part MultipartBody.Part user,
-            @Part MultipartBody.Part profilePicture);
-
-    @GET("resourceRegistry/ad/{adId}")
-    Call<List<ResourceRegistry>> getAdImages(@Path("adId") String adId);
 
     @GET("test/{id}")
     Call<ResponseBody> testById(@Path("id") String id);

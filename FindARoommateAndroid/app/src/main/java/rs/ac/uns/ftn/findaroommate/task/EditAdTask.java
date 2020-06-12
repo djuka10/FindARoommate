@@ -44,7 +44,7 @@ public class EditAdTask extends AsyncTask<Long, Void, Void> {
 
             AdFormDto adFormDto = new AdFormDto();
 
-            Call<AdFormDto> call = ServiceUtils.reviewerServiceApi.add(adFormDto);
+            Call<AdFormDto> call = ServiceUtils.adServiceApi.add(adFormDto);
             call.enqueue(new Callback<AdFormDto>() {
                 @Override
                 public void onResponse(Call<AdFormDto> call, Response<AdFormDto> response) {
