@@ -9,6 +9,7 @@ import androidx.core.content.FileProvider;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
@@ -118,6 +119,8 @@ public class ProfileFormActivity extends AppCompatActivity {
 
     AlertDialog alertDialog;
 
+    ProgressDialog uploadingBar;
+
     private static final int LANGUAGE_CHOSER_ACTIVITY = 99;
     private static final int USER_ATTRIBUTES_ACTIVITY = 100;
     private static final int TAKE_PHOTO_ACTIVITY = 101;
@@ -219,6 +222,14 @@ public class ProfileFormActivity extends AppCompatActivity {
         //new UploadProfileTask(getApplicationContext()).execute(image, fileName, user.getEntityId(), true);
         RequestBody body = MultipartBody.create(MediaType.parse("image/jpeg"), image);
 
+        uploadingBar = new ProgressDialog(ProfileFormActivity.this);
+
+        uploadingBar.setTitle("Upload profile picture");
+        uploadingBar.setMessage("Please wait");
+        uploadingBar.setCanceledOnTouchOutside(true);
+        uploadingBar.show();
+
+
         Call<ResourceRegistry> c = ServiceUtils.userServiceApi.uploadPhoto(
                 MultipartBody.Part.createFormData("image", fileName, body),
                 MultipartBody.Part.createFormData("user", Integer.toString(user.getEntityId())),
@@ -230,6 +241,7 @@ public class ProfileFormActivity extends AppCompatActivity {
                     ResourceRegistry body = response.body();
                     user.setUrlProfile(body.getUri());
                     System.out.println("super");
+                    uploadingBar.dismiss();
 
                 }
             }

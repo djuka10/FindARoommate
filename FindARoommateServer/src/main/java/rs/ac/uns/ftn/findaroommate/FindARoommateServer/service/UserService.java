@@ -52,6 +52,27 @@ public class UserService implements ServiceInterface<User> {
 	@Override
 	public User save(User entity) {
 		// TODO Auto-generated method stub
+		User user = userRepository.findByEmail(entity.getEmail());
+		//if exists
+		if(user != null) {
+			user.setActiveSince(entity.getActiveSince());
+			user.setFirstName(entity.getFirstName());
+			user.setLastName(entity.getLastName());
+			user.setUrlProfile(entity.getUrlProfile());
+			
+			if(user.getLanguageIds() != null) {
+				List<Language> languages = languageRepository.findAllById(entity.getLanguageIds());
+				user.setLanguages(languages);
+			}
+			
+			if(user.getUserCharacteristicIds() != null) {
+				List<UserCharacteristic> userCharacteristics = userCharacteristicsRepository.findAllById(entity.getUserCharacteristicIds());
+				user.setCharacteristics(userCharacteristics);
+			}
+			
+			return userRepository.save(user);
+		}
+		
 		if(entity.getLanguageIds() != null) {
 			List<Language> languages = languageRepository.findAllById(entity.getLanguageIds());
 			entity.setLanguages(languages);

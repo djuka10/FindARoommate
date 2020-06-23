@@ -8,6 +8,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 
 import rs.ac.uns.ftn.findaroommate.MainActivity;
 import rs.ac.uns.ftn.findaroommate.R;
@@ -57,6 +59,23 @@ public class HomepageActivity extends AppCompatActivity {
         //actionBar.setIcon(R.mipmap.ic_logo);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_dot);
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+
+        /*MenuItem item = (MenuItem) findViewById(R.id.profile_item);
+        if(currentUser != null) {
+            String displayName = currentUser.getDisplayName();
+
+            // If the above were null, iterate the provider data
+            // and set with the first non null data
+            for (UserInfo userInfo : currentUser.getProviderData()) {
+                if (displayName == null && userInfo.getDisplayName() != null) {
+                    displayName = userInfo.getDisplayName();
+                }
+            }
+
+            item.setTitle(displayName);
+        }*/
+
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {

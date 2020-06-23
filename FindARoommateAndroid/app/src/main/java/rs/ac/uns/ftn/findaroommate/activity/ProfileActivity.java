@@ -44,6 +44,7 @@ import rs.ac.uns.ftn.findaroommate.utils.Mockup;
 public class ProfileActivity extends AppCompatActivity {
 
     private User loggedUserModel;
+    private FirebaseUser firebaseUser;
 
     private ImageView profileImage;
 
@@ -57,6 +58,8 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        firebaseUser = AppTools.getFirebaseUser();
 
         loggedUserModel = AppTools.getLoggedUser();
         if(loggedUserModel == null){
@@ -134,6 +137,8 @@ public class ProfileActivity extends AppCompatActivity {
         tEducation.setText(loggedUserModel.getWorkingStatus());
         tStudyLevel.setText(loggedUserModel.getStudyLevel());
 
+
+
         BottomAppBar bottomAppBar = (BottomAppBar) findViewById(R.id.bottom_app_bar);
         bottomAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -180,7 +185,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void initFields(){
-        if(loggedUserModel.getUrlProfile() != null){
+        if(loggedUserModel.getUrlProfile() != null) {
             loadingBar = new ProgressDialog(ProfileActivity.this);
 
             loadingBar.setTitle("Loading profile into");
@@ -188,22 +193,28 @@ public class ProfileActivity extends AppCompatActivity {
             loadingBar.setCanceledOnTouchOutside(true);
             loadingBar.show();
 
-            Glide.with(getApplicationContext())
-                    .load(PROFILE_URL.replace("HOST", getString(R.string.host)) + loggedUserModel.getUrlProfile())
-                    .listener(new RequestListener<Drawable>() {
-                                  @Override
-                                  public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                                      return false;
-                                  }
+            if (loggedUserModel.getUrlProfile().startsWith("http")) { // fotografija je sa google naloga
+                Glide.with(this).load(loggedUserModel.getUrlProfile()).into(profileImage);
+                loadingBar.dismiss();
+            } else {
 
-                                  @Override
-                                  public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                                      loadingBar.dismiss();
-                                      return false;
+                Glide.with(getApplicationContext())
+                        .load(PROFILE_URL.replace("HOST", getString(R.string.host)) + loggedUserModel.getUrlProfile())
+                        .listener(new RequestListener<Drawable>() {
+                                      @Override
+                                      public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                          return false;
+                                      }
+
+                                      @Override
+                                      public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                          loadingBar.dismiss();
+                                          return false;
+                                      }
                                   }
-                              }
-                    )
-                    .into(profileImage);
+                        )
+                        .into(profileImage);
+            }
         }
     }
 

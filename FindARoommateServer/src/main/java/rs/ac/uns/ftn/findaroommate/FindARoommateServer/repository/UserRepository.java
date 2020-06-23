@@ -6,4 +6,5 @@ import rs.ac.uns.ftn.findaroommate.FindARoommateServer.model.User;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
+	User findByEmail(String email);
 }
