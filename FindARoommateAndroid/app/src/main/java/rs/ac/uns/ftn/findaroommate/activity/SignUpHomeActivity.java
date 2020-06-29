@@ -33,6 +33,9 @@ import java.util.List;
 import rs.ac.uns.ftn.findaroommate.R;
 import rs.ac.uns.ftn.findaroommate.model.User;
 import rs.ac.uns.ftn.findaroommate.service.EditProfileService;
+import rs.ac.uns.ftn.findaroommate.service.SyncService;
+import rs.ac.uns.ftn.findaroommate.utils.AppTools;
+
 import static java.util.Objects.nonNull;
 
 public class SignUpHomeActivity extends AppCompatActivity {
@@ -78,6 +81,7 @@ public class SignUpHomeActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == GOOGLE_SIGN && resultCode == RESULT_OK) {
             saveUser();
+            startSync();
             Intent intent = new Intent(SignUpHomeActivity.this, HomepageActivity.class);
             startActivity(intent);
         }
@@ -87,9 +91,15 @@ public class SignUpHomeActivity extends AppCompatActivity {
     //Preko google kad treba da se kreira u internoj bazi
     private void saveUser() {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        String[] credentials = firebaseUser.getDisplayName().split(" ");
-        String firstName = credentials[0];
-        String lastName = credentials[1];
+        String[] credentials;
+        String firstName = "";
+        String lastName = "";
+        if(firebaseUser.getDisplayName() != null){
+           credentials = firebaseUser.getDisplayName().split(" ");
+           firstName = credentials[0];
+           lastName = credentials[1];
+        }
+
         String profileUrl = "";
         if(firebaseUser.getPhotoUrl() != null) {
             profileUrl = firebaseUser.getPhotoUrl().toString();
@@ -105,18 +115,22 @@ public class SignUpHomeActivity extends AppCompatActivity {
                     .firstName(firstName)
                     .lastName(lastName)
                     .activeSince(new Date())
-                    .urlProfile(profileUrl)
                     .build();
+            if(!profileUrl.isEmpty()){
+                user2.setUrlProfile(profileUrl);
+            }
             user2.save();
             sendToServer(user2);
         } else {
 
-            if (user.getUrlProfile() == null)
-                user.setUrlProfile(profileUrl);
-
-            user.setFirstName(firstName);
-            user.setLastName(lastName);
-            user.setActiveSince(new Date());
+            if (user.getUrlProfile() == null){
+                if(!profileUrl.isEmpty()){
+                    user.setUrlProfile(profileUrl);
+                }
+            }
+//            user.setFirstName(user.getFirstName());
+//            user.setLastName(user.getLastName());
+//            user.setActiveSince(user.getActiveSince());
             user.save();
             sendToServer(user);
         }
@@ -129,6 +143,9 @@ public class SignUpHomeActivity extends AppCompatActivity {
         startService(editProfileIntent);
     }
 
-
+    private void startSync(){
+        Intent intent = new Intent(this, SyncService.class);
+        startService(intent);
+    }
 
 }

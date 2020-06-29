@@ -30,7 +30,7 @@
         <activity
             android:name=".activity.MyAdsActivity"
             android:label="@string/title_activity_my_ads"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
 
         <service
             android:name=".service.BookService"
@@ -60,7 +60,7 @@
             android:value="FindARoommateDatabase" />
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="38" />
+            android:value="41" />
         <meta-data
             android:name="AA_MODELS"
             android:value="rs.ac.uns.ftn.findaroommate.model.Ad,                            rs.ac.uns.ftn.findaroommate.model.AdItem,                            rs.ac.uns.ftn.findaroommate.model.Message, rs.ac.uns.ftn.findaroommate.model.Language, rs.ac.uns.ftn.findaroommate.model.ResourceRegistry, rs.ac.uns.ftn.findaroommate.model.Setting, rs.ac.uns.ftn.findaroommate.model.User, rs.ac.uns.ftn.findaroommate.model.UserCharacteristic, rs.ac.uns.ftn.findaroommate.model.Review, rs.ac.uns.ftn.findaroommate.model.Stay" />
@@ -173,9 +173,13 @@
                 android:value=".activity.HomepageActivity" />
         </activity>
         <activity android:name=".activity.UserReviewDetailActivity" />
-        <activity android:name=".activity.UserStayDetailActivity" />
+        <activity android:name=".activity.UserStayDetailActivity"
+            android:parentActivityName=".activity.UserStayActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.UserStayActivity" />
+        </activity>
         <activity android:name=".activity.ChatActivity" /> <!-- Facebook -->
-
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
@@ -205,26 +209,49 @@
 
         <service android:name=".service.DemoService" />
 
-        <receiver android:name=".receiver.EditProfileReceiver" />
+        <receiver android:name=".receiver.ServerErrorReceiver" />
+        <receiver android:name=".receiver.BookReceiver" />
 
         <service
             android:name=".service.EditProfileService"
             android:enabled="true"
             android:exported="true" />
-
         <service
             android:name=".service.EditProfileIntentService"
             android:exported="false" />
-
         <service
             android:name=".service.EditAdService"
             android:enabled="true"
-            android:exported="true"></service>
-
+            android:exported="true" />
         <service
             android:name=".service.UploadImagesService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+        <service android:name=".service.UpcomingStayService" />
+
+        <receiver
+            android:name=".receiver.UpcomingStayReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
+        <receiver
+            android:name=".receiver.ReviewReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
+        <service
+            android:name=".service.MyFirebaseMessagingService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".service.SyncService"
+            android:enabled="true"
+            android:exported="true" />
 
         <service
             android:name=".service.ResourceRegistryService"

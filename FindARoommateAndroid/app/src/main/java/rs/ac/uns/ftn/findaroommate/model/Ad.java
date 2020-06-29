@@ -5,6 +5,7 @@ import android.view.Display;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
 import com.google.gson.annotations.Expose;
 
@@ -49,6 +50,9 @@ public class Ad  extends Model{
     @Expose
     @Column(name = "longitude")
     private float longitude;
+    @Expose
+    @Column(name = "address")
+    private String address;
     @Expose
     @Column(name = "ad_type")
     private String adType;
@@ -104,12 +108,20 @@ public class Ad  extends Model{
         return new Select().from(Ad.class).where("id=?", id).executeSingle();
     }
 
+    public static Ad getOneGlobal(int id) {
+        return new Select().from(Ad.class).where("entity_id=?",id).executeSingle();
+    }
+
     public static List<Ad> getAllAdsByUserId(User user) {
         return new Select().from(Ad.class).where("user_id=?", user.getId()).execute();
     }
 
     public static List<Ad> getAllAdsByOwnerId(User user) {
         return new Select().from(Ad.class).where("owner_id=?", user.getId()).execute();
+    }
+
+    public static List<Ad> deleteAll() {
+        return new Delete().from(Ad.class).execute();
     }
 
 }

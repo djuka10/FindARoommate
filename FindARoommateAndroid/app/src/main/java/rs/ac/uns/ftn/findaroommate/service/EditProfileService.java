@@ -7,9 +7,6 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-import rs.ac.uns.ftn.findaroommate.activity.ProfileFormActivity;
-import rs.ac.uns.ftn.findaroommate.model.User;
-import rs.ac.uns.ftn.findaroommate.receiver.EditProfileReceiver;
 import rs.ac.uns.ftn.findaroommate.task.EditProfileTask;
 import rs.ac.uns.ftn.findaroommate.utils.AppTools;
 
@@ -40,7 +37,7 @@ public class EditProfileService extends Service {
 
     @Override
     public void onDestroy() {
-//        Intent intent = new Intent(getApplicationContext(), EditProfileReceiver.class);
+//        Intent intent = new Intent(getApplicationContext(), ServerErrorReceiver.class);
 //        sendBroadcast(intent);
 
         super.onDestroy();

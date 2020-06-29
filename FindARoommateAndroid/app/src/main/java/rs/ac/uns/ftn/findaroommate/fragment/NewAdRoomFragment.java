@@ -71,7 +71,7 @@ public class NewAdRoomFragment extends NewAdFragmentAbstact {
         }
 
         TextView titleText = (TextView) view.findViewById(R.id.dialog_title);
-        titleText.setText(title + " (Room)");
+        titleText.setText(title + dialogNamePatern.replace("NAME", getString(R.string.ad_form_room)));
 
         minStaySpinner = (Spinner) view.findViewById(R.id.ad_form_min_stay_spinner);
         ArrayAdapter<CharSequence> minStayAdapter = ArrayAdapter.createFromResource(getActivity(),

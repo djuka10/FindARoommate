@@ -5,25 +5,27 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.imageio.ImageIO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import rs.ac.uns.ftn.findaroommate.FindARoommateServer.dto.ProfileImageDto;
+import rs.ac.uns.ftn.findaroommate.FindARoommateServer.dto.UserDto;
 import rs.ac.uns.ftn.findaroommate.FindARoommateServer.model.Language;
 import rs.ac.uns.ftn.findaroommate.FindARoommateServer.model.ResourceRegistry;
 import rs.ac.uns.ftn.findaroommate.FindARoommateServer.model.User;
 import rs.ac.uns.ftn.findaroommate.FindARoommateServer.model.UserCharacteristic;
+import rs.ac.uns.ftn.findaroommate.FindARoommateServer.model.UserDevice;
 import rs.ac.uns.ftn.findaroommate.FindARoommateServer.repository.LanguageRepository;
 import rs.ac.uns.ftn.findaroommate.FindARoommateServer.repository.ResourceRegistryRepository;
 import rs.ac.uns.ftn.findaroommate.FindARoommateServer.repository.UserCharacteristicRepository;
+import rs.ac.uns.ftn.findaroommate.FindARoommateServer.repository.UserDeviceRepository;
 import rs.ac.uns.ftn.findaroommate.FindARoommateServer.repository.UserRepository;
 
 @Service
@@ -41,6 +43,9 @@ public class UserService implements ServiceInterface<User> {
 	@Autowired
 	private ResourceRegistryRepository resourceRegistryRepository;
 	
+	@Autowired
+	private UserDeviceRepository userDeviceRepository;
+	
 	private static final String IMAGE_FOLDER= "images/";
 	
 	@Override
@@ -53,6 +58,7 @@ public class UserService implements ServiceInterface<User> {
 	public User save(User entity) {
 		// TODO Auto-generated method stub
 		User user = userRepository.findByEmail(entity.getEmail());
+		User savedUser = null;
 		//if exists
 		if(user != null) {
 			user.setActiveSince(entity.getActiveSince());
@@ -70,7 +76,9 @@ public class UserService implements ServiceInterface<User> {
 				user.setCharacteristics(userCharacteristics);
 			}
 			
-			return userRepository.save(user);
+			savedUser = userRepository.save(user);
+			updateUserDeviceRegistry(savedUser.getEntityId(), entity.getDeviceId());
+			return savedUser;
 		}
 		
 		if(entity.getLanguageIds() != null) {
@@ -83,7 +91,9 @@ public class UserService implements ServiceInterface<User> {
 			entity.setCharacteristics(userCharacteristics);
 		}
 		
-		return userRepository.save(entity);
+		savedUser = userRepository.save(entity);
+		updateUserDeviceRegistry(savedUser.getEntityId(), entity.getDeviceId());
+		return savedUser;
 	}
 
 	@Override
@@ -142,6 +152,23 @@ public class UserService implements ServiceInterface<User> {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public void signOut(User userDto) {
+		List<UserDevice> userDevices = userDeviceRepository.findAll().stream()
+		.filter(uD -> uD.getUserId().equals(userDto.getEntityId()) && uD.getDeviceId().equals(userDto.getDeviceId()))
+		.collect(Collectors.toList());
+		userDeviceRepository.deleteAll(userDevices);
+	}
+	
+	private void updateUserDeviceRegistry(Integer entityId, String deviceId) {
+		UserDevice userDevice = UserDevice.builder().userId(entityId).deviceId(deviceId).build();
+		try {
+			userDeviceRepository.save(userDevice);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+		}
 	}
 
 }

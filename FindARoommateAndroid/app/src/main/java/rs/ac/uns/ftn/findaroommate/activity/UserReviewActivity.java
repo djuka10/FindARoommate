@@ -20,9 +20,14 @@ import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.List;
+
 import rs.ac.uns.ftn.findaroommate.R;
 import rs.ac.uns.ftn.findaroommate.adapter.UserReviewRecyclerAdapter;
 import rs.ac.uns.ftn.findaroommate.adapter.UserStayRecyclerAdapter;
+import rs.ac.uns.ftn.findaroommate.model.Review;
+import rs.ac.uns.ftn.findaroommate.model.User;
+import rs.ac.uns.ftn.findaroommate.utils.AppTools;
 import rs.ac.uns.ftn.findaroommate.utils.Mockup;
 
 public class UserReviewActivity extends AppCompatActivity {
@@ -75,16 +80,26 @@ public class UserReviewActivity extends AppCompatActivity {
             TextView revUserGrade = (TextView) v.findViewById(R.id.review_user_grade);
             TextView revUserNum = (TextView) v.findViewById(R.id.review_user_num);
 
-            revUserName.setText("Paola");
-            revUserGrade.setText("4.53");
-            revUserNum.setText("10");
+            User loggedUser = AppTools.getLoggedUser();
+            List<Review> gradesAboutMe = Review.getAboutMe(loggedUser.getEntityId());
+
+            double avgGrade = gradesAboutMe.stream()
+                    .mapToDouble(Review::getRating)
+                    .average()
+                    .orElse(Double.NaN);
+
+            revUserName.setText(loggedUser.getFirstName());
+            revUserGrade.setText(String.format("%.2f", avgGrade));
+            revUserNum.setText(String.valueOf(gradesAboutMe.size()) + " " + getString(R.string.profile_reviews));
 
             LinearLayoutManager recyclerViewLayoutManager = new LinearLayoutManager(getActivity());
             DividerItemDecoration divider = new DividerItemDecoration(getActivity(), recyclerViewLayoutManager.getOrientation());
             RecyclerView recyclerView = (RecyclerView)v.findViewById(R.id.other_marks_recyclerview);
             recyclerView.setLayoutManager(recyclerViewLayoutManager);
             recyclerView.addItemDecoration(divider);
-            recyclerView.setAdapter(new UserReviewRecyclerAdapter(Mockup.getInstance().getReviews(), true));
+
+            recyclerView.setAdapter(new UserReviewRecyclerAdapter(gradesAboutMe
+                    , true));
 
             return v;
         }
@@ -117,22 +132,33 @@ public class UserReviewActivity extends AppCompatActivity {
             TextView revUserGrade = (TextView) v.findViewById(R.id.review_user_grade);
             TextView revUserNum = (TextView) v.findViewById(R.id.review_user_num);
 
+            User loggedUser = AppTools.getLoggedUser();
+            List<Review> gradesFromMe = Review.getFromMe(loggedUser.getEntityId());
+
+            double avgGrade = gradesFromMe.stream()
+                    .mapToDouble(Review::getRating)
+                    .average()
+                    .orElse(Double.NaN);
+
             revUserName.setText("My marks");
-            revUserGrade.setText("4.53");
-            revUserNum.setText("10");
+            revUserGrade.setText(String.format("%.2f", avgGrade));
+            revUserNum.setText(String.valueOf(gradesFromMe.size()) + " " + getString(R.string.profile_reviews));
 
             LinearLayoutManager recyclerViewLayoutManager = new LinearLayoutManager(getActivity());
             DividerItemDecoration divider = new DividerItemDecoration(getActivity(), recyclerViewLayoutManager.getOrientation());
             RecyclerView recyclerView = (RecyclerView)v.findViewById(R.id.other_marks_recyclerview);
             recyclerView.setLayoutManager(recyclerViewLayoutManager);
             recyclerView.addItemDecoration(divider);
-            recyclerView.setAdapter(new UserReviewRecyclerAdapter(Mockup.getInstance().getReviews(), false));
+
+            recyclerView.setAdapter(
+                    new UserReviewRecyclerAdapter(gradesFromMe, false));
 
             return v;
         }
     }
 
     static class TabPagerAdapter extends FragmentStatePagerAdapter {
+
 
         public TabPagerAdapter(FragmentManager fm) {
             super(fm);

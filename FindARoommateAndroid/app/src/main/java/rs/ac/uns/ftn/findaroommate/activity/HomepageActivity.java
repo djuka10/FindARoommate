@@ -7,6 +7,7 @@ import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.widget.Toolbar;
+import androidx.preference.PreferenceManager;
 
 import android.content.ClipData;
 import android.content.Context;
@@ -15,7 +16,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,9 +29,18 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
 
+import java.util.List;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import rs.ac.uns.ftn.findaroommate.MainActivity;
 import rs.ac.uns.ftn.findaroommate.R;
+import rs.ac.uns.ftn.findaroommate.dto.UserDto;
 import rs.ac.uns.ftn.findaroommate.model.Ad;
+import rs.ac.uns.ftn.findaroommate.model.User;
+import rs.ac.uns.ftn.findaroommate.service.api.ServiceUtils;
 import rs.ac.uns.ftn.findaroommate.utils.AppTools;
 
 public class HomepageActivity extends AppCompatActivity {
@@ -88,9 +98,10 @@ public class HomepageActivity extends AppCompatActivity {
 
                 switch (id) {
                     case android.R.id.home:
-
                         return true;
                     case R.id.search_item:
+                        Intent searchIntent = new Intent(HomepageActivity.this, SearchActivity.class);
+                        startActivity(searchIntent);
                         return true;
                     case R.id.profile_item:
                         Intent intent = new Intent(HomepageActivity.this, ProfileActivity.class);
@@ -101,6 +112,8 @@ public class HomepageActivity extends AppCompatActivity {
                         startActivity(settingsIntent);
                         return true;
                     case R.id.sign_out_item:
+                        removeUserDevice();
+                        removePrefs();
                         mAuth.signOut();
                         AppTools.setLoggedUser(null);
                         AppTools.setFirebaseUser(null);
@@ -187,11 +200,51 @@ public class HomepageActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         switch (id) {
+            case R.id.search_item_toolbar:
+                Intent searchIntent = new Intent(HomepageActivity.this, SearchActivity.class);
+                startActivity(searchIntent);
+                return true;
             case android.R.id.home:
                 Toast.makeText(this, "TODO: drawer togler or something else for home button", Toast.LENGTH_SHORT).show();
                 //return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void removeUserDevice(){
+        User loggedUser = AppTools.getLoggedUser();
+        UserDto userDto = UserDto.builder().entityId(loggedUser.getEntityId()).deviceId(AppTools.getDeviceId()).build();
+        Call<ResponseBody> call = ServiceUtils.userServiceApi.signOut(userDto);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    System.out.println("Meesage recieved");
+                    Log.i("fd", "Message received");
+
+                } else {
+                    Log.e("editProfileTask", "Error");
+                    Intent intent = new Intent(MainActivity.SERVER_ERROR);
+                    intent.putExtra("error_message",
+                            "Server error while user signout.");
+                    sendBroadcast(intent);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e("editProfileTask", "Error");
+                Intent intent = new Intent(MainActivity.SERVER_ERROR);
+                intent.putExtra("error_message",
+                        "Server error while user signout.");
+                sendBroadcast(intent);
+            }
+        });
+    }
+
+    private void removePrefs(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        preferences.edit().clear().apply();
     }
 }

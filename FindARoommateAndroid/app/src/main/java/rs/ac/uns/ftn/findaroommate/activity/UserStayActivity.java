@@ -100,7 +100,7 @@ public class UserStayActivity extends AppCompatActivity {
                 }
             }
             if(tabPosition.contains("Past")) {
-                recyclerView.setAdapter(new UserStayRecyclerAdapter(pastStays));
+                recyclerView.setAdapter(new UserStayRecyclerAdapter(pastStays, true));
             } else {
                 recyclerView.setAdapter(new UserStayRecyclerAdapter(upcomingStays));
             }

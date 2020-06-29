@@ -2,9 +2,38 @@ server:
   port: 8089
   servlet:
     contextPath: /server
+    
+mail:
+  smtp:
+    debug: true
+    
+app:
+  firebase-configuration-file: findaroommate-android-firebase-adminsdk.json
+    
 spring:
   application:
     name: Springen application
+  mail: 
+    default-encoding: UTF-8
+    host: smtp.gmail.com
+    # luka
+    username: isa.airflights.project@gmail.com
+    password: isa.airflights.project12
+    # djuka
+#    username: isaairflights@gmail.com
+#    password: isa4321air
+    port: 587
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls: 
+            enable: true
+            required: true
+          ssl:
+            trust: smtp.gmail.com
+    protocol: smtp
+    test-connection: false
   servlet:
     multipart:
       max-file-size: 7MB

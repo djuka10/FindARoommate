@@ -89,7 +89,7 @@ public class NewAdFinalFragment extends NewAdFragmentAbstact {
         }
 
         TextView titleText = (TextView) view.findViewById(R.id.dialog_title);
-        titleText.setText(title + " (Final)");
+        titleText.setText(title + dialogNamePatern.replace("NAME", getString(R.string.ad_form_final)));
 
         uploadPhotoButton = (ImageButton) view.findViewById(R.id.btn_upload_photo);
         uploadPhotoButton.setOnClickListener(new View.OnClickListener() {

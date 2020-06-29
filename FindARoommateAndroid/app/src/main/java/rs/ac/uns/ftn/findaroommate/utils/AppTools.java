@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -104,6 +105,10 @@ public class AppTools {
     public static String createFileName() {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         return "IMG_"+ timeStamp + ".jpg";
+    }
+
+    public static String getDeviceId(){
+        return FirebaseInstanceId.getInstance().getToken();
     }
 
 }

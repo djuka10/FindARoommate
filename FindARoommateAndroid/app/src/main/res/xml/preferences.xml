@@ -35,7 +35,7 @@
 
         <CheckBoxPreference
             app:iconSpaceReserved="false"
-            android:defaultValue="true"
+            android:defaultValue="false"
             android:key="@string/prefs_should_remind"
             android:summary="@string/remind_summary"
             android:title="@string/should_remind_title"
@@ -44,6 +44,7 @@
         <EditTextPreference
             app:iconSpaceReserved="false"
             app:dependency="@string/prefs_should_remind"
+            android:defaultValue="5"
             app:key="@string/prefs_remind_day"
             app:title="@string/reminder_day_title"
             app:useSimpleSummaryProvider="true"
@@ -58,26 +59,36 @@
             app:title="@string/unit_title"
             app:useSimpleSummaryProvider="true" />
 
+        <!-- Camera permission-->
+        <!--
+        <CheckBoxPreference
+            app:iconSpaceReserved="false"
+            android:defaultValue="true"
+            android:key="@string/prefs_camera_permision"
+            android:summary="@string/remind_summary"
+            android:title="@string/should_remind_title"
+            />
+        -->
     </PreferenceCategory>
     <PreferenceCategory app:title="@string/notification_header"
         app:iconSpaceReserved="false"
         >
 
-        <SwitchPreferenceCompat
+        <!--<SwitchPreferenceCompat
             app:iconSpaceReserved="false"
             app:key="@string/prefs_new_add_notif"
             app:defaultValue="false"
-            app:title="@string/new_add_notif_title" />
+            app:title="@string/new_add_notif_title" />-->
 
         <SwitchPreferenceCompat
             app:iconSpaceReserved="false"
-            app:defaultValue="true"
-            app:key="@string/prefs_reminder_notif"
-            app:title="@string/booking_reminder_notif_title" />
+            app:defaultValue="false"
+            app:key="@string/prefs_stay_notif"
+            app:title="@string/stay_notif_title" />
 
         <SwitchPreferenceCompat
             app:iconSpaceReserved="false"
-            app:defaultValue="true"
+            app:defaultValue="false"
             app:key="@string/prefs_new_message_notif"
             app:title="@string/new_message_notif_title" />
 
@@ -104,6 +115,12 @@
             app:key="@string/prefs_should_request_mail"
             app:defaultValue="false"
             app:title="@string/should_send_req_at_mail_title" />
+
+        <SwitchPreferenceCompat
+            app:iconSpaceReserved="false"
+            app:key="@string/prefs_should_new_ad_mail"
+            app:defaultValue="false"
+            app:title="@string/should_send_new_ad_title" />
 
     </PreferenceCategory>
 

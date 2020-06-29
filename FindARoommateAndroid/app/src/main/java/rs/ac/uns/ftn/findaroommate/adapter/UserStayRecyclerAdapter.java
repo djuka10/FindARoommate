@@ -2,6 +2,7 @@ package rs.ac.uns.ftn.findaroommate.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,15 +18,24 @@ import java.util.List;
 import rs.ac.uns.ftn.findaroommate.R;
 import rs.ac.uns.ftn.findaroommate.activity.UserStayDetailActivity;
 import rs.ac.uns.ftn.findaroommate.dto.StayDto;
+import rs.ac.uns.ftn.findaroommate.model.Review;
+import rs.ac.uns.ftn.findaroommate.model.User;
+import rs.ac.uns.ftn.findaroommate.utils.AppTools;
 
 public class UserStayRecyclerAdapter extends RecyclerView.Adapter<UserStayRecyclerAdapter.ViewHolder> {
 
     private List<StayDto> mItems;
     SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM dd, yyyy");
 
+    private boolean pastStays;
 
     public UserStayRecyclerAdapter(List<StayDto> items) {
         mItems = items;
+    }
+
+    public UserStayRecyclerAdapter(List<StayDto> items, boolean pastStays) {
+        mItems = items;
+        this.pastStays = pastStays;
     }
 
     @Override
@@ -48,10 +58,19 @@ public class UserStayRecyclerAdapter extends RecyclerView.Adapter<UserStayRecycl
             @Override
             public void onClick(View view) {
                 Context context = view.getContext();
-                Toast.makeText(context, "AD STATUS: " + item.getAdStatus().name(), Toast.LENGTH_SHORT).show();
-                /*Intent intent = new Intent(context, UserStayDetailActivity.class);
-                intent.putExtra("stayId", 1l);
-                context.startActivity(intent);*/
+                if(pastStays){
+                    if(!alreadyAddedReview(item.getEntity_id())){
+                        Intent intent = new Intent(context, UserStayDetailActivity.class);
+                        intent.putExtra("stayId", item.getEntity_id());
+                        context.startActivity(intent);
+                    } else {
+                        Log.i("User review action", "For this stay user already added review.");
+                    }
+
+                } else {
+                    Toast.makeText(context, "AD STATUS: " + item.getAdStatus().name(), Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
     }
@@ -77,6 +96,16 @@ public class UserStayRecyclerAdapter extends RecyclerView.Adapter<UserStayRecycl
             mTextTitle = (TextView)v.findViewById(R.id.list_title);
             detailButton = (Button) v.findViewById(R.id.list_btn);
         }
+    }
+
+    private boolean alreadyAddedReview(int adId){
+        User user = AppTools.getLoggedUser();
+        Review addedReview = Review.getOne(adId, user.getEntityId());
+        if (addedReview != null){
+            return true;
+        }
+
+        return false;
     }
 
 }

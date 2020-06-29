@@ -16,20 +16,21 @@ import rs.ac.uns.ftn.findaroommate.dto.AdFormDto;
 import rs.ac.uns.ftn.findaroommate.dto.TagToSend;
 import rs.ac.uns.ftn.findaroommate.model.Ad;
 import rs.ac.uns.ftn.findaroommate.model.ResourceRegistry;
+import rs.ac.uns.ftn.findaroommate.model.Review;
 import rs.ac.uns.ftn.findaroommate.model.UserCharacteristic;
 
-public interface ReviewerServiceApi {
-
-    @GET(ServiceUtils.TEST)
-    Call<ResponseBody> test();
+public interface ReviewServiceApi {
 
     @Headers({
             "User-Agent: Mobile-Android",
             "Content-Type:application/json"
     })
-    @POST(ServiceUtils.USER_CHARACTERISTIC_API)
-    Call<ResponseBody> addUserChar(@Body UserCharacteristic tag);
+    @POST(ServiceUtils.REVIEW_API)
+    Call<Review> addReview(@Body Review review);
 
-    @GET("test/{id}")
-    Call<ResponseBody> testById(@Path("id") String id);
+    @GET(ServiceUtils.REVIEW_API)
+    Call<List<Review>> getAll();
+
+    @GET(ServiceUtils.REVIEW_API + "/{userId}")
+    Call<List<Review>> getUserReview(@Path("userId") int userId);
 }

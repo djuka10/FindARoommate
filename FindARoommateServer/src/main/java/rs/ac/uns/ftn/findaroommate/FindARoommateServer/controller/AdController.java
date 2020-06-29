@@ -36,11 +36,11 @@ public class AdController {
 	
 	@PostMapping("/book")
 	public Ad bookAd(@RequestBody Ad ad) {
-		return adService.save(ad);
+		return adService.book(ad);
 	}
 	
 	@PostMapping
-    public Ad createOrUpdateCity(@RequestBody Ad ad) {
+    public Ad createOrUpdateAd(@RequestBody Ad ad) {
         return adService.save(ad);
     }
 	

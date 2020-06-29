@@ -3,8 +3,8 @@
     <string name="app_title">Find a roommate</string>
 
     <!-- Ip adresa je drugacija -->
-    <string name="host">192.168.1.4:8089</string>
-   <!-- <string name="host">192.168.1.2:8089</string>-->
+    <string name="host" translatable="false">192.168.1.4:8089</string>
+    <!--<string name="host" translatable="false">192.168.1.2:8089</string>-->
 
     <!-- Homepage -->
     <string name="hello_world">Hello world!</string>
@@ -48,7 +48,7 @@
     <string name="notification_mail_header">Notifications on mail</string>
 
     <!-- Preference titles -->
-    <string name="reminder_day_title">Reminder(in days)</string>
+    <string name="reminder_day_title">Reminder (num of days before)</string>
     <string name="language_title">Language</string>
     <string name="unit_title">Distance unit</string>
     <string name="should_remind_title">Reminder option</string>
@@ -58,6 +58,9 @@
     <string name="booking_reminder_notif_title">Reminders about my upcoming bookings</string>
     <string name="new_message_notif_title">New message push notification</string>
     <string name="new_review_notif_title">New review push nofitication</string>
+    <string name="should_send_new_ad_title">Sending new ad submission</string>
+    <string name="reminder_day_error">Value should be number between 1 and 15</string>
+    <string name="stay_notif_title">Receive notification about booking </string>
 
     <!-- Preference summary -->
     <string name="remind_summary">Remind option for upcoming stays</string>
@@ -73,6 +76,10 @@
     <string name="prefs_new_review_notif">new_review_notif</string>
     <string name="prefs_should_confirm_mail">should_confirm</string>
     <string name="prefs_should_request_mail">should_request</string>
+    <string name="prefs_should_new_ad_mail">should_new_ad</string>
+    <string name="prefs_stay_notif">stay_notif</string>
+
+    <!-- Search -->
     <string name="title_room_list">Ads</string>
     <string name="title_room_detail">Ad Detail</string>
     <string name="find_a_roommate">Find a Roommate</string>
@@ -105,6 +112,7 @@
     <string name="fab_profile_edit_tooltip">Edit profile</string>
 
     <string name="profile_form_title">My profile</string>
+    <string name="profile_form_active_since">Active since </string>
     <string name="profile_form_photo">Photo</string>
     <string name="profile_form_first_name">First name</string>
     <string name="profile_form_last_name">Last name</string>
@@ -128,6 +136,12 @@
     <string name="profile_form_success">Profile successfully updated</string>
 
     <!-- Ad -->
+    <string name="ad_form_room">Room</string>
+    <string name="ad_form_property">Property</string>
+    <string name="ad_form_mate_prefs">Mate prefs</string>
+    <string name="ad_form_final">Final</string>
+    <string name="ad_form_amenity">Amenities</string>
+    <string name="ad_form_header">New ad</string>
     <string name="ad_form_success">Ad successfully created</string>
     <string name="ad_form_save">Save ad</string>
     <string name="ad_form_title">New ad</string>
@@ -163,7 +177,10 @@
     <string name="ad_form_bills_included">Bills\'s included</string>
     <string name="ad_form_deposit">Deposit (in €)</string>
     <string name="ad_form_deposit_required">No deposit required</string>
-
+    <string name="ad_form_mail_content">Dear %USER_NAME%, you have just successfully created your new ad.</string>
+    <string name="ad_form_mail_subject">"Notification about adding your new ad"</string>
+    <string name="ad_form_mail_additional_info">"Open application for additional information."</string>
+    <string name="ad_form_location_desc">Insert location of your apartment</string>
 
     <!-- Google Maps API-->
 
@@ -183,5 +200,39 @@
     <string name="facebook_app_id">1501643706681249</string>
     <string name="fb_login_protocol_scheme">fb1501643706681249</string>
     <string name="title_activity_my_ads">MyAdsActivity</string>
+
+    <!-- Notifications bar -->
+    <string name="notif_upcoming_stays_title">Upcoming stays notification!</string>
+    <string name="notif_upcoming_stays_text">Dear %NAME%, you\'ve got upcoming stay in less than %DAY% days. Press %ACTION% for more details.</string>
+    <string name="notif_upcoming_stays_action">Go to upcoming stays</string>
+    <string name="notif_settings_action">Go to settings</string>
+    <string name="notif_server_error_title">Server error</string>
+    <string name="notif_booking_topic">Booking</string>
+    <string name="notif_booking_title">Booking notification!</string>
+    <string name="notif_booking_text">Your %AD%(%TITLE%) has changed its status. Current status: %STATUS%.</string>
+    <string name="notif_profile_action">Go to your profile</string>
+    <string name="notif_review_title">Review notification!</string>
+    <string name="notif_review_topic">Review</string>
+    <string name="notif_review_edit_message">You\'ve successfully entered review for %AD%. Visit your profile for more info.</string>
+    <string name="notif_review_push_message">You\'ve got new review for %AD%. Visit your profile for more info.</string>
+
+
+    <!-- Review & comments -->
+    <string name="profile_reviews">reviews</string>
+    <string name="review_form_title">Stay review</string>
+    <string name="review_form_comment_title">Review title</string>
+    <string name="review_form_comment">Comment</string>
+    <string name="review_form_grade">Grade</string>
+    <string name="review_form_submit">Submit</string>
+    <string name="review_form_period">Period:</string>
+    <string name="review_form_owner">Owner:</string>
+    <string name="review_form_location">Location:</string>
+    <string name="review_form_submit_error">Review title and grade are required!</string>
+
+    <string name="server_error_msg">Server error while %ACTION%. Please try again.</string>
+
+    <string name="google_place_api_key" translatable="false">AIzaSyAe0pcYDtJ3Ug9yFr6tilIqQE2dO8sXeL8</string>
+
+
 
 </resources>

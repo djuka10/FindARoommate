@@ -58,6 +58,9 @@ public class UserDto{
     @Expose
     private List<Integer> userCharacteristicIds;
 
+    @Expose
+    private String deviceId;
+
     public void convert(User user){
         this.entityId = user.getEntityId();
         if(user.getBirthDay() != null){

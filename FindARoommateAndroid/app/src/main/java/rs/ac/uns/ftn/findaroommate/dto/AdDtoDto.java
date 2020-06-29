@@ -36,6 +36,8 @@ public class AdDtoDto {
     @Expose
     private float longitude;
     @Expose
+    private String address;
+    @Expose
     private String adType;
     @Expose
     private float flatM2;
@@ -87,12 +89,16 @@ public class AdDtoDto {
         this.minDays = ad.getMinDays();
         this.maxPerson = ad.getMaxPerson();
         this.price = ad.getPrice();
-        UserDto userDto = new UserDto();
-        userDto.convert(ad.getUserId());
-        this.userId = userDto;
+
         UserDto ownerDto = new UserDto();
         ownerDto.convert(ad.getOwnerId());
         this.ownerId = ownerDto;
         this.adStatus = ad.getAdStatus();
+
+        if( ad.getUserId() != null){
+            UserDto userDto = new UserDto();
+            userDto.convert(ad.getUserId());
+            this.userId = userDto;
+        }
     }
 }

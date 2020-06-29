@@ -1,0 +1,229 @@
+<resources>
+    <string name="app_name">FindARoommate-Android</string>
+    <string name="app_title">Nađi cimera</string>
+
+    <!-- Homepage -->
+    <string name="hello_world">Dobrodošli!</string>
+    <string name="action_settings">Settings</string>
+    <string name="settings">Podešavanja</string>
+    <string name="profile">Profil</string>
+    <string name="sign_out">Odjava</string>
+    <string name="drawer_header_text">Drawer Header</string>
+    <string name="homepage_button_1">Tražim cimera.</string>
+    <string name="homepage_button_2">Želim da dodam oglas.</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
+    <!-- Sign in -->
+    <string name="title_activity_login">Sign in</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Prijava ili registracija</string>
+    <string name="action_sign_in_short">Prijavi se</string>
+    <string name="welcome">Dobrodošli!</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="title_activity_sign_up">SignUpActivity</string>
+
+    <!-- Sign up  -->
+    <string name="sign_up">Registracija</string>
+    <string name="prompt_username">Username</string>
+    <string name="prompt_first_name">Ime</string>
+    <string name="prompt_last_name">Prezime</string>
+
+    <!-- Sign up home -->
+    <string name="sign_up_google">Sign up with google</string>
+    <string name="sign_up_mail">Sign up with mail</string>
+    <string name="sign_up_fb">Sign up with facebook</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Preference Headers -->
+    <string name="general_header">Opšte</string>
+    <string name="notification_header">Obaveštenja</string>
+    <string name="notification_mail_header">Obaveštenja na mail</string>
+
+    <!-- Preference titles -->
+    <string name="reminder_day_title">Podsetnik (broj dana pre)</string>
+    <string name="language_title">Jezik</string>
+    <string name="unit_title">Merna jedinica</string>
+    <string name="should_remind_title">Podsetnik</string>
+    <string name="should_send_conf_at_mail_title">Slanje potvrde bukiranja</string>
+    <string name="should_send_req_at_mail_title">Slanje zahteva bukiranja</string>
+    <string name="new_add_notif_title">Primanje oglasa u neposrednoj blizini</string>
+    <string name="booking_reminder_notif_title">Podsetnik o nadolazećim boravcima</string>
+    <string name="new_message_notif_title">Slanje novih poruka</string>
+    <string name="new_review_notif_title">Slanje novih ocena</string>
+    <string name="should_send_new_ad_title">Slanje info o novokreiranom oglasu</string>
+    <string name="reminder_day_error">Vrednost more biti izmedju 1 i 15</string>
+    <string name="stay_notif_title">Primanje obavestenja o rezervacijama</string>
+
+    <!-- Preference summary -->
+    <string name="remind_summary">Podsetnik o nadolazećim boravcima</string>
+
+    <!-- Preference keys -->
+    <string name="prefs_lang">language</string>
+    <string name="prefs_should_remind">should_remind</string>
+    <string name="prefs_remind_day">reminder_day</string>
+    <string name="prefs_unit">unit</string>
+    <string name="prefs_new_add_notif">new_add_notif</string>
+    <string name="prefs_reminder_notif">booking_reminder_notif</string>
+    <string name="prefs_new_message_notif">new_message_notif</string>
+    <string name="prefs_new_review_notif">new_review_notif</string>
+    <string name="prefs_should_confirm_mail">should_confirm</string>
+    <string name="prefs_should_request_mail">should_request</string>
+    <string name="prefs_should_new_ad_mail">should_new_ad</string>
+    <string name="prefs_stay_notif">stay_notif</string>
+
+    <!-- Search -->
+    <string name="title_room_list">Oglasi</string>
+    <string name="title_room_detail">Detalji oglasa</string>
+    <string name="find_a_roommate">Pronađi cimera</string>
+    <string name="enter_location">Unos lokacije</string>
+    <string name="where_do_you_want_to_live">Gde biste voleli da živite</string>
+    <string name="filters">Filteri</string>
+    <string name="monthly_budget">Mesečni budžet</string>
+    <string name="minimum">Minimum</string>
+    <string name="maximum">Maximum</string>
+    <string name="from">Od</string>
+    <string name="available_from">Dostupno od</string>
+    <string name="now">Sada</string>
+    <string name="choose_date">Odaberi datum</string>
+    <string name="duration_of_stay">Vreme boravka</string>
+    <string name="short_1_5_months">Short(1-5 months)</string>
+    <string name="medium_6_11_months">Medium (6-11 months)</string>
+    <string name="long_12_months">Long (12+ months)</string>
+    <string name="flat_amenities">Artikli oglasa</string>
+    <string name="tv">TV</string>
+    <string name="wifi">WiFi</string>
+    <string name="apply">Pretraga</string>
+
+    <string name="date_format">MMMM dd, yyyy</string>
+
+    <!-- Profile -->
+    <string name="menu_profile_review_title">Ocene</string>
+    <string name="menu_profile_ads_title">Moji oglasi</string>
+    <string name="menu_profile_history_title">Istorija</string>
+
+    <string name="fab_profile_edit_tooltip">Izmeni profil</string>
+
+    <string name="ad_form_room">Soba</string>
+    <string name="ad_form_property">Prostor</string>
+    <string name="ad_form_mate_prefs">Cimer osobine</string>
+    <string name="ad_form_final">Finalno</string>
+    <string name="ad_form_amenity">Stavke</string>
+    <string name="profile_form_active_since">Aktivan od </string>
+    <string name="profile_form_title">Moj profil</string>
+    <string name="profile_form_photo">Fotografija</string>
+    <string name="profile_form_first_name">Ime</string>
+    <string name="profile_form_last_name">Prezime</string>
+    <string name="profile_form_gender">Odaberite pol</string>
+    <string name="profile_form_birth_day">Datum rođenja</string>
+    <string name="profile_form_language">Strani jezici</string>
+    <string name="profile_form_atrs_about">Recite nam više o sebi</string>
+    <string name="profile_form_personality">Personality</string>
+    <string name="profile_form_lifestyle">Lifestyle</string>
+    <string name="profile_form_sport">Sport</string>
+    <string name="profile_form_science">Nauka</string>
+    <string name="profile_form_film">Film</string>
+    <string name="profile_form_music">Muzika</string>
+    <string name="profile_form_occupation">Profesija</string>
+    <string name="profile_form_working_status">Radni status</string>
+    <string name="profile_form_study_level">Nivo studija</string>
+    <string name="profile_form_education">Obrazovanje</string>
+    <string name="profile_form_desc">Dodatni opis</string>
+    <string name="profile_form_update">Izmeni</string>
+    <string name="profile_form_save">Sačuvaj profil</string>
+    <string name="profile_form_success">Profil uspešno izmenjen</string>
+
+    <!-- Ad -->
+    <string name="ad_form_header">Novi oglas</string>
+    <string name="ad_form_success">Oglas uspešno kreiran</string>
+    <string name="ad_form_save">Čuvanje oglasa</string>
+    <string name="ad_form_title">Novi oglas</string>
+    <string name="ad_form_location">Lokacija</string>
+    <string name="ad_form_street">Ulica</string>
+    <string name="ad_form_longitude">Geo dužina</string>
+    <string name="ad_form_latitude">Geo širina</string>
+    <string name="ad_form_property_size_hint">Veličina stana (u m2)</string>
+    <string name="ad_form_mmates_info">Ko trenutno živi</string>
+    <string name="ad_form_women">Female</string>
+    <string name="ad_form_men">Male</string>
+    <string name="ad_form_property_type">Vrsta oglasa</string>
+    <string name="ad_form_max_person">Br max osoba</string>
+    <string name="ad_form_ad_title">Naziv oglasa</string>
+    <string name="ad_form_house_rules">Kućna pravila</string>
+    <string name="ad_form_pets">Ljubimci</string>
+    <string name="ad_form_couple">Parovi</string>
+    <string name="ad_form_smoking">Pušenje</string>
+    <string name="ad_form_flat">Stan</string>
+    <string name="ad_form_private_room">Soba</string>
+    <string name="ad_form_shared_room">Deljena soba</string>
+    <string name="ad_form_desc">Opis</string>
+    <string name="ad_form_bed_type">Vrsta kreveta</string>
+    <string name="ad_form_single_bed">Jedan krevet</string>
+    <string name="ad_form_double_bed">Bračni krevet</string>
+    <string name="ad_form_sofa_bec">Sofa</string>
+    <string name="ad_form_room_size_hint">Veličina sobe (u m2)</string>
+    <string name="ad_form_available_info">Soba je dostupna:</string>
+    <string name="ad_form_available_from">Od</string>
+    <string name="ad_form_available_to">Do</string>
+    <string name="ad_form_stay_cond_info">Osoba može ostati min/max:</string>
+    <string name="ad_form_costs">Cena (u €)</string>
+    <string name="ad_form_bills_included">Uključeni računi</string>
+    <string name="ad_form_deposit">Depozit (in €)</string>
+    <string name="ad_form_deposit_required">Bez depozita</string>
+    <string name="ad_form_mail_content">Poštovani %USER_NAME%, upravo ste kreirali novi oglas.</string>
+    <string name="ad_form_mail_subject">"Obaveštenje povodom kreiranja novog oglasa"</string>
+    <string name="ad_form_mail_additional_info">"Otvorite aplikaciju za više informacija."</string>
+    <string name="ad_form_location_desc">Unesite lokaciju vaseg smestaja.</string>
+
+    <!-- Google Maps API-->
+
+    <string name="google_maps_API_key">AIzaSyCqysn5uvaOW6OhpBG8UWXViZ6PROqXqXo</string>
+    <string name="messenger">Messenger</string>
+    <string name="title_activity_sign_up_google">SignUpGoogleActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <!-- FACEBOOK -->
+    <string name="facebook_app_id">1501643706681249</string>
+    <string name="fb_login_protocol_scheme">fb1501643706681249</string>
+    <string name="title_activity_my_ads">MyAdsActivity</string>
+
+    <!-- Notifications bar -->
+    <string name="notif_upcoming_stays_title">Obaveštenje o nadolazećim boravcima!</string>
+    <string name="notif_upcoming_stays_text">Poštovani %NAME%, za manje od %DAY% dana idete na putovanje. Pritisnite %ACTION% za vise detalja.</string>
+    <string name="notif_upcoming_stays_action">Nadolazeća putovanja</string>
+    <string name="notif_settings_action">Podešavanja</string>
+    <string name="notif_server_error_title">Greska na serveru</string>
+    <string name="notif_booking_topic">Booking</string>
+    <string name="notif_booking_title">Obavestenje o bukingu!</string>
+    <string name="notif_booking_text">Vas %AD%(%TITLE%) je promenio status. Trenutni status: %STATUS%.</string>
+    <string name="notif_profile_action">Klik na profil</string>
+    <string name="notif_review_topic">Ocenjivanje</string>
+    <string name="notif_review_title">Obavestenje o ocenjivanju!</string>
+    <string name="notif_review_edit_message">Uspesno ste uneli ocenu za %AD%. Posetitie svoj profil za vise informacija.</string>
+    <string name="notif_review_push_message">Upravo ste primili obavestenje za %AD%. Posetitie svoj profil za vise informacija.</string>
+
+    <!-- Review & comments -->
+    <string name="profile_reviews">ocene</string>
+    <string name="review_form_title">Ocenjivanje</string>
+    <string name="review_form_comment_title">Naslov komentara</string>
+    <string name="review_form_comment">Komentar</string>
+    <string name="review_form_grade">Ocena boravka</string>
+    <string name="review_form_submit">Potvrdi</string>
+    <string name="review_form_period">Vreme boravka:</string>
+    <string name="review_form_owner">Vlasnik:</string>
+    <string name="review_form_location">Lokacija:</string>
+    <string name="review_form_submit_error">Naslov i ocena su obavezni!</string>
+
+    <string name="server_error_msg">Greska na serveru prilikom %ACTION%. Molimo vas pokusajte ponovo.</string>
+
+</resources>

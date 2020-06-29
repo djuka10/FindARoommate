@@ -44,7 +44,6 @@ import rs.ac.uns.ftn.findaroommate.utils.Mockup;
 public class ProfileActivity extends AppCompatActivity {
 
     private User loggedUserModel;
-    private FirebaseUser firebaseUser;
 
     private ImageView profileImage;
 
@@ -58,8 +57,6 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
-        firebaseUser = AppTools.getFirebaseUser();
 
         loggedUserModel = AppTools.getLoggedUser();
         if(loggedUserModel == null){
@@ -132,7 +129,7 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
         tUserInfo.setText(String.format("%s %s%s", loggedUserModel.getFirstName(), loggedUserModel.getLastName(), age));
-        tUserActive.setText("Active since " + formattedActive);
+        tUserActive.setText(getString(R.string.profile_form_active_since) + " " + formattedActive);
         tOccupation.setText(loggedUserModel.getOccupation());
         tEducation.setText(loggedUserModel.getWorkingStatus());
         tStudyLevel.setText(loggedUserModel.getStudyLevel());
@@ -203,6 +200,7 @@ public class ProfileActivity extends AppCompatActivity {
                         .listener(new RequestListener<Drawable>() {
                                       @Override
                                       public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                          loadingBar.dismiss();
                                           return false;
                                       }
 

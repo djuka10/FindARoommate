@@ -53,7 +53,7 @@ public class NewAdPropertyFragment extends NewAdFragmentAbstact {
         }
 
         TextView titleText = (TextView) view.findViewById(R.id.dialog_title);
-        titleText.setText(title + " (Property)");
+        titleText.setText(title + dialogNamePatern.replace("NAME", getString(R.string.ad_form_property)));
 
         npMan = view.findViewById(R.id.ad_form_picker_men);
 
