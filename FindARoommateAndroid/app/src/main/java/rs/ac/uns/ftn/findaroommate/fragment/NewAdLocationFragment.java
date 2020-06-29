@@ -1,7 +1,10 @@
 package rs.ac.uns.ftn.findaroommate.fragment;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +13,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.maps.model.LatLng;
+
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.model.RectangularBounds;
+import com.google.android.libraries.places.api.model.TypeFilter;
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.google.android.material.textfield.TextInputEditText;
+
+
+import java.util.Arrays;
 
 import rs.ac.uns.ftn.findaroommate.R;
 import rs.ac.uns.ftn.findaroommate.activity.NewAdActivity;
@@ -21,6 +36,11 @@ public class NewAdLocationFragment extends NewAdFragmentAbstact {
 
     TextInputEditText latitudeEditText;
     TextInputEditText longitudeEditText;
+
+    double latitude;
+    double longitude;
+    String address = "" +
+            "";
 
 
     public NewAdLocationFragment(AdDto ad) {
@@ -45,7 +65,7 @@ public class NewAdLocationFragment extends NewAdFragmentAbstact {
         }
 
         TextView titleText = (TextView) view.findViewById(R.id.dialog_title);
-        titleText.setText(title + " (Location)");
+        titleText.setText(title + dialogNamePatern.replace("NAME", getString(R.string.ad_form_location)));
 
         if(savedInstanceState != null){
             String val = savedInstanceState.getString("title", "nema");
@@ -53,30 +73,45 @@ public class NewAdLocationFragment extends NewAdFragmentAbstact {
             r= 5;
         }
 
-        longitudeEditText = (TextInputEditText) view.findViewById(R.id.ad_form_longitude);
-        latitudeEditText = (TextInputEditText) view.findViewById(R.id.ad_form_latitude);
-
-        //temp
-//        String adType = ad.getAd().getAdType();
-//        String adTitle = ad.getAd().getTitle();
-//
-//        if(adType != null){
-//            longitudeEditText.setText(ad.getAd().getAdType());
-//        }
-//
-//        if(adTitle != null){
-//            latitudeEditText.setText(ad.getAd().getTitle());
-//        }
-        float longitude = ad.getAd().getLongitude();
-        float latitude = ad.getAd().getLatitude();
-
-        if(longitude != 0){
-            longitudeEditText.setText(ad.getAd().getAdType());
+        if (!Places.isInitialized()) {
+            Places.initialize(getContext().getApplicationContext(), getString(R.string.google_place_api_key));
         }
 
-        if(latitude != 0){
-            latitudeEditText.setText(ad.getAd().getTitle());
-        }
+        AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
+               // getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
+                //getActivity().getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
+                this.getChildFragmentManager().findFragmentById(R.id.autocomplete_fragment);
+
+//        autocompleteFragment.setTypeFilter(TypeFilter.ADDRESS);
+//        autocompleteFragment.setTypeFilter(TypeFilter.CITIES);
+
+        autocompleteFragment.setLocationBias(RectangularBounds.newInstance(
+                new LatLng(-33.880490, 151.184363),
+                new LatLng(-33.858754, 151.229596)));
+
+        // Specify the types of place data to return.
+        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.NAME, Place.Field.LAT_LNG, Place.Field.ADDRESS));
+
+
+        // Set up a PlaceSelectionListener to handle the response.
+        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(Place place) {
+                // TODO: Get info about the selected place.
+                Log.i("fd", "Place: " + place.getName() + ", " + place.getId());
+                LatLng latLng = place.getLatLng();
+                latitude = latLng.longitude;
+                longitude = latLng.latitude;
+                address = place.getAddress();
+
+            }
+
+            @Override
+            public void onError(Status status) {
+                // TODO: Handle the error.
+                Log.i("fd", "An error occurred: " + status);
+            }
+        });
 
         return view;
     }
@@ -109,20 +144,15 @@ public class NewAdLocationFragment extends NewAdFragmentAbstact {
     @Override
     public void onDestroyView() {
 
-        String longitudeText = longitudeEditText.getText().toString();
-        String latitudeText = latitudeEditText.getText().toString();
-
-        if(!longitudeText.isEmpty()){
-            ad.getAd().setLongitude(Float.parseFloat(longitudeText));
+        if(latitude != 0){
+            ad.getAd().setLatitude((float)latitude);
         }
 
-        if(!latitudeText.isEmpty()){
-            ad.getAd().setLatitude(Float.parseFloat(latitudeText));
+        if(longitude != 0){
+            ad.getAd().setLongitude((float)longitude);
         }
+        ad.getAd().setAddress(address);
 
-        //privremeno mapiranje
-//        ad.getAd().setAdType(locationEditText.getText().toString());
-//        ad.getAd().setTitle(streetEditText.getText().toString());
         super.onDestroyView();
     }
 

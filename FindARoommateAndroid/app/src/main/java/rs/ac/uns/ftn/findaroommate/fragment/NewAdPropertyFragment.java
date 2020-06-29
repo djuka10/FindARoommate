@@ -20,6 +20,7 @@ import rs.ac.uns.ftn.findaroommate.R;
 import rs.ac.uns.ftn.findaroommate.activity.NewAdActivity;
 import rs.ac.uns.ftn.findaroommate.dto.AdDto;
 import rs.ac.uns.ftn.findaroommate.model.Ad;
+import rs.ac.uns.ftn.findaroommate.utils.AppTools;
 
 public class NewAdPropertyFragment extends NewAdFragmentAbstact {
 
@@ -53,7 +54,7 @@ public class NewAdPropertyFragment extends NewAdFragmentAbstact {
         }
 
         TextView titleText = (TextView) view.findViewById(R.id.dialog_title);
-        titleText.setText(title + " (Property)");
+        titleText.setText(title + dialogNamePatern.replace("NAME", getString(R.string.ad_form_property)));
 
         npMan = view.findViewById(R.id.ad_form_picker_men);
 
@@ -132,11 +133,11 @@ public class NewAdPropertyFragment extends NewAdFragmentAbstact {
         String propertySizeText = propertySizeEditText.getText().toString();
 
         if(!maxPersonText.isEmpty()){
-            ad.getAd().setMaxPerson(Integer.parseInt(maxPersonText));
+            ad.getAd().setMaxPerson(AppTools.parseInt(maxPersonText));
         }
 
         if(!propertySizeText.isEmpty()){
-            ad.getAd().setFlatM2(Float.parseFloat(propertySizeText));
+            ad.getAd().setFlatM2(AppTools.parseFloat(propertySizeText));
         }
 
         ad.getAd().setLadiesNum(npWoman.getValue());

@@ -1,12 +1,12 @@
 <resources>
     <string-array name="lang_entries">
-        <item>Serbian</item>
         <item>English</item>
+        <item>Srpski</item>
     </string-array>
 
     <string-array name="lang_values">
-        <item>serbian</item>
         <item>english</item>
+        <item>serbian</item>
     </string-array>
 
     <string-array name="unit_entries">

@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -33,13 +34,16 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.google.android.gms.common.util.IOUtils;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -52,15 +56,12 @@ import java.util.stream.Collectors;
 
 import android.app.AlertDialog;
 
-import lombok.val;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Multipart;
 import rs.ac.uns.ftn.findaroommate.R;
 import rs.ac.uns.ftn.findaroommate.model.CharacteristicType;
 import rs.ac.uns.ftn.findaroommate.model.Language;
@@ -68,11 +69,9 @@ import rs.ac.uns.ftn.findaroommate.model.ResourceRegistry;
 import rs.ac.uns.ftn.findaroommate.model.User;
 import rs.ac.uns.ftn.findaroommate.model.UserCharacteristic;
 import rs.ac.uns.ftn.findaroommate.provider.GenericFileProvider;
-import rs.ac.uns.ftn.findaroommate.receiver.EditProfileReceiver;
-import rs.ac.uns.ftn.findaroommate.service.EditProfileIntentService;
+import rs.ac.uns.ftn.findaroommate.receiver.ServerErrorReceiver;
 import rs.ac.uns.ftn.findaroommate.service.EditProfileService;
 import rs.ac.uns.ftn.findaroommate.service.api.ServiceUtils;
-import rs.ac.uns.ftn.findaroommate.task.UploadProfileTask;
 import rs.ac.uns.ftn.findaroommate.utils.AppTools;
 
 public class ProfileFormActivity extends AppCompatActivity {
@@ -131,7 +130,7 @@ public class ProfileFormActivity extends AppCompatActivity {
 
     private ClickListener clickListener = new ClickListener();
 
-    EditProfileReceiver editProfileReceiver;
+    ServerErrorReceiver serverErrorReceiver;
     public static String EDIT_USER_PROFILE = "EDIT_USER_PROFILE";
 
     public static String PROFILE_URL = "http://HOST/server/user/profile/";
@@ -338,9 +337,9 @@ public class ProfileFormActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         //osloboditi resurse
-        if(editProfileReceiver != null){
-            unregisterReceiver(editProfileReceiver);
-        }
+//        if(serverErrorReceiver != null){
+//            unregisterReceiver(serverErrorReceiver);
+//        }
 
         super.onPause();
     }
@@ -351,11 +350,11 @@ public class ProfileFormActivity extends AppCompatActivity {
 
         IntentFilter filter = new IntentFilter();
         filter.addAction(EDIT_USER_PROFILE);
-        registerReceiver(editProfileReceiver, filter);
+        registerReceiver(serverErrorReceiver, filter);
     }
 
     private void setUpReceiver(){
-        editProfileReceiver = new EditProfileReceiver();
+        serverErrorReceiver = new ServerErrorReceiver();
     }
 
     private void setData(){
@@ -447,8 +446,26 @@ public class ProfileFormActivity extends AppCompatActivity {
         });
 
         if(user.getUrlProfile() != null){
-            Glide.with(getApplicationContext())
-                    .load(PROFILE_URL.replace("HOST", getString(R.string.host)) + user.getUrlProfile()).into(photoView);
+            if (user.getUrlProfile().startsWith("http")) { // fotografija je sa google naloga
+                Glide.with(this).load(user.getUrlProfile()).into(photoView);
+            } else {
+
+                Glide.with(getApplicationContext())
+                        .load(PROFILE_URL.replace("HOST", getString(R.string.host)) + user.getUrlProfile())
+                        .listener(new RequestListener<Drawable>() {
+                                      @Override
+                                      public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                          return false;
+                                      }
+
+                                      @Override
+                                      public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                          return false;
+                                      }
+                                  }
+                        )
+                        .into(photoView);
+            }
         }
 
     }

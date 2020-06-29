@@ -12,8 +12,11 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
+import rs.ac.uns.ftn.findaroommate.dto.EmailDto;
 import rs.ac.uns.ftn.findaroommate.dto.TagToSend;
 import rs.ac.uns.ftn.findaroommate.dto.UserDto;
+import rs.ac.uns.ftn.findaroommate.model.Ad;
 import rs.ac.uns.ftn.findaroommate.model.Language;
 import rs.ac.uns.ftn.findaroommate.model.ResourceRegistry;
 import rs.ac.uns.ftn.findaroommate.model.User;
@@ -53,4 +56,39 @@ public interface UserServiceApi {
 
     @GET(ServiceUtils.USER_API + "/{id}/userCharacteristics")
     Call<List<UserCharacteristic>> getUserUserCharacteristic(@Path("id") int id);
+
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @POST(ServiceUtils.USER_API + "/mail")
+    Call<ResponseBody> sendNotificationMail(@Body EmailDto emailDto, @Query("ad_id") int adId);
+
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @POST(ServiceUtils.USER_API + "/mail")
+    Call<ResponseBody> sendNotificationMail(@Body EmailDto emailDto);
+
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @POST(ServiceUtils.USER_API + "/mailBatch")
+    Call<ResponseBody> sendNotificationMailBatch(@Body List<EmailDto> emailDto);
+
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @POST(ServiceUtils.USER_API + "/upcomingStays")
+    Call<Integer> getUpcomingStays(@Body UserDto userDto, @Query("days_before") int daysBefore);
+
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @POST(ServiceUtils.USER_API + "/signOut")
+    Call<ResponseBody> signOut(@Body UserDto userDto);
 }

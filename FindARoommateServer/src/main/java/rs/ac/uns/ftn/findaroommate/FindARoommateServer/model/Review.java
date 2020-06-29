@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -27,13 +29,21 @@ public class Review {
     private Integer entityId;
 
     @Column
-    private int author;
+    private Integer rating;
     @Column
-    private int rating;
+    private String title;
     @Column
     private String comment;
-    @Column
-    private int ratedUser;
-    @Column
-    private String adUrl;
+  
+    @ManyToOne
+    @JoinColumn(name = "ad_id")
+    private Ad ad;
+    
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private User author;
+    
+    @ManyToOne
+    @JoinColumn(name = "rated_user_id")
+    private User ratedUser;
 }

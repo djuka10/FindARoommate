@@ -8,6 +8,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import javax.imageio.ImageIO;
 
@@ -67,7 +75,6 @@ public class AdService implements ServiceInterface<Ad> {
 		
 		if(entity.getAdOwnerId() != null) {
 			User user = userRepository.getOne(entity.getAdOwnerId());
-			//TODO: set owner to ad
 			entity.setOwnerId(user);
 		}
 		Ad savedAd = adRepository.save(entity);
@@ -90,6 +97,22 @@ public class AdService implements ServiceInterface<Ad> {
 	public void deleteById(Integer id) {
 		// TODO Auto-generated method stub
 		adRepository.deleteById(id);
+	}
+	
+	public Ad book(Ad entity) {
+		// TODO Auto-generated method stub
+		Ad repoAd = adRepository.getOne(entity.getEntityId());
+		
+		// i case owner is editing it will be null
+		if(entity.getUserId() != null) {
+			User user = userRepository.getOne(entity.getUserId().getEntityId());
+			repoAd.setUserId(user);
+		}
+		
+		repoAd.setAdStatus(entity.getAdStatus());
+
+		Ad savedAd = adRepository.save(repoAd);
+		return Ad.builder().entityId(savedAd.getEntityId()).build();
 	}
 	
 	public ResourceRegistry uploadAdPhoto(ProfileImageDto profileImageDto) {
@@ -143,6 +166,18 @@ public class AdService implements ServiceInterface<Ad> {
 			}
 		}
 		return ad.getCharacteristics();
+		
+	}	
+		
+	public List<Ad> getUpcomingStays(Integer userId, Integer daysBefore) {
+		Date now = new Date();
+		
+		return getAll().stream()
+				.filter(ad -> Objects.nonNull(ad.getUserId()))
+				.filter(ad -> ad.getUserId().getEntityId().equals(userId))
+				// soon upcoming stays in less that daysBefore
+				.filter(ad -> TimeUnit.DAYS.convert(Math.abs(ad.getAvailableFrom().getTime() - now.getTime()), TimeUnit.MILLISECONDS) + 1 <= daysBefore)
+				.collect(Collectors.toList());
 	}
 
 }

@@ -13,6 +13,7 @@ public abstract class NewAdFragmentAbstact extends Fragment {
     protected String title;
     protected int dialogNum;
     protected AdDto ad;
+    protected String dialogNamePatern = " (NAME)";
 
     public String getTitle() {
         return title;

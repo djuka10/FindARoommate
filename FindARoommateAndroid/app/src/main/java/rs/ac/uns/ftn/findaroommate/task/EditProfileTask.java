@@ -16,6 +16,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import rs.ac.uns.ftn.findaroommate.MainActivity;
 import rs.ac.uns.ftn.findaroommate.activity.ProfileFormActivity;
 import rs.ac.uns.ftn.findaroommate.dto.UserDto;
 import rs.ac.uns.ftn.findaroommate.model.User;
@@ -52,6 +53,8 @@ public class EditProfileTask extends AsyncTask<Long, Void, Void> {
 
             UserDto userDto = new UserDto();
             userDto.convert(user);
+            String deviceId = AppTools.getDeviceId();
+            userDto.setDeviceId(deviceId);
             Call<UserDto> call = ServiceUtils.userServiceApi.add(userDto);
             call.enqueue(new Callback<UserDto>() {
                 @Override
@@ -68,12 +71,13 @@ public class EditProfileTask extends AsyncTask<Long, Void, Void> {
                             user.setEntityId(body.getEntityId());
                             user.save();
                         }
-//                        Intent intent = new Intent(ProfileFormActivity.EDIT_USER_PROFILE);
-//                        context.sendBroadcast(intent);
+
                     } else {
                         Log.e("editProfileTask", "Error");
-
-                        // TODO: HANDLE ERROR MECHANISM
+                        Intent intent = new Intent(MainActivity.SERVER_ERROR);
+                        intent.putExtra("error_message",
+                                "Server error while editing user info. Please try again.");
+                        context.sendBroadcast(intent);
                     }
                 }
 
@@ -81,6 +85,11 @@ public class EditProfileTask extends AsyncTask<Long, Void, Void> {
                 public void onFailure(Call<UserDto> call, Throwable t) {
                     System.out.println("Error!");
                     Log.e("error", t.getMessage());
+
+                    Intent intent = new Intent(MainActivity.SERVER_ERROR);
+                    intent.putExtra("error_message",
+                            "Server error while editing user info. Please try again.");
+                    context.sendBroadcast(intent);
                 }
             });
         } catch (Exception e) {
@@ -96,7 +105,6 @@ public class EditProfileTask extends AsyncTask<Long, Void, Void> {
 
     @Override
     protected void onPostExecute(Void aVoid) {
-        //super.onPostExecute(aVoid);
 
     }
 }

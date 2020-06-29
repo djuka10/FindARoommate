@@ -20,17 +20,18 @@ import rs.ac.uns.ftn.findaroommate.activity.UserReviewDetailActivity;
 import rs.ac.uns.ftn.findaroommate.activity.UserStayDetailActivity;
 import rs.ac.uns.ftn.findaroommate.dto.ReviewDto;
 import rs.ac.uns.ftn.findaroommate.dto.StayDto;
+import rs.ac.uns.ftn.findaroommate.model.Review;
 
 public class UserReviewRecyclerAdapter extends RecyclerView.Adapter<UserReviewRecyclerAdapter.ViewHolder> {
 
-    private List<ReviewDto> mItems;
+    private List<Review> mItems;
     private boolean otherGrades;
 
-    public UserReviewRecyclerAdapter(List<ReviewDto> items) {
+    public UserReviewRecyclerAdapter(List<Review> items) {
         mItems = items;
     }
 
-    public UserReviewRecyclerAdapter(List<ReviewDto> items, boolean otherGrades) {
+    public UserReviewRecyclerAdapter(List<Review> items, boolean otherGrades) {
         this(items);
         this.otherGrades = otherGrades;
     }
@@ -44,18 +45,18 @@ public class UserReviewRecyclerAdapter extends RecyclerView.Adapter<UserReviewRe
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        ReviewDto item = mItems.get(i);
-        viewHolder.mRevUser.setText(item.getName());
-        viewHolder.mRevText.setText(item.getText());
+        Review item = mItems.get(i);
+        viewHolder.mRevName.setText(item.getReviewerName());
+        viewHolder.mRevText.setText(item.getComment());
         viewHolder.mRevTitle.setText(item.getTitle());
-        viewHolder.mRevGrade.setRating(Float.parseFloat(item.getRate()));
+        viewHolder.mRevGrade.setRating((float)item.getRating());
 
         viewHolder.detailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Context context = view.getContext();
                 Intent intent = new Intent(context, UserReviewDetailActivity.class);
-                intent.putExtra("revId", 1l);
+                intent.putExtra("reviewId", item.getEntityId());
                 context.startActivity(intent);
             }
         });
@@ -68,7 +69,7 @@ public class UserReviewRecyclerAdapter extends RecyclerView.Adapter<UserReviewRe
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView mRevUser;
+        private final TextView mRevName;
         private final RatingBar mRevGrade;
         private final TextView mRevText;
         private final TextView mRevTitle;
@@ -76,7 +77,7 @@ public class UserReviewRecyclerAdapter extends RecyclerView.Adapter<UserReviewRe
 
         ViewHolder(View v) {
             super(v);
-            mRevUser = (TextView)v.findViewById(R.id.review_row_name);
+            mRevName = (TextView)v.findViewById(R.id.review_row_name);
             mRevGrade = (RatingBar) v.findViewById(R.id.review_row_grade);
             mRevText = (TextView)v.findViewById(R.id.review_row_text);
             mRevTitle = (TextView)v.findViewById(R.id.review_row_title);

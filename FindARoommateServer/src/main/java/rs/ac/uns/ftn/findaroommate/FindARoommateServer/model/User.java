@@ -73,5 +73,8 @@ public class User {
     
     @ManyToMany
     private List<UserCharacteristic> characteristics;
+
+    @Transient
+    private String deviceId;
         
 }

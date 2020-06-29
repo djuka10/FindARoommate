@@ -64,7 +64,8 @@ public class NewAdMateAttrFragment extends NewAdFragmentAbstact{
         }
 
         TextView titleText = (TextView) view.findViewById(R.id.dialog_title);
-        titleText.setText(title + " (Mate prefs)");
+        titleText.setText(title + dialogNamePatern.replace("NAME", getString(R.string.ad_form_mate_prefs)));
+
 
         if(savedInstanceState != null){
 
@@ -134,7 +135,7 @@ public class NewAdMateAttrFragment extends NewAdFragmentAbstact{
                     } else {
                         UserCharacteristic u = (UserCharacteristic)c.getTag();
                         selectedAttrs.remove(u);
-                        ad.getPrefsId().remove(u.getEntityId());
+                        ad.getPrefsId().remove(new Integer(u.getEntityId()));
                     }
                 }
             });
@@ -147,7 +148,8 @@ public class NewAdMateAttrFragment extends NewAdFragmentAbstact{
                     c.setChecked(false);
                     UserCharacteristic u = (UserCharacteristic)c.getTag();
                     selectedAttrs.remove(u);
-                    ad.getPrefsId().remove(u.getEntityId());                }
+                    ad.getPrefsId().remove(new Integer(u.getEntityId()));
+                }
             });
 
             chips.addView(chip);

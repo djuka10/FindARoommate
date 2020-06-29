@@ -52,7 +52,8 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.12'
     annotationProcessor 'org.projectlombok:lombok:1.18.12'
     //Google play services
-    implementation 'com.google.android.gms:play-services:11.4.0'
+    // zakomentarisano zbog place autocomplete
+//    implementation 'com.google.android.gms:play-services:11.4.0'
     //Facebook
     implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
     //Glide
@@ -63,4 +64,14 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
+
+    // place autocomplete
+    implementation 'com.google.android.libraries.places:places:2.3.0'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+
+    // firebase in-app messaging
+    implementation 'com.google.firebase:firebase-inappmessaging-display:19.0.7'
+    implementation 'com.google.firebase:firebase-analytics:17.4.3'
+    implementation 'com.google.firebase:firebase-messaging:20.2.1'
+
 }

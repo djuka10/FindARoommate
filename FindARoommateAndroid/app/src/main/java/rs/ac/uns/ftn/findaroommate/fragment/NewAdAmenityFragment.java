@@ -61,8 +61,7 @@ public class NewAdAmenityFragment extends NewAdFragmentAbstact {
         }
 
         TextView titleText = (TextView) view.findViewById(R.id.dialog_title);
-        titleText.setText(title + " (Amenities)");
-
+        titleText.setText(title + dialogNamePatern.replace("NAME", getString(R.string.ad_form_amenity)));
 
         if(savedInstanceState != null){
 
@@ -101,7 +100,7 @@ public class NewAdAmenityFragment extends NewAdFragmentAbstact {
                         ad.getAdItemsIds().add(((AdItem) c.getTag()).getEntityId());
                     } else {
                         selectedAdItems.remove((AdItem)c.getTag());
-                        ad.getAdItemsIds().remove(((AdItem) c.getTag()).getEntityId());
+                        ad.getAdItemsIds().remove(new Integer(((AdItem) c.getTag()).getEntityId()));
                     }
                 }
             });
@@ -119,7 +118,8 @@ public class NewAdAmenityFragment extends NewAdFragmentAbstact {
                     Chip c = (Chip)v;
                     c.setChecked(false);
                     selectedAdItems.remove((AdItem)c.getTag());
-                    ad.getAdItemsIds().remove(((AdItem) c.getTag()).getEntityId());
+                    ad.getAdItemsIds().remove(new Integer(((AdItem) c.getTag()).getEntityId()));
+
                 }
             });
 

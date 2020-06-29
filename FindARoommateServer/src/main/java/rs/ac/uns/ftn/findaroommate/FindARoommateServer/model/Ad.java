@@ -44,6 +44,8 @@ public class Ad {
     private float latitude;
     @Column(name = "longitude")
     private float longitude;
+    @Column(name = "address")
+    private String address;
     @Column(name = "ad_type")
     private String adType;
     @Column(name = "flat_M2")
