@@ -2,35 +2,57 @@ package rs.ac.uns.ftn.findaroommate.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.style.BackgroundColorSpan;
+import android.util.TypedValue;
+import android.view.Display;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import rs.ac.uns.ftn.findaroommate.R;
+import rs.ac.uns.ftn.findaroommate.adapter.ChipAdapter;
 import rs.ac.uns.ftn.findaroommate.model.Ad;
+import rs.ac.uns.ftn.findaroommate.model.AdItem;
+import rs.ac.uns.ftn.findaroommate.model.Language;
 import rs.ac.uns.ftn.findaroommate.model.User;
+import rs.ac.uns.ftn.findaroommate.model.UserCharacteristic;
 import rs.ac.uns.ftn.findaroommate.receiver.BookReceiver;
 import rs.ac.uns.ftn.findaroommate.service.BookService;
 import rs.ac.uns.ftn.findaroommate.service.EditProfileService;
 import rs.ac.uns.ftn.findaroommate.utils.AdStatus;
 import rs.ac.uns.ftn.findaroommate.utils.AppTools;
+import rs.ac.uns.ftn.findaroommate.utils.Mockup;
 
 /**
  * A fragment representing a single Room detail screen.
@@ -44,6 +66,8 @@ public class RoomDetailFragment extends Fragment{
      * represents.
      */
     public static final String ARG_ITEM_ID = "item_id";
+    public static List<AdItem> listAdItems = new ArrayList<>();
+    public static List<UserCharacteristic> listUserCharacteristic = new ArrayList<>();
 
     /**
      * The Ad content this fragment is presenting.
@@ -56,6 +80,12 @@ public class RoomDetailFragment extends Fragment{
     //ad id
     Long adId;
 
+    Dialog myDialog;
+
+    PopupWindow popupAnimates;
+    ChipGroup chipAnimatesGroup;
+    List<AdItem> chips = new ArrayList<>();
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -66,6 +96,8 @@ public class RoomDetailFragment extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        chipAnimatesGroup = new ChipGroup(getContext());
 
         adId = Long.parseLong(getArguments().getString(ARG_ITEM_ID));
 
@@ -144,6 +176,60 @@ public class RoomDetailFragment extends Fragment{
                 }
             });
 
+            Button btnAdItems = (Button) rootView.findViewById(R.id.btn_ad_items);
+
+            btnAdItems.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if(!listAdItems.isEmpty()) {
+                        popupAnimates = new PopupWindow(inflater.inflate(R.layout.ad_item_popup, null, false),800,1000, true);
+                        createAmenitesChips(listAdItems);
+                        ListView listView = popupAnimates.getContentView().findViewById(R.id.list_of_animates);
+
+                        List<String> strings = new ArrayList<>();
+
+                        for(AdItem adItem : listAdItems) {
+                            strings.add(adItem.getName());
+                        }
+
+                        ArrayAdapter<String> itemsAdapter =
+                                new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, strings);
+                        listView.setAdapter(itemsAdapter);
+
+                        //popupAnimates.setContentView(chipAnimatesGroup);
+                        popupAnimates.showAtLocation(container, Gravity.CENTER, 0, 0);
+                    }
+                }
+            });
+
+            Button btnUserCharacteristic = (Button) rootView.findViewById(R.id.btn_user_characteristic);
+
+            btnUserCharacteristic.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    //TODO Isto kao i za Animates
+                    if(!listUserCharacteristic.isEmpty()) {
+                        popupAnimates = new PopupWindow(inflater.inflate(R.layout.ad_item_popup, null, false),800,1000, true);
+                        ListView listView = popupAnimates.getContentView().findViewById(R.id.list_of_animates);
+                        List<String> strings = new ArrayList<>();
+
+                        for(UserCharacteristic uc : listUserCharacteristic) {
+                            strings.add(uc.getValue());
+                        }
+
+                        ArrayAdapter<String> itemsAdapter =
+                                new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, strings);
+                        listView.setAdapter(itemsAdapter);
+
+                        //popupAnimates.setContentView(chipAnimatesGroup);
+                        popupAnimates.showAtLocation(container, Gravity.CENTER, 0, 0);
+                    }
+
+                }
+            });
+
             Button btnRequest = (Button) rootView.findViewById(R.id.btn_request_to_book);
 
             btnRequest.setOnClickListener(new View.OnClickListener() {
@@ -163,6 +249,34 @@ public class RoomDetailFragment extends Fragment{
         }
 
         return rootView;
+    }
+
+    private void createAmenitesChips(List<AdItem> adItems){
+        for (AdItem item : adItems){
+            Chip c1 = (Chip) this.getLayoutInflater().inflate(R.layout.chip_item, null, false);
+            Display display = getActivity().getWindowManager().getDefaultDisplay();
+            int width = display.getWidth();
+            double ratio = ((float) (width))/300.0;
+            int height = (int)(ratio*50);
+
+            c1.setWidth(width);
+            c1.setText(item.getName());
+
+            int paddingDp = (int) TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP, 10,
+                    getResources().getDisplayMetrics()
+            );
+            c1.setPadding(paddingDp, 0, paddingDp, 0);
+            c1.setTag(item);
+
+            if(!chips.contains(item)) {
+                chips.add(item);
+                chipAnimatesGroup.addView(c1);
+            }
+
+
+        }
+
     }
 
 }

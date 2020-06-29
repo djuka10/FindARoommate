@@ -19,6 +19,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -28,8 +29,12 @@ import rs.ac.uns.ftn.findaroommate.R;
 import rs.ac.uns.ftn.findaroommate.adapters.ImageAdapter;
 import rs.ac.uns.ftn.findaroommate.adapters.ImageAdapterOnline;
 import rs.ac.uns.ftn.findaroommate.model.Ad;
+import rs.ac.uns.ftn.findaroommate.model.AdItem;
+import rs.ac.uns.ftn.findaroommate.model.CharacteristicType;
 import rs.ac.uns.ftn.findaroommate.model.ResourceRegistry;
+import rs.ac.uns.ftn.findaroommate.model.UserCharacteristic;
 import rs.ac.uns.ftn.findaroommate.service.api.ServiceUtils;
+import rs.ac.uns.ftn.findaroommate.utils.Mockup;
 
 /**
  * An activity representing a single Room detail screen. This
@@ -91,7 +96,13 @@ public class RoomDetailActivity extends AppCompatActivity {
 
             viewPager = (ViewPager) findViewById(R.id.ViewPage);
 
+            setUpAdItems(ad.getEntityId());
+
+            setUpUserCharacteristics(ad.getEntityId());
+
             setUpAdapter(ad.getEntityId(), fragment);
+            
+
 //            imageAdapter = new ImageAdapter(RoomDetailActivity.this, images);
 //            viewPager.setAdapter(imageAdapter);
 //            getSupportFragmentManager().beginTransaction()
@@ -99,6 +110,103 @@ public class RoomDetailActivity extends AppCompatActivity {
 //                    .commit();
         }
 
+    }
+
+    private void setUpUserCharacteristics(int entityId) {
+        Call<List<UserCharacteristic>> r = ServiceUtils.adServiceApi.getUserCharacteristis(Integer.toString(entityId));
+
+        r.enqueue(new Callback<List<UserCharacteristic>>() {
+            @Override
+            public void onResponse(Call<List<UserCharacteristic>> call, Response<List<UserCharacteristic>> response) {
+                List<UserCharacteristic> body = response.body();
+                RoomDetailFragment.listUserCharacteristic = body;
+                /*List<UserCharacteristic> sports = Mockup.getInstance().getAvailableSports();
+                List<UserCharacteristic> films = Mockup.getInstance().getAvailableFilms();
+                List<UserCharacteristic> lifestyles = Mockup.getInstance().getAvailableLifestyles();
+                List<UserCharacteristic> musics = Mockup.getInstance().getAvailableMusics();
+                List<UserCharacteristic> personalities = Mockup.getInstance().getAvailablePersonalities();
+                System.out.println("super");
+
+                for(UserCharacteristic uc : body) {
+                    if(uc.getType().equals(CharacteristicType.SPORT)) {
+                        for (UserCharacteristic uSport : sports) {
+                            if(uSport.getValue().equals(uc.getValue())) {
+                                RoomDetailFragment.listUserCharacteristic.add(uSport);
+                                break;
+                            }
+                        }
+                    } else if(uc.getType().equals(CharacteristicType.FILM)) {
+                        for (UserCharacteristic uFilm : films) {
+                            if(uFilm.getValue().equals(uc.getValue())) {
+                                RoomDetailFragment.listUserCharacteristic.add(uFilm);
+                                break;
+                            }
+                        }
+                    } else if(uc.getType().equals(CharacteristicType.LIFESTYLE)) {
+                        for (UserCharacteristic uLifestyle : lifestyles) {
+                            if(uLifestyle.getValue().equals(uc.getValue())) {
+                                RoomDetailFragment.listUserCharacteristic.add(uLifestyle);
+                                break;
+                            }
+                        }
+
+                    } else if(uc.getType().equals(CharacteristicType.MUSIC)) {
+                        for (UserCharacteristic music : musics) {
+                            if(music.getValue().equals(uc.getValue())) {
+                                RoomDetailFragment.listUserCharacteristic.add(music);
+                                break;
+                            }
+                        }
+                    } else if(uc.getType().equals(CharacteristicType.PERSONALITY)){
+                        //Personality
+                        for (UserCharacteristic pers : personalities) {
+                            if(pers.getValue().equals(uc.getValue())) {
+                                RoomDetailFragment.listUserCharacteristic.add(pers);
+                                break;
+                            }
+                        }
+                    } else {
+
+                    }
+                }*/
+
+            }
+
+            @Override
+            public void onFailure(Call<List<UserCharacteristic>> call, Throwable t) {
+                System.out.println("Error");
+            }
+        });
+    }
+
+    private void setUpAdItems(int entityId) {
+        Call<List<AdItem>> r = ServiceUtils.adServiceApi.getAdItems(Integer.toString(entityId));
+
+        r.enqueue(new Callback<List<AdItem>>() {
+            @Override
+            public void onResponse(Call<List<AdItem>> call, Response<List<AdItem>> response) {
+                List<AdItem> body = response.body();
+                RoomDetailFragment.listAdItems = new ArrayList<>();
+                List<AdItem> adItems = Mockup.getInstance().getAdItems();
+                System.out.println("super");
+
+                for(AdItem ad : body) {
+                    for (AdItem adItem : adItems) {
+                        if(ad.getEntityId() == adItem.getEntityId()) {
+                            RoomDetailFragment.listAdItems.add(adItem);
+                            break;
+                        }
+
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<AdItem>> call, Throwable t) {
+                System.out.println("Error");
+            }
+        });
     }
 
     @Override
@@ -125,8 +233,10 @@ public class RoomDetailActivity extends AppCompatActivity {
             public void onResponse(Call<List<ResourceRegistry>> call, Response<List<ResourceRegistry>> response) {
                 List<ResourceRegistry> body = response.body();
                 System.out.println("super");
-                imageAdapterOnline = new ImageAdapterOnline(RoomDetailActivity.this, body);
-                viewPager.setAdapter(imageAdapterOnline);
+                if(!body.isEmpty()) {
+                    imageAdapterOnline = new ImageAdapterOnline(RoomDetailActivity.this, body);
+                    viewPager.setAdapter(imageAdapterOnline);
+                }
 
                 getSupportFragmentManager().beginTransaction()
                         .add(R.id.room_detail_container, fragment)

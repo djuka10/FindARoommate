@@ -3,6 +3,7 @@ package rs.ac.uns.ftn.findaroommate.model;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Select;
 import com.google.gson.annotations.Expose;
 
 import lombok.AllArgsConstructor;
@@ -26,4 +27,8 @@ public class AdItem extends Model {
     private String name;
     @Column(name = "ad")
     private Ad ad;
+
+    public static AdItem getOne(Integer id) {
+        return new Select().from(Ad.class).where("entity_id=?", id).executeSingle();
+    }
 }

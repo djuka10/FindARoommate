@@ -507,7 +507,7 @@
         android:layout_height="60dp"
         android:gravity="left|center_vertical"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/relative_price"
+        android:layout_below="@id/relative_user_char"
         android:background="@drawable/layout_round_edg">
 
 
@@ -522,6 +522,49 @@
 
 
     </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_ad_items"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="left|top"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/relative_price"
+        android:background="@drawable/layout_round_edg">
+
+        <Button
+            android:id="@+id/btn_ad_items"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Amenites"
+            android:background="@drawable/button_effect"
+            >
+        </Button>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_user_char"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="left|top"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/relative_ad_items"
+        android:background="@drawable/layout_round_edg">
+        <Button
+            android:id="@+id/btn_user_characteristic"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Prefer characteristic"
+            android:background="@drawable/button_effect"
+            >
+        </Button>
+    </RelativeLayout>
+
+
 
 
 
