@@ -49,7 +49,7 @@ public class MyAdsActivity extends AppCompatActivity {
         toolbar.setTitle("My ads");
         setSupportActionBar(toolbar);
 
-        tabTitles = new String[]{"Past", "Active"};
+        tabTitles = new String[]{"Active", "Past"};
 
         MyAdsActivity.TabPagerAdapter adapter = new MyAdsActivity.TabPagerAdapter(getSupportFragmentManager());
         ViewPager viewPager = (ViewPager)findViewById(R.id.my_ads_viewpager);

@@ -38,6 +38,7 @@ import rs.ac.uns.ftn.findaroommate.activity.NewAdActivity;
 import rs.ac.uns.ftn.findaroommate.activity.ProfileActivity;
 import rs.ac.uns.ftn.findaroommate.activity.SettingsActivity;
 import rs.ac.uns.ftn.findaroommate.activity.SignUpHomeActivity;
+import rs.ac.uns.ftn.findaroommate.activity.UserReviewActivity;
 import rs.ac.uns.ftn.findaroommate.activity.UserStayActivity;
 import rs.ac.uns.ftn.findaroommate.model.Ad;
 import rs.ac.uns.ftn.findaroommate.model.Language;
@@ -125,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(logged){
-            Intent intent = new Intent(MainActivity.this, NewAdActivity.class);
+            Intent intent = new Intent(MainActivity.this, HomepageActivity.class);
             startActivity(intent);
         } else {
             Intent intent = new Intent(MainActivity.this, SignUpHomeActivity.class);
@@ -161,15 +162,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
+        //calendar.setTimeInMillis(System.currentTimeMillis());
         //calendar.add(Calendar.SECOND, 30);
-        calendar.add(Calendar.MINUTE, 1);
+        calendar.add(Calendar.MINUTE, 3);
 
-//        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),
+
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),
+                AppTools.calculateTimeTillNextSync(3), pendingIntent);
+
+//        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
 //                AlarmManager.INTERVAL_DAY, pendingIntent);
-
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                AlarmManager.INTERVAL_DAY, pendingIntent);
 
         IntentFilter upcomingStayIntentFilter = new IntentFilter();
         upcomingStayIntentFilter.addAction(UPCOMING_STAY);

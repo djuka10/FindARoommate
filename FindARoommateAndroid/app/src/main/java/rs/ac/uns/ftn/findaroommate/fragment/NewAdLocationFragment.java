@@ -73,22 +73,6 @@ public class NewAdLocationFragment extends NewAdFragmentAbstact {
             r= 5;
         }
 
-//        longitudeEditText = (TextInputEditText) view.findViewById(R.id.ad_form_longitude);
-//        latitudeEditText = (TextInputEditText) view.findViewById(R.id.ad_form_latitude);
-//
-//        float longitude = ad.getAd().getLongitude();
-//        float latitude = ad.getAd().getLatitude();
-//
-//        if(longitude != 0){
-//            longitudeEditText.setText(ad.getAd().getAdType());
-//        }
-//
-//        if(latitude != 0){
-//            latitudeEditText.setText(ad.getAd().getTitle());
-//        }
-
-
-
         if (!Places.isInitialized()) {
             Places.initialize(getContext().getApplicationContext(), getString(R.string.google_place_api_key));
         }
@@ -116,8 +100,8 @@ public class NewAdLocationFragment extends NewAdFragmentAbstact {
                 // TODO: Get info about the selected place.
                 Log.i("fd", "Place: " + place.getName() + ", " + place.getId());
                 LatLng latLng = place.getLatLng();
-                latitude = latLng.latitude;
-                longitude = latLng.longitude;
+                latitude = latLng.longitude;
+                longitude = latLng.latitude;
                 address = place.getAddress();
 
             }
@@ -159,17 +143,6 @@ public class NewAdLocationFragment extends NewAdFragmentAbstact {
 
     @Override
     public void onDestroyView() {
-
-//        String longitudeText = longitudeEditText.getText().toString();
-//        String latitudeText = latitudeEditText.getText().toString();
-//
-//        if(!longitudeText.isEmpty()){
-//            ad.getAd().setLongitude(Float.parseFloat(longitudeText));
-//        }
-//
-//        if(!latitudeText.isEmpty()){
-//            ad.getAd().setLatitude(Float.parseFloat(latitudeText));
-//        }
 
         if(latitude != 0){
             ad.getAd().setLatitude((float)latitude);

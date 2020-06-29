@@ -104,12 +104,14 @@ public class NewAdActivity extends AppCompatActivity {
                     }
 
                     //save
-                    proccessAdEdit();
+                    if(valid()){
+                        proccessAdEdit();
 
-                    Toast.makeText(NewAdActivity.this, getString(R.string.ad_form_success), Toast.LENGTH_LONG).show();
-                    Intent homepageIntent = new Intent(NewAdActivity.this, HomepageActivity.class);
-                    startActivity(homepageIntent);
-                    finish();
+                        Toast.makeText(NewAdActivity.this, getString(R.string.ad_form_success), Toast.LENGTH_LONG).show();
+                        Intent homepageIntent = new Intent(NewAdActivity.this, HomepageActivity.class);
+                        startActivity(homepageIntent);
+                        finish();
+                    }
                 } else {
                     //Fragment f = FragmentTransition.getCurrentFragment(NewAdActivity.this);
                     int nextDialogNum = ++dialogNum;
@@ -214,6 +216,42 @@ public class NewAdActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean valid(){
+        Ad a = ad.getAd();
+
+        if(a.getTitle().isEmpty()){
+            Toast.makeText(this, getString(R.string.ad_form_title_invalid), Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if(a.getAddress().isEmpty()){
+            Toast.makeText(this, getString(R.string.ad_form_address_invalid), Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if(a.getPrice() == 0){
+            Toast.makeText(this, getString(R.string.ad_form_price_invalid), Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if(a.getAvailableFrom() == null){
+            Toast.makeText(this, getString(R.string.ad_form_available_from_invalid), Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if(a.getAvailableUntil() == null){
+            Toast.makeText(this, getString(R.string.ad_form_available_until_invalid), Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if(a.getMaxPerson() < a.getLadiesNum() + a.getBoysNum()){
+            Toast.makeText(this, getString(R.string.ad_form_max_person_invalid), Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
     }
 
     private void proccessAdEdit(){

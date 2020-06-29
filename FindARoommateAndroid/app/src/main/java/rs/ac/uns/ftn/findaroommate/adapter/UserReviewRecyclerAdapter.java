@@ -56,7 +56,7 @@ public class UserReviewRecyclerAdapter extends RecyclerView.Adapter<UserReviewRe
             public void onClick(View view) {
                 Context context = view.getContext();
                 Intent intent = new Intent(context, UserReviewDetailActivity.class);
-                intent.putExtra("revId", 1l);
+                intent.putExtra("reviewId", item.getEntityId());
                 context.startActivity(intent);
             }
         });

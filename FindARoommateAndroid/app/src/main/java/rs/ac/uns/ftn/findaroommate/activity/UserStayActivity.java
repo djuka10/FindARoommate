@@ -49,7 +49,7 @@ public class UserStayActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);  // false: ne prikazuje home
 
-        tabTitles = new String[]{"Past", "Upcoming"};
+        tabTitles = new String[]{"Upcoming", "Past"};
 
         TabPagerAdapter adapter = new TabPagerAdapter(getSupportFragmentManager());
         ViewPager viewPager = (ViewPager)findViewById(R.id.viewpager);

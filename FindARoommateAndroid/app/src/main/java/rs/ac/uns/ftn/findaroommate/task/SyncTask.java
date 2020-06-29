@@ -17,6 +17,8 @@ import rs.ac.uns.ftn.findaroommate.activity.RoomListActivity;
 import rs.ac.uns.ftn.findaroommate.model.Ad;
 import rs.ac.uns.ftn.findaroommate.model.Review;
 import rs.ac.uns.ftn.findaroommate.model.User;
+import rs.ac.uns.ftn.findaroommate.service.SyncService;
+import rs.ac.uns.ftn.findaroommate.service.UpcomingStayService;
 import rs.ac.uns.ftn.findaroommate.service.api.ServiceUtils;
 import rs.ac.uns.ftn.findaroommate.utils.AdStatus;
 import rs.ac.uns.ftn.findaroommate.utils.AppTools;
@@ -47,6 +49,65 @@ public class SyncTask extends AsyncTask<Void, Void, Void> {
         Log.i("REZ", "doInBackground");
 
         try {
+
+            Call<List<Ad>> a = ServiceUtils.adServiceApi.getAll();
+            a.enqueue(new Callback<List<Ad>>() {
+                @Override
+                public void onResponse(Call<List<Ad>> call, Response<List<Ad>> response) {
+                    if (response.isSuccessful()) {
+                        System.out.println("Meesage recieved");
+                        Log.i("fd", "Message received");
+
+                        Ad.deleteAll();
+
+                        RoomListActivity.adsList = response.body();
+
+                        for (Ad ad: RoomListActivity.adsList) {
+                            if(Ad.getOneGlobal(ad.getEntityId()) == ad) {
+                                //proveram kako poredi
+                            }
+
+                            User user = null;
+                            User owner = null;
+
+                            if(Ad.getOneGlobal(ad.getEntityId()) == null) {
+                                if(ad.getUserId() != null) {
+                                    user = User.getOneGlobal(ad.getUserId().getEntityId());
+                                }
+                                if(ad.getOwnerId() != null) {
+                                    owner = User.getOneGlobal(ad.getOwnerId().getEntityId());
+                                }
+
+                                if(ad.getAdStatus() != null) {
+                                    if(ad.getAdStatus().equals(AdStatus.IDLE)) {
+
+                                    } else if(ad.getAdStatus().equals(AdStatus.PENDING)) {
+
+                                    } else if(ad.getAdStatus().equals(AdStatus.APPROVE)) {
+
+                                    } else {
+                                        //denied
+                                    }
+                                }
+
+                                ad.setUserId(user);
+                                ad.setOwnerId(owner);
+                                ad.save();
+                            }
+
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<Ad>> call, Throwable t) {
+                    System.out.println("Error!");
+                    Log.e("error", t.getMessage());
+                }
+            });
+
+
 
             User loggedUser = AppTools.getLoggedUser();
             if(loggedUser != null){

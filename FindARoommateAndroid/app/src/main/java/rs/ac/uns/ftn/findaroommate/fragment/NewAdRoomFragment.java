@@ -29,6 +29,7 @@ import rs.ac.uns.ftn.findaroommate.R;
 import rs.ac.uns.ftn.findaroommate.activity.NewAdActivity;
 import rs.ac.uns.ftn.findaroommate.dto.AdDto;
 import rs.ac.uns.ftn.findaroommate.model.Ad;
+import rs.ac.uns.ftn.findaroommate.utils.AppTools;
 
 public class NewAdRoomFragment extends NewAdFragmentAbstact {
 
@@ -237,15 +238,15 @@ public class NewAdRoomFragment extends NewAdFragmentAbstact {
         String depositText = depositEditText.getText().toString();
 
         if(!roomSizeText.isEmpty()){
-            ad.getAd().setRoomM2(Float.parseFloat(roomSizeText));
+            ad.getAd().setRoomM2(AppTools.parseFloat(roomSizeText));
         }
 
         if(!costText.isEmpty()){
-            ad.getAd().setPrice(Float.parseFloat(costText));
+            ad.getAd().setPrice(AppTools.parseFloat(costText));
         }
 
         if(!depositText.isEmpty() && !depositCheckbox.isChecked()){
-            ad.getAd().setDeposit(Float.parseFloat(depositText));
+            ad.getAd().setDeposit(AppTools.parseFloat(depositText));
         } else {
             ad.getAd().setDeposit(0f);
             depositEditText.setText("");

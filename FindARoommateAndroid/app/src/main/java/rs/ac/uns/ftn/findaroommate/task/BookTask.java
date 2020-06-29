@@ -66,7 +66,7 @@ public class BookTask extends AsyncTask<Long,Void,Void> {
                         Log.i("fd", "Message received");
 
                         AdDtoDto body = response.body();
-                        Ad ad = Ad.getOne(body.getEntityId());
+                        Ad ad = Ad.getOneGlobal(body.getEntityId());
                         User user = AppTools.getLoggedUser();
 
                         // interested user edited ad

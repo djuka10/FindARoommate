@@ -172,7 +172,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.HomepageActivity" />
         </activity>
-        <activity android:name=".activity.UserReviewDetailActivity" />
+        <activity android:name=".activity.UserReviewDetailActivity"
+            android:parentActivityName=".activity.UserReviewActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.UserReviewActivity" />
+        </activity>
         <activity android:name=".activity.UserStayDetailActivity"
             android:parentActivityName=".activity.UserStayActivity">
             <meta-data

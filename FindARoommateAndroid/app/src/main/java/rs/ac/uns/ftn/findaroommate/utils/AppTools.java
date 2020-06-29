@@ -111,4 +111,22 @@ public class AppTools {
         return FirebaseInstanceId.getInstance().getToken();
     }
 
+    public static int parseInt(String value){
+        try {
+            int parsedValue = Integer.parseInt(value);
+            return parsedValue > 0 ? parsedValue : 0;
+        } catch (NumberFormatException e) {
+            return 0;
+        }
+    }
+
+    public static float parseFloat(String value){
+        try {
+            float parsedValue = Float.parseFloat(value);
+            return parsedValue > 0 ? parsedValue : 0;
+        } catch (NumberFormatException e) {
+            return 0;
+        }
+    }
+
 }

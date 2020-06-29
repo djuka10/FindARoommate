@@ -89,7 +89,8 @@
     <string name="monthly_budget">Monthly budget</string>
     <string name="minimum">Minimum</string>
     <string name="maximum">Maximum</string>
-    <string name="from">From</string>
+    <string name="from">From:</string>
+    <string name="to">To:</string>
     <string name="available_from">Available from</string>
     <string name="now">Now</string>
     <string name="choose_date">Choose date</string>
@@ -181,6 +182,13 @@
     <string name="ad_form_mail_subject">"Notification about adding your new ad"</string>
     <string name="ad_form_mail_additional_info">"Open application for additional information."</string>
     <string name="ad_form_location_desc">Insert location of your apartment</string>
+    <string name="ad_form_title_invalid">Ad title field is required</string>
+    <string name="ad_form_address_invalid">Ad address field is required</string>
+    <string name="ad_form_price_invalid">Ad price field is required</string>
+    <string name="ad_form_available_from_invalid">Ad available from field is required</string>
+    <string name="ad_form_available_until_invalid">Ad available from field is required</string>
+    <string name="ad_form_max_person_invalid">Ad max person does not much with current number</string>
+
 
     <!-- Google Maps API-->
 
@@ -228,6 +236,8 @@
     <string name="review_form_owner">Owner:</string>
     <string name="review_form_location">Location:</string>
     <string name="review_form_submit_error">Review title and grade are required!</string>
+    <string name="review_detail_title">Ad review detail info</string>
+
 
     <string name="server_error_msg">Server error while %ACTION%. Please try again.</string>
 

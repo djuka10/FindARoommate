@@ -66,6 +66,8 @@ public class DemoTask extends AsyncTask<Void, Void, Void> {
                                 user.save();
                             }
                         }
+
+                        sync();
                     }
 
                 }
@@ -77,71 +79,77 @@ public class DemoTask extends AsyncTask<Void, Void, Void> {
                 }
             });
 
-            Call<List<Ad>> a = ServiceUtils.adServiceApi.getAll();
-            a.enqueue(new Callback<List<Ad>>() {
-                @Override
-                public void onResponse(Call<List<Ad>> call, Response<List<Ad>> response) {
-                    if (response.isSuccessful()) {
-                        System.out.println("Meesage recieved");
-                        Log.i("fd", "Message received");
+            // removed to SyncTask
+//            Call<List<Ad>> a = ServiceUtils.adServiceApi.getAll();
+//            a.enqueue(new Callback<List<Ad>>() {
+//                @Override
+//                public void onResponse(Call<List<Ad>> call, Response<List<Ad>> response) {
+//                    if (response.isSuccessful()) {
+//                        System.out.println("Meesage recieved");
+//                        Log.i("fd", "Message received");
+//
+//                        Ad.deleteAll();
+//
+//                        RoomListActivity.adsList = response.body();
+//
+//                        for (Ad ad: RoomListActivity.adsList) {
+//                            if(Ad.getOne(ad.getEntityId()) == ad) {
+//                                //proveram kako poredi
+//                            }
+//
+//                            User user = null;
+//                            User owner = null;
+//
+//                            if(Ad.getOne(ad.getEntityId()) == null) {
+//                                if(ad.getUserId() != null) {
+//                                    user = User.getOne(ad.getUserId().getEntityId());
+//                                }
+//                                if(ad.getOwnerId() != null) {
+//                                    owner = User.getOne(ad.getOwnerId().getEntityId());
+//                                }
+//
+//                                if(ad.getAdStatus() != null) {
+//                                    if(ad.getAdStatus().equals(AdStatus.IDLE)) {
+//
+//                                    } else if(ad.getAdStatus().equals(AdStatus.PENDING)) {
+//
+//                                    } else if(ad.getAdStatus().equals(AdStatus.APPROVE)) {
+//
+//                                    } else {
+//                                        //denied
+//                                    }
+//                                }
+//
+//                                ad.setUserId(user);
+//                                ad.setOwnerId(owner);
+//                                ad.save();
+//                            }
+//
+//                        }
+//
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure(Call<List<Ad>> call, Throwable t) {
+//                    System.out.println("Error!");
+//                    Log.e("error", t.getMessage());
+//                }
+//            });
 
-                        Ad.deleteAll();
 
-                        RoomListActivity.adsList = response.body();
-                        User user = null;
-                        User owner = null;
-                        for (Ad ad: RoomListActivity.adsList) {
-                            if(Ad.getOne(ad.getEntityId()) == ad) {
-                                //proveram kako poredi
-                            }
-                            if(Ad.getOne(ad.getEntityId()) == null) {
-                                if(ad.getUserId() != null) {
-                                    user = User.getOne(ad.getUserId().getEntityId());
-                                }
-                                if(ad.getOwnerId() != null) {
-                                    owner = User.getOne(ad.getOwnerId().getEntityId());
-                                }
 
-                                if(ad.getAdStatus() != null) {
-                                    if(ad.getAdStatus().equals(AdStatus.IDLE)) {
-
-                                    } else if(ad.getAdStatus().equals(AdStatus.PENDING)) {
-
-                                    } else if(ad.getAdStatus().equals(AdStatus.APPROVE)) {
-
-                                    } else {
-                                        //denied
-                                    }
-                                }
-
-                                ad.setUserId(user);
-                                ad.setOwnerId(owner);
-                                ad.save();
-                            }
-
-                        }
-
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<List<Ad>> call, Throwable t) {
-                    System.out.println("Error!");
-                    Log.e("error", t.getMessage());
-                }
-            });
-
-            User loggedUser = AppTools.getLoggedUser();
-            if(loggedUser != null){
-                Intent intent = new Intent(context, SyncService.class);
-                context.startService(intent);
-            }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         return null;
+    }
+
+    private void sync(){
+        Intent intent = new Intent(context, SyncService.class);
+        context.startService(intent);
     }
 
 

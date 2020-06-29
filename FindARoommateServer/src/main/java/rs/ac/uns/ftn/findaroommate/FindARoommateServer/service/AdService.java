@@ -166,6 +166,9 @@ public class AdService implements ServiceInterface<Ad> {
 			}
 		}
 		return ad.getCharacteristics();
+		
+	}	
+		
 	public List<Ad> getUpcomingStays(Integer userId, Integer daysBefore) {
 		Date now = new Date();
 		

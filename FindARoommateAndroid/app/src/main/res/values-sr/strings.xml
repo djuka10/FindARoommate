@@ -85,7 +85,8 @@
     <string name="monthly_budget">Mesečni budžet</string>
     <string name="minimum">Minimum</string>
     <string name="maximum">Maximum</string>
-    <string name="from">Od</string>
+    <string name="from">Od:</string>
+    <string name="to">Do:</string>
     <string name="available_from">Dostupno od</string>
     <string name="now">Sada</string>
     <string name="choose_date">Odaberi datum</string>
@@ -177,6 +178,12 @@
     <string name="ad_form_mail_subject">"Obaveštenje povodom kreiranja novog oglasa"</string>
     <string name="ad_form_mail_additional_info">"Otvorite aplikaciju za više informacija."</string>
     <string name="ad_form_location_desc">Unesite lokaciju vaseg smestaja.</string>
+    <string name="ad_form_title_invalid">Polje naslov oglasa je obavezno</string>
+    <string name="ad_form_address_invalid">Polje adresa oglasa je obavezno</string>
+    <string name="ad_form_price_invalid">Polje cena oglasa je obavezno</string>
+    <string name="ad_form_available_from_invalid">Polje dostupno od je obavezno</string>
+    <string name="ad_form_available_until_invalid">Polje dostupno do je obavezno</string>
+    <string name="ad_form_max_person_invalid">Max broj stanara se ne podudara sa trenutnim brojem</string>
 
     <!-- Google Maps API-->
 
@@ -223,6 +230,8 @@
     <string name="review_form_owner">Vlasnik:</string>
     <string name="review_form_location">Lokacija:</string>
     <string name="review_form_submit_error">Naslov i ocena su obavezni!</string>
+    <string name="review_detail_title">Informacija o oceni boravka</string>
+
 
     <string name="server_error_msg">Greska na serveru prilikom %ACTION%. Molimo vas pokusajte ponovo.</string>
 
