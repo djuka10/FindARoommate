@@ -35,7 +35,6 @@ public class ChipAdapter extends RecyclerView.Adapter<ChipAdapter.ViewHolder>{
         this.selectedAdItemsId = selectedAdItemsId;
     }
 
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.amenity_chip_item_recl, viewGroup, false);

@@ -34,6 +34,8 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -184,9 +186,10 @@ public class RoomDetailFragment extends Fragment{
 
                     if(!listAdItems.isEmpty()) {
                         popupAnimates = new PopupWindow(inflater.inflate(R.layout.ad_item_popup, null, false),800,1000, true);
-                        createAmenitesChips(listAdItems);
                         ListView listView = popupAnimates.getContentView().findViewById(R.id.list_of_animates);
+                        TextView textView = popupAnimates.getContentView().findViewById(R.id.popup_title);
 
+                        textView.setText("Amenites");
                         List<String> strings = new ArrayList<>();
 
                         for(AdItem adItem : listAdItems) {
@@ -209,11 +212,13 @@ public class RoomDetailFragment extends Fragment{
                 @Override
                 public void onClick(View v) {
 
-                    //TODO Isto kao i za Animates
                     if(!listUserCharacteristic.isEmpty()) {
                         popupAnimates = new PopupWindow(inflater.inflate(R.layout.ad_item_popup, null, false),800,1000, true);
                         ListView listView = popupAnimates.getContentView().findViewById(R.id.list_of_animates);
                         List<String> strings = new ArrayList<>();
+                        TextView textView = popupAnimates.getContentView().findViewById(R.id.popup_title);
+
+                        textView.setText("Characteristic");
 
                         for(UserCharacteristic uc : listUserCharacteristic) {
                             strings.add(uc.getValue());
@@ -249,34 +254,6 @@ public class RoomDetailFragment extends Fragment{
         }
 
         return rootView;
-    }
-
-    private void createAmenitesChips(List<AdItem> adItems){
-        for (AdItem item : adItems){
-            Chip c1 = (Chip) this.getLayoutInflater().inflate(R.layout.chip_item, null, false);
-            Display display = getActivity().getWindowManager().getDefaultDisplay();
-            int width = display.getWidth();
-            double ratio = ((float) (width))/300.0;
-            int height = (int)(ratio*50);
-
-            c1.setWidth(width);
-            c1.setText(item.getName());
-
-            int paddingDp = (int) TypedValue.applyDimension(
-                    TypedValue.COMPLEX_UNIT_DIP, 10,
-                    getResources().getDisplayMetrics()
-            );
-            c1.setPadding(paddingDp, 0, paddingDp, 0);
-            c1.setTag(item);
-
-            if(!chips.contains(item)) {
-                chips.add(item);
-                chipAnimatesGroup.addView(c1);
-            }
-
-
-        }
-
     }
 
 }

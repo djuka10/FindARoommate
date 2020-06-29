@@ -219,9 +219,6 @@ public class NewAdActivity extends AppCompatActivity {
         a.setAdStatus(AdStatus.IDLE);
         a.save();
 
-        //update global adList
-        //RoomListActivity.adsList.add(a);
-
         // send to the server
 //        Intent editAdtent = new Intent(this, EditAdService.class);
 //        editAdtent.putExtra("userId", -1);

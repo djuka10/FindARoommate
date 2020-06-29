@@ -126,8 +126,6 @@ public class DemoTask extends AsyncTask<Void, Void, Void> {
                 }
             });
 
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
