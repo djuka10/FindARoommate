@@ -9,8 +9,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Date;
+
 import rs.ac.uns.ftn.findaroommate.R;
 import rs.ac.uns.ftn.findaroommate.model.Ad;
+import rs.ac.uns.ftn.findaroommate.service.ResourceRegistryService;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -43,6 +46,29 @@ public class SearchActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        //Getovati sa servera celu listu Ad-ova
+
+        //setUpAdReceiver();
+
+        RoomListActivity.adsList = Ad.getAllAds();
+        for (Ad ad:RoomListActivity.adsList) {
+            if(ad.getAvailableFrom().after(new Date()) && ad.getUserId() == null)
+                if(!RoomListActivity.listOfAvaiable.contains(ad))
+                    RoomListActivity.listOfAvaiable.add(ad);
+        }
+
+        //ovo bi se moglo pozvati kada se obavi "Search" metoda, za sad se poziva na kraju ove
+        setUpReceiver();
+    }
+
+    /*private void setUpAdReceiver() {
+        Intent adIntent = new Intent(this, AdService.class);
+        startService(adIntent);
+    }*/
+
+    private void setUpReceiver() {
+        Intent resourceIntent = new Intent(this, ResourceRegistryService.class);
+        startService(resourceIntent);
     }
 
 }

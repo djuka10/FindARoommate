@@ -65,11 +65,15 @@ public class ImageAdapterOnline extends PagerAdapter {
         loadingBar.setCanceledOnTouchOutside(true);
         loadingBar.show();
 
+
+        //TODO ukoliko ne postoje slike treba dismissovati ovo
+
         Glide.with(context)
                 .load(IMAGE_URL.replace("HOST", context.getString(R.string.host)) + fileName)
                 .listener(new RequestListener<Drawable>() {
                               @Override
                               public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                  loadingBar.dismiss();
                                   return false;
                               }
 

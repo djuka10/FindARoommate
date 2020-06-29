@@ -16,7 +16,9 @@ import rs.ac.uns.ftn.findaroommate.dto.AdDto;
 import rs.ac.uns.ftn.findaroommate.dto.AdDtoDto;
 import rs.ac.uns.ftn.findaroommate.dto.AdFormDto;
 import rs.ac.uns.ftn.findaroommate.model.Ad;
+import rs.ac.uns.ftn.findaroommate.model.AdItem;
 import rs.ac.uns.ftn.findaroommate.model.ResourceRegistry;
+import rs.ac.uns.ftn.findaroommate.model.UserCharacteristic;
 
 
 public interface AdServiceApi {
@@ -55,4 +57,13 @@ public interface AdServiceApi {
 
     @GET("resourceRegistry/ad/{adId}")
     Call<List<ResourceRegistry>> getAdImages(@Path("adId") String adId);
+
+    //AdItem
+    @GET("ad/adItems/{adId}")
+    Call<List<AdItem>> getAdItems(@Path("adId") String adId);
+
+    //UserCharacteristic
+    @GET("ad/userChar/{adId}")
+    Call<List<UserCharacteristic>> getUserCharacteristis(@Path("adId") String adId);
+
 }

@@ -4,8 +4,10 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.imageio.ImageIO;
 
@@ -114,6 +116,33 @@ public class AdService implements ServiceInterface<Ad> {
               System.out.println("Exception occured :" + e.getMessage());
         }
 		return null;	
+	}
+	
+	public List<AdItem> getAdItems(Integer id) {
+		Ad ad = null; //trebace getOneByEntityId
+		List<Ad> listAds = adRepository.findAll();
+		for(Ad ad2 : listAds) {
+			if(ad2.getEntityId() == id) {
+				ad = ad2;
+				break;
+			}
+		}
+		//Optional<Ad> oAd = adRepository.findById(id);
+		
+
+		return ad.getItems();
+	}
+	
+	public List<UserCharacteristic> getUserCharacteristis(Integer id) {
+		Ad ad = null; //trebace getOneByEntityId
+		List<Ad> listAds = adRepository.findAll();
+		for(Ad ad2 : listAds) {
+			if(ad2.getEntityId() == id) {
+				ad = ad2;
+				break;
+			}
+		}
+		return ad.getCharacteristics();
 	}
 
 }
