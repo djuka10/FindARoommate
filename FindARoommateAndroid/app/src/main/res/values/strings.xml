@@ -80,6 +80,7 @@
     <string name="prefs_stay_notif">stay_notif</string>
 
     <!-- Search -->
+    <string name="search_form_title">Search</string>
     <string name="title_room_list">Ads</string>
     <string name="title_room_detail">Ad Detail</string>
     <string name="find_a_roommate">Find a Roommate</string>
@@ -91,7 +92,7 @@
     <string name="maximum">Maximum</string>
     <string name="from">From:</string>
     <string name="to">To:</string>
-    <string name="available_from">Available from</string>
+    <string name="available">Available</string>
     <string name="now">Now</string>
     <string name="choose_date">Choose date</string>
     <string name="duration_of_stay">Duration of stay</string>
@@ -102,6 +103,8 @@
     <string name="tv">TV</string>
     <string name="wifi">WiFi</string>
     <string name="apply">Apply</string>
+    <string name="date_required_error_msg">If one date field input is filled, the other is mandatory!</string>
+    <string name="date_order_error_msg">Invalid date order from,to</string>
 
     <string name="date_format">MMMM dd, yyyy</string>
 

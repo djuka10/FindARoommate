@@ -1,315 +1,362 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryMonoComp">
-
-    <ImageView
-        android:id="@+id/iv_navigationDrawer"
-        android:layout_width="wrap_content"
+    tools:context=".activity.ProfileFormActivity"
+    >
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/ic_dot"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <TextView
-        android:id="@+id/tv_find_roommate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:text="@string/find_a_roommate"
-        android:textColor="@color/colorPureWhite"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@id/iv_navigationDrawer"
-        app:layout_constraintEnd_toStartOf="@id/iv_location"
-        app:layout_constraintStart_toEndOf="@id/iv_navigationDrawer"
-        app:layout_constraintTop_toTopOf="@id/iv_navigationDrawer"
-        />
-
-    <ImageView
-        android:id="@+id/iv_location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:src="@drawable/ic_location"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-
-    <TextView
-        android:id="@+id/tv_enterLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/enter_location"
-        app:layout_constraintTop_toBottomOf="@id/tv_find_roommate"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:textSize="20sp"
-        android:textColor="@color/colorPureWhite"
-        android:layout_marginTop="10dp"
-        />
-
-    <EditText
-        android:id="@+id/et_search"
-        android:layout_width="250dp"
-        android:layout_height="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_enterLocation"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/custom_edittext_background"
-        android:drawableStart="@drawable/ic_search"
-        android:hint="@string/where_do_you_want_to_live"
-        />
-
-    <TextView
-        android:id="@+id/tv_filters"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/filters"
-        app:layout_constraintTop_toBottomOf="@id/et_search"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:textSize="20sp"
-        android:textColor="@color/colorPureWhite"
-        android:layout_marginTop="10dp"
-        />
-
-    <TextView
-        android:id="@+id/tv_monthlyBudget"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/monthly_budget"
-        app:layout_constraintTop_toBottomOf="@id/tv_filters"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textSize="15sp"
-        android:textColor="@color/colorPureWhite"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
-        />
-
-    <TextView
-        android:id="@+id/tv_minimum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/minimum"
-        app:layout_constraintTop_toBottomOf="@id/tv_monthlyBudget"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textSize="12sp"
-        android:textColor="@color/colorPureWhite"
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="10dp"
-        />
-
-    <NumberPicker
-        android:id="@+id/number_picker_min"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:orientation="vertical"
-        app:layout_constraintStart_toEndOf = "@id/tv_minimum"
-        app:layout_constraintTop_toTopOf="@id/tv_minimum"
-        app:layout_constraintBottom_toBottomOf="@id/tv_minimum"
-        android:layout_marginStart="20dp"
-        />
-
-    <TextView
-        android:id="@+id/tv_maximum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/maximum"
-        app:layout_constraintTop_toBottomOf="@id/tv_monthlyBudget"
-        app:layout_constraintEnd_toStartOf="@id/number_picker_max"
-        android:textSize="12sp"
-        android:textColor="@color/colorPureWhite"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="20dp"
-        />
-
-    <NumberPicker
-        android:id="@+id/number_picker_max"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_minimum"
-        app:layout_constraintBottom_toBottomOf="@id/tv_minimum"
-        android:layout_marginEnd="20dp"
-        />
-
-    <TextView
-        android:id="@+id/tv_availableFrom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/available_from"
-        app:layout_constraintTop_toBottomOf="@id/tv_minimum"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textSize="15sp"
-        android:textColor="@color/colorPureWhite"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="10dp"
-        />
-
-    <TextView
-        android:id="@+id/tv_from"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/from"
-        app:layout_constraintTop_toBottomOf="@id/tv_availableFrom"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textSize="12sp"
-        android:textColor="@color/colorPureWhite"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="10dp"
-        />
-
-    <RadioGroup
-        android:id="@+id/radio_group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/tv_from"
-        app:layout_constraintBottom_toBottomOf="@id/tv_from"
-        app:layout_constraintStart_toEndOf="@id/tv_from"
-        android:layout_marginStart="20dp"
-        android:orientation="vertical">
-
-        <RadioButton
-            android:id="@+id/radio_button_now"
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/profile_form_toolbar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/now"
-            android:textColor="@color/colorPureWhite"/>
+            android:background="?attr/colorPrimary"
+            android:gravity="center"
+            app:layout_scrollFlags="scroll|enterAlways">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/ic_logo"
+                android:layout_marginTop="15dp"/>
 
-        <RadioButton
-            android:id="@+id/radio_button_choose_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/choose_date"
-            android:textColor="@color/colorPureWhite"/>
-
-    </RadioGroup>
-
-    <TextView
-        android:id="@+id/tv_durationOfStay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/duration_of_stay"
-        app:layout_constraintTop_toBottomOf="@id/radio_group"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textSize="12sp"
-        android:textColor="@color/colorPureWhite"
-        android:layout_marginTop="50dp"
-        android:layout_marginStart="10dp"
-        />
-
-    <RadioGroup
-        android:id="@+id/radio_group_duration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/tv_durationOfStay"
-        app:layout_constraintBottom_toBottomOf="@id/tv_durationOfStay"
-        app:layout_constraintStart_toEndOf="@id/tv_durationOfStay"
-        android:layout_marginStart="20dp"
-        android:orientation="vertical"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/app_title"
+                android:textColor="@color/colorPureWhite"
+                android:textSize="20sp">
+            </TextView>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/sss"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:background="@color/colorPrimaryMonoComp"
         >
 
-        <RadioButton
-            android:id="@+id/radio_button_short"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/short_1_5_months"
-            android:textColor="@color/colorPureWhite"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <RadioButton
-            android:id="@+id/radio_button_medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/medium_6_11_months"
-            android:textColor="@color/colorPureWhite"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="@dimen/activity_vertical_margin"
+                android:layout_marginEnd="@dimen/activity_vertical_margin"
+                android:layout_marginTop="@dimen/form_margin_up"
+                android:layout_marginBottom="@dimen/form_margin_up"
 
-        <RadioButton
-            android:id="@+id/radio_button_long"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/long_12_months"
-            android:textColor="@color/colorPureWhite"/>
-    </RadioGroup>
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:layout_gravity="center"
+                    android:text="@string/search_form_title"
+                    android:textColor="@color/colorPureWhite"
+                    android:textSize="30sp">
+                </TextView>
+            </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_flatAmenities"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/flat_amenities"
-        app:layout_constraintTop_toBottomOf="@id/radio_group_duration"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textSize="15sp"
-        android:textColor="@color/colorPureWhite"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="10dp"
-        />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginStart="@dimen/activity_vertical_margin"
+                android:layout_marginEnd="@dimen/activity_vertical_margin"
+                android:layout_marginTop="@dimen/form_margin_up"
+                >
 
-    <ImageView
-    android:id="@+id/iv_wifi"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:src="@drawable/ic_wifi_24dp"
-    app:layout_constraintBottom_toBottomOf="@id/tv_flatAmenities"
-    app:layout_constraintStart_toEndOf="@id/tv_flatAmenities"
-    app:layout_constraintTop_toTopOf="@id/tv_flatAmenities"
-    android:layout_marginStart="20dp"
-    />
+                <TextView
+                    android:id="@+id/tv_enterLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/enter_location"
 
-    <TextView
-        android:id="@+id/tv_wifi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/wifi"
-        app:layout_constraintTop_toBottomOf="@id/iv_wifi"
-        app:layout_constraintStart_toStartOf="@id/iv_wifi"
-        app:layout_constraintEnd_toEndOf="@id/iv_wifi"
-        android:textSize="12sp"
-        android:textColor="@color/colorPureWhite"
-        android:layout_marginTop="5dp"
-        />
+                    android:textSize="20sp"
+                    android:textColor="@color/colorPureWhite"
+                    android:layout_marginTop="10dp"
+                    />
 
-    <ImageView
-        android:id="@+id/iv_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_tv_black_24dp"
-        app:layout_constraintBottom_toBottomOf="@id/iv_wifi"
-        app:layout_constraintStart_toEndOf="@id/iv_wifi"
-        app:layout_constraintTop_toTopOf="@id/iv_wifi"
-        android:layout_marginStart="20dp"
-        />
+                <fragment android:id="@+id/autocomplete_search_fragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/form_margin_up"
+                    android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+                    />
 
-    <TextView
-        android:id="@+id/tv_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tv"
-        app:layout_constraintTop_toBottomOf="@id/iv_tv"
-        app:layout_constraintStart_toStartOf="@id/iv_tv"
-        app:layout_constraintEnd_toEndOf="@id/iv_tv"
-        android:textSize="12sp"
-        android:textColor="@color/colorPureWhite"
-        android:layout_marginTop="5dp"
-        />
+            </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_apply"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tv_tv"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/button_background"
-        android:text="@string/apply"
-        android:textColor="@color/colorPureWhite"
-        android:layout_marginTop="30dp"
-        />
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:gravity="center"
+                android:layout_marginStart="@dimen/activity_vertical_margin"
+                android:layout_marginEnd="@dimen/activity_vertical_margin"
+                android:layout_marginBottom="@dimen/form_margin_up"
+                >
+
+                <TextView
+                    android:id="@+id/tv_filters"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/filters"
+
+                    android:textSize="20sp"
+                    android:textColor="@color/colorPureWhite"
+                    android:layout_marginTop="10dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="@dimen/activity_vertical_margin"
+                    android:layout_marginStart="@dimen/activity_vertical_margin"
+                    android:layout_marginEnd="@dimen/activity_vertical_margin"
+                    android:layout_marginRight="@dimen/activity_vertical_margin"
+                    android:layout_marginBottom="@dimen/form_margin_up"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="@string/monthly_budget"
+                        android:textSize="15sp"
+                        android:textColor="@color/colorPureWhite"
+
+
+
+                        />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/minimum"
+                            android:textSize="12sp"
+                            android:textColor="@color/colorPureWhite"
+                            >
+                        </TextView>
+                        <NumberPicker
+                            android:id="@+id/number_picker_min"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="50dp"
+                            android:orientation="vertical"
+                            />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/maximum"
+                            android:textSize="12sp"
+                            android:textColor="@color/colorPureWhite"
+                            >
+                        </TextView>
+                        <NumberPicker
+                            android:id="@+id/number_picker_max"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="50dp"
+                            android:orientation="vertical"
+                            />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="@dimen/activity_vertical_margin"
+                    android:layout_marginStart="@dimen/activity_vertical_margin"
+                    android:layout_marginEnd="@dimen/activity_vertical_margin"
+                    android:layout_marginRight="@dimen/activity_vertical_margin"
+                    android:layout_marginBottom="@dimen/form_margin_up"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="@string/available"
+                        android:textSize="15sp"
+                        android:textColor="@color/colorPureWhite"
+
+
+
+                        />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        >
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/ad_form_available_from"
+                            android:textColorHint="@color/colorPureWhite"
+                            android:textColor="@color/colorPureWhite"
+                            >
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/search_date_from"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorPureWhite"
+                                >
+                            </com.google.android.material.textfield.TextInputEditText>
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/ad_form_available_to"
+                            android:textColorHint="@color/colorPureWhite"
+                            android:textColor="@color/colorPureWhite"
+
+                            >
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/search_date_to"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorPureWhite"
+                                android:textColor="@color/colorPureWhite"
+                                >
+                            </com.google.android.material.textfield.TextInputEditText>
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="@dimen/activity_vertical_margin"
+                    android:layout_marginStart="@dimen/activity_vertical_margin"
+                    android:layout_marginEnd="@dimen/activity_vertical_margin"
+                    android:layout_marginRight="@dimen/activity_vertical_margin"
+                    android:layout_marginBottom="@dimen/form_margin_up"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="@string/duration_of_stay"
+                        android:textSize="15sp"
+                        android:textColor="@color/colorPureWhite"
+
+
+
+                        />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="0.4"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            >
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            >
+
+                            <RadioGroup
+                                android:id="@+id/radio_group_duration"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+                                android:orientation="vertical"
+                                >
+
+                                <RadioButton
+                                    android:id="@+id/radio_button_short"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/short_1_5_months"
+                                    android:textColor="@color/colorPureWhite"/>
+
+                                <RadioButton
+                                    android:id="@+id/radio_button_medium"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/medium_6_11_months"
+                                    android:textColor="@color/colorPureWhite"/>
+
+                                <RadioButton
+                                    android:id="@+id/radio_button_long"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/long_12_months"
+                                    android:textColor="@color/colorPureWhite"/>
+                            </RadioGroup>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <Button
+                    android:id="@+id/btn_apply"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_background"
+                    android:text="@string/apply"
+                    android:textColor="@color/colorPureWhite"
+                    android:layout_marginTop="30dp"
+                    />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

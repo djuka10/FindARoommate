@@ -116,13 +116,6 @@ public class UserAttributesActivity extends AppCompatActivity {
         sportChipGroup = (ChipGroup) findViewById(R.id.sport_selector_chips);
 
         setupChips();
-
-
-//        createChips(personalityChipGroup, selectedPersonalityAttrs, CharacteristicType.PERSONALITY);
-//        createChips(lifestyleChipGroup, selectedLifestyleAttrs, CharacteristicType.LIFESTYLE);
-//        createChips(musicChipGroup, selectedMusicAttrs, CharacteristicType.MUSIC);
-//        createChips(filmChipGroup, selectedFilmAttrs, CharacteristicType.FILM);
-//        createChips(sportChipGroup, selectedSportAttrs, CharacteristicType.SPORT);
     }
 
     private void setupChips(){

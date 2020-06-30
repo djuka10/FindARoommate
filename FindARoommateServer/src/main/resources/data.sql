@@ -107,8 +107,8 @@ insert into users (about, active_since, birth_day, email, first_name, gender, la
 -- Ads
 -- slobodni oglasi
 insert into ads (address, ad_type, available_from, available_until, boys_num, const_included, deposit, desc, flat_m2, ladies_num, latitude, longitude, max_days, max_person, min_days, price, room_m2, title, ad_status, owner_id) values
-('Drage Spasic 7, Novi Sad, Serbia','type1', '2020-07-09', '2021-07-09', 3, 1, 300, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
- 25, 2, 29.72224235534668, 48.2092170715332, '60', 5, '1-5 months', 322, 20, 'Apartment with positive view 1',0,1);
+('Drage Spasic 7, Novi Sad, Serbia', 'type1', '2020-07-09', '2020-08-09', 3, 1, 300, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+ 25, 2, 19.966207, 45.303114, '60', 5, '1-5 months', 322, 20, 'Apartment with positive view 1',0,1);
  
 -- zauzeti oglasi
 insert into ads (address, ad_type, available_from, available_until, boys_num, const_included, deposit, desc, flat_m2, ladies_num, latitude, longitude, max_days, max_person, min_days, price, room_m2, title, ad_status, owner_id, user_id) values
