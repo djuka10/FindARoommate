@@ -76,6 +76,7 @@
     <string name="prefs_stay_notif">stay_notif</string>
 
     <!-- Search -->
+    <string name="search_form_title">Pretraga</string>
     <string name="title_room_list">Oglasi</string>
     <string name="title_room_detail">Detalji oglasa</string>
     <string name="find_a_roommate">Pronađi cimera</string>
@@ -87,7 +88,7 @@
     <string name="maximum">Maximum</string>
     <string name="from">Od:</string>
     <string name="to">Do:</string>
-    <string name="available_from">Dostupno od</string>
+    <string name="available">Dostupno</string>
     <string name="now">Sada</string>
     <string name="choose_date">Odaberi datum</string>
     <string name="duration_of_stay">Vreme boravka</string>
@@ -98,6 +99,8 @@
     <string name="tv">TV</string>
     <string name="wifi">WiFi</string>
     <string name="apply">Pretraga</string>
+    <string name="date_required_error_msg">Ukoliko je jedan datum unesen i drugi je obavezan!</string>
+    <string name="date_order_error_msg">Nevalidan redosled datuma</string>
 
     <string name="date_format">MMMM dd, yyyy</string>
 

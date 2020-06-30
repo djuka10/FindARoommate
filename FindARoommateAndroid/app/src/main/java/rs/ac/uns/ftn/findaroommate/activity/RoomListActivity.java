@@ -153,7 +153,7 @@ public class RoomListActivity extends AppCompatActivity {
                 } else {
                     Context context = view.getContext();
                     Intent intent = new Intent(context, RoomDetailActivity.class);
-                    intent.putExtra(RoomDetailFragment.ARG_ITEM_ID, item.getId().toString());
+                    intent.putExtra(RoomDetailFragment.ARG_ITEM_ID, item.getEntityId());
 
                     context.startActivity(intent);
                 }

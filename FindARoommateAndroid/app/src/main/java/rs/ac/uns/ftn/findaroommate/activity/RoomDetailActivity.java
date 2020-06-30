@@ -85,14 +85,15 @@ public class RoomDetailActivity extends AppCompatActivity {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             Bundle arguments = new Bundle();
-            arguments.putString(RoomDetailFragment.ARG_ITEM_ID,
-                    getIntent().getStringExtra(RoomDetailFragment.ARG_ITEM_ID));
+//            arguments.putString(RoomDetailFragment.ARG_ITEM_ID,
+//                    getIntent().getStringExtra(RoomDetailFragment.ARG_ITEM_ID));
+            arguments.putInt(RoomDetailFragment.ARG_ITEM_ID, getIntent().getIntExtra(RoomDetailFragment.ARG_ITEM_ID, -1));
             RoomDetailFragment fragment = new RoomDetailFragment();
             fragment.setArguments(arguments);
 
             CollapsingToolbarLayout layout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
-            Ad ad = RoomListActivity.adsMap.get(getIntent().getStringExtra(RoomDetailFragment.ARG_ITEM_ID));
-
+            //Ad ad = RoomListActivity.adsMap.get(getIntent().getStringExtra(RoomDetailFragment.ARG_ITEM_ID));
+            Ad ad = Ad.getOneGlobal(getIntent().getExtras().getInt(RoomDetailFragment.ARG_ITEM_ID));
 
             viewPager = (ViewPager) findViewById(R.id.ViewPage);
 

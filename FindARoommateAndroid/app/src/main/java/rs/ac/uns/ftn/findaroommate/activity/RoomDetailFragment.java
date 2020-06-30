@@ -101,13 +101,14 @@ public class RoomDetailFragment extends Fragment{
 
         chipAnimatesGroup = new ChipGroup(getContext());
 
-        adId = Long.parseLong(getArguments().getString(ARG_ITEM_ID));
+        //adId = Long.parseLong(getArguments().getString(ARG_ITEM_ID));
 
         if (getArguments().containsKey(ARG_ITEM_ID)) {
             // Load the dummy content specified by the fragment
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
-            mItem = RoomListActivity.adsMap.get(getArguments().getString(ARG_ITEM_ID));
+            //mItem = RoomListActivity.adsMap.get(getArguments().getString(ARG_ITEM_ID));
+            mItem = Ad.getOneGlobal(getArguments().getInt(ARG_ITEM_ID));
 
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
@@ -245,7 +246,8 @@ public class RoomDetailFragment extends Fragment{
                 @Override
                 public void onClick(View v) {
                     // send to the server
-                    Ad ad = Ad.load(Ad.class,adId);
+                    //Ad ad = Ad.load(Ad.class,adId);
+                    Ad ad = mItem;
                     User user = AppTools.getLoggedUser();
                     ad.setUserId(user);
                     ad.setAdStatus(AdStatus.PENDING);
