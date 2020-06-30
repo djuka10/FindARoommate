@@ -45,9 +45,11 @@ public class MyAdsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_ads);
+
         Toolbar toolbar = findViewById(R.id.my_ads_toolbar);
         toolbar.setTitle("My ads");
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         tabTitles = new String[]{"Active", "Past"};
 
@@ -56,8 +58,6 @@ public class MyAdsActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
         TabLayout tabLayout = (TabLayout)findViewById(R.id.my_ads_tablayout);
         tabLayout.setupWithViewPager(viewPager);
-
-
 
     }
 
@@ -123,7 +123,7 @@ public class MyAdsActivity extends AppCompatActivity {
             List<StayDto> stays = new ArrayList<>();
             for (Ad ad: listAds) {
                 if(ad.getOwnerId().getEntityId() == AppTools.getLoggedUser().getEntityId())
-                    stays.add(new StayDto(ad.getTitle(), "Novi Sad", ad.getAvailableFrom(), ad.getAvailableUntil(),ad.getAdStatus(), ad.getUserId(), ad.getEntityId(), ad.getId()));
+                    stays.add(new StayDto(ad.getTitle(), ad.getAddress(), ad.getAvailableFrom(), ad.getAvailableUntil(),ad.getAdStatus(), ad.getUserId(), ad.getEntityId(), ad.getId()));
             }
             return stays;
         }

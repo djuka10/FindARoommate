@@ -69,5 +69,8 @@ public class AdFormDto {
     @Expose
     Integer adOwnerId;
 
+    @Expose
+    private String address;
+
     // private List<ResourceRegistry> images;
 }

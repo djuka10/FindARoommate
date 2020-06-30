@@ -24,10 +24,9 @@
 
         <TextView
             android:id="@+id/owner"
-            android:layout_width="match_parent"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:layout_marginRight="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginBottom="2dp"
             android:layout_below="@id/ad_picture"
@@ -38,6 +37,36 @@
             android:textAppearance="?attr/textAppearanceListItem">
 
         </TextView>
+
+        <TextView
+            android:id="@+id/rate_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/owner"
+            android:layout_below="@+id/ad_picture"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            app:autoSizeTextType="uniform"
+            android:textSize="12dp"
+            android:textColor="@android:color/black"
+            android:textAlignment="gravity">
+
+        </TextView>
+
+        <ImageView
+            android:id="@+id/star_picture"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/rate_number"
+            android:layout_below="@+id/ad_picture"
+            android:layout_above="@+id/content"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="2dp"
+            android:src="@drawable/ic_gold_star_foreground"
+            android:scaleType="fitCenter">
+
+        </ImageView>
 
         <TextView
             android:id="@+id/content"

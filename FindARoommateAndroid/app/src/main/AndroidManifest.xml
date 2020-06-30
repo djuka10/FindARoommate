@@ -30,7 +30,12 @@
         <activity
             android:name=".activity.MyAdsActivity"
             android:label="@string/title_activity_my_ads"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar"
+            android:parentActivityName=".activity.ProfileFormActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.ProfileFormActivity" />
+        </activity>
 
         <service
             android:name=".service.BookService"
@@ -102,7 +107,13 @@
         <activity
             android:name=".activity.RoomListActivity"
             android:label="@string/title_room_list"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar"
+            android:parentActivityName=".activity.SearchActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="rs.ac.uns.ftn.findaroommate.activity.SearchActivity" />
+
+        </activity>
         <activity
             android:name=".activity.RoomDetailActivity"
             android:label="@string/title_room_detail"

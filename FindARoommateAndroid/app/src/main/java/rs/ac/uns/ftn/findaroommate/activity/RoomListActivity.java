@@ -30,6 +30,7 @@ import rs.ac.uns.ftn.findaroommate.R;
 import rs.ac.uns.ftn.findaroommate.adapters.ImageAdapterOnline;
 import rs.ac.uns.ftn.findaroommate.model.Ad;
 import rs.ac.uns.ftn.findaroommate.model.ResourceRegistry;
+import rs.ac.uns.ftn.findaroommate.model.Review;
 import rs.ac.uns.ftn.findaroommate.model.User;
 import rs.ac.uns.ftn.findaroommate.receiver.ResourceRegistryReceiver;
 import rs.ac.uns.ftn.findaroommate.service.ResourceRegistryService;
@@ -220,7 +221,6 @@ public class RoomListActivity extends AppCompatActivity {
                 holder.mCostsIncluded.setText("No");
             }
 
-
             User user = User.getOneGlobal(mValues.get(position).getOwnerId().getEntityId());
 
             int now = Calendar.getInstance().get(Calendar.YEAR);
@@ -229,7 +229,28 @@ public class RoomListActivity extends AppCompatActivity {
                 age = ", " + Integer.toString(now - user.getBirthDay().getYear() - 1900);
             }
 
-            holder.mOwner.setText(user.getFirstName() + age);
+            String nameAge = user.getFirstName() + age;
+
+            holder.mOwner.setText(nameAge);
+
+            //Average rate number
+
+            List<Review> reviews = Review.getAllReviews();
+            int sum = 0;
+            int count = 0;
+            float average = 0;
+
+            for(Review r : reviews) {
+                if(r.getAd() == mValues.get(position).getEntityId()) {
+                    sum += r.getRating();
+                    count++;
+                }
+            }
+
+            if(sum != 0)
+                average = (float) sum / count;
+
+            holder.mRateNumber.setText(String.valueOf(average));
 
             holder.itemView.setTag(mValues.get(position));
             holder.itemView.setOnClickListener(mOnClickListener);
@@ -248,6 +269,7 @@ public class RoomListActivity extends AppCompatActivity {
             final TextView mCostsIncludedLabel;
             final TextView mCostsIncluded;
             final TextView mOwner;
+            final TextView mRateNumber;
 
             ViewHolder(View view) {
                 super(view);
@@ -258,6 +280,7 @@ public class RoomListActivity extends AppCompatActivity {
                 mCostsIncludedLabel = (TextView) view.findViewById(R.id.costs_included_label);
                 mCostsIncluded = (TextView) view.findViewById(R.id.costs_included);
                 mOwner = (TextView) view.findViewById(R.id.owner);
+                mRateNumber = (TextView) view.findViewById(R.id.rate_number);
             }
         }
     }

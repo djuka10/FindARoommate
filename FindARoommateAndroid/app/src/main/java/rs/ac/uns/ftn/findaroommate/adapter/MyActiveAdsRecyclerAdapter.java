@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import rs.ac.uns.ftn.findaroommate.R;
+import rs.ac.uns.ftn.findaroommate.activity.HomepageActivity;
 import rs.ac.uns.ftn.findaroommate.dto.StayDto;
 import rs.ac.uns.ftn.findaroommate.model.Ad;
 import rs.ac.uns.ftn.findaroommate.service.BookService;
@@ -103,12 +104,16 @@ public class MyActiveAdsRecyclerAdapter extends RecyclerView.Adapter<MyActiveAds
         if(b) {
             ad.setAdStatus(AdStatus.APPROVE);
         } else {
-            ad.setAdStatus(AdStatus.DENIED);
+            ad.setAdStatus(AdStatus.IDLE);
+            ad.setUserId(null);
         }
         ad.save();
         Intent bookIntent = new Intent(context, BookService.class);
         bookIntent.putExtra("adId", ad.getId());
         context.startService(bookIntent);
+
+        Intent homepageIntent = new Intent(context.getApplicationContext(), HomepageActivity.class);
+        context.startActivity(homepageIntent);
 
     }
 

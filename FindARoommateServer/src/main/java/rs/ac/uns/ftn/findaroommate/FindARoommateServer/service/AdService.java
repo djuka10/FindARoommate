@@ -107,9 +107,12 @@ public class AdService implements ServiceInterface<Ad> {
 		if(entity.getUserId() != null) {
 			User user = userRepository.getOne(entity.getUserId().getEntityId());
 			repoAd.setUserId(user);
+		} else {
+			repoAd.setUserId(null);
 		}
 		
 		repoAd.setAdStatus(entity.getAdStatus());
+		
 
 		Ad savedAd = adRepository.save(repoAd);
 		return Ad.builder().entityId(savedAd.getEntityId()).build();

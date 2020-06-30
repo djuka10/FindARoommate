@@ -202,6 +202,8 @@ public class RoomDetailFragment extends Fragment{
 
                         //popupAnimates.setContentView(chipAnimatesGroup);
                         popupAnimates.showAtLocation(container, Gravity.CENTER, 0, 0);
+                    } else {
+                        Toast.makeText(getContext(), "There is no amenites for this Ad", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -230,6 +232,8 @@ public class RoomDetailFragment extends Fragment{
 
                         //popupAnimates.setContentView(chipAnimatesGroup);
                         popupAnimates.showAtLocation(container, Gravity.CENTER, 0, 0);
+                    }else {
+                        Toast.makeText(getContext(), "There is no characteristics for this Ad", Toast.LENGTH_SHORT).show();
                     }
 
                 }
@@ -249,6 +253,9 @@ public class RoomDetailFragment extends Fragment{
                     Intent bookIntent = new Intent(getActivity(), BookService.class);
                     bookIntent.putExtra("adId", mItem.getId());
                     getActivity().startService(bookIntent);
+
+                    Intent homepageIntent = new Intent(getActivity(), HomepageActivity.class);
+                    startActivity(homepageIntent);
                 }
             });
         }

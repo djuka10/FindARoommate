@@ -288,6 +288,7 @@ public class NewAdActivity extends AppCompatActivity {
                 .roommatePrefsId(ad.getPrefsId())
                 .adStatus(AdStatus.IDLE)
                 .adOwnerId(user.getEntityId())
+                .address(ad.getAd().getAddress())
                 .build();
 
         if(ad.getAd().getAvailableFrom() != null){

@@ -14,6 +14,7 @@ import java.util.Date;
 import rs.ac.uns.ftn.findaroommate.R;
 import rs.ac.uns.ftn.findaroommate.model.Ad;
 import rs.ac.uns.ftn.findaroommate.service.ResourceRegistryService;
+import rs.ac.uns.ftn.findaroommate.utils.AdStatus;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -38,8 +39,10 @@ public class SearchActivity extends AppCompatActivity {
                 Toast.makeText(SearchActivity.this, "MasterDetailView action", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(SearchActivity.this, RoomListActivity.class);
                 //TODO Ovde treba da se pozove servis i da se sinhronizuju oglasi na osnovu search-a
+
+
                 RoomListActivity.adsList = Ad.getAllAds();
-                for (Ad ad: RoomListActivity.adsList) {
+                for (Ad ad: RoomListActivity.adsList) { //ovde bi trebalo available list
                     RoomListActivity.adsMap.put(ad.getId().toString(), ad);
                 }
 
@@ -52,8 +55,8 @@ public class SearchActivity extends AppCompatActivity {
 
         RoomListActivity.adsList = Ad.getAllAds();
         for (Ad ad:RoomListActivity.adsList) {
-            if(ad.getAvailableFrom().after(new Date()) && ad.getUserId() == null)
-                if(!RoomListActivity.listOfAvaiable.contains(ad))
+            if(ad.getAvailableFrom().after(new Date()) && ad.getUserId() == null && ad.getAdStatus().equals(AdStatus.IDLE))
+                if(checkIfExist(ad))
                     RoomListActivity.listOfAvaiable.add(ad);
         }
 
@@ -69,6 +72,15 @@ public class SearchActivity extends AppCompatActivity {
     private void setUpReceiver() {
         Intent resourceIntent = new Intent(this, ResourceRegistryService.class);
         startService(resourceIntent);
+    }
+
+    private boolean checkIfExist(Ad ad) {
+        for(Ad ad2 : RoomListActivity.listOfAvaiable) {
+            if(ad.getEntityId() == ad2.getEntityId()) {
+                return false;
+            }
+        }
+        return true;
     }
 
 }
