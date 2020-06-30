@@ -116,7 +116,6 @@ public class SearchActivity extends AppCompatActivity {
         startService(resourceIntent);
     }
 
-<<<<<<< HEAD
     private boolean checkIfExist(Ad ad) {
         for(Ad ad2 : RoomListActivity.listOfAvaiable) {
             if(ad.getEntityId() == ad2.getEntityId()) {
@@ -126,7 +125,6 @@ public class SearchActivity extends AppCompatActivity {
         return true;
     }
 
-=======
     private void setupSearchComponents(){
         costsMin = findViewById(R.id.number_picker_min);
 
@@ -350,5 +348,4 @@ public class SearchActivity extends AppCompatActivity {
         return degree * (Math.PI/180);
     }
 
->>>>>>> View filtered ad results by search
 }

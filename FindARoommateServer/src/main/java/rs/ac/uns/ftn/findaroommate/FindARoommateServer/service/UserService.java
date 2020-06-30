@@ -66,18 +66,19 @@ public class UserService implements ServiceInterface<User> {
 			user.setLastName(entity.getLastName());
 			user.setUrlProfile(entity.getUrlProfile());
 			
-			if(user.getLanguageIds() != null) {
+			if(entity.getLanguageIds() != null) {
 				List<Language> languages = languageRepository.findAllById(entity.getLanguageIds());
 				user.setLanguages(languages);
 			}
 			
-			if(user.getUserCharacteristicIds() != null) {
+			if(entity.getUserCharacteristicIds() != null) {
 				List<UserCharacteristic> userCharacteristics = userCharacteristicsRepository.findAllById(entity.getUserCharacteristicIds());
 				user.setCharacteristics(userCharacteristics);
 			}
 			
 			savedUser = userRepository.save(user);
 			updateUserDeviceRegistry(savedUser.getEntityId(), entity.getDeviceId());
+			removeOneToManyUnnecessary(savedUser);
 			return savedUser;
 		}
 		
@@ -93,7 +94,13 @@ public class UserService implements ServiceInterface<User> {
 		
 		savedUser = userRepository.save(entity);
 		updateUserDeviceRegistry(savedUser.getEntityId(), entity.getDeviceId());
+		removeOneToManyUnnecessary(savedUser);
 		return savedUser;
+	}
+	
+	private void removeOneToManyUnnecessary(User user) {
+		user.setLanguages(null);
+		user.setCharacteristics(null);
 	}
 
 	@Override
@@ -161,8 +168,8 @@ public class UserService implements ServiceInterface<User> {
 		userDeviceRepository.deleteAll(userDevices);
 	}
 	
-	private void updateUserDeviceRegistry(Integer entityId, String deviceId) {
-		UserDevice userDevice = UserDevice.builder().userId(entityId).deviceId(deviceId).build();
+	private void updateUserDeviceRegistry(Integer userId, String deviceId) {
+		UserDevice userDevice = UserDevice.builder().userId(userId).deviceId(deviceId).build();
 		try {
 			userDeviceRepository.save(userDevice);
 		} catch (Exception e) {

@@ -331,7 +331,6 @@ public class ProfileFormActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE }, 0);
         }
 
-        setUpReceiver();
     }
 
     @Override
@@ -348,13 +347,6 @@ public class ProfileFormActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(EDIT_USER_PROFILE);
-        registerReceiver(serverErrorReceiver, filter);
-    }
-
-    private void setUpReceiver(){
-        serverErrorReceiver = new ServerErrorReceiver();
     }
 
     private void setData(){
@@ -379,7 +371,7 @@ public class ProfileFormActivity extends AppCompatActivity {
             dateOfBirthEditText.setText(cldr.get(Calendar.DAY_OF_MONTH) + "/" + (cldr.get(Calendar.MONTH) + 1) + "/" + cldr.get(Calendar.YEAR));
         }
 
-        Call<List<Language>> c = ServiceUtils.userServiceApi.getUserLanguages(1);
+        Call<List<Language>> c = ServiceUtils.userServiceApi.getUserLanguages(user.getEntityId());
         c.enqueue(new Callback<List<Language>>() {
             @Override
             public void onResponse(Call<List<Language>> call, Response<List<Language>> response) {
@@ -412,7 +404,7 @@ public class ProfileFormActivity extends AppCompatActivity {
             }
         });
 
-        Call<List<UserCharacteristic>> cs = ServiceUtils.userServiceApi.getUserUserCharacteristic(1);
+        Call<List<UserCharacteristic>> cs = ServiceUtils.userServiceApi.getUserUserCharacteristic(user.getEntityId());
         cs.enqueue(new Callback<List<UserCharacteristic>>() {
             @Override
             public void onResponse(Call<List<UserCharacteristic>> call, Response<List<UserCharacteristic>> response) {

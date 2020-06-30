@@ -74,8 +74,9 @@ public class RoomListActivity extends AppCompatActivity {
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);  // false: ne prikazuje home
 
         //updateAdsList();
         //listOfAvaiable = new ArrayList<>();
@@ -250,7 +251,7 @@ public class RoomListActivity extends AppCompatActivity {
             if(sum != 0)
                 average = (float) sum / count;
 
-            holder.mRateNumber.setText(String.valueOf(average));
+            holder.mRateNumber.setText(String.format("%.2f", average));
 
             holder.itemView.setTag(mValues.get(position));
             holder.itemView.setOnClickListener(mOnClickListener);
