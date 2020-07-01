@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.widget.Toolbar;
@@ -13,6 +14,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.ActionBar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -33,6 +35,7 @@ import rs.ac.uns.ftn.findaroommate.model.AdItem;
 import rs.ac.uns.ftn.findaroommate.model.CharacteristicType;
 import rs.ac.uns.ftn.findaroommate.model.ResourceRegistry;
 import rs.ac.uns.ftn.findaroommate.model.UserCharacteristic;
+import rs.ac.uns.ftn.findaroommate.service.SignOutService;
 import rs.ac.uns.ftn.findaroommate.service.api.ServiceUtils;
 import rs.ac.uns.ftn.findaroommate.utils.Mockup;
 
@@ -49,10 +52,17 @@ public class RoomDetailActivity extends AppCompatActivity {
     ImageAdapter imageAdapter;
     ImageAdapterOnline imageAdapterOnline;
 
+    private DrawerLayout mDrawerLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room_detail);
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        setUpDrawer();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
 
@@ -113,6 +123,44 @@ public class RoomDetailActivity extends AppCompatActivity {
 
     }
 
+    private void setUpDrawer(){
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                menuItem.setChecked(true);
+
+                int id = menuItem.getItemId();
+
+                switch (id) {
+                    case R.id.search_item:
+                        Intent intent = new Intent(RoomDetailActivity.this, SearchActivity.class);
+                        startActivity(intent);
+                        return true;
+                    case R.id.profile_item:
+                        Intent profileIntent = new Intent(RoomDetailActivity.this, ProfileActivity.class);
+                        startActivity(profileIntent);
+                        return true;
+                    case R.id.settings_item:
+                        Intent settingsIntent = new Intent(RoomDetailActivity.this, SettingsActivity.class);
+                        startActivity(settingsIntent);
+                        return true;
+                    case R.id.sign_out_item:
+                        Intent signOutIntent = new Intent(RoomDetailActivity.this, SignOutService.class);
+                        startService(signOutIntent);
+                        Intent signUpIntent = new Intent(RoomDetailActivity.this, SignUpHomeActivity.class);
+                        startActivity(signUpIntent);
+                        return true;
+                }
+
+                return true;
+            }
+        });
+
+
+    }
+
     private void setUpUserCharacteristics(int entityId) {
         Call<List<UserCharacteristic>> r = ServiceUtils.adServiceApi.getUserCharacteristis(Integer.toString(entityId));
 
@@ -121,56 +169,6 @@ public class RoomDetailActivity extends AppCompatActivity {
             public void onResponse(Call<List<UserCharacteristic>> call, Response<List<UserCharacteristic>> response) {
                 List<UserCharacteristic> body = response.body();
                 RoomDetailFragment.listUserCharacteristic = body;
-                /*List<UserCharacteristic> sports = Mockup.getInstance().getAvailableSports();
-                List<UserCharacteristic> films = Mockup.getInstance().getAvailableFilms();
-                List<UserCharacteristic> lifestyles = Mockup.getInstance().getAvailableLifestyles();
-                List<UserCharacteristic> musics = Mockup.getInstance().getAvailableMusics();
-                List<UserCharacteristic> personalities = Mockup.getInstance().getAvailablePersonalities();
-                System.out.println("super");
-
-                for(UserCharacteristic uc : body) {
-                    if(uc.getType().equals(CharacteristicType.SPORT)) {
-                        for (UserCharacteristic uSport : sports) {
-                            if(uSport.getValue().equals(uc.getValue())) {
-                                RoomDetailFragment.listUserCharacteristic.add(uSport);
-                                break;
-                            }
-                        }
-                    } else if(uc.getType().equals(CharacteristicType.FILM)) {
-                        for (UserCharacteristic uFilm : films) {
-                            if(uFilm.getValue().equals(uc.getValue())) {
-                                RoomDetailFragment.listUserCharacteristic.add(uFilm);
-                                break;
-                            }
-                        }
-                    } else if(uc.getType().equals(CharacteristicType.LIFESTYLE)) {
-                        for (UserCharacteristic uLifestyle : lifestyles) {
-                            if(uLifestyle.getValue().equals(uc.getValue())) {
-                                RoomDetailFragment.listUserCharacteristic.add(uLifestyle);
-                                break;
-                            }
-                        }
-
-                    } else if(uc.getType().equals(CharacteristicType.MUSIC)) {
-                        for (UserCharacteristic music : musics) {
-                            if(music.getValue().equals(uc.getValue())) {
-                                RoomDetailFragment.listUserCharacteristic.add(music);
-                                break;
-                            }
-                        }
-                    } else if(uc.getType().equals(CharacteristicType.PERSONALITY)){
-                        //Personality
-                        for (UserCharacteristic pers : personalities) {
-                            if(pers.getValue().equals(uc.getValue())) {
-                                RoomDetailFragment.listUserCharacteristic.add(pers);
-                                break;
-                            }
-                        }
-                    } else {
-
-                    }
-                }*/
-
             }
 
             @Override

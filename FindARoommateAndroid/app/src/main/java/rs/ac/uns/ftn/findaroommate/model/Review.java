@@ -72,6 +72,10 @@ public class Review extends Model {
         return new Select().from(Review.class).execute();
     }
 
+    public static List<Review> getReviewsForAd(int ad) {
+        return new Select().from(Review.class).where("ad=?", ad).execute();
+    }
+
     public static List<Review> getAboutMe(int ratedUser) {
         return new Select().from(Review.class).where("rated_user=?", ratedUser).execute();
     }

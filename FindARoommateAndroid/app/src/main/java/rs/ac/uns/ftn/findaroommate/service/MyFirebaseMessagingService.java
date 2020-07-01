@@ -112,8 +112,15 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         int adEntityId = Integer.parseInt(data.get("adEntityId"));
         AdStatus adStatus = AdStatus.valueOf(data.get("adStatus"));
 
-        Ad ad = Ad.getOneGlobal(1);
+        String userIdStr = data.get("userId");
+        int userId = 0;
+        if(!userIdStr.isEmpty()){
+            userId = Integer.parseInt(userIdStr);
+        }
+
+        Ad ad = Ad.getOneGlobal(adEntityId);
         ad.setAdStatus(adStatus);
+        ad.setUserId(userId);
         ad.save();
     }
 

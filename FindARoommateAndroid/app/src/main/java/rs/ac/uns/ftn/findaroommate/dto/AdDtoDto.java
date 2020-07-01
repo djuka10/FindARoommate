@@ -24,9 +24,9 @@ public class AdDtoDto {
     @Expose
     private int entityId;
     @Expose
-    private UserDto userId;
+    private int adUserId;
     @Expose
-    private UserDto ownerId;
+    private int adOwnerId;
     @Expose
     private String title;
     @Expose
@@ -89,16 +89,9 @@ public class AdDtoDto {
         this.minDays = ad.getMinDays();
         this.maxPerson = ad.getMaxPerson();
         this.price = ad.getPrice();
-
-        UserDto ownerDto = new UserDto();
-        ownerDto.convert(ad.getOwnerId());
-        this.ownerId = ownerDto;
+        this.adOwnerId = ad.getOwnerId();
         this.adStatus = ad.getAdStatus();
+        this.adUserId = ad.getUserId();
 
-        if( ad.getUserId() != null){
-            UserDto userDto = new UserDto();
-            userDto.convert(ad.getUserId());
-            this.userId = userDto;
-        }
     }
 }

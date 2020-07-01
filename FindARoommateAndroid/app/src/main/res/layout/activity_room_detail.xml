@@ -1,106 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+    android:id="@+id/drawer_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_width="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".activity.RoomDetailActivity"
-    tools:ignore="MergeRootFrame">
+    tools:ignore="MergeRootFrame"
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
+    >
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        tools:context=".activity.RoomDetailActivity"
+        tools:ignore="MergeRootFrame">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/toolbar_layout"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:fitsSystemWindows="true"
-            app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
-            app:expandedTitleMarginStart="@dimen/activity_vertical_margin"
-            app:toolbarId="@+id/toolbar"
-            >
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/ViewPage"
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/toolbar_layout"
                 android:layout_width="match_parent"
-                android:layout_height="193dp">
+                android:layout_height="300dp"
+                android:fitsSystemWindows="true"
+                app:contentScrim="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
+                app:expandedTitleMarginStart="@dimen/activity_vertical_margin"
+                app:toolbarId="@+id/toolbar"
+                >
 
-            </androidx.viewpager.widget.ViewPager>
-<!--                <ImageView
-                    android:id="@+id/imageView"
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/ViewPage"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:src="@drawable/ic_location"
-                    android:scaleType="centerCrop">
+                    android:layout_height="193dp">
 
-                </ImageView>-->
+                </androidx.viewpager.widget.ViewPager>
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/detail_toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-                  <!--  <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">-->
-<!--
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_marginTop="15dp"
-                            android:src="@mipmap/ic_logo" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="45dp"
-                            android:gravity="center_horizontal|bottom"
-                            android:text="@string/app_title"
-                            android:textColor="@color/colorPureWhite"
-                            android:textSize="20sp"></TextView>
-
-                    </LinearLayout>-->
-
                 </androidx.appcompat.widget.Toolbar>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-<!--                    <TextView
-                        android:id="@+id/room_title"
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:layout_gravity="center_vertical|start"
-                        android:textAlignment="center"
-                        android:textColor="@color/colorPureWhite"
-                        android:textSize="30sp"
-                        tools:ignore="RtlCompat">
-                    </TextView>-->
+        </com.google.android.material.appbar.AppBarLayout>
 
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/room_detail_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:background="@color/colorPrimaryMonoComp"/>
 
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|start"
+            android:layout_margin="@dimen/fab_margin"
+            app:layout_anchor="@+id/room_detail_container"
+            app:layout_anchorGravity="bottom|right|end"
+            app:srcCompat="@android:drawable/stat_notify_chat"
+            android:tooltipText="Request to book"/>
 
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/room_detail_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:background="@color/colorPrimaryMonoComp"/>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|start"
-        android:layout_margin="@dimen/fab_margin"
-        app:layout_anchor="@+id/room_detail_container"
-        app:layout_anchorGravity="bottom|right|end"
-        app:srcCompat="@android:drawable/stat_notify_chat"
-        android:tooltipText="Request to book"/>
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/drawer_header"
+        app:menu="@menu/menu_drawer">
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </com.google.android.material.navigation.NavigationView>
+</androidx.drawerlayout.widget.DrawerLayout>

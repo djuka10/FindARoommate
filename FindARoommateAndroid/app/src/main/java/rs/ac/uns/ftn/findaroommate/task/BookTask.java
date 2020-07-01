@@ -70,8 +70,8 @@ public class BookTask extends AsyncTask<Long,Void,Void> {
                         User user = AppTools.getLoggedUser();
 
                         // interested user edited ad
-                        if(ad.getOwnerId().getEntityId() != user.getEntityId()){
-                            ad.setUserId(user);
+                        if(ad.getOwnerId() != user.getEntityId()){
+                            ad.setUserId(user.getEntityId());
                         }
                         ad.setAdStatus(ad.getAdStatus());
                         ad.save();
@@ -118,7 +118,7 @@ public class BookTask extends AsyncTask<Long,Void,Void> {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 
         String adOwnerShip = "";
-        if(ad.getOwnerId().getEntityId() == user.getEntityId()){
+        if(ad.getOwnerId() == user.getEntityId()){
             adOwnerShip = "ad";
         } else {
             adOwnerShip = "booking";
@@ -145,12 +145,12 @@ public class BookTask extends AsyncTask<Long,Void,Void> {
         Integer userId = null;
         if(adOwnerShip.equals("ad")){
             adOwnerShipRemote = "booking";
-            if(ad.getUserId() != null){
-                userId = ad.getUserId().getEntityId();
+            if(ad.getUserId() != 0){
+                userId = ad.getUserId();
             }
         } else {
             adOwnerShipRemote = "ad";
-            userId = ad.getOwnerId().getEntityId();
+            userId = ad.getOwnerId();
         }
 
         String notif_topic = context.getString(R.string.notif_booking_topic);
@@ -200,7 +200,7 @@ public class BookTask extends AsyncTask<Long,Void,Void> {
         EmailDto emailDto2;
 
         String adOwnerShip = "";
-        if(ad.getOwnerId().getEntityId() == user.getEntityId()){
+        if(ad.getOwnerId() == user.getEntityId()){
             // owner of ad is editing
 
             // notificationEmail: ad owner booking confirmation is checked
@@ -231,8 +231,9 @@ public class BookTask extends AsyncTask<Long,Void,Void> {
             }
 
             // send to user mail if it is not null
-            if(ad.getUserId() != null){
-                emailDto2 = prepareMail(ad, ad.getUserId(), "booking");
+            if(ad.getUserId() != 0){
+                User u = User.getOneGlobal(ad.getUserId());
+                emailDto2 = prepareMail(ad, u, "booking");
 
                 // send to user mail
                 Call<ResponseBody> call = ServiceUtils.userServiceApi.sendNotificationMail(emailDto2, ad.getEntityId());
@@ -259,7 +260,8 @@ public class BookTask extends AsyncTask<Long,Void,Void> {
 
         } else {
             // user would like to book ad
-            emailDto2 = prepareMail(ad, ad.getOwnerId(), "ad");
+            User own = User.getOneGlobal(ad.getOwnerId());
+            emailDto2 = prepareMail(ad, own, "ad");
             List<EmailDto> emails = new ArrayList<EmailDto>(Arrays.asList(new EmailDto[]{emailDto2}));
 
             // notificationEmail: user booking request is checked

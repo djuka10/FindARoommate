@@ -23,8 +23,10 @@ import rs.ac.uns.ftn.findaroommate.FindARoommateServer.model.Language;
 import rs.ac.uns.ftn.findaroommate.FindARoommateServer.model.ResourceRegistry;
 import rs.ac.uns.ftn.findaroommate.FindARoommateServer.model.User;
 import rs.ac.uns.ftn.findaroommate.FindARoommateServer.model.UserCharacteristic;
+import rs.ac.uns.ftn.findaroommate.FindARoommateServer.model.UserSettings;
 import rs.ac.uns.ftn.findaroommate.FindARoommateServer.service.AdService;
 import rs.ac.uns.ftn.findaroommate.FindARoommateServer.service.MailService;
+import rs.ac.uns.ftn.findaroommate.FindARoommateServer.service.SettingsService;
 import rs.ac.uns.ftn.findaroommate.FindARoommateServer.service.UserService;
 
 @RestController
@@ -39,6 +41,9 @@ public class UserController {
 	
 	@Autowired
 	private AdService adService;
+	
+	@Autowired
+	private SettingsService userSettingsService;
 	
 	@GetMapping
 	public List<User> getAll() {
@@ -104,6 +109,21 @@ public class UserController {
     public String signOut(@RequestBody User userDto){
        userService.signOut(userDto);
        return "SignOut";
+    }
+	
+	@GetMapping("/settings/{userId}")
+    public UserSettings getSettings(@PathVariable Integer userId) {
+	   UserSettings settings = userSettingsService.getOne(userId);
+	   if(settings == null) {
+		   settings = new UserSettings();
+	   }
+       return settings;
+    }
+	
+	@PostMapping("/settings")
+    public String updateSettings(@RequestBody UserSettings userSettings){
+       userSettingsService.save(userSettings);
+       return "Success";
     }
 	
 }

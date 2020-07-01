@@ -16,6 +16,7 @@ import retrofit2.http.Query;
 import rs.ac.uns.ftn.findaroommate.dto.EmailDto;
 import rs.ac.uns.ftn.findaroommate.dto.TagToSend;
 import rs.ac.uns.ftn.findaroommate.dto.UserDto;
+import rs.ac.uns.ftn.findaroommate.dto.UserSettings;
 import rs.ac.uns.ftn.findaroommate.model.Ad;
 import rs.ac.uns.ftn.findaroommate.model.Language;
 import rs.ac.uns.ftn.findaroommate.model.ResourceRegistry;
@@ -91,4 +92,15 @@ public interface UserServiceApi {
     })
     @POST(ServiceUtils.USER_API + "/signOut")
     Call<ResponseBody> signOut(@Body UserDto userDto);
+
+
+    @GET(ServiceUtils.USER_API + "/settings/{userId}")
+    Call<UserSettings> getUserSettings(@Path("userId") int userId);
+
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @POST(ServiceUtils.USER_API + "/settings")
+    Call<ResponseBody> updateSettings(@Body UserSettings userSettings);
 }

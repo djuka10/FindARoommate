@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import rs.ac.uns.ftn.findaroommate.FindARoommateServer.model.AdStatus;
 
 @Getter
 @Setter
@@ -16,8 +17,6 @@ import lombok.Setter;
 public class AdDto {
 	
 	 	private int entityId;
-	    private Integer userId;
-	    private Integer ownerId;
 	    private String title;
 	    private String description;
 	    private float latitude;
@@ -35,5 +34,11 @@ public class AdDto {
 	    private int maxPerson;
 	    private int ladiesNum;
 	    private int boysNum;
+	    private AdStatus adStatus;
+	    private String address;
+	    
+	    private Integer ownerId;
+	    private Integer userId;
+
 
 }

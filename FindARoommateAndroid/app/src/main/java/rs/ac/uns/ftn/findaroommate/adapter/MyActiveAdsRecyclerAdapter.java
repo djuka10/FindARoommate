@@ -105,7 +105,7 @@ public class MyActiveAdsRecyclerAdapter extends RecyclerView.Adapter<MyActiveAds
             ad.setAdStatus(AdStatus.APPROVE);
         } else {
             ad.setAdStatus(AdStatus.IDLE);
-            ad.setUserId(null);
+            ad.setUserId(0);
         }
         ad.save();
         Intent bookIntent = new Intent(context, BookService.class);

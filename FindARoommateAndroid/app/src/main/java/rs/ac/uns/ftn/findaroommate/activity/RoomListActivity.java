@@ -7,7 +7,9 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 
@@ -17,9 +19,11 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -34,6 +38,7 @@ import rs.ac.uns.ftn.findaroommate.model.Review;
 import rs.ac.uns.ftn.findaroommate.model.User;
 import rs.ac.uns.ftn.findaroommate.receiver.ResourceRegistryReceiver;
 import rs.ac.uns.ftn.findaroommate.service.ResourceRegistryService;
+import rs.ac.uns.ftn.findaroommate.service.SignOutService;
 
 
 import java.util.ArrayList;
@@ -67,36 +72,22 @@ public class RoomListActivity extends AppCompatActivity {
 
     public static String HOST = "";
 
+    private DrawerLayout mDrawerLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room_list);
 
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.activity_room_list_toolbar);
         toolbar.setTitle(getTitle());
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);  // false: ne prikazuje home
 
-        //updateAdsList();
-        //listOfAvaiable = new ArrayList<>();
 
-        /*for (Ad ad:adsList) {
-            if(ad.getAvailableFrom().after(new Date()) && ad.getUserId() == null)
-                listOfAvaiable.add(ad);
-        }*/
-
-       // setUpReceiver();
-
-
-      /*  FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent chatIntent = new Intent(RoomListActivity.this, ChatActivity.class);
-                startActivity(chatIntent);
-            }
-        });*/
 
         if (findViewById(R.id.room_detail_container) != null) {
             // The detail container view will be present only in the
@@ -106,11 +97,51 @@ public class RoomListActivity extends AppCompatActivity {
             mTwoPane = true;
         }
 
+        setUpDrawer();
+
         View recyclerView = findViewById(R.id.room_list);
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
 
         HOST = getString(R.string.host);
+
+
+    }
+
+    private void setUpDrawer(){
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                menuItem.setChecked(true);
+
+                int id = menuItem.getItemId();
+
+                switch (id) {
+                    case R.id.search_item:
+                        Intent intent = new Intent(RoomListActivity.this, SearchActivity.class);
+                        startActivity(intent);
+                        return true;
+                    case R.id.profile_item:
+                        Intent profileIntent = new Intent(RoomListActivity.this, ProfileActivity.class);
+                        startActivity(profileIntent);
+                        return true;
+                    case R.id.settings_item:
+                        Intent settingsIntent = new Intent(RoomListActivity.this, SettingsActivity.class);
+                        startActivity(settingsIntent);
+                        return true;
+                    case R.id.sign_out_item:
+                        Intent signOutIntent = new Intent(RoomListActivity.this, SignOutService.class);
+                        startService(signOutIntent);
+                        Intent signUpIntent = new Intent(RoomListActivity.this, SignUpHomeActivity.class);
+                        startActivity(signUpIntent);
+                        return true;
+                }
+
+                return true;
+            }
+        });
 
 
     }
@@ -122,12 +153,6 @@ public class RoomListActivity extends AppCompatActivity {
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);*/
     }
-
-    /*private void setUpReceiver() {
-        Intent resourceIntent = new Intent(this, ResourceRegistryService.class);
-        startService(resourceIntent);
-    }*/
-
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, listOfAvaiable, mTwoPane));
@@ -222,7 +247,8 @@ public class RoomListActivity extends AppCompatActivity {
                 holder.mCostsIncluded.setText("No");
             }
 
-            User user = User.getOneGlobal(mValues.get(position).getOwnerId().getEntityId());
+            int ownerId = mValues.get(position).getOwnerId();
+            User user = User.getOneGlobal(ownerId);
 
             int now = Calendar.getInstance().get(Calendar.YEAR);
             String age = "";
@@ -236,7 +262,7 @@ public class RoomListActivity extends AppCompatActivity {
 
             //Average rate number
 
-            List<Review> reviews = Review.getAllReviews();
+            List<Review> reviews = Review.getReviewsForAd(mValues.get(position).getEntityId());
             int sum = 0;
             int count = 0;
             float average = 0;

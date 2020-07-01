@@ -1,188 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<androidx.drawerlayout.widget.DrawerLayout
+    android:id="@+id/drawer_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.ProfileFormActivity"
-    >
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark">
+    android:layout_width="match_parent"
+    android:fitsSystemWindows="true">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/profile_form_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            android:gravity="center"
-            app:layout_scrollFlags="scroll|enterAlways">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@mipmap/ic_logo"
-                android:layout_marginTop="15dp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/app_title"
-                android:textColor="@color/colorPureWhite"
-                android:textSize="20sp">
-            </TextView>
-        </androidx.appcompat.widget.Toolbar>
-    </com.google.android.material.appbar.AppBarLayout>
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/sss"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:background="@color/colorPrimaryMonoComp"
+        android:orientation="vertical"
         >
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-        <LinearLayout
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/search_form_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorPrimary"
+                android:gravity="center"
+                app:layout_scrollFlags="scroll|enterAlways">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@mipmap/ic_logo"
+                    android:layout_marginTop="15dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/app_title"
+                    android:textColor="@color/colorPureWhite"
+                    android:textSize="20sp">
+                </TextView>
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/sss"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:background="@color/colorPrimaryMonoComp"
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginStart="@dimen/activity_vertical_margin"
-                android:layout_marginEnd="@dimen/activity_vertical_margin"
-                android:layout_marginTop="@dimen/form_margin_up"
-                android:layout_marginBottom="@dimen/form_margin_up"
-
-                >
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal|center_vertical"
-                    android:layout_gravity="center"
-                    android:text="@string/search_form_title"
-                    android:textColor="@color/colorPureWhite"
-                    android:textSize="30sp">
-                </TextView>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_marginStart="@dimen/activity_vertical_margin"
-                android:layout_marginEnd="@dimen/activity_vertical_margin"
-                android:layout_marginTop="@dimen/form_margin_up"
-                >
-
-                <TextView
-                    android:id="@+id/tv_enterLocation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/enter_location"
-
-                    android:textSize="20sp"
-                    android:textColor="@color/colorPureWhite"
-                    android:layout_marginTop="10dp"
-                    />
-
-                <fragment android:id="@+id/autocomplete_search_fragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/form_margin_up"
-                    android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
-                    />
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="@dimen/activity_vertical_margin"
-                android:gravity="center"
-                android:layout_marginStart="@dimen/activity_vertical_margin"
-                android:layout_marginEnd="@dimen/activity_vertical_margin"
-                android:layout_marginBottom="@dimen/form_margin_up"
-                >
-
-                <TextView
-                    android:id="@+id/tv_filters"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/filters"
-
-                    android:textSize="20sp"
-                    android:textColor="@color/colorPureWhite"
-                    android:layout_marginTop="10dp"
-                    />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginLeft="@dimen/activity_vertical_margin"
                     android:layout_marginStart="@dimen/activity_vertical_margin"
                     android:layout_marginEnd="@dimen/activity_vertical_margin"
-                    android:layout_marginRight="@dimen/activity_vertical_margin"
+                    android:layout_marginTop="@dimen/form_margin_up"
                     android:layout_marginBottom="@dimen/form_margin_up"
+
                     >
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center_horizontal|center_vertical"
                         android:layout_gravity="center"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/monthly_budget"
-                        android:textSize="15sp"
+                        android:text="@string/search_form_title"
                         android:textColor="@color/colorPureWhite"
+                        android:textSize="30sp">
+                    </TextView>
+                </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginStart="@dimen/activity_vertical_margin"
+                    android:layout_marginEnd="@dimen/activity_vertical_margin"
+                    android:layout_marginTop="@dimen/form_margin_up"
+                    >
 
+                    <TextView
+                        android:id="@+id/tv_enterLocation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/enter_location"
 
+                        android:textSize="20sp"
+                        android:textColor="@color/colorPureWhite"
+                        android:layout_marginTop="10dp"
                         />
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="@string/minimum"
-                            android:textSize="12sp"
-                            android:textColor="@color/colorPureWhite"
-                            >
-                        </TextView>
-                        <NumberPicker
-                            android:id="@+id/number_picker_min"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="50dp"
-                            android:orientation="vertical"
-                            />
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="@string/maximum"
-                            android:textSize="12sp"
-                            android:textColor="@color/colorPureWhite"
-                            >
-                        </TextView>
-                        <NumberPicker
-                            android:id="@+id/number_picker_max"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="50dp"
-                            android:orientation="vertical"
-                            />
-                    </LinearLayout>
 
+                    <fragment android:id="@+id/autocomplete_search_fragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/form_margin_up"
+                        android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+                        />
 
                 </LinearLayout>
 
@@ -191,172 +109,269 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginLeft="@dimen/activity_vertical_margin"
+                    android:layout_margin="@dimen/activity_vertical_margin"
+                    android:gravity="center"
                     android:layout_marginStart="@dimen/activity_vertical_margin"
                     android:layout_marginEnd="@dimen/activity_vertical_margin"
-                    android:layout_marginRight="@dimen/activity_vertical_margin"
                     android:layout_marginBottom="@dimen/form_margin_up"
                     >
+
                     <TextView
-                        android:layout_width="match_parent"
+                        android:id="@+id/tv_filters"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/available"
-                        android:textSize="15sp"
+                        android:text="@string/filters"
+
+                        android:textSize="20sp"
                         android:textColor="@color/colorPureWhite"
-
-
-
+                        android:layout_marginTop="10dp"
                         />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="@dimen/activity_vertical_margin"
+                        android:layout_marginStart="@dimen/activity_vertical_margin"
+                        android:layout_marginEnd="@dimen/activity_vertical_margin"
+                        android:layout_marginRight="@dimen/activity_vertical_margin"
+                        android:layout_marginBottom="@dimen/form_margin_up"
                         >
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
+                        <TextView
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/ad_form_available_from"
-                            android:textColorHint="@color/colorPureWhite"
+                            android:layout_gravity="center"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/monthly_budget"
+                            android:textSize="15sp"
                             android:textColor="@color/colorPureWhite"
-                            >
 
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/search_date_from"
-                                android:layout_width="match_parent"
+
+
+                            />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
                                 android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="@string/minimum"
+                                android:textSize="12sp"
                                 android:textColor="@color/colorPureWhite"
                                 >
-                            </com.google.android.material.textfield.TextInputEditText>
-                        </com.google.android.material.textfield.TextInputLayout>
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
+                            </TextView>
+                            <NumberPicker
+                                android:id="@+id/number_picker_min"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="50dp"
+                                android:orientation="vertical"
+                                />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="@string/maximum"
+                                android:textSize="12sp"
+                                android:textColor="@color/colorPureWhite"
+                                >
+                            </TextView>
+                            <NumberPicker
+                                android:id="@+id/number_picker_max"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="50dp"
+                                android:orientation="vertical"
+                                />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="@dimen/activity_vertical_margin"
+                        android:layout_marginStart="@dimen/activity_vertical_margin"
+                        android:layout_marginEnd="@dimen/activity_vertical_margin"
+                        android:layout_marginRight="@dimen/activity_vertical_margin"
+                        android:layout_marginBottom="@dimen/form_margin_up"
+                        >
+                        <TextView
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/ad_form_available_to"
-                            android:textColorHint="@color/colorPureWhite"
+                            android:layout_gravity="center"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/available"
+                            android:textSize="15sp"
                             android:textColor="@color/colorPureWhite"
 
-                            >
 
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/search_date_to"
-                                android:layout_width="match_parent"
+
+                            />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            >
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
                                 android:layout_height="wrap_content"
+                                android:hint="@string/ad_form_available_from"
                                 android:textColorHint="@color/colorPureWhite"
                                 android:textColor="@color/colorPureWhite"
                                 >
-                            </com.google.android.material.textfield.TextInputEditText>
-                        </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/search_date_from"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/colorPureWhite"
+                                    >
+                                </com.google.android.material.textfield.TextInputEditText>
+                            </com.google.android.material.textfield.TextInputLayout>
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/ad_form_available_to"
+                                android:textColorHint="@color/colorPureWhite"
+                                android:textColor="@color/colorPureWhite"
+
+                                >
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/search_date_to"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textColorHint="@color/colorPureWhite"
+                                    android:textColor="@color/colorPureWhite"
+                                    >
+                                </com.google.android.material.textfield.TextInputEditText>
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+
+
                     </LinearLayout>
 
 
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginLeft="@dimen/activity_vertical_margin"
-                    android:layout_marginStart="@dimen/activity_vertical_margin"
-                    android:layout_marginEnd="@dimen/activity_vertical_margin"
-                    android:layout_marginRight="@dimen/activity_vertical_margin"
-                    android:layout_marginBottom="@dimen/form_margin_up"
-                    >
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/duration_of_stay"
-                        android:textSize="15sp"
-                        android:textColor="@color/colorPureWhite"
-
-
-
-                        />
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="@dimen/activity_vertical_margin"
+                        android:layout_marginStart="@dimen/activity_vertical_margin"
+                        android:layout_marginEnd="@dimen/activity_vertical_margin"
+                        android:layout_marginRight="@dimen/activity_vertical_margin"
+                        android:layout_marginBottom="@dimen/form_margin_up"
                         >
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/duration_of_stay"
+                            android:textSize="15sp"
+                            android:textColor="@color/colorPureWhite"
 
+
+
+                            />
                         <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_weight="0.4"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             >
 
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            >
-
-                            <RadioGroup
-                                android:id="@+id/radio_group_duration"
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="0.4"
                                 android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                >
 
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
                                 android:orientation="vertical"
                                 >
 
-                                <RadioButton
-                                    android:id="@+id/radio_button_short"
+                                <RadioGroup
+                                    android:id="@+id/radio_group_duration"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@string/short_1_5_months"
-                                    android:textColor="@color/colorPureWhite"/>
 
-                                <RadioButton
-                                    android:id="@+id/radio_button_medium"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/medium_6_11_months"
-                                    android:textColor="@color/colorPureWhite"/>
+                                    android:orientation="vertical"
+                                    >
 
-                                <RadioButton
-                                    android:id="@+id/radio_button_long"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/long_12_months"
-                                    android:textColor="@color/colorPureWhite"/>
-                            </RadioGroup>
+                                    <RadioButton
+                                        android:id="@+id/radio_button_short"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/short_1_5_months"
+                                        android:textColor="@color/colorPureWhite"/>
+
+                                    <RadioButton
+                                        android:id="@+id/radio_button_medium"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/medium_6_11_months"
+                                        android:textColor="@color/colorPureWhite"/>
+
+                                    <RadioButton
+                                        android:id="@+id/radio_button_long"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/long_12_months"
+                                        android:textColor="@color/colorPureWhite"/>
+                                </RadioGroup>
+
+                            </LinearLayout>
 
                         </LinearLayout>
+
 
                     </LinearLayout>
 
 
+                    <Button
+                        android:id="@+id/btn_apply"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button_background"
+                        android:text="@string/apply"
+                        android:textColor="@color/colorPureWhite"
+                        android:layout_marginTop="30dp"
+                        />
+
+
                 </LinearLayout>
-
-
-                <Button
-                    android:id="@+id/btn_apply"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/button_background"
-                    android:text="@string/apply"
-                    android:textColor="@color/colorPureWhite"
-                    android:layout_marginTop="30dp"
-                    />
-
 
             </LinearLayout>
 
-        </LinearLayout>
 
-
-    </androidx.core.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
 
 
 
 
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </LinearLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/drawer_header"
+        app:menu="@menu/menu_drawer">
+
+    </com.google.android.material.navigation.NavigationView>
+</androidx.drawerlayout.widget.DrawerLayout>

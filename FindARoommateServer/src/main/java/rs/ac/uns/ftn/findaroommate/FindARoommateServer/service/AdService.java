@@ -103,9 +103,8 @@ public class AdService implements ServiceInterface<Ad> {
 		// TODO Auto-generated method stub
 		Ad repoAd = adRepository.getOne(entity.getEntityId());
 		
-		// i case owner is editing it will be null
-		if(entity.getUserId() != null) {
-			User user = userRepository.getOne(entity.getUserId().getEntityId());
+		if(entity.getAdUserId() != 0) {
+			User user = userRepository.getOne(entity.getAdUserId());
 			repoAd.setUserId(user);
 		} else {
 			repoAd.setUserId(null);
@@ -179,7 +178,10 @@ public class AdService implements ServiceInterface<Ad> {
 				.filter(ad -> Objects.nonNull(ad.getUserId()))
 				.filter(ad -> ad.getUserId().getEntityId().equals(userId))
 				// soon upcoming stays in less that daysBefore
-				.filter(ad -> TimeUnit.DAYS.convert(Math.abs(ad.getAvailableFrom().getTime() - now.getTime()), TimeUnit.MILLISECONDS) + 1 <= daysBefore)
+				.filter(ad -> 
+					TimeUnit.DAYS.convert(Math.abs(ad.getAvailableFrom().getTime() - now.getTime()), TimeUnit.MILLISECONDS) + 1 <= daysBefore
+					&& now.before(ad.getAvailableFrom())
+						)
 				.collect(Collectors.toList());
 	}
 

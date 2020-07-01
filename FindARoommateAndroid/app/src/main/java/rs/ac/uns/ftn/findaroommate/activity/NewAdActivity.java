@@ -258,7 +258,7 @@ public class NewAdActivity extends AppCompatActivity {
 
         Ad a = ad.getAd();
         User user = AppTools.getLoggedUser();
-        a.setOwnerId(user);
+        a.setOwnerId(user.getEntityId());
         a.setAdStatus(AdStatus.IDLE);
         a.save();
 

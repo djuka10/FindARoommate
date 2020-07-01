@@ -66,26 +66,8 @@ public class HomepageActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-        //actionBar.setIcon(R.mipmap.ic_logo);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_dot);
         actionBar.setDisplayHomeAsUpEnabled(true);
-
-
-        /*MenuItem item = (MenuItem) findViewById(R.id.profile_item);
-        if(currentUser != null) {
-            String displayName = currentUser.getDisplayName();
-
-            // If the above were null, iterate the provider data
-            // and set with the first non null data
-            for (UserInfo userInfo : currentUser.getProviderData()) {
-                if (displayName == null && userInfo.getDisplayName() != null) {
-                    displayName = userInfo.getDisplayName();
-                }
-            }
-
-            item.setTitle(displayName);
-        }*/
-
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -204,12 +186,16 @@ public class HomepageActivity extends AppCompatActivity {
                 Intent searchIntent = new Intent(HomepageActivity.this, SearchActivity.class);
                 startActivity(searchIntent);
                 return true;
-            case android.R.id.home:
-                Toast.makeText(this, "TODO: drawer togler or something else for home button", Toast.LENGTH_SHORT).show();
-                //return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // prevent gooing to the MainActivity
+        Log.d("back button", "back press");
+        finishAndRemoveTask();
     }
 
     private void removeUserDevice(){

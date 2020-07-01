@@ -249,7 +249,7 @@ public class RoomDetailFragment extends Fragment{
                     //Ad ad = Ad.load(Ad.class,adId);
                     Ad ad = mItem;
                     User user = AppTools.getLoggedUser();
-                    ad.setUserId(user);
+                    ad.setUserId(user.getEntityId());
                     ad.setAdStatus(AdStatus.PENDING);
                     ad.save();
                     Intent bookIntent = new Intent(getActivity(), BookService.class);

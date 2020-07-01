@@ -115,7 +115,8 @@ public class UserStayActivity extends AppCompatActivity {
         private List<StayDto> createStays(List<Ad> listAds) {
             List<StayDto> stays = new ArrayList<>();
             for (Ad ad: listAds) {
-                stays.add(new StayDto(ad.getTitle(), ad.getAddress(), ad.getAvailableFrom(), ad.getAvailableUntil(), ad.getAdStatus(), ad.getUserId(), ad.getEntityId(),ad.getId()));
+                User user = User.getOneGlobal(ad.getUserId());
+                stays.add(new StayDto(ad.getTitle(), ad.getAddress(), ad.getAvailableFrom(), ad.getAvailableUntil(), ad.getAdStatus(), user, ad.getEntityId(),ad.getId()));
             }
             return stays;
         }

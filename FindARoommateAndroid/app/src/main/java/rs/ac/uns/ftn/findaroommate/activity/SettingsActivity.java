@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,12 +21,20 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
+import java.io.IOException;
 import java.util.Locale;
 
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import rs.ac.uns.ftn.findaroommate.R;
+import rs.ac.uns.ftn.findaroommate.dto.UserSettings;
+import rs.ac.uns.ftn.findaroommate.service.api.ServiceUtils;
+import rs.ac.uns.ftn.findaroommate.utils.AppTools;
 
 public class SettingsActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
-    //private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +62,6 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
             int topMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, (int) getResources().getDimension(R.dimen.activity_vertical_margin), getResources().getDisplayMetrics());
             linearLayout.setPadding(horizontalMargin, topMargin, horizontalMargin, verticalMargin);
         }
-
-//        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-//        sharedPreferences.registerOnSharedPreferenceChangeListener(this);
-
     }
 
     @Override
@@ -79,7 +84,38 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        updateSettings();
+    }
+
+    private void updateSettings(){
+        UserSettings u = prepareSettingsToServer();
+        Call<ResponseBody> call = ServiceUtils.userServiceApi.updateSettings(u);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.isSuccessful()){
+
+                } else {
+                    System.out.println("Error!");
+                    Log.e("error", "Error");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                System.out.println("Error!");
+                Log.e("error", t.getMessage());
+            }
+        });
+    }
+
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        updateSettings();
+
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -149,5 +185,39 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
             setPreferencesFromResource(R.xml.preferences, rootKey);
 
         }
+    }
+
+    private UserSettings prepareSettingsToServer(){
+        UserSettings userSettings = new UserSettings();
+
+        SharedPreferences s = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        boolean prefs_should_remind = s.getBoolean(getString(R.string.prefs_should_remind), false);
+
+        boolean prefs_should_confirm_mail = s.getBoolean(getString(R.string.prefs_should_confirm_mail), false);
+        boolean prefs_should_request_mail = s.getBoolean(getString(R.string.prefs_should_request_mail), false);
+        boolean prefs_should_new_ad_mail = s.getBoolean(getString(R.string.prefs_should_new_ad_mail), false);
+
+        boolean prefs_stay_notif = s.getBoolean(getString(R.string.prefs_stay_notif), false);
+        boolean prefs_new_review_notif = s.getBoolean(getString(R.string.prefs_new_review_notif), false);
+        boolean prefs_new_message_notif = s.getBoolean(getString(R.string.prefs_new_message_notif), false);
+
+        String prefs_remind_day = s.getString(getString(R.string.prefs_remind_day), "5");
+        String prefs_unit = s.getString(getString(R.string.prefs_unit), "km");
+        String prefs_lang = s.getString(getString(R.string.prefs_lang), "english");
+
+        userSettings.setNewValues(
+                prefs_unit,
+                prefs_lang,
+                prefs_remind_day,
+                prefs_new_message_notif,
+                prefs_new_review_notif,
+                prefs_stay_notif, prefs_should_confirm_mail,
+                prefs_should_new_ad_mail,
+                prefs_should_request_mail,
+                prefs_should_remind,
+                AppTools.getLoggedUser().getEntityId()
+        );
+
+        return userSettings;
     }
 }

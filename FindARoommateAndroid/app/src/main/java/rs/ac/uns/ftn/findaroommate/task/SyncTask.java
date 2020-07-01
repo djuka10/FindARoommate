@@ -2,8 +2,11 @@ package rs.ac.uns.ftn.findaroommate.task;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
+
+import androidx.preference.PreferenceManager;
 
 import java.util.List;
 import java.util.Locale;
@@ -14,6 +17,7 @@ import retrofit2.Response;
 import rs.ac.uns.ftn.findaroommate.MainActivity;
 import rs.ac.uns.ftn.findaroommate.R;
 import rs.ac.uns.ftn.findaroommate.activity.RoomListActivity;
+import rs.ac.uns.ftn.findaroommate.dto.UserSettings;
 import rs.ac.uns.ftn.findaroommate.model.Ad;
 import rs.ac.uns.ftn.findaroommate.model.Review;
 import rs.ac.uns.ftn.findaroommate.model.User;
@@ -50,6 +54,30 @@ public class SyncTask extends AsyncTask<Void, Void, Void> {
 
         try {
 
+            Call<List<User>> c = ServiceUtils.userServiceApi.getAll();
+            c.enqueue(new Callback<List<User>>() {
+                @Override
+                public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                    if (response.isSuccessful()) {
+                        System.out.println("Meesage recieved");
+                        Log.i("fd", "Message received");
+                        List<User> users = response.body();
+                        for (User user: users) {
+                            if(User.getOneByEmailSingle(user.getEmail()) == null){
+                                user.save();
+                            }
+                        }
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<List<User>> call, Throwable t) {
+                    System.out.println("Error!");
+                    Log.e("error", t.getMessage());
+                }
+            });
+
             Call<List<Ad>> a = ServiceUtils.adServiceApi.getAll();
             a.enqueue(new Callback<List<Ad>>() {
                 @Override
@@ -63,40 +91,8 @@ public class SyncTask extends AsyncTask<Void, Void, Void> {
                         RoomListActivity.adsList = response.body();
 
                         for (Ad ad: RoomListActivity.adsList) {
-                            if(Ad.getOneGlobal(ad.getEntityId()) == ad) {
-                                //proveram kako poredi
-                            }
-
-                            User user = null;
-                            User owner = null;
-
-                            if(Ad.getOneGlobal(ad.getEntityId()) == null) {
-                                if(ad.getUserId() != null) {
-                                    user = User.getOneGlobal(ad.getUserId().getEntityId());
-                                }
-                                if(ad.getOwnerId() != null) {
-                                    owner = User.getOneGlobal(ad.getOwnerId().getEntityId());
-                                }
-
-                                if(ad.getAdStatus() != null) {
-                                    if(ad.getAdStatus().equals(AdStatus.IDLE)) {
-
-                                    } else if(ad.getAdStatus().equals(AdStatus.PENDING)) {
-
-                                    } else if(ad.getAdStatus().equals(AdStatus.APPROVE)) {
-
-                                    } else {
-                                        //denied
-                                    }
-                                }
-
-                                ad.setUserId(user);
-                                ad.setOwnerId(owner);
-                                ad.save();
-                            }
-
+                            ad.save();
                         }
-
                     }
                 }
 
@@ -111,7 +107,7 @@ public class SyncTask extends AsyncTask<Void, Void, Void> {
 
             User loggedUser = AppTools.getLoggedUser();
             if(loggedUser != null){
-                Call<List<Review>> reviewsCall = ServiceUtils.reviewServiceApi.getUserReview(loggedUser.getEntityId());
+                Call<List<Review>> reviewsCall = ServiceUtils.reviewServiceApi.getAll();
                 reviewsCall.enqueue(new Callback<List<Review>>() {
                     @Override
                     public void onResponse(Call<List<Review>> call, Response<List<Review>> response) {
@@ -135,6 +131,25 @@ public class SyncTask extends AsyncTask<Void, Void, Void> {
                         serverErrorHandling("Reviews");
                     }
                 });
+                Call<UserSettings> settingsCall = ServiceUtils.userServiceApi.getUserSettings(loggedUser.getEntityId());
+                settingsCall.enqueue(new Callback<UserSettings>() {
+                    @Override
+                    public void onResponse(Call<UserSettings> call, Response<UserSettings> response) {
+                        if(response.isSuccessful()){
+                            UserSettings settings = response.body();
+                            if(settings.getEntityId() != null){
+                                updateSettings(settings);
+                            }
+                        } else {
+                            serverErrorHandling("gettings user settings");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<UserSettings> call, Throwable t) {
+                        serverErrorHandling("gettings user settings");
+                    }
+                });
             } {
                 Log.i("login", "user Should be logged");
             }
@@ -151,6 +166,27 @@ public class SyncTask extends AsyncTask<Void, Void, Void> {
     protected void onPostExecute(Void result) {
         Log.i("REZ", "onPostExecute");
 
+    }
+
+    private void updateSettings(UserSettings settings){
+        SharedPreferences s = PreferenceManager.getDefaultSharedPreferences(context);
+        s.edit()
+                //app:EntryValues
+                .putString(context.getString(R.string.prefs_lang), settings.getLanguage())
+                .putString(context.getString(R.string.prefs_unit), settings.getDistance())
+                .putString(context.getString(R.string.prefs_remind_day), settings.getRemindDay())
+
+                .putBoolean(context.getString(R.string.prefs_should_remind), settings.getShouldRemind())
+
+
+                .putBoolean(context.getString(R.string.prefs_stay_notif), settings.getStayNotif())
+                .putBoolean(context.getString(R.string.prefs_new_message_notif), settings.getNewMessageNotif())
+                .putBoolean(context.getString(R.string.prefs_new_review_notif), settings.getNewReviewNotif())
+
+                .putBoolean(context.getString(R.string.prefs_should_request_mail), settings.getShouldRequestMail())
+                .putBoolean(context.getString(R.string.prefs_should_new_ad_mail), settings.getShouldNewAdMail())
+                .putBoolean(context.getString(R.string.prefs_should_confirm_mail), settings.getShouldConfirmMail())
+                .apply();
     }
 
     private void serverErrorHandling(String action){

@@ -27,11 +27,15 @@
         android:roundIcon="@mipmap/ic_logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+        <service
+            android:name=".service.SignOutService"
+            android:exported="false"></service>
+
         <activity
             android:name=".activity.MyAdsActivity"
             android:label="@string/title_activity_my_ads"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar"
-            android:parentActivityName=".activity.ProfileFormActivity">
+            android:parentActivityName=".activity.ProfileFormActivity"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.ProfileFormActivity" />
@@ -65,7 +69,7 @@
             android:value="FindARoommateDatabase" />
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="41" />
+            android:value="42" />
         <meta-data
             android:name="AA_MODELS"
             android:value="rs.ac.uns.ftn.findaroommate.model.Ad,                            rs.ac.uns.ftn.findaroommate.model.AdItem,                            rs.ac.uns.ftn.findaroommate.model.Message, rs.ac.uns.ftn.findaroommate.model.Language, rs.ac.uns.ftn.findaroommate.model.ResourceRegistry, rs.ac.uns.ftn.findaroommate.model.Setting, rs.ac.uns.ftn.findaroommate.model.User, rs.ac.uns.ftn.findaroommate.model.UserCharacteristic, rs.ac.uns.ftn.findaroommate.model.Review, rs.ac.uns.ftn.findaroommate.model.Stay" />
@@ -87,7 +91,11 @@
         <activity
             android:name=".activity.SignUpHomeActivity"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
+            tools:ignore="LockedOrientationActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity
             android:name=".activity.SignUpActivity"
             android:screenOrientation="portrait"
@@ -107,12 +115,11 @@
         <activity
             android:name=".activity.RoomListActivity"
             android:label="@string/title_room_list"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar"
-            android:parentActivityName=".activity.SearchActivity">
+            android:parentActivityName=".activity.SearchActivity"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="rs.ac.uns.ftn.findaroommate.activity.SearchActivity" />
-
         </activity>
         <activity
             android:name=".activity.RoomDetailActivity"
@@ -183,13 +190,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.HomepageActivity" />
         </activity>
-        <activity android:name=".activity.UserReviewDetailActivity"
+        <activity
+            android:name=".activity.UserReviewDetailActivity"
             android:parentActivityName=".activity.UserReviewActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.UserReviewActivity" />
         </activity>
-        <activity android:name=".activity.UserStayDetailActivity"
+        <activity
+            android:name=".activity.UserStayDetailActivity"
             android:parentActivityName=".activity.UserStayActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -249,7 +258,6 @@
             android:name=".receiver.UpcomingStayReceiver"
             android:enabled="true"
             android:exported="true" />
-
         <receiver
             android:name=".receiver.ReviewReceiver"
             android:enabled="true"
@@ -263,18 +271,14 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
         <service
             android:name=".service.SyncService"
             android:enabled="true"
             android:exported="true" />
-
         <service
             android:name=".service.ResourceRegistryService"
             android:enabled="true"
-            android:exported="true"></service>
-
-
+            android:exported="true" />
     </application>
 
 </manifest>

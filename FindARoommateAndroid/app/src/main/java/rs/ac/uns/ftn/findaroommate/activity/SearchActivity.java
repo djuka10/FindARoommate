@@ -2,9 +2,11 @@ package rs.ac.uns.ftn.findaroommate.activity;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -14,7 +16,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.model.LatLng;
@@ -24,6 +30,7 @@ import com.google.android.libraries.places.api.model.RectangularBounds;
 import com.google.android.libraries.places.api.model.TypeFilter;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
@@ -38,7 +45,9 @@ import rs.ac.uns.ftn.findaroommate.dto.SearchDto;
 import rs.ac.uns.ftn.findaroommate.fragment.NewAdRoomFragment;
 import rs.ac.uns.ftn.findaroommate.model.Ad;
 import rs.ac.uns.ftn.findaroommate.service.ResourceRegistryService;
+import rs.ac.uns.ftn.findaroommate.service.SignOutService;
 import rs.ac.uns.ftn.findaroommate.utils.AdStatus;
+import rs.ac.uns.ftn.findaroommate.utils.AppTools;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -57,10 +66,25 @@ public class SearchActivity extends AppCompatActivity {
 
     SearchDto searchDto;
 
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private Toolbar toolbar;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        toolbar = (Toolbar) findViewById(R.id.search_form_toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_dot);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        setUpDrawer();
 
         searchDto = new SearchDto();
 
@@ -97,7 +121,7 @@ public class SearchActivity extends AppCompatActivity {
 
         RoomListActivity.adsList = Ad.getAllAds();
         for (Ad ad:RoomListActivity.adsList) {
-            if(ad.getAvailableFrom().after(new Date()) && ad.getUserId() == null && ad.getAdStatus().equals(AdStatus.IDLE))
+            if(ad.getAvailableFrom().after(new Date()) && ad.getUserId() == 0 && ad.getAdStatus().equals(AdStatus.IDLE))
                 if(checkIfExist(ad))
                     RoomListActivity.listOfAvaiable.add(ad);
         }
@@ -106,10 +130,80 @@ public class SearchActivity extends AppCompatActivity {
         setUpReceiver();
     }
 
-    /*private void setUpAdReceiver() {
-        Intent adIntent = new Intent(this, AdService.class);
-        startService(adIntent);
-    }*/
+    private void setUpDrawer(){
+
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                menuItem.setChecked(true);
+
+                int id = menuItem.getItemId();
+
+                switch (id) {
+                    case R.id.search_item:
+
+                        return true;
+                    case R.id.profile_item:
+                        Intent intent = new Intent(SearchActivity.this, ProfileActivity.class);
+                        startActivity(intent);
+                        return true;
+                    case R.id.settings_item:
+                        Intent settingsIntent = new Intent(SearchActivity.this, SettingsActivity.class);
+                        startActivity(settingsIntent);
+                        return true;
+                    case R.id.sign_out_item:
+                        Intent signOutIntent = new Intent(SearchActivity.this, SignOutService.class);
+                        startService(signOutIntent);
+                        Intent signUpIntent = new Intent(SearchActivity.this, SignUpHomeActivity.class);
+                        startActivity(signUpIntent);
+                        return true;
+                }
+
+                return true;
+            }
+        });
+
+        mDrawerToggle = new ActionBarDrawerToggle(
+                this,                  /* host Activity */
+                mDrawerLayout,         /* DrawerLayout object */
+                toolbar,  /* nav drawer image to replace 'Up' caret */
+                R.string.drawer_open,  /* "open drawer" description for accessibility */
+                R.string.drawer_close  /* "close drawer" description for accessibility */
+        ) {
+            public void onDrawerClosed(View view) {
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+
+            public void onDrawerOpened(View drawerView) {
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+        };
+        // OVOM LINIJOM SE AKTIVIRA LISTENER IZNAD
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        // Pass any configuration change to the drawer toggls
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        //Intent intent = new Intent(this, YourActivity.class);
+        //startActivity(intent);
+    }
 
     private void setUpReceiver() {
         Intent resourceIntent = new Intent(this, ResourceRegistryService.class);
@@ -288,7 +382,7 @@ public class SearchActivity extends AppCompatActivity {
 
         List<Ad> filtered = Ad.getAllAds()
                 .stream()
-                .filter(ad -> ad.getUserId() == null)
+                .filter(ad -> ad.getUserId() == 0)
                 .filter(ad -> ad.getAdStatus().equals(AdStatus.IDLE))
                 .filter(ad -> searchDto.getCostsMin() <= ad.getPrice() && ad.getPrice() <= searchDto.getCostsMax())
                 .collect(Collectors.toList());

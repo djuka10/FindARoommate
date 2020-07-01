@@ -94,8 +94,10 @@ public class UserStayDetailActivity extends AppCompatActivity {
 
 
     private void setValues(){
-        String firstName = stayDetail.getOwnerId().getFirstName();
-        String lastName = stayDetail.getOwnerId().getLastName();
+        User owner = User.getOneGlobal(stayDetail.getOwnerId());
+
+        String firstName = owner.getFirstName();
+        String lastName = owner.getLastName();
 
         String fromStr = "";
         String  toStr = "";
@@ -131,7 +133,7 @@ public class UserStayDetailActivity extends AppCompatActivity {
         String reviewComment = reviewMessageEditText.getText().toString();
         String reviewerName = user.getFirstName();
         int author = user.getEntityId();
-        int ratedUser = stayDetail.getOwnerId().getEntityId();
+        int ratedUser = stayDetail.getOwnerId();
         int ad = stayDetail.getEntityId();
 
         Review newReview = Review.builder()
@@ -227,7 +229,7 @@ public class UserStayDetailActivity extends AppCompatActivity {
                 .title(notif_title)
                 .message(message)
                 .adId(ad.getEntityId())
-                .userId(ad.getOwnerId().getEntityId())
+                .userId(ad.getOwnerId())
                 .reviewId(reviewRemoteId)
                 .build();
 

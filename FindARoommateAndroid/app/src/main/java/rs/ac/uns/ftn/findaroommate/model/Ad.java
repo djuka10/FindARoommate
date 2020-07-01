@@ -31,13 +31,20 @@ public class Ad  extends Model{
     @Column(name = "entity_id", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
     private int entityId;
     //obican korisnik koji trazi oglas
+//    @Expose
+//    @Column(name = "user_id")
+//    private User userId;
+//    //vlasnik oglasa
+//    @Expose
+//    @Column(name = "owner_id")
+//    private User ownerId;
     @Expose
     @Column(name = "user_id")
-    private User userId;
+    private int userId;
     //vlasnik oglasa
     @Expose
     @Column(name = "owner_id")
-    private User ownerId;
+    private int ownerId;
     @Expose
     @Column(name="title")
     private String title;

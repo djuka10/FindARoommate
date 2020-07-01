@@ -9,6 +9,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -96,8 +97,10 @@ public class SignUpHomeActivity extends AppCompatActivity {
         String lastName = "";
         if(firebaseUser.getDisplayName() != null){
            credentials = firebaseUser.getDisplayName().split(" ");
-           firstName = credentials[0];
-           lastName = credentials[1];
+           if(credentials.length >= 2){
+               firstName = credentials[0];
+               lastName = credentials[1];
+           }
         }
 
         String profileUrl = "";
@@ -147,5 +150,11 @@ public class SignUpHomeActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SyncService.class);
         startService(intent);
     }
+
+//    @Override
+//    public void onBackPressed() {
+//        // prevent gooing to the MainActivity
+//        Log.d("back button", "back press");
+//    }
 
 }

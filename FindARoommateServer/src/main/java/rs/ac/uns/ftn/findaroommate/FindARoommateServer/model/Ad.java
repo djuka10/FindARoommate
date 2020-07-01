@@ -96,5 +96,7 @@ public class Ad {
     private List<Integer> roommatePrefsId;
     @Transient
     private Integer adOwnerId;
+    @Transient
+    private Integer adUserId;
     
 }

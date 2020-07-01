@@ -66,8 +66,6 @@
     <string name="prefs_should_remind">should_remind</string>
     <string name="prefs_remind_day">reminder_day</string>
     <string name="prefs_unit">unit</string>
-    <string name="prefs_new_add_notif">new_add_notif</string>
-    <string name="prefs_reminder_notif">booking_reminder_notif</string>
     <string name="prefs_new_message_notif">new_message_notif</string>
     <string name="prefs_new_review_notif">new_review_notif</string>
     <string name="prefs_should_confirm_mail">should_confirm</string>

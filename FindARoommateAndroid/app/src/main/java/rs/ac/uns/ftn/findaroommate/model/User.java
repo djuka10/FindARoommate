@@ -3,6 +3,7 @@ package rs.ac.uns.ftn.findaroommate.model;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
 import com.google.gson.annotations.Expose;
 
@@ -76,12 +77,20 @@ public class User extends Model {
         return new Select().from(User.class).where("email=?",email).execute();
     }
 
+    public static User getOneByEmailSingle(String email) {
+        return new Select().from(User.class).where("email=?",email).executeSingle();
+    }
+
     public static User getOne(long id) {
         return new Select().from(User.class).where("id=?",id).executeSingle();
     }
 
     public static User getOneGlobal(int id) {
         return new Select().from(User.class).where("entity_id=?",id).executeSingle();
+    }
+
+    public static List<User> deleteAll() {
+        return new Delete().from(User.class).execute();
     }
 
 }

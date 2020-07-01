@@ -59,6 +59,11 @@ public class PushNotificationController {
 			    data.put("fcmAction", "booking");
 			    data.put("adEntityId", ad.getEntityId().toString());
 			    data.put("adStatus", ad.getAdStatus().toString());
+			    String userId = "";
+			    if(ad.getUserId() != null) {
+			    	userId = ad.getUserId().getEntityId().toString();
+			    }
+		    	data.put("userId", userId);
 				
 				pushNotificationService.sendPushNotificationToTokenWithData(request, token, data);
 			}

@@ -57,31 +57,6 @@ public class UserService implements ServiceInterface<User> {
 	@Override
 	public User save(User entity) {
 		// TODO Auto-generated method stub
-		User user = userRepository.findByEmail(entity.getEmail());
-		User savedUser = null;
-		//if exists
-		if(user != null) {
-			user.setActiveSince(entity.getActiveSince());
-			user.setFirstName(entity.getFirstName());
-			user.setLastName(entity.getLastName());
-			user.setUrlProfile(entity.getUrlProfile());
-			
-			if(entity.getLanguageIds() != null) {
-				List<Language> languages = languageRepository.findAllById(entity.getLanguageIds());
-				user.setLanguages(languages);
-			}
-			
-			if(entity.getUserCharacteristicIds() != null) {
-				List<UserCharacteristic> userCharacteristics = userCharacteristicsRepository.findAllById(entity.getUserCharacteristicIds());
-				user.setCharacteristics(userCharacteristics);
-			}
-			
-			savedUser = userRepository.save(user);
-			updateUserDeviceRegistry(savedUser.getEntityId(), entity.getDeviceId());
-			removeOneToManyUnnecessary(savedUser);
-			return savedUser;
-		}
-		
 		if(entity.getLanguageIds() != null) {
 			List<Language> languages = languageRepository.findAllById(entity.getLanguageIds());
 			entity.setLanguages(languages);
@@ -92,7 +67,7 @@ public class UserService implements ServiceInterface<User> {
 			entity.setCharacteristics(userCharacteristics);
 		}
 		
-		savedUser = userRepository.save(entity);
+		User savedUser = userRepository.save(entity);
 		updateUserDeviceRegistry(savedUser.getEntityId(), entity.getDeviceId());
 		removeOneToManyUnnecessary(savedUser);
 		return savedUser;
