@@ -3,7 +3,7 @@
     <string name="app_title">Find a roommate</string>
 
     <!-- Ip adresa je drugacija -->
-<!--    <string name="host" translatable="false">192.168.1.4:8089</string>-->
+    <!--    <string name="host" translatable="false">192.168.1.4:8089</string>-->
     <string name="host" translatable="false">192.168.1.2:8089</string>
 
     <!-- Homepage -->
@@ -225,6 +225,8 @@
     <string name="notif_review_edit_message">You\'ve successfully entered review for %AD%. Visit your profile for more info.</string>
     <string name="notif_review_push_message">You\'ve got new review for %AD%. Visit your profile for more info.</string>
 
+    <!-- Chat -->
+    <string name="new_message_text_hint">Type your message here...</string>
 
     <!-- Review & comments -->
     <string name="profile_reviews">reviews</string>

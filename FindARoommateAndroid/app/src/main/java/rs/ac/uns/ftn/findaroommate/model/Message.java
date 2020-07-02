@@ -38,5 +38,4 @@ public class Message extends Model {
         return new Select().from(Message.class).execute();
     }
 
-    /*private List<Ad> ads;*/
 }

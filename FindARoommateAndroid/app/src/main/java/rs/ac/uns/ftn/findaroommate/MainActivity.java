@@ -35,6 +35,7 @@ import java.util.List;
 import java.util.Locale;
 
 import rs.ac.uns.ftn.findaroommate.activity.HomepageActivity;
+import rs.ac.uns.ftn.findaroommate.activity.MessagesActivity;
 import rs.ac.uns.ftn.findaroommate.activity.NewAdActivity;
 import rs.ac.uns.ftn.findaroommate.activity.ProfileActivity;
 import rs.ac.uns.ftn.findaroommate.activity.SettingsActivity;
@@ -46,6 +47,7 @@ import rs.ac.uns.ftn.findaroommate.model.Language;
 import rs.ac.uns.ftn.findaroommate.model.Message;
 import rs.ac.uns.ftn.findaroommate.model.User;
 import rs.ac.uns.ftn.findaroommate.receiver.BookReceiver;
+import rs.ac.uns.ftn.findaroommate.receiver.ChatReceiver;
 import rs.ac.uns.ftn.findaroommate.receiver.ReviewReceiver;
 import rs.ac.uns.ftn.findaroommate.receiver.ServerErrorReceiver;
 import rs.ac.uns.ftn.findaroommate.receiver.UpcomingStayReceiver;
@@ -75,6 +77,9 @@ public class MainActivity extends AppCompatActivity {
 
     private ReviewReceiver reviewReceiver;
     public static String REVIEW = "REVIEW";
+
+    private ChatReceiver chatReceiver;
+    public static String CHAT = "CHAT";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -180,6 +185,10 @@ public class MainActivity extends AppCompatActivity {
         IntentFilter reviewIntent = new IntentFilter();
         reviewIntent.addAction(REVIEW);
         registerReceiver(reviewReceiver, reviewIntent);
+
+        IntentFilter chatIntent = new IntentFilter();
+        chatIntent.addAction(CHAT);
+        registerReceiver(chatReceiver, chatIntent);
     }
 
     private void sync(){
@@ -207,6 +216,7 @@ public class MainActivity extends AppCompatActivity {
         serverErrorReceiver = new ServerErrorReceiver();
         bookReceiver = new BookReceiver();
         reviewReceiver = new ReviewReceiver();
+        chatReceiver = new ChatReceiver();
 
         Intent upcomingStayIntent = new Intent(this, UpcomingStayService.class);
         pendingIntent = PendingIntent.getService(this, 0, upcomingStayIntent, 0);

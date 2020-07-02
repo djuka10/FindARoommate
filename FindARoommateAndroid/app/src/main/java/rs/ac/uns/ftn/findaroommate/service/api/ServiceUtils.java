@@ -15,6 +15,7 @@ public class ServiceUtils {
 //    public static final String SERVER_API_PATH = "http://192.168.1.4:8089/server/";
  //      public static final String SERVER_API_PATH = "http://192.168.43.125:8089/server/";
 
+    public static final String FCM_API_PATH = "https://fcm.googleapis.com/";
 
     public static final String USER_CHARACTERISTIC_API = "userCharacteristic";
     public static final String USER_API = "user";
@@ -43,6 +44,11 @@ public class ServiceUtils {
             .client(test())
             .build();
 
+    public static Retrofit fcmRetrofit = new Retrofit.Builder()
+            .baseUrl(FCM_API_PATH)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+
 
     public static ReviewServiceApi reviewServiceApi = retrofit.create(ReviewServiceApi.class);
     public static UserServiceApi userServiceApi = retrofit.create(UserServiceApi.class);
@@ -50,5 +56,6 @@ public class ServiceUtils {
     public static LanguageServiceApi languageServiceApi = retrofit.create(LanguageServiceApi.class);
     public static UserCharacteristicServiceApi userCharacteristicServiceApi = retrofit.create(UserCharacteristicServiceApi.class);
     public static NotificationServiceApi notificationServiceApi = retrofit.create(NotificationServiceApi.class);
+    public static FCMServiceApi fcmServiceApi = fcmRetrofit.create(FCMServiceApi.class);
 
 }

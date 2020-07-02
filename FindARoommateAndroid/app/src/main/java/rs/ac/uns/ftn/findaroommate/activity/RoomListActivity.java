@@ -127,6 +127,10 @@ public class RoomListActivity extends AppCompatActivity {
                         Intent profileIntent = new Intent(RoomListActivity.this, ProfileActivity.class);
                         startActivity(profileIntent);
                         return true;
+                    case R.id.messages_item:
+                        Intent messagesIntent = new Intent(RoomListActivity.this, MessagesActivity.class);
+                        startActivity(messagesIntent);
+                        return true;
                     case R.id.settings_item:
                         Intent settingsIntent = new Intent(RoomListActivity.this, SettingsActivity.class);
                         startActivity(settingsIntent);

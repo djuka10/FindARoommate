@@ -189,7 +189,7 @@
     <!-- Google Maps API-->
 
     <string name="google_maps_API_key">AIzaSyCqysn5uvaOW6OhpBG8UWXViZ6PROqXqXo</string>
-    <string name="messenger">Messenger</string>
+    <string name="messenger">Poruke</string>
     <string name="title_activity_sign_up_google">SignUpGoogleActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -235,5 +235,9 @@
 
 
     <string name="server_error_msg">Greska na serveru prilikom %ACTION%. Molimo vas pokusajte ponovo.</string>
+
+    <!-- Chat -->
+    <string name="new_message_text_hint">Pisite poruku ovde...</string>
+
 
 </resources>

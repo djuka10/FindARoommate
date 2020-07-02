@@ -89,6 +89,10 @@ public class HomepageActivity extends AppCompatActivity {
                         Intent intent = new Intent(HomepageActivity.this, ProfileActivity.class);
                         startActivity(intent);
                         return true;
+                    case R.id.messages_item:
+                        Intent messagesIntent = new Intent(HomepageActivity.this, MessagesActivity.class);
+                        startActivity(messagesIntent);
+                        return true;
                     case R.id.settings_item:
                         Intent settingsIntent = new Intent(HomepageActivity.this, SettingsActivity.class);
                         startActivity(settingsIntent);

@@ -149,6 +149,10 @@ public class SearchActivity extends AppCompatActivity {
                         Intent intent = new Intent(SearchActivity.this, ProfileActivity.class);
                         startActivity(intent);
                         return true;
+                    case R.id.messages_item:
+                        Intent messagesIntent = new Intent(SearchActivity.this, MessagesActivity.class);
+                        startActivity(messagesIntent);
+                        return true;
                     case R.id.settings_item:
                         Intent settingsIntent = new Intent(SearchActivity.this, SettingsActivity.class);
                         startActivity(settingsIntent);
@@ -380,12 +384,20 @@ public class SearchActivity extends AppCompatActivity {
 //        float NsRioBrasil = this.getDistanceFromLatLonInKm(45.27f, 19.83f, -22.9f, -43.17f);
         List<Ad> allAds = Ad.getAllAds();
 
+        float defaultCostsMinValue = 50f;
+        float defaultCostsMaxValue = 250f;
+
         List<Ad> filtered = Ad.getAllAds()
                 .stream()
                 .filter(ad -> ad.getUserId() == 0)
                 .filter(ad -> ad.getAdStatus().equals(AdStatus.IDLE))
-                .filter(ad -> searchDto.getCostsMin() <= ad.getPrice() && ad.getPrice() <= searchDto.getCostsMax())
                 .collect(Collectors.toList());
+
+        if(searchDto.getCostsMax() != defaultCostsMaxValue && searchDto.getCostsMin() != defaultCostsMinValue){
+            filtered = filtered.stream()
+                    .filter(ad -> searchDto.getCostsMin() <= ad.getPrice() && ad.getPrice() <= searchDto.getCostsMax())
+                    .collect(Collectors.toList());;
+        }
 
         if(!searchDto.getDurationOfStay().isEmpty()){
             filtered = filtered.stream()

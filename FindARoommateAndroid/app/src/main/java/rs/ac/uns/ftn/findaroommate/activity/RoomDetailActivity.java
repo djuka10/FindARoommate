@@ -54,6 +54,8 @@ public class RoomDetailActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
 
+    Ad ad;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,14 +68,7 @@ public class RoomDetailActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent chatIntent = new Intent(RoomDetailActivity.this, ChatActivity.class);
-                startActivity(chatIntent);
-            }
-        });
+
 
         // Show the Up button in the action bar.
         ActionBar actionBar = getSupportActionBar();
@@ -103,7 +98,7 @@ public class RoomDetailActivity extends AppCompatActivity {
 
             CollapsingToolbarLayout layout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
             //Ad ad = RoomListActivity.adsMap.get(getIntent().getStringExtra(RoomDetailFragment.ARG_ITEM_ID));
-            Ad ad = Ad.getOneGlobal(getIntent().getExtras().getInt(RoomDetailFragment.ARG_ITEM_ID));
+            ad = Ad.getOneGlobal(getIntent().getExtras().getInt(RoomDetailFragment.ARG_ITEM_ID));
 
             viewPager = (ViewPager) findViewById(R.id.ViewPage);
 
@@ -120,6 +115,21 @@ public class RoomDetailActivity extends AppCompatActivity {
 //                    .add(R.id.room_detail_container, fragment)
 //                    .commit();
         }
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent chatIntent = new Intent(RoomDetailActivity.this, MessageActivity.class);
+
+                startActivity(chatIntent);
+
+                Intent messageIntent = new Intent(RoomDetailActivity.this, MessageActivity.class);
+                messageIntent.putExtra("receiverId", ad.getOwnerId());
+                messageIntent.putExtra("adId", ad.getEntityId());
+                startActivity(messageIntent);
+            }
+        });
 
     }
 
@@ -141,6 +151,10 @@ public class RoomDetailActivity extends AppCompatActivity {
                     case R.id.profile_item:
                         Intent profileIntent = new Intent(RoomDetailActivity.this, ProfileActivity.class);
                         startActivity(profileIntent);
+                        return true;
+                    case R.id.messages_item:
+                        Intent messagesIntent = new Intent(RoomDetailActivity.this, MessagesActivity.class);
+                        startActivity(messagesIntent);
                         return true;
                     case R.id.settings_item:
                         Intent settingsIntent = new Intent(RoomDetailActivity.this, SettingsActivity.class);
