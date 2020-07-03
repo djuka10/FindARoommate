@@ -65,6 +65,8 @@ public class MessageActivity extends AppCompatActivity {
     RecyclerView messagesRecyclerView;
     List<FirebaseMessageDto> messages;
 
+    User receiver;
+
     boolean notify = true;
 
     public static String PROFILE_URL = "http://HOST/server/user/profile/";
@@ -90,7 +92,7 @@ public class MessageActivity extends AppCompatActivity {
             receiverId = getIntent().getExtras().getInt("receiverId", -1);
             adId = getIntent().getExtras().getInt("adId", -1);
 
-            User receiver = User.getOneGlobal(receiverId);
+            receiver = User.getOneGlobal(receiverId);
 
             User sender = AppTools.getLoggedUser();
             loggedUserId = sender.getEntityId();
@@ -122,13 +124,13 @@ public class MessageActivity extends AppCompatActivity {
 
             message_profile_img = (ImageView)findViewById(R.id.message_profile_img);
 
-            if(loggedUser.getUrlProfile() != null) {
-                if (loggedUser.getUrlProfile().startsWith("http")) { // fotografija je sa google naloga
-                    Glide.with(this).load(loggedUser.getUrlProfile()).into(message_profile_img);
+            if(receiver.getUrlProfile() != null) {
+                if (receiver.getUrlProfile().startsWith("http")) { // fotografija je sa google naloga
+                    Glide.with(this).load(receiver.getUrlProfile()).into(message_profile_img);
                 } else {
 
                     Glide.with(getApplicationContext())
-                            .load(PROFILE_URL.replace("HOST", getString(R.string.host)) + loggedUser.getUrlProfile())
+                            .load(PROFILE_URL.replace("HOST", getString(R.string.host)) + receiver.getUrlProfile())
                             .listener(new RequestListener<Drawable>() {
                                           @Override
                                           public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {

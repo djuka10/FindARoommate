@@ -80,7 +80,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
         map.addMarker(adPlace);
-        CameraUpdate location = CameraUpdateFactory.newLatLngZoom(adLocation, 10.0f);
+        CameraUpdate location = CameraUpdateFactory.newLatLngZoom(adLocation, 15.0f);
         map.animateCamera(location);
 
 /*        map.addMarker(place2);*/

@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_margin="@dimen/text_margin"
-            android:scaleType="fitXY"
+            android:scaleType="fitCenter"
             android:adjustViewBounds="true"
             android:textAppearance="?attr/textAppearanceListItem"
             />
