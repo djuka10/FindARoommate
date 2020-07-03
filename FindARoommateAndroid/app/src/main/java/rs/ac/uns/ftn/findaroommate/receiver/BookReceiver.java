@@ -51,6 +51,9 @@ public class BookReceiver extends BroadcastReceiver {
             Intent profileIntent = new Intent(context, ProfileActivity.class);
             PendingIntent pProfileIntent = PendingIntent.getActivity(context, 0, profileIntent, 0);
 
+            Intent settingsIntent = new Intent(context, SettingsActivity.class);
+            PendingIntent pIntentSettings = PendingIntent.getActivity(context, 0, settingsIntent, 0);
+
             Bitmap bm = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_logo);
 
             NotificationManager mNotificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -61,6 +64,8 @@ public class BookReceiver extends BroadcastReceiver {
                             .bigText(bookingMessage
                             ))
                     .addAction(R.drawable.ic_profile, contentAction, pProfileIntent)
+                    .addAction(R.drawable.ic_settings, context.getString(R.string.notif_settings_action), pIntentSettings)
+                    .setColor(Color.CYAN)
                     .setLargeIcon(bm);
 
             mNotificationManager.notify(notificationID, mBuilder.build());

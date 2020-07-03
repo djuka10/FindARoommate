@@ -151,10 +151,10 @@ public class SignUpHomeActivity extends AppCompatActivity {
         startService(intent);
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        // prevent gooing to the MainActivity
-//        Log.d("back button", "back press");
-//    }
+    @Override
+    public void onBackPressed() {
+        // prevent gooing to the MainActivity
+        Log.d("back button", "back press");
+    }
 
 }

@@ -25,7 +25,7 @@
 
         <ListPreference
             app:iconSpaceReserved="false"
-            app:defaultValue="serbian"
+            app:defaultValue="english"
             app:entries="@array/lang_entries"
             app:entryValues="@array/lang_values"
             app:key="@string/prefs_lang"

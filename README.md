@@ -1,4 +1,4 @@
-# FindARoommate
+﻿# FindARoommate
 
 Aplikacija FindARoommate je osmišljena sa idejom da pomogne ljudima koji izdaju stanove kako bi mogli postaviti oglas za izdavanje stana za više osoba u određenom gradu na određeno vreme.
 Takođe aplikacija služi i za osobe koje žele da pronađu cimiere u svrhu podele troškova.
@@ -15,7 +15,7 @@ Osnovne funkcionalnosti aplikacije su:
 
 Detaljnu specifikaciju možete pronaći [ovde](https://github.com/djuka10/FindARoommate/blob/development/PMA_2020_07.pdf)
 
-Demo video možete pronaći [ovde]()
+Demo video možete pronaći [ovde](https://youtu.be/psqf9Nx2xZo)
 
 Članovi tima:
 * [Luka Jovanovic](https://github.com/lukajvnv)

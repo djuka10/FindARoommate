@@ -81,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
     private ChatReceiver chatReceiver;
     public static String CHAT = "CHAT";
 
+    boolean logged;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,17 +105,8 @@ public class MainActivity extends AppCompatActivity {
         TextView textView = (TextView)findViewById(R.id.textView);
         textView.setText(m.getTitle() + m.getMessage());
 
-        Button button = (Button)findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, HomepageActivity.class);
-                startActivity(intent);
-            }
-        });
 
-
-        boolean logged = false;
+        logged = false;
 
         if(currentUser == null) {
             logged = false;
@@ -128,6 +121,20 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, SignUpHomeActivity.class);
             startActivity(intent);
         }
+
+        Button button = (Button)findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(logged){
+                    Intent intent = new Intent(MainActivity.this, HomepageActivity.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(MainActivity.this, SignUpHomeActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
 
         setUpLanguage();
         sync();

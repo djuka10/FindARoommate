@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
@@ -14,6 +15,7 @@ import androidx.core.app.NotificationCompat;
 import rs.ac.uns.ftn.findaroommate.MainActivity;
 import rs.ac.uns.ftn.findaroommate.R;
 import rs.ac.uns.ftn.findaroommate.activity.ProfileActivity;
+import rs.ac.uns.ftn.findaroommate.activity.SettingsActivity;
 
 public class ReviewReceiver extends BroadcastReceiver {
     private static int notificationID = 4;
@@ -31,6 +33,9 @@ public class ReviewReceiver extends BroadcastReceiver {
             Intent profileIntent = new Intent(context, ProfileActivity.class);
             PendingIntent pProfileIntent = PendingIntent.getActivity(context, 0, profileIntent, 0);
 
+            Intent settingsIntent = new Intent(context, SettingsActivity.class);
+            PendingIntent pIntentSettings = PendingIntent.getActivity(context, 0, settingsIntent, 0);
+
             Bitmap bm = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_logo);
 
             NotificationManager mNotificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -41,6 +46,8 @@ public class ReviewReceiver extends BroadcastReceiver {
                             .bigText(notif_review_message
                             ))
                     .addAction(R.drawable.ic_profile, contentAction, pProfileIntent)
+                    .addAction(R.drawable.ic_settings, context.getString(R.string.notif_settings_action), pIntentSettings)
+                    .setColor(Color.GREEN)
                     .setLargeIcon(bm);
 
             mNotificationManager.notify(notificationID, mBuilder.build());

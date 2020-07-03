@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,6 +21,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import rs.ac.uns.ftn.findaroommate.MainActivity;
 import rs.ac.uns.ftn.findaroommate.activity.ProfileFormActivity;
+import rs.ac.uns.ftn.findaroommate.dto.FirebaseUserDto;
 import rs.ac.uns.ftn.findaroommate.dto.UserDto;
 import rs.ac.uns.ftn.findaroommate.model.User;
 import rs.ac.uns.ftn.findaroommate.model.UserCharacteristic;
@@ -70,6 +74,7 @@ public class EditProfileTask extends AsyncTask<Long, Void, Void> {
                             User user = users.get(0);
                             user.setEntityId(body.getEntityId());
                             user.save();
+                            updateUser(body.getEntityId());
                         }
 
                     } else {
@@ -106,5 +111,12 @@ public class EditProfileTask extends AsyncTask<Long, Void, Void> {
     @Override
     protected void onPostExecute(Void aVoid) {
 
+    }
+
+    private void updateUser(int loggedUserId){
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+        FirebaseUserDto user = new FirebaseUserDto(loggedUserId, AppTools.getDeviceId());
+
+        ref.child(String.valueOf(loggedUserId)).setValue(user);
     }
 }

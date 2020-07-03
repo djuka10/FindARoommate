@@ -266,7 +266,7 @@ public class RoomListActivity extends AppCompatActivity {
 
             //Average rate number
 
-            List<Review> reviews = Review.getReviewsForAd(mValues.get(position).getEntityId());
+            List<Review> reviews = Review.getAboutMe(mValues.get(position).getOwnerId());
             int sum = 0;
             int count = 0;
             float average = 0;
@@ -278,10 +278,11 @@ public class RoomListActivity extends AppCompatActivity {
                 }
             }
 
-            if(sum != 0)
+            if(sum != 0){
                 average = (float) sum / count;
+                holder.mRateNumber.setText(String.format("%.2f", average));
+            }
 
-            holder.mRateNumber.setText(String.format("%.2f", average));
 
             holder.itemView.setTag(mValues.get(position));
             holder.itemView.setOnClickListener(mOnClickListener);

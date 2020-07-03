@@ -65,6 +65,7 @@ public class UserStayRecyclerAdapter extends RecyclerView.Adapter<UserStayRecycl
                         context.startActivity(intent);
                     } else {
                         Log.i("User review action", "For this stay user already added review.");
+                        Toast.makeText(context, "For this stay user already added review.", Toast.LENGTH_SHORT).show();
                     }
 
                 } else {

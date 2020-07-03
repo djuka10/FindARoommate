@@ -3,8 +3,9 @@
     <string name="app_title">Find a roommate</string>
 
     <!-- Ip adresa je drugacija -->
-        <string name="host" translatable="false">192.168.1.4:8089</string>
-    <!--<string name="host" translatable="false">192.168.1.2:8089</string>-->
+<!--        <string name="host" translatable="false">192.168.1.4:8089</string>-->
+<!--    <string name="host" translatable="false">192.168.1.2:8089</string>-->
+    <string name="host" translatable="false">192.168.43.125:8089</string>
 
     <!-- Homepage -->
     <string name="hello_world">Hello world!</string>

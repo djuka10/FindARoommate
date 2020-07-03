@@ -2,6 +2,7 @@ package rs.ac.uns.ftn.findaroommate.task;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.List;
@@ -60,7 +61,6 @@ public class ResourceRegistryTask extends AsyncTask<Long,Void,Void> {
     @Override
     protected void onPostExecute(Void aVoid) {
         //super.onPostExecute(aVoid);
-        Toast.makeText(context, "Succesfully!!", Toast.LENGTH_SHORT).show();
-
+        Log.i("Resource images registry task", "Succesfully get images");
     }
 }

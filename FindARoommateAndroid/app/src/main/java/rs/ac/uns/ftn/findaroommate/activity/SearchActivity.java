@@ -98,8 +98,6 @@ public class SearchActivity extends AppCompatActivity {
                 if(valid()){
                     preparedSearchFields();
 
-                    Toast.makeText(SearchActivity.this, "MasterDetailView action", Toast.LENGTH_LONG).show();
-
                     RoomListActivity.listOfAvaiable = search();
 
                     Intent intent = new Intent(SearchActivity.this, RoomListActivity.class);

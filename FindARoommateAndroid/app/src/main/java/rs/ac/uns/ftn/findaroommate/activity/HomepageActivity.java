@@ -199,7 +199,7 @@ public class HomepageActivity extends AppCompatActivity {
     public void onBackPressed() {
         // prevent gooing to the MainActivity
         Log.d("back button", "back press");
-        finishAndRemoveTask();
+        //finishAndRemoveTask();
     }
 
     private void removeUserDevice(){

@@ -63,7 +63,7 @@ public class ImageAdapterOnline extends PagerAdapter {
         loadingBar.setTitle("Loading profile into");
         loadingBar.setMessage("Please wait");
         loadingBar.setCanceledOnTouchOutside(true);
-        loadingBar.show();
+        //loadingBar.show();
 
 
         //TODO ukoliko ne postoje slike treba dismissovati ovo
