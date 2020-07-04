@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="rs.ac.uns.ftn.findaroommate">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature
+        android:name="android.hardware.camera.front"
+        android:required="false" />
+
+    <application
+        android:name="com.activeandroid.app.Application"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_logo"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_logo_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme.NoActionBar">
+
+        <service
+            android:name=".service.SignOutService"
+            android:exported="false" />
+
+        <activity
+            android:name=".activity.MyAdsActivity"
+            android:label="@string/title_activity_my_ads"
+            android:parentActivityName=".activity.ProfileFormActivity"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.ProfileFormActivity" />
+        </activity>
+
+        <service
+            android:name=".service.BookService"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".service.BookIntentService"
+            android:exported="false" />
+        <service
+            android:name=".service.EditProfileIntentService"
+            android:exported="false" /> <!-- Google Maps -->
+        <!-- BUG IN GOOGLE PLAY SERVICES!!! -->
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCqysn5uvaOW6OhpBG8UWXViZ6PROqXqXo" />
+        <!--
+        <meta-data android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        -->
+        <!-- Database SQLite -->
+        <meta-data
+            android:name="AA_DB_NAME"
+            android:value="FindARoommateDatabase" />
+        <meta-data
+            android:name="AA_DB_VERSION"
+            android:value="42" />
+        <meta-data
+            android:name="AA_MODELS"
+            android:value="rs.ac.uns.ftn.findaroommate.model.Ad,                            rs.ac.uns.ftn.findaroommate.model.AdItem,                            rs.ac.uns.ftn.findaroommate.model.Message, rs.ac.uns.ftn.findaroommate.model.Language, rs.ac.uns.ftn.findaroommate.model.ResourceRegistry, rs.ac.uns.ftn.findaroommate.model.Setting, rs.ac.uns.ftn.findaroommate.model.User, rs.ac.uns.ftn.findaroommate.model.UserCharacteristic, rs.ac.uns.ftn.findaroommate.model.Review, rs.ac.uns.ftn.findaroommate.model.Stay" />
+
+        <provider
+            android:name="com.activeandroid.content.ContentProvider"
+            android:authorities="rs.ac.uns.ftn.findaroommate" />
+
+        <activity
+            android:name=".activity.MapActivity"
+            android:label="Map" />
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:label="@string/title_activity_settings">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="rs.ac.uns.ftn.findaroommate.activity.HomepageActivity" />
+        </activity>
+        <activity
+            android:name=".activity.SignUpHomeActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
+            android:name=".activity.SignUpActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:label="@string/title_activity_login"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.HomepageActivity"
+            android:label="HomepageActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
+            android:name=".activity.RoomListActivity"
+            android:label="@string/title_room_list"
+            android:parentActivityName=".activity.SearchActivity"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="rs.ac.uns.ftn.findaroommate.activity.SearchActivity" />
+        </activity>
+        <activity
+            android:name=".activity.RoomDetailActivity"
+            android:label="@string/title_room_detail"
+            android:parentActivityName=".activity.RoomListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar"
+            tools:ignore="LockedOrientationActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="rs.ac.uns.ftn.findaroommate.activity.RoomListActivity" />
+        </activity>
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.SearchActivity" />
+        <activity
+            android:name=".activity.ProfileActivity"
+            android:parentActivityName=".activity.HomepageActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.HomepageActivity" />
+        </activity>
+        <activity
+            android:name=".activity.LanguageChooserActivity"
+            android:parentActivityName=".activity.ProfileFormActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.ProfileFormActivity" />
+        </activity>
+        <activity
+            android:name=".activity.UserAttributesActivity"
+            android:parentActivityName=".activity.ProfileFormActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.ProfileFormActivity" />
+        </activity>
+        <activity
+            android:name=".activity.ProfileFormActivity"
+            android:parentActivityName=".activity.ProfileActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.ProfileActivity" />
+        </activity>
+        <activity
+            android:name=".activity.UserStayActivity"
+            android:parentActivityName=".activity.ProfileActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.ProfileActivity" />
+        </activity>
+        <activity
+            android:name=".activity.UserReviewActivity"
+            android:parentActivityName=".activity.ProfileActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.ProfileActivity" />
+        </activity>
+        <activity
+            android:name=".activity.NewAdActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:parentActivityName=".activity.HomepageActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.HomepageActivity" />
+        </activity>
+        <activity
+            android:name=".activity.UserReviewDetailActivity"
+            android:parentActivityName=".activity.UserReviewActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.UserReviewActivity" />
+        </activity>
+        <activity
+            android:name=".activity.UserStayDetailActivity"
+            android:parentActivityName=".activity.UserStayActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.UserStayActivity" />
+        </activity>
+        <activity android:name=".activity.ChatActivity" /> <!-- Facebook -->
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
+
+        <provider
+            android:name=".provider.GenericFileProvider"
+            android:authorities="rs.ac.uns.ftn.findaroommate.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+        <service android:name=".service.DemoService" />
+
+        <receiver android:name=".receiver.ServerErrorReceiver" />
+        <receiver android:name=".receiver.BookReceiver" />
+
+        <service
+            android:name=".service.EditProfileService"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".service.EditProfileIntentService"
+            android:exported="false" />
+        <service
+            android:name=".service.EditAdService"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".service.UploadImagesService"
+            android:enabled="true"
+            android:exported="true" />
+        <service android:name=".service.UpcomingStayService" />
+
+        <receiver
+            android:name=".receiver.UpcomingStayReceiver"
+            android:enabled="true"
+            android:exported="true" />
+        <receiver
+            android:name=".receiver.ReviewReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
+        <receiver
+            android:name=".receiver.ChatReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
+        <service
+            android:name=".service.MyFirebaseMessagingService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".service.SyncService"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".service.ResourceRegistryService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".activity.MessageActivity"
+            android:parentActivityName=".activity.MessagesActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MessagesActivity" />
+        </activity>
+        <activity android:name=".activity.MessagesActivity"
+            android:parentActivityName=".activity.HomepageActivity">
+            <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".activity.HomepageActivity" />
+        </activity>
+    </application>
+
+</manifest>

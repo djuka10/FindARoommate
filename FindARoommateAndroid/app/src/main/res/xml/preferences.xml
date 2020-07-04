@@ -1,0 +1,127 @@
+<!--
+  ~ Copyright 2018 The app Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <PreferenceCategory
+        app:title="@string/general_header"
+        app:iconSpaceReserved="false"
+        >
+
+        <ListPreference
+            app:iconSpaceReserved="false"
+            app:defaultValue="english"
+            app:entries="@array/lang_entries"
+            app:entryValues="@array/lang_values"
+            app:key="@string/prefs_lang"
+            app:title="@string/language_title"
+            app:useSimpleSummaryProvider="true"
+            />
+
+        <CheckBoxPreference
+            app:iconSpaceReserved="false"
+            android:defaultValue="false"
+            android:key="@string/prefs_should_remind"
+            android:summary="@string/remind_summary"
+            android:title="@string/should_remind_title"
+            />
+
+        <EditTextPreference
+            app:iconSpaceReserved="false"
+            app:dependency="@string/prefs_should_remind"
+            android:defaultValue="5"
+            app:key="@string/prefs_remind_day"
+            app:title="@string/reminder_day_title"
+            app:useSimpleSummaryProvider="true"
+            />
+
+        <ListPreference
+            app:iconSpaceReserved="false"
+            app:defaultValue="km"
+            app:entries="@array/unit_entries"
+            app:entryValues="@array/unit_values"
+            app:key="@string/prefs_unit"
+            app:title="@string/unit_title"
+            app:useSimpleSummaryProvider="true" />
+
+        <!-- Camera permission-->
+        <!--
+        <CheckBoxPreference
+            app:iconSpaceReserved="false"
+            android:defaultValue="true"
+            android:key="@string/prefs_camera_permision"
+            android:summary="@string/remind_summary"
+            android:title="@string/should_remind_title"
+            />
+        -->
+    </PreferenceCategory>
+    <PreferenceCategory app:title="@string/notification_header"
+        app:iconSpaceReserved="false"
+        >
+
+        <!--<SwitchPreferenceCompat
+            app:iconSpaceReserved="false"
+            app:key="@string/prefs_new_add_notif"
+            app:defaultValue="false"
+            app:title="@string/new_add_notif_title" />-->
+
+        <SwitchPreferenceCompat
+            app:iconSpaceReserved="false"
+            app:defaultValue="false"
+            app:key="@string/prefs_stay_notif"
+            app:title="@string/stay_notif_title" />
+
+        <SwitchPreferenceCompat
+            app:iconSpaceReserved="false"
+            app:defaultValue="false"
+            app:key="@string/prefs_new_message_notif"
+            app:title="@string/new_message_notif_title" />
+
+        <SwitchPreferenceCompat
+            app:iconSpaceReserved="false"
+            app:key="@string/prefs_new_review_notif"
+            app:defaultValue="false"
+            app:title="@string/new_review_notif_title" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/notification_mail_header"
+        app:iconSpaceReserved="false"
+        >
+
+        <SwitchPreferenceCompat
+            app:iconSpaceReserved="false"
+            app:key="@string/prefs_should_confirm_mail"
+            app:defaultValue="false"
+            app:title="@string/should_send_conf_at_mail_title" />
+
+        <SwitchPreferenceCompat
+            app:iconSpaceReserved="false"
+            app:key="@string/prefs_should_request_mail"
+            app:defaultValue="false"
+            app:title="@string/should_send_req_at_mail_title" />
+
+        <SwitchPreferenceCompat
+            app:iconSpaceReserved="false"
+            app:key="@string/prefs_should_new_ad_mail"
+            app:defaultValue="false"
+            app:title="@string/should_send_new_ad_title" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

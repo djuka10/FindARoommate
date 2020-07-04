@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginBottom="@dimen/text_margin"
+    app:layout_goneMarginBottom="@dimen/text_margin"
+    android:background="@drawable/layout_round_edg">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ad_picture"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="@dimen/text_margin"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:textAppearance="?attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/owner"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="2dp"
+            android:layout_below="@id/ad_picture"
+            app:autoSizeTextType="uniform"
+            android:textSize="12dp"
+            android:textColor="@android:color/black"
+            android:textAlignment="gravity"
+            android:textAppearance="?attr/textAppearanceListItem">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/rate_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/owner"
+            android:layout_below="@+id/ad_picture"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            app:autoSizeTextType="uniform"
+            android:textSize="12dp"
+            android:textColor="@android:color/black"
+            android:textAlignment="gravity">
+
+        </TextView>
+
+        <ImageView
+            android:id="@+id/star_picture"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/rate_number"
+            android:layout_below="@+id/ad_picture"
+            android:layout_above="@+id/content"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="2dp"
+            android:src="@drawable/ic_gold_star_foreground"
+            android:scaleType="fitCenter">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="2dp"
+            android:layout_below="@id/owner"
+            app:autoSizeTextType="uniform"
+            android:textColor="@android:color/black"
+            android:textAppearance="?attr/textAppearanceListItem" />
+
+        <TextView
+            android:id="@+id/price_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="2dp"
+            android:layout_below="@id/content"
+            android:textColor="@android:color/black"
+            android:textAppearance="?attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="2dp"
+            android:layout_below="@id/content"
+            android:layout_toRightOf="@id/price_label"
+            android:textColor="@android:color/black"
+            android:textAppearance="?attr/textAppearanceListItem"/>
+
+        <TextView
+            android:id="@+id/costs_included_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="2dp"
+            android:layout_below="@id/content"
+            android:layout_toRightOf="@id/price"
+            android:textColor="@android:color/black"
+            android:textAppearance="?attr/textAppearanceListItem"
+            />
+
+        <TextView
+            android:id="@+id/costs_included"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="2dp"
+            android:layout_below="@id/content"
+            android:layout_toRightOf="@id/costs_included_label"
+            android:textColor="@android:color/black"
+            android:textAppearance="?attr/textAppearanceListItem"
+            >
+
+        </TextView>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

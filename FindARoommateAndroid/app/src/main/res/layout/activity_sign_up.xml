@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".activity.SignUpActivity"
+    android:background="@color/colorPrimaryMonoComp"
+    android:layout_gravity="center_vertical|center_horizontal"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="40"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/sign_up"
+            android:textColor="@android:color/black"
+            android:textSize="40sp"
+            android:background="@drawable/layout_round_edg"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp">
+        </TextView>
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="60"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/sign_up_email"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+
+            android:background="@drawable/layout_round_edg"
+            android:hint="@string/prompt_email"
+            android:inputType="textEmailAddress"
+            android:selectAllOnFocus="true"
+            />
+
+        <EditText
+            android:id="@+id/sign_up_first_name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginEnd="24dp"
+
+            android:background="@drawable/layout_round_edg"
+            android:hint="@string/prompt_first_name"
+            android:imeActionLabel="@string/action_sign_in_short"
+            android:imeOptions="actionDone"
+            android:inputType="textPersonName"
+            android:selectAllOnFocus="true"
+            />
+
+        <EditText
+            android:id="@+id/sign_up_last_name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginEnd="24dp"
+
+            android:background="@drawable/layout_round_edg"
+            android:hint="@string/prompt_last_name"
+            android:imeActionLabel="@string/action_sign_in_short"
+            android:imeOptions="actionDone"
+            android:inputType="textPersonName"
+            android:selectAllOnFocus="true"
+            />
+
+        <EditText
+            android:id="@+id/sign_up_username"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginEnd="24dp"
+
+            android:background="@drawable/layout_round_edg"
+            android:hint="@string/prompt_username"
+            android:imeActionLabel="@string/action_sign_in_short"
+            android:imeOptions="actionDone"
+            android:inputType="textPersonName"
+            android:selectAllOnFocus="true"
+            />
+
+        <EditText
+            android:id="@+id/sign_up_password"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginEnd="24dp"
+
+            android:background="@drawable/layout_round_edg"
+            android:hint="@string/prompt_password"
+            android:imeActionLabel="@string/action_sign_in_short"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            android:selectAllOnFocus="true"
+            />
+
+        <Button
+            android:id="@+id/btn_signup"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="60dp"
+            android:text="@string/sign_up"
+            android:background="@drawable/button_effect"
+            />
+    </LinearLayout>
+</LinearLayout>

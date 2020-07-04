@@ -1,0 +1,61 @@
+package rs.ac.uns.ftn.findaroommate.FindARoommateServer.firebase;
+
+import java.time.Duration;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+
+import com.google.firebase.messaging.AndroidConfig;
+import com.google.firebase.messaging.AndroidNotification;
+import com.google.firebase.messaging.ApnsConfig;
+import com.google.firebase.messaging.Aps;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.Message;
+import com.google.firebase.messaging.Notification;
+
+
+@Service
+public class FCMService {
+	
+    Logger logger = LoggerFactory.getLogger(FCMService.class);
+    
+    public void sendMessageToTokenWithData(PushNotificationRequest request, String token, Map<String, String> data)
+            throws InterruptedException, ExecutionException {
+        Message message = getPreconfiguredMessageToTokenWithData(data, request, token);
+        String response = sendAndGetResponse(message);
+        logger.info("Sent message to token. Device token: " + request.getToken() + ", " + response);
+    }
+
+    private String sendAndGetResponse(Message message) throws InterruptedException, ExecutionException {
+        return FirebaseMessaging.getInstance().sendAsync(message).get();
+    }
+
+    private AndroidConfig getAndroidConfig(String topic) {
+        return AndroidConfig.builder()
+                .setTtl(Duration.ofMinutes(2).toMillis()).setCollapseKey(topic)
+                .setPriority(AndroidConfig.Priority.HIGH)
+                .setNotification(AndroidNotification.builder().setSound(NotificationParameter.SOUND.getValue())
+                        .setColor(NotificationParameter.COLOR.getValue()).setTag(topic).build()).build();
+    }
+
+    private Message getPreconfiguredMessageToTokenWithData(Map<String, String> data, PushNotificationRequest request, String token) {
+        return getPreconfiguredMessageBuilder(request).putAllData(data).setToken(token)
+                .build();
+    }
+
+    private Message.Builder getPreconfiguredMessageBuilder(PushNotificationRequest request) {
+        AndroidConfig androidConfig = getAndroidConfig(request.getTopic());
+        ApnsConfig apnsConfig = getApnsConfig(request.getTopic());
+        return Message.builder()
+                .setApnsConfig(apnsConfig).setAndroidConfig(androidConfig).setNotification(
+                        new Notification(request.getTitle(), request.getMessage()));
+    }
+    
+    private ApnsConfig getApnsConfig(String topic) {
+        return ApnsConfig.builder()
+                .setAps(Aps.builder().setCategory(topic).setThreadId(topic).build()).build();
+    }
+}

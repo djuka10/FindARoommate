@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "13825129988",
+    "firebase_url": "https://findaroommate-android.firebaseio.com",
+    "project_id": "findaroommate-android",
+    "storage_bucket": "findaroommate-android.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:13825129988:android:54b5a057afcfc1cb29ff51",
+        "android_client_info": {
+          "package_name": "rs.ac.uns.ftn.findaroommate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "13825129988-19jc1uvibbb7955lksq37fd7v3h6f5oa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBF6hI0uL2sbNF4SKRvoD--lhHSc7J4IgI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "13825129988-19jc1uvibbb7955lksq37fd7v3h6f5oa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

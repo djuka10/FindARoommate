@@ -1,0 +1,53 @@
+<resources>
+    <string-array name="lang_entries">
+        <item>English</item>
+        <item>Srpski</item>
+    </string-array>
+
+    <string-array name="lang_values">
+        <item>english</item>
+        <item>serbian</item>
+    </string-array>
+
+    <string-array name="unit_entries">
+        <item>kilometers</item>
+        <item>miles</item>
+    </string-array>
+
+    <string-array name="unit_values">
+        <item>km</item>
+        <item>miles</item>
+    </string-array>
+
+    <string-array name="gender_values">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string-array name="working_status_values">
+        <item>Work</item>
+        <item>Study</item>
+        <item>Both</item>
+        <item>Unemployed</item>
+    </string-array>
+
+    <string-array name="study_level_values">
+        <item>High school</item>
+        <item>Bachelor\'s degree</item>
+        <item>Master\'s degree</item>
+        <item>PhD</item>
+    </string-array>
+
+    <string-array name="stay_range">
+        <item>1-5 months</item>
+        <item>6-11 months</item>
+        <item>12+ months</item>
+    </string-array>
+
+    <string-array name="property_type_keys">
+        <item>Private room</item>
+        <item>Shared room</item>
+        <item>Flat</item>
+    </string-array>
+
+</resources>
